@@ -1,0 +1,16 @@
+@import 'styles/every.scss';
+
+.root {
+
+    height: auto; min-height: $device-xs__max-height * 2;
+    position: static;
+
+    margin-top: #{$header__height + 20px};
+    // top: 0;
+    // z-index: 0;
+
+    @media (min-width: $device-m__min-width) { // 320≤ xs < 576,   576 ≤ s < 768,   768 ≤ m < 992,   992 ≤ l < 1200,   1200 ≤ xl
+        // top: $nav-2--bar__height;
+        top: 0;
+	}
+} 

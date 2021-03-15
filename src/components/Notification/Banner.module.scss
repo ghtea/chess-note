@@ -1,0 +1,223 @@
+@import 'styles/every.scss';
+
+
+
+@keyframes showBanner {
+    0% {
+        opacity: 0.5;
+        transform: translateY(-25%);
+    }
+    100% {
+        opacity: 1;
+        transform: translateY(0px);
+    }
+}
+
+$width__side: 50px;
+
+.root {
+
+    display: flex;
+    flex-flow: row nowrap;
+    justify-content: space-between;
+    align-items: center;
+
+    width: $device-xs__min-width; 
+    height: auto;
+  
+    border-radius: 8px;
+  
+    padding: 10px 0px 10px 0px; /* top right bottom left */
+    
+    animation: showBanner 0.2s ease-out 0s 1 normal;
+  
+    &:nth-child(n+2) { 
+        margin-top: 5px;
+        padding: 0px 0px 0px 0px; /* top right bottom left */
+        opacity: 0.9;
+    }
+  
+    
+    &.success {
+        @include color-each-theme(background-color, success__1);
+        @include color-each-theme(color, success__6);
+
+        @include frame-each-theme(border, 2px, solid, success__4);
+
+        @include shadow-each-theme(box-shadow, 0px, 0px, 10px, 2px, shadow__success__normal);
+    }
+
+    &.hint {
+        @include color-each-theme(background-color, hint__1);
+        @include color-each-theme(color, hint__6);
+
+        @include frame-each-theme(border, 2px, solid, hint__4);
+
+        @include shadow-each-theme(box-shadow, 0px, 0px, 10px, 2px, shadow__hint__normal);
+    }
+
+    &.error {
+        @include color-each-theme(background-color, error__1);
+        @include color-each-theme(color, error__6);
+
+        @include frame-each-theme(border, 2px, solid, error__4);
+
+        @include shadow-each-theme(box-shadow, 0px, 0px, 10px, 2px, shadow__error__normal);
+    }
+
+    &.warning {
+        @include color-each-theme(background-color, warning__1);
+        @include color-each-theme(color, warning__6);
+
+        @include frame-each-theme(border, 2px, solid, warning__4);
+
+        @include shadow-each-theme(box-shadow, 0px, 0px, 10px, 2px, shadow__warning__normal);
+    }
+  
+    .icon__success, .icon__hint, .icon__error, .icon__warning {
+        width: 24px;
+        height: 24px;
+    }
+
+    .icon__success {
+        @include color-each-theme(color, success__6);
+    }
+    .icon__hint {
+        @include color-each-theme(color, hint__6);
+    }
+    .icon__error {
+        @include color-each-theme(color, error__6);
+    }
+    .icon__warning {
+        @include color-each-theme(color, warning__6);
+    }
+
+
+    .left, .right {
+        width: $width__side;
+    }
+
+    .middle{
+        
+        display: flex;
+        flex-flow: row nowrap;
+        justify-content: center;
+        align-items: center;
+
+        width: calc(100% - #{$width__side} - #{$width__side});
+        height: 40px;
+
+        border-right-width: 2px;
+        border-right-style: solid;
+        border-right-color: inherit;
+
+        border-left-width: 2px;
+        border-left-style: solid;
+        border-left-color: inherit;
+
+        & > * {
+            width: calc(100% - 20px);
+        }
+    }
+    
+    
+    &:nth-child(n+2) { 
+        .middle {
+            border-left-style: none;
+            border-right-style: none;
+        }
+        & > div:nth-child(2){
+            font-size: 0.8rem;
+        }
+        & > div:nth-child(1), & > div:nth-child(3){
+            visibility: hidden;
+        }
+
+    }
+}
+
+
+
+
+.button__delete {
+
+    & > div:nth-child(1){
+        display: flex;
+	}
+      
+    & > div:nth-child(2){
+	    display: none;
+	}
+	  
+	&:hover, &:active {
+	    & > div:nth-child(1){
+	        display: none;
+	    }
+	    & > div:nth-child(2){
+            display: flex;
+	    }
+    }
+    
+    .icon__x-circle {
+
+        width: 20px;
+        height: 20px;
+
+        .success & {
+            @include color-each-theme(color, success__4);
+        }
+        .hint & {
+            @include color-each-theme(color, hint__4);
+        }
+        .error & {
+            @include color-each-theme(color, error__4);
+        }
+        .warning & {
+            @include color-each-theme(color, warning__4);
+        }
+    }
+}
+
+/*
+@keyframes scaleGuage {
+    0% {
+        transform: scaleX(1);
+    }
+    100% {
+        transform: scaleX(0); 
+    }
+}
+*/
+
+/*
+.gauge {
+
+    width: inherit;
+    height: 1px;
+    
+    position: absolute;
+    top: 0px;
+    left: 0px;
+  
+    transform-origin: 0% 50%;
+  
+    // animation: scaleGuage ${ banner.msTime / 1000 }s linear normal forwards; 
+  
+    &.success {
+        @include color-each-theme(background-color, banner-success__border-color);
+    }
+
+    &.hint {
+        @include color-each-theme(background-color, banner-hint__border-color);
+    }
+
+    &.error {
+        @include color-each-theme(background-color, banner-error__border-color);
+    }
+
+    &.warning {
+        @include color-each-theme(background-color, banner-warning__border-color);
+    }
+  
+}
+*/
