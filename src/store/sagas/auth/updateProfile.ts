@@ -6,7 +6,7 @@ import { v4 as uuidv4 } from "uuid";
 // import * as config from 'config';
 import {StateRoot} from 'store/reducers';
 import * as actionsRoot from "store/actions";
-
+import {User} from 'store/reducers/auth'
 import * as actionsPortal from "store/actions/data";
 //import * as actionsTheme from "../../actions/theme";
 
@@ -23,8 +23,8 @@ const updateProfileFirebase = (update: any) => {
 
 function* updateProfile(action: actionsRoot.auth.type__UPDATE_PROFILE) {
 
-    const readyUser =  yield select( (state:StateRoot) => state.status.ready.user); 
-    const idUserInApp =  yield select( (state:StateRoot) => state.auth.user?.id); 
+    const readyUser: boolean  =  yield select( (state:StateRoot) => state.status.ready.user); 
+    const idUserInApp: undefined | string =  yield select( (state:StateRoot) => state.auth.user?.id); 
    
     try {
 
@@ -55,8 +55,8 @@ function* updateProfile(action: actionsRoot.auth.type__UPDATE_PROFILE) {
                 .ref()
                 .child(`${idUserInApp}/${uuidv4()}`);
 
-                const response = yield call( uploadPhoto, refFirebase, urlPhotoLocal); // upload photo
-                const urlPhotoFirebase = yield call (getUrlPhotoFirebase, response);
+                const response: unknown = yield call( uploadPhoto, refFirebase, urlPhotoLocal); // upload photo
+                const urlPhotoFirebase:string = yield call (getUrlPhotoFirebase, response);
 
                 update['photoURL'] = urlPhotoFirebase;
             }

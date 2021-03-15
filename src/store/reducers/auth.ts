@@ -11,7 +11,7 @@ import putValueToNestedObject from 'tools/vanilla/putValueToNestedObject';
 export type State = typeof stateInitial;   // 아직 불확실
 
 
-type User = {
+export type User = {
     id: string;
     email: string;
 

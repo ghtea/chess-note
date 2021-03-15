@@ -3,7 +3,8 @@ import history from 'historyApp';
 
 import axios from "axios";
 import queryString from 'query-string';
-import { firebaseAuth } from "firebaseApp";
+
+import firebaseApp, { firebaseAuth } from "firebaseApp"; 
 
 import Cookies from 'js-cookie';
 import { v4 as uuidv4 } from 'uuid';
@@ -85,7 +86,8 @@ function* signUp(action: actionsRoot.auth.type__SIGN_UP) {
             const password:string = action.payload.password1;
             
             try {
-                const user = yield call( requestSignUp, email, password );
+                // unknown 임시방편
+                const user: unknown = yield call( requestSignUp, email, password );
                 console.log(user);
 
                 yield put( actionsRoot.status.return__REPLACE({
