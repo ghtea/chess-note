@@ -41,8 +41,11 @@ function Header({}: PropsHeader) {
     const {onClick_LinkInsideApp} = useLink(history);
     
     useEffect(() => {
-        // console.log(location.pathname);
-        if (  (/^\/log-in/).test(location.pathname) || (/^\/sign-up/).test(location.pathname)  ) {
+        console.log(location.pathname);
+        if (  
+            (/^\/log-in/).test(location.pathname) || 
+            (/^\/sign-up/).test(location.pathname)
+        ) {
             dispatch(actions.status.return__REPLACE({
                 listKey:['showing', 'header', 'root'],
                 replacement: false
@@ -78,7 +81,7 @@ function Header({}: PropsHeader) {
 
   
   return (
-    <header className={`${styles['root']} ${showingHeader && 'showing'}`}>
+    <header className={`${styles['root']} ${showingHeader.root && 'showing'}`}>
 
         <div className={`${styles['bar']}`}>
 

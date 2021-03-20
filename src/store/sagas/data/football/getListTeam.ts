@@ -1,5 +1,6 @@
 import { call, select, put } from "redux-saga/effects";
 import { firebaseFirestore } from "firebaseApp";
+import firebase from "firebase";
 
 import axios from "axios";
 import queryString from 'query-string';
@@ -46,7 +47,7 @@ function* getListTeam(action: actions.data.football.type__GET_LIST_TEAM) {
             replacement: true
         }) );
 
-        const querySnapshot  =  yield call( requestGetListTeam, idCountry );
+        const querySnapshot: firebase.firestore.QuerySnapshot<firebase.firestore.DocumentData>  =  yield call( requestGetListTeam, idCountry );
         // console.log(res.data());
         const listTeam = querySnapshot.docs.map((document: any)=>(
             {

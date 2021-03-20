@@ -1,5 +1,6 @@
 import { call, select, put } from "redux-saga/effects";
 import { firebaseFirestore } from "firebaseApp";
+import firebase from "firebase";
 
 import axios from "axios";
 import queryString from 'query-string';
@@ -41,10 +42,10 @@ function* getLeagueStandings(action: actions.data.football.type__GET_LEAGUE_STAN
             replacement: true
         }) );
 
-        const res =  yield call( requestGetLeagueStandings, idLeague );
+        const res: firebase.firestore.DocumentSnapshot<firebase.firestore.DocumentData> =  yield call( requestGetLeagueStandings, idLeague );
         // console.log(res.data());
 
-        const leagueStandings: types.data.football.LeagueStandings = res.data();
+        const leagueStandings = res.data() as (types.data.football.LeagueStandings | undefined);
 
         const dateNow = Date.now();
 

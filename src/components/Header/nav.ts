@@ -1,29 +1,32 @@
 
 export type Link = {
     id: string;        //   camelcase
+    kind: 'link';
     name?: string;
 }
 
 export type Category = {
     id: string;        //   camelcase
+    kind: 'category';
     name?: string;
     listLink: Link[];
 }
 
-const nav: Category[] = [
+const nav: (Category | Link)[] = [
     {
-        id: 'sports',
-        listLink: [
-            {id: 'football'} 
-        ],
+        id: 'opening',
+        kind: 'link'
     },
-    {
-        id: 'life',
-        listLink: [
-            {id: 'weather'} 
-        ],
-    },
+    
 ]
 
+/*
+{
+        id: 'animal',
+        listLink: [
+            {id: 'cat'} 
+        ],
+    }
+*/
 
 export default nav;

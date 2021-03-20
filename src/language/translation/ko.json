@@ -43,14 +43,11 @@
     "Modal.SortingFootballLeagueStandings_GoalsAgainst": "골 실점 수",
     "Modal.SortingFootballLeagueStandings_GamesPlayed": "경기 수",
 
-    "Nav.NameApp": "데이터 시너리",
+    "Nav.NameApp": "체스 노트",
     "Nav.Home": "홈",
     "Nav.LogIn": "로그인",
     "Nav.SignUp": "회원가입",
-    "Nav.Sports": "스포츠",  
-    "Nav.Sports_Football": "축구",  
-    "Nav.Life": "라이프",  
-    "Nav.Life_Weather": "날씨",  
+    "Nav.Opening": "오프닝",  
     
     "Notification.Test1__S": "테스트에 성공하였습니다 1 !",
     "Notification.Test2__H": "테스트에 성공하였습니다 2 !",

@@ -1,4 +1,4 @@
-import { call, spawn, put, takeEvery, select, take, race } from "redux-saga/effects";
+import { call, spawn, put, takeEvery, select, SelectEffect, take, race } from "redux-saga/effects";
 
 import * as actions from "store/actions";
 
@@ -10,13 +10,15 @@ type Selector<T> = (state:StateRoot) => T;
 
 function* waitForStateChange<T>( selector: Selector<T>, value:T) {
 
-    if (yield select(selector) as unknown === value) return; 
+    let valueCurrent: T = yield select(selector);
+    if (valueCurrent === value) return; 
 
     while (true) {
 
         yield take([actions.auth.name__REPLACE, actions.data.name__REPLACE, actions.notification.name__REPLACE, actions.status.name__REPLACE]);
         
-        if ( yield select(selector) as unknown === value ) return;
+        valueCurrent = yield select(selector);
+        if (valueCurrent === value) return; 
 
     }
 }

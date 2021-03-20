@@ -8,7 +8,8 @@ import {StateRoot} from 'store/reducers';
 import * as actionsRoot from "store/actions";
 
 import Category from './Nav/Category';
-import nav from './nav';
+import LinkSolo from './Nav/LinkSolo';
+import nav, {Category as TypeCategory, Link as TypeLInk} from './nav';
 import useLink from 'tools/hooks/useLink';
 
 import styles from './NavBoard.module.scss';
@@ -62,18 +63,34 @@ function NavBoard({isOpen}: PropsNavBoard) {
             aria-labelledby={'name__categoryA'}
             ref={refListAll}
             >
-                {nav.map((categoryEach, iEach)=>(
-                    <Category 
-                        idCategoryOpen={idCategoryOpen}
+                {nav.map((itemEach, iEach)=>{
+                const {kind} = itemEach;
+                if (kind === 'category'){
+                    return (
+                        <Category  
+                            idCategoryOpen={idCategoryOpen}
+                            kind={(itemEach as TypeCategory).kind}
+                            id={(itemEach as TypeCategory).id}
+                            listLink={(itemEach as TypeCategory).listLink}
 
-                        id={categoryEach.id}
-                        listLink={categoryEach.listLink}
-
-                        onClick={onClick_Category}
-                        setIdCategoryOpen={setIdCategoryOpen}
-                        key={`NavBoard__Category-${iEach}`}
-                    />
-                ))}
+                            onClick={onClick_Category}
+                            setIdCategoryOpen={setIdCategoryOpen}
+                            
+                            key={`NavBar__Item-${iEach}`}
+                        />
+                    )
+                }
+                else { // kind === 'link;
+                    return (
+                        <LinkSolo  
+                            kind={(itemEach as TypeLInk).kind}
+                            id={(itemEach as TypeLInk).id}
+                            
+                            key={`NavBar__Item-${iEach}`}
+                        />
+                    )
+                }
+            })}
             </ul>
         </nav> 
     );

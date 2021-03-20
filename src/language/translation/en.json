@@ -13,14 +13,11 @@
     "Header.Setting": "Setting",
 
 
-    "Nav.NameApp": "Data Scenery",
+    "Nav.NameApp": "Chess Note",
     "Nav.Home": "Home",
     "Nav.LogIn": "Log In",
     "Nav.SignUp": "Sign Up",
-    "Nav.Sports": "Sports",  
-    "Nav.Sports_Football": "Football",  
-    "Nav.Life": "Life",  
-    "Nav.Life_Weather": "Weather",  
+    "Nav.Opening": "Opening",  
 
     "Main.LogIn_LogIn": "Log In",
     "Main.LogIn_EmailAddress": "Email Address",
