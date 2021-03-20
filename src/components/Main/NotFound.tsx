@@ -12,7 +12,7 @@ import * as actions from "store/actions";
 
 import TopBar from './LogIn/TopBar';
 
-//import IconLogIn from 'svgs/basic/IconLogIn';
+import IconMapSigns from 'svgs/basic/IconMapSigns';
 
 import styles from './NotFound.module.scss';
 import stylesLogIn from './LogIn.module.scss';
@@ -38,6 +38,7 @@ function NotFound({}: PropsNotFound) {
 
         <div className={`${styles['content']}`} >  
 
+          <IconMapSigns className={ `${styles['icon__map-signs']}`} kind='light' />
           <div> Not Found </div>
 
         </div>     
