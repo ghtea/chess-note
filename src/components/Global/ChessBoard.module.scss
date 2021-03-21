@@ -1,0 +1,19 @@
+@import 'styles/every.scss';
+
+.root {
+  width: 90vw;
+  height: 90vw;
+  min-width: $device-xs__min-width;
+  max-width: $device-m__min-width;
+  min-height: $device-xs__min-width;
+  max-height: $device-m__min-width;
+
+  margin-bottom: 40px;
+
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+
+}

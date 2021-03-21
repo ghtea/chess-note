@@ -5,7 +5,7 @@ import Home from "./Main/Home";
 import LogIn from "./Main/LogIn";
 import SignUp from "./Main/SignUp";
 
-import Sports from "./Main/Sports";
+import Opening from "./Main/Opening";
 
 import Test from "./Main/Test";
 import NotFound from "./Main/NotFound";
@@ -35,8 +35,8 @@ function Main({}: PropsMain) {
                 <SignUp />
             </Route>
 
-            <Route path="/sports" >
-                <Sports />
+            <Route path="/opening" >
+                <Opening />
             </Route>
 
             <Route path="/test" >
