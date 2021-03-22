@@ -10,12 +10,21 @@ import chess from 'chess';
 
 // https://github.com/STRML/react-draggable
 
-import IconPawn from 'svgs/chess/IconPawn';
-import IconKnight from 'svgs/chess/IconKnight';
-import IconBishop from 'svgs/chess/IconBishop';
-import IconRook from 'svgs/chess/IconRook';
-import IconQueen from 'svgs/chess/IconQueen';
-import IconKing from 'svgs/chess/IconKing';
+//import IconPawn from 'svgs/chess/PiecePawn';
+
+import srcImgWhitePawn from 'others/images/chess/pawn-w.png';
+import srcImgBlackPawn from 'others/images/chess/pawn-b.png';
+import srcImgWhiteKnight from 'others/images/chess/knight-w.png';
+import srcImgBlackKnight from 'others/images/chess/knight-b.png';
+import srcImgWhiteBishop from 'others/images/chess/bishop-w.png';
+import srcImgBlackBishop from 'others/images/chess/bishop-b.png';
+import srcImgWhiteRook from 'others/images/chess/rook-w.png';
+import srcImgBlackRook from 'others/images/chess/rook-b.png';
+import srcImgWhiteQueen from 'others/images/chess/queen-w.png';
+import srcImgBlackQueen from 'others/images/chess/queen-b.png';
+import srcImgWhiteKing from 'others/images/chess/king-w.png';
+import srcImgBlackKing from 'others/images/chess/king-b.png';
+
 
 import * as actions  from 'store/actions';
 import * as types  from 'store/types';
@@ -30,6 +39,11 @@ type PropsChessSquare = {
     status: chess.Square 
 };
 
+type Square = chess.Square & {
+    typeSquare: 'light' | 'dark'
+}
+ 
+
 function ChessSquare({
     status
 }: PropsChessSquare) {
@@ -41,7 +55,7 @@ function ChessSquare({
 
     const {file, rank, piece, typeSquare} = useMemo(()=>{
 
-        const result: any = {...status};
+        const result: Square = {...status, typeSquare: 'light'};
         if (['a', 'c', 'e', 'g'].includes(status.file)){
             result.typeSquare = status.rank % 2 === 0 ? 'light' : 'dark'
         }
@@ -52,31 +66,29 @@ function ChessSquare({
     }, [status]);
 
 
-    const svgPiece = useMemo(()=>{
+    const srcImg = useMemo(()=>{
         if (!piece){
-            return null;
+            return undefined;
         }
         else if (piece.type === 'pawn'){
-            return <IconPawn className={`piece-pawn`} kind='solid'/>
+            return piece.side.name === 'white' ? srcImgWhitePawn : srcImgBlackPawn
         }
         else if (piece.type === 'knight'){
-            return <IconKnight className={`piece-knight`} kind='solid'/>
+            return piece.side.name === 'white' ? srcImgWhiteKnight : srcImgBlackKnight
         }
         else if (piece.type === 'bishop'){
-            return <IconBishop className={`piece-bishop`} kind='solid'/>
+            return piece.side.name === 'white' ? srcImgWhiteBishop : srcImgBlackBishop
         }
         else if (piece.type === 'rook'){
-            return <IconRook className={`piece-rook`} kind='solid'/>
+            return piece.side.name === 'white' ? srcImgWhiteRook : srcImgBlackRook
         }
         else if (piece.type === 'queen'){
-            return <IconQueen className={`piece-queen`} kind='solid'/>
+            return piece.side.name === 'white' ? srcImgWhiteQueen : srcImgBlackQueen
         }
         else if (piece.type === 'king'){
-            return <IconKing className={`piece-king`} kind='solid'/>
+            return piece.side.name === 'white' ? srcImgWhiteKing : srcImgBlackKing
         }
-        else {
-            return null;
-        }
+        
     }, [status]);
 
     useEffect(()=>{
@@ -89,9 +101,13 @@ function ChessSquare({
 
     return (
         <div className={`${styles['root']} type----${typeSquare}`}>
-            <div className={`${styles['piece']} side----${piece?.side.name}`}>
-                {svgPiece}
-            </div>
+            {!piece ? null : 
+                <img 
+                    className={`${styles['piece']}`}
+                    src={srcImg}
+                >
+                </img>
+            }
         </div>
     );
 }

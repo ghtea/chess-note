@@ -4,8 +4,7 @@ import React, {useMemo} from "react";
 type PropsIcon = {
   
   className: string;
-  kind?: 'regular' | 'solid' | 'light' | 'duotone';  // thin, light, regular, solid, ...
-  
+  side: 'white' | 'black';
 } & typeof propsDefault;
 
 const propsDefault = {  
@@ -14,77 +13,52 @@ const propsDefault = {
 
  
 
-
-// King
-const Icon = ({ className, kind }: PropsIcon) => {
+// opacity:1,
+//           fill:none, 
+//           fill-rule:evenodd, 
+//           fill-opacity:1, 
+//           stroke:#000000, 
+//           stroke-width:1.5, 
+//           stroke-linecap:round, 
+//           stroke-linejoin:round, 
+//           stroke-miterlimit:4, 
+//           stroke-dasharray:none, 
+//           stroke-opacity:1,
+// Bishop
+const Icon = ({ className, side }: PropsIcon) => {
 
 
   return (
     <span className={`${className} icon`} >
-  
-    {(!kind || kind === 'regular') && 
-      <svg
-        width="100%"
-        height="100%"
-        fill="currentColor"
-        className=""
-        aria-hidden="true"
-        focusable="false"
-        role="img"
-        xmlns="http://www.w3.org/2000/svg"
-        viewBox="0 0 448 512"
-      >
-  <path fill="currentColor" d="M400 464H48a16 16 0 0 0-16 16v16a16 16 0 0 0 16 16h352a16 16 0 0 0 16-16v-16a16 16 0 0 0-16-16zm37.05-281.16A55.37 55.37 0 0 0 391.93 160H248v-56h48a8 8 0 0 0 8-8V64a8 8 0 0 0-8-8h-48V8a8 8 0 0 0-8-8h-32a8 8 0 0 0-8 8v48h-48a8 8 0 0 0-8 8v32a8 8 0 0 0 8 8h48v56H56a55.95 55.95 0 0 0-53.31 73.06L68.51 432h50.54L48.38 218.38A8 8 0 0 1 56 208h335.93a8 8 0 0 1 7.78 10l-70.82 214h50.55l66-199.31a55.35 55.35 0 0 0-8.39-49.85z"></path>
-      </svg>
-    }
-    {(kind === 'light') && 
-      <svg
-        width="100%"
-        height="100%"
-        fill="currentColor"
-        className=""
-        aria-hidden="true"
-        focusable="false"
-        role="img"
-        xmlns="http://www.w3.org/2000/svg"
-        viewBox="0 0 448 512"
-      >
-<path fill="currentColor" d="M408 480H40a8 8 0 0 0-8 8v16a8 8 0 0 0 8 8h368a8 8 0 0 0 8-8v-16a8 8 0 0 0-8-8zm31.34-301.88A44 44 0 0 0 403.51 160H240V96h56a8 8 0 0 0 8-8V72a8 8 0 0 0-8-8h-56V8a8 8 0 0 0-8-8h-16a8 8 0 0 0-8 8v56h-56a8 8 0 0 0-8 8v16a8 8 0 0 0 8 8h56v64H44.46a44.46 44.46 0 0 0-42.34 58L79 448h33.75L32.59 208.16A12.42 12.42 0 0 1 44.46 192h359.05c10.57 0 13.67 10.38 12 15.88L335.2 448H369l77-230.28a44.07 44.07 0 0 0-6.68-39.6z"></path>
-      </svg>
-    }
-    {(kind === 'solid') && 
-      <svg
-        width="100%"
-        height="100%"
-        fill="currentColor"
-        className=""
-        aria-hidden="true"
-        focusable="false"
-        role="img"
-        xmlns="http://www.w3.org/2000/svg"
-        viewBox="0 0 448 512"
-      >
-<path fill="currentColor" d="M400 448H48a16 16 0 0 0-16 16v32a16 16 0 0 0 16 16h352a16 16 0 0 0 16-16v-32a16 16 0 0 0-16-16zm16-288H256v-48h40a8 8 0 0 0 8-8V56a8 8 0 0 0-8-8h-40V8a8 8 0 0 0-8-8h-48a8 8 0 0 0-8 8v40h-40a8 8 0 0 0-8 8v48a8 8 0 0 0 8 8h40v48H32a32 32 0 0 0-30.52 41.54L74.56 416h298.88l73.08-214.46A32 32 0 0 0 416 160z"></path>
-      </svg>
-    }
-    {(kind === 'duotone') && 
-      <svg
-        width="100%"
-        height="100%"
-        fill="currentColor"
-        className=""
-        aria-hidden="true"
-        focusable="false"
-        role="img"
-        xmlns="http://www.w3.org/2000/svg"
-        viewBox="0 0 448 512"
-      >
-        <g  >
-        <path className="fa-secondary" fill="currentColor" d="M400 448H48a16 16 0 0 0-16 16v32a16 16 0 0 0 16 16h352a16 16 0 0 0 16-16v-32a16 16 0 0 0-16-16z" opacity="0.4"></path>
-        <path className="fa-primary" fill="currentColor" d="M416 160H256v-48h40a8 8 0 0 0 8-8V56a8 8 0 0 0-8-8h-40V8a8 8 0 0 0-8-8h-48a8 8 0 0 0-8 8v40h-40a8 8 0 0 0-8 8v48a8 8 0 0 0 8 8h40v48H32a32 32 0 0 0-30.52 41.54L74.56 416h298.88l73.08-214.46A32 32 0 0 0 416 160z"></path>
+
+      <svg xmlns="http://www.w3.org/2000/svg" version="1.1" width="45" height="45">
+        <g 
+          opacity="1" 
+          fill="none"
+          fill-rule="evenodd"
+          fill-opacity="1"
+          stroke="#000000"
+          stroke-width="1.5"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          stroke-miterlimit="4" 
+          stroke-dasharray="none" 
+          stroke-opacity="1"
+        >
+          <g 
+            fill="#000000" 
+            stroke="#000000" 
+            stroke-linecap="butt"
+            >
+            <path d="M 9,36 C 12.39,35.03 19.11,36.43 22.5,34 C 25.89,36.43 32.61,35.03 36,36 C 36,36 37.65,36.54 39,38 C 38.32,38.97 37.35,38.99 36,38.5 C 32.61,37.53 25.89,38.96 22.5,37.5 C 19.11,38.96 12.39,37.53 9,38.5 C 7.65,38.99 6.68,38.97 6,38 C 7.35,36.54 9,36 9,36 z"/>
+            <path d="M 15,32 C 17.5,34.5 27.5,34.5 30,32 C 30.5,30.5 30,30 30,30 C 30,27.5 27.5,26 27.5,26 C 33,24.5 33.5,14.5 22.5,10.5 C 11.5,14.5 12,24.5 17.5,26 C 17.5,26 15,27.5 15,30 C 15,30 14.5,30.5 15,32 z"/>
+            <path d="M 25 8 A 2.5 2.5 0 1 1  20,8 A 2.5 2.5 0 1 1  25 8 z"/>
+          </g>
+          <path d="M 17.5,26 L 27.5,26 M 15,30 L 30,30 M 22.5,15.5 L 22.5,20.5 M 20,18 L 25,18" 
+            fill="none" stroke="#ffffff" stroke-linejoin="miter"
+          />
         </g>
       </svg>
-    }
       
     </span>
   );

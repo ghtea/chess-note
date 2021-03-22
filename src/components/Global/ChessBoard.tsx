@@ -62,6 +62,7 @@ function ChessBoard({}: PropsChessBoard) {
                 return (
                     <ChessSquare 
                         status={e}
+                        key={`ChessSquare-${i}`}
                     />
                 )
             })}

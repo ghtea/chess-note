@@ -17,7 +17,7 @@ import InputPassword from "components/Global/Input/InputPassword";
 import TopBar from './LogIn/TopBar';
 
 //import IconLogIn from 'svgs/basic/IconLogIn';
-import imgGoogle from 'others/imgs/g-logo.png';
+import imgGoogle from 'others/images/g-logo.png';
 import IconGithub from 'svgs/others/IconGithub';
  
 import styles from './SignUp.module.scss';
