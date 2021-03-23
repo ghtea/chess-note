@@ -1,0 +1,13 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<Footer /> matches snapshot 1`] = `
+<div>
+  <footer
+    class="root showing----false"
+  >
+    <div>
+       ⓒ 2016. nextwing.me All Rights Reserved. 
+    </div>
+  </footer>
+</div>
+`;

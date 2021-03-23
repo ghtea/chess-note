@@ -1,0 +1,69 @@
+@import 'styles/every.scss';
+
+
+
+/**
+ * 1. Change the font styles in all browsers.
+ * 2. Remove the margin in Firefox and Safari.
+ * 3. Show the overflow in Edge.
+ */
+
+
+.container__input-radio {
+    
+    display: flex;
+    flex-flow: row nowrap;
+    justify-content: flex-start;
+    align-items: center;
+
+    width: auto;
+    height: 32px;
+
+    @include color-each-theme(background-color, basic__1, $is-module: false);
+    
+    border-radius: 5px;
+
+    padding: 0px 3px 0px 3px; /* top right bottom left */
+    overflow: hidden;
+    
+    input[type=radio] {
+        visibility: hidden;
+        position: absolute;
+        width: auto;
+
+        font-family: inherit; /* 1 */
+        font-size: 100%; /* 1 */
+        line-height: 1.15; /* 1 */
+        margin: 0; /* 2 */
+        overflow: visible; /* 3 */
+    }
+    
+    label {
+        display: flex;
+        flex-flow: row nowrap;
+        justify-content: center;
+        align-items: center;
+
+        width: auto;
+        height: 28px;
+        border-radius: 5px;
+        padding: 2px 7px 4px 7px; /* top right bottom left */
+        box-sizing: border-box;
+        cursor: pointer;
+        background-color: transparent;
+        @include color-each-theme(color, basic__5);
+
+        &:nth-of-type(n+2){
+            margin-left: 8px;
+            
+        }
+    }
+
+    input[type=radio]:checked + label {
+        @include color-each-theme(background-color, main__5, $is-module: false);
+        @include color-each-theme(color, basic__0, $is-module: false);
+        // @include shadow-each-theme(box-shadow, 0px, 0px, 2px, 2px, shadow__basic__weak);
+    }
+}
+
+

@@ -1,0 +1,37 @@
+@import 'styles/every.scss';
+
+.root {
+
+    background-color: transparent;
+    // @include color-each-theme(background-color, basic__0);
+
+    display: none;
+    &:global(.showing----true) {
+        display: flex;
+    }
+    flex-flow: column nowrap;
+    justify-content: center;
+    align-items: center;
+
+    width: 100%; min-width: $device-xs__min-width; 
+    height: auto; min-height: 120px;
+
+    position: static;
+    // z-index: 200;
+    // left: 50%;
+    // transform: translateX(-50%);
+
+    margin: 0 0 0 0; /* top right bottom left */
+    padding: 0; /* top right bottom left */
+      
+    
+    & > * {
+        display: block;
+
+        width: auto;
+        margin: 0 auto;
+
+    }
+       
+}
+
