@@ -6,7 +6,7 @@ import { FormattedMessage } from 'react-intl';
 
 import {useSelector, useDispatch} from "react-redux";
 import {StateRoot} from 'store/reducers';
-import chess from 'chess';
+import {Chess, PieceType} from 'chess.js';
 
 // https://github.com/STRML/react-draggable
 
@@ -30,22 +30,27 @@ import * as actions  from 'store/actions';
 import * as types  from 'store/types';
 
 import styles from './ChessSquare.module.scss';
-import { stat } from "node:fs";
 // import IconSort from 'svgs/basic/IconSort';
 
 
 
 type PropsChessSquare = {
-    status: chess.Square 
+    piece: {
+        type: PieceType;
+        color: "b" | "w";
+    } | null;
+    position: {
+        rank: '1'|'2'|'3'|'4'|'5'|'6'|'7'|'8';
+        file: 'a'|'b'|'c'|'d'|'e'|'f'|'g'|'h';
+    };
+    color: 'light' | 'dark';
 };
 
-type Square = chess.Square & {
-    typeSquare: 'light' | 'dark'
-}
- 
 
 function ChessSquare({
-    status
+    piece,
+    position,
+    color,
 }: PropsChessSquare) {
     
     const dispatch = useDispatch();
@@ -53,43 +58,43 @@ function ChessSquare({
 
     //const sorting = useSelector((state: StateRoot)=>state.status.current.football.leagueStandings.sorting);
 
-    const {file, rank, piece, typeSquare} = useMemo(()=>{
+    // const {file, rank, piece, typeSquare} = useMemo(()=>{
 
-        const result: Square = {...status, typeSquare: 'light'};
-        if (['a', 'c', 'e', 'g'].includes(status.file)){
-            result.typeSquare = status.rank % 2 === 0 ? 'light' : 'dark'
-        }
-        else {
-            result.typeSquare = status.rank % 2 === 0 ? 'dark' : 'light'
-        }
-        return result; 
-    }, [status]);
+    //     const result: Square = {...status, typeSquare: 'light'};
+    //     if (['a', 'c', 'e', 'g'].includes(status.file)){
+    //         result.typeSquare = status.rank % 2 === 0 ? 'light' : 'dark'
+    //     }
+    //     else {
+    //         result.typeSquare = status.rank % 2 === 0 ? 'dark' : 'light'
+    //     }
+    //     return result; 
+    // }, [status]);
 
 
     const srcImg = useMemo(()=>{
         if (!piece){
             return undefined;
         }
-        else if (piece.type === 'pawn'){
-            return piece.side.name === 'white' ? srcImgWhitePawn : srcImgBlackPawn
+        else if (piece.type === 'p'){
+            return piece.color === 'w' ? srcImgWhitePawn : srcImgBlackPawn
         }
-        else if (piece.type === 'knight'){
-            return piece.side.name === 'white' ? srcImgWhiteKnight : srcImgBlackKnight
+        else if (piece.type === 'n'){
+            return piece.color === 'w' ? srcImgWhiteKnight : srcImgBlackKnight
         }
-        else if (piece.type === 'bishop'){
-            return piece.side.name === 'white' ? srcImgWhiteBishop : srcImgBlackBishop
+        else if (piece.type === 'b'){
+            return piece.color === 'w' ? srcImgWhiteBishop : srcImgBlackBishop
         }
-        else if (piece.type === 'rook'){
-            return piece.side.name === 'white' ? srcImgWhiteRook : srcImgBlackRook
+        else if (piece.type === 'r'){
+            return piece.color === 'w' ? srcImgWhiteRook : srcImgBlackRook
         }
-        else if (piece.type === 'queen'){
-            return piece.side.name === 'white' ? srcImgWhiteQueen : srcImgBlackQueen
+        else if (piece.type === 'q'){
+            return piece.color === 'w' ? srcImgWhiteQueen : srcImgBlackQueen
         }
-        else if (piece.type === 'king'){
-            return piece.side.name === 'white' ? srcImgWhiteKing : srcImgBlackKing
+        else if (piece.type === 'k'){
+            return piece.color === 'w' ? srcImgWhiteKing : srcImgBlackKing
         }
         
-    }, [status]);
+    }, [piece]);
 
     useEffect(()=>{
 
@@ -100,7 +105,7 @@ function ChessSquare({
     
 
     return (
-        <div className={`${styles['root']} type----${typeSquare}`}>
+        <div className={`${styles['root']} color----${color}`}>
             {!piece ? null : 
                 <img 
                     className={`${styles['piece']}`}
@@ -116,3 +121,4 @@ ChessSquare.defaultProps = {};
 
 export default ChessSquare;
 
+ 
