@@ -36,7 +36,7 @@ function Opening({}: PropsOpening) {
           onClick={onClick_Button}
         >paste pgn</button>
       </div>
-      <ChessBoard pgn={pgn}/>
+      <ChessBoard pgn={pgn} setPgn={setPgn}/>
     </div>
   );
 }

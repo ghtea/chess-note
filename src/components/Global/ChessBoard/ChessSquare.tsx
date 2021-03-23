@@ -44,6 +44,7 @@ type PropsChessSquare = {
         file: 'a'|'b'|'c'|'d'|'e'|'f'|'g'|'h';
     };
     color: 'light' | 'dark';
+    focused:boolean;
 };
 
 
@@ -51,6 +52,7 @@ function ChessSquare({
     piece,
     position,
     color,
+    focused,
 }: PropsChessSquare) {
     
     const dispatch = useDispatch();
@@ -105,12 +107,19 @@ function ChessSquare({
     
 
     return (
-        <div className={`${styles['root']} color----${color}`}>
+        <div 
+            className={`${styles['root']} color----${color} focused----${focused}`}
+            data-file={position.file}
+            data-rank={position.rank}
+            data-level={'square'}
+        >
             {!piece ? null : 
                 <div
-                    className={`${styles['piece']}`}
+                    className={`${styles['piece']} piece-${piece.type}`}
+                    data-level={'piece'}
                 >
                     <img 
+                        className={`piece-${piece.type}`}
                         src={srcImg}
                     >
                     </img>

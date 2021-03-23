@@ -18,7 +18,7 @@ import styles from './ChessBoard.module.scss';
 import ChessSquare from "./ChessBoard/ChessSquare";
 // import IconSort from 'svgs/basic/IconSort';
 // import {Chess} from 'chess.js'; // => makes error
-import { ChessInstance } from 'chess.js'
+import { ChessInstance, Square } from 'chess.js'
 
 const ChessReq:any = require('chess.js');
 // https://stackoverflow.com/questions/58598457/not-a-constructor-error-with-library-and-angular
@@ -26,10 +26,12 @@ const ChessReq:any = require('chess.js');
 
 type PropsChessBoard = {
     pgn: string;
+    setPgn: React.Dispatch<React.SetStateAction<string>>
 };
 
 function ChessBoard({
-    pgn
+    pgn,
+    setPgn
 }: PropsChessBoard) {
 
     const dispatch = useDispatch();
@@ -43,12 +45,27 @@ function ChessBoard({
 
     const [positionStart, setPositionStart] = useState<null | string>(null);
 
-    const onClick_Square = useCallback(
-        (event:React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
-
-        if (positionStart === null){
-            setPositionStart()
+    const onClick_Board = useCallback(
+        (event:React.MouseEvent<HTMLDivElement, MouseEvent>, positionStart: string | null) => {
+        let elementUsing = event.target as HTMLDivElement | HTMLImageElement;
+        //console.log(elementUsing.dataset)
+        while (!elementUsing.dataset || elementUsing.dataset['level'] !== 'square'){
+            elementUsing = elementUsing.parentElement as HTMLDivElement | HTMLImageElement;
         }
+        const position = (elementUsing.dataset['file'] || '') + (elementUsing.dataset['rank'] || '')
+        if (positionStart === null){
+            //console.log(elementUsing.dataset['file'], )
+            
+            setPositionStart(position);
+            console.log(position);
+        }
+        else {
+            const result = gameCurrent.move({from: positionStart as Square, to: position as Square});
+            //console.log('result', result);
+            setPgn(gameCurrent.pgn());
+            setPositionStart(null);
+        }
+        console.log(positionStart);
         // const {value} = event.currentTarget;
 
         // dispatch(actions.status.return__REPLACE({ 
@@ -56,9 +73,14 @@ function ChessBoard({
         //     replacement: value
         // }));
     
-        },[]
+        },[gameCurrent]
     );
+
+    useEffect(()=>{
+        console.log('positionStart: ', positionStart);
+    },[positionStart])
     
+
     const [listSquare, setListSquare] = useState(gameCurrent.board())
     useEffect(()=>{
         if (gameCurrent){
@@ -74,17 +96,20 @@ function ChessBoard({
     
 
     return (
-        <div className={`${styles['root']}`} data-pgn={pgn}>
+        <div 
+            className={`${styles['root']}`} data-pgn={pgn}
+            onClick={e=>onClick_Board(e, positionStart)}
+        >
             {listSquare.map((row,iRow)=>row.map((e, iCol)=>
                 {
                     const rank = (8-iRow).toString() as "1" | "2" | "3" | "4" | "5" | "6" | "7" | "8";
                     const file = 'abcdefgh'[iCol] as "a" | "b" | "g" | "c" | "d" | "e" | "f" | "h";
                     const color = (iRow + iCol) % 2 === 1 ? 'light' : 'dark';
-                    console.log('he')
                     return (
                         <ChessSquare 
                             piece={e}
                             position={{rank, file}}
+                            focused={file+rank===positionStart}
                             color={color}
                             key={`ChessSquare-${iRow}-${iCol}-${pgn}`}
                         />
