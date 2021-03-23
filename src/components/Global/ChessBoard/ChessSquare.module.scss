@@ -1,0 +1,88 @@
+@import 'styles/every.scss';
+
+.root {
+  width: 1/8 * 100%;
+  height: 1/8 * 100%;
+
+  &:global(.color----light) {
+    background-color: rgb(148, 223, 191);
+    &:global(.focused----true) {
+      background-color: rgb(96, 206, 158);
+    }
+  }
+  &:global(.color----dark) {
+    background-color: rgb(30, 134, 89);
+    &:global(.focused----true) {
+      background-color: rgb(56, 173, 122);
+    }
+  }
+
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+
+  .piece {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    
+    img {
+      width: 100%;
+      height: 100%;
+
+      display: flex;
+      flex-direction: row;
+      justify-content: center;
+      align-items: center;
+
+      
+      &:global(.side----white) {
+        color: #eee;
+        :global(.icon){
+          filter: drop-shadow( 0px 0px 0px 5px #111);
+        }
+      }
+      &:global(.side----black) {
+        color: #111;
+        :global(.icon){
+          filter: drop-shadow( 0px 0px 0px 5px #eee);
+        }
+      }
+
+      &:global(.piece-p) {
+        width: 90%;
+        height: 90%;
+      }
+
+      &:global(.piece-n) {
+        width: 90%;
+        height: 90%;
+      }
+
+      &:global(.piece-b) {
+        width: 90%;
+        height: 90%;
+      }
+
+      &:global(.piece-r) {
+        width: 93%;
+        height: 93%;
+      }
+
+      &:global(.piece-q) {
+        width: 93%;
+        height: 93%;
+      }
+
+      &:global(.piece-k) {
+        width: 93%;
+        height: 93%;
+      }
+    }
+  }
+
+}

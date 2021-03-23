@@ -1,0 +1,57 @@
+@import 'styles/every.scss';
+
+
+
+input[type=text], input[type=email], input[type=password], input[type=search] {
+
+    display: flex;
+    flex-flow: column nowrap;
+    justify-content: center;
+    align-items: center;
+
+    @include color-each-theme(background-color, basic__1, $is-module: false);
+    @include color-each-theme(color, basic__5, $is-module: false);
+
+    &::placeholder {
+        @include color-each-theme(color, basic__4, $is-module: false);
+    }
+
+    @include frame-each-theme(border, 1px, solid, basic__1, $is-module: false);
+    border-radius: 4px;
+
+    width: 100%;
+    height: 36px; 
+
+    box-sizing: border-box;
+
+    font-size: 1rem;
+    
+    position: static;
+
+    overflow: visible;
+    cursor: pointer;
+    
+    margin: 0px 0px 0px 0px; 
+    padding: 0px 0px 0px 4px; 
+    
+
+    &:focus {
+        @include color-each-theme(background-color, basic__1, $is-module: false);
+        @include color-each-theme(color, basic__7, $is-module: false);
+
+        //@include frame-each-theme(border, 2px, solid, main__5, $is-module: false);
+        //outline: 2px solid red;
+
+        outline-style: none;
+        @include shadow-each-theme(box-shadow, 0px, 0px, 0px, 2px, main__5, $is-module: false);
+    }
+}
+
+/* clears the ‘X’ from input search */
+    input[type=search]::-ms-clear { display: none; width : 0; height: 0; }
+    input[type=search]::-ms-reveal { display: none; width : 0; height: 0; }
+    input[type="search"]::-webkit-search-decoration,
+    input[type="search"]::-webkit-search-cancel-button,
+    input[type="search"]::-webkit-search-results-button,
+    input[type="search"]::-webkit-search-results-decoration { display: none; }
+

@@ -1,0 +1,21 @@
+@import './color-elements.scss';
+
+
+$palette-others: (
+
+    light: (
+        google__bg: #FFFFFF,
+        google__font: #757575,
+        google__white: #FFFFFF,
+        github__bg: hsl($h-basic,$s-basic,25%),
+        github__font: hsl($h-basic,$s-basic,100%)
+    ),
+
+    dark: (
+        google__bg: #4285F4,
+        google__font: #FFFFFF,
+        google__white: #FFFFFF,
+        github__bg: hsl($h-basic,$s-basic,25%),
+        github__font: hsl($h-basic,$s-basic,100%)
+    )
+);

@@ -1,0 +1,38 @@
+@import 'styles/every.scss';
+
+.root {
+    display: flex;
+    flex-flow: column nowrap;
+    justify-content: center;
+    align-items: center;
+
+
+
+
+}
+
+
+@keyframes rotateSpinner {
+    from { transform: rotate(0deg); }
+    to { transform: rotate(360deg); }
+}
+
+
+
+.icon__spinner {
+    width: 60px;
+    height: 60px;
+
+    @include color-each-theme(color, basic__2);
+
+    transform-origin: 50% 50%;
+
+    animation-name: rotateSpinner;
+    animation-duration: 0.7s; 
+    animation-timing-function: ease-out; 
+    animation-delay: 0s;
+    animation-direction: normal;
+    animation-iteration-count: infinite;
+    animation-fill-mode: none;
+    animation-play-state: running; 
+}
