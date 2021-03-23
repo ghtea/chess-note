@@ -107,11 +107,14 @@ function ChessSquare({
     return (
         <div className={`${styles['root']} color----${color}`}>
             {!piece ? null : 
-                <img 
+                <div
                     className={`${styles['piece']}`}
-                    src={srcImg}
                 >
-                </img>
+                    <img 
+                        src={srcImg}
+                    >
+                    </img>
+                </div>
             }
         </div>
     );

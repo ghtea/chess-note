@@ -41,15 +41,20 @@ function ChessBoard({
         return new ChessReq(); 
     }, []);
 
+    const [positionStart, setPositionStart] = useState<null | string>(null);
 
-    const onClick_ChangeMode = useCallback(
+    const onClick_Square = useCallback(
         (event:React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
-        const {value} = event.currentTarget;
 
-        dispatch(actions.status.return__REPLACE({ 
-            listKey: ['current', 'football', 'leagueStandings', 'mode', 'element'],
-            replacement: value
-        }));
+        if (positionStart === null){
+            setPositionStart()
+        }
+        // const {value} = event.currentTarget;
+
+        // dispatch(actions.status.return__REPLACE({ 
+        //     listKey: ['current', 'football', 'leagueStandings', 'mode', 'element'],
+        //     replacement: value
+        // }));
     
         },[]
     );
