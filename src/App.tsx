@@ -10,8 +10,7 @@ import Cookies from 'js-cookie';
 
 import {useSelector, useDispatch} from "react-redux";
 import {StateRoot} from 'store/reducers';
-import * as actionsStatus from 'store/actions/status';
-import * as actionsAuth from 'store/actions/auth';
+import * as actions from "store/actions";
 import 'styles/once.scss';
 
 import Header from "components/Header";
@@ -43,7 +42,7 @@ function App({}: PropsApp) {
     },[codeLanguageCurrent])
     useEffect(()=>{
         if (codeLanguageCurrent === ''){
-            dispatch(actionsStatus.return__DETECT_LANGUAGE() );
+            dispatch(actions.status.return__DETECT_LANGUAGE() );
         }
         else {
             Cookies.set('codeLanguageStandard', codeLanguageCurrent, { expires: 30 });
@@ -56,7 +55,7 @@ function App({}: PropsApp) {
     const optionThemeCurrent:string = useSelector((state: StateRoot) => state['status']['current']['theme']['option']);
     const nameThemeCurrent:string = useSelector((state: StateRoot) => state['status']['current']['theme']['name']);
     useEffect(() => {
-        dispatch(actionsStatus.return__READ_OPTION_THEME() );
+        dispatch(actions.status.return__READ_OPTION_THEME() );
     }, [optionThemeCurrent]);
     useEffect(()=>{
             if (nameThemeCurrent === 'dark'){
@@ -73,17 +72,17 @@ function App({}: PropsApp) {
   
     // log check
     useEffect(() => {
-        dispatch( actionsStatus.return__REPLACE({
+        dispatch( actions.status.return__REPLACE({
             listKey: ['loading', 'user'],
             replacement: true
         }) );
         try {
             firebaseAuth.onAuthStateChanged((user) => {
                 if (user) {
-                    dispatch(actionsAuth.return__LOG_CHECK_SUCCEEDED() );
+                    dispatch(actions.auth.return__LOG_CHECK_SUCCEEDED() );
                 } 
                 else {
-                    dispatch(actionsAuth.return__LOG_CHECK_FAILED() );
+                    dispatch(actions.auth.return__LOG_CHECK_FAILED() );
                 }
             });
         }
@@ -97,12 +96,36 @@ function App({}: PropsApp) {
     const readyUser:boolean = useSelector((state: StateRoot) => state['status']['ready']['user']);
     useEffect(()=>{
         if (!readyUser){
-            dispatch( actionsAuth.return__REPLACE({
+            dispatch( actions.auth.return__REPLACE({
                 listKey: ['user'],
                 replacement: null
             }) );
         }
-    },[readyUser])
+    },[readyUser]);
+
+
+    useEffect(()=>{
+        dispatch( actions.status.return__REPLACE({
+            listKey: ['current', 'size', 'window', 'innerWidth'],
+            replacement: window.innerWidth
+        }) );
+        dispatch( actions.status.return__REPLACE({
+            listKey: ['current', 'size', 'window', 'innerHeight'],
+            replacement: window.innerHeight
+        }) );
+        
+        window.addEventListener('resize', (event) => {
+            dispatch( actions.status.return__REPLACE({
+                listKey: ['current', 'size', 'window', 'innerWidth'],
+                replacement: window.innerWidth
+            }) );
+            dispatch( actions.status.return__REPLACE({
+                listKey: ['current', 'size', 'window', 'innerHeight'],
+                replacement: window.innerHeight
+            }) );
+        });
+    },[]);
+
     
 
   // https://dev.to/cmcwebcode40/simple-react-dark-mode-with-scss-lae

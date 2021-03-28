@@ -41,7 +41,7 @@ function Header({}: PropsHeader) {
     const {onClick_LinkInsideApp} = useLink(history);
     
     useEffect(() => {
-        console.log(location.pathname);
+        //console.log(location.pathname);
         if (  
             (/^\/log-in/).test(location.pathname) || 
             (/^\/sign-up/).test(location.pathname)

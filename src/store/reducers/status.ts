@@ -47,7 +47,23 @@ const stateInitial = {
         option: 'always-light',
         name: 'light'
     },
-    
+
+    size: {
+      window: {
+        innerWidth: 0,
+        innerHeight: 0,
+      },
+      document: {
+        header: {
+          height: 60,
+        },
+        chessBoard: {
+          toolbar: {
+            height: 60
+          }
+        }
+      }
+    },
 
     football: {
         leagueStandings: {

@@ -34,14 +34,42 @@ function ChessBoard({
     setPgn
 }: PropsChessBoard) {
 
-    const dispatch = useDispatch();
-    const leagueStandings = useSelector((state: StateRoot)=>state.data.football.leagueStandings);
-
-    const sorting = useSelector((state: StateRoot)=>state.status.current.football.leagueStandings.sorting);
-
     const gameCurrent:ChessInstance = useMemo(()=>{
         return new ChessReq(); 
     }, []);
+
+    const dispatch = useDispatch();
+    const {innerWidth, innerHeight} = useSelector((state: StateRoot)=>state.status.current.size.window);
+    const heightHeader = useSelector((state: StateRoot)=>state.status.current.size.document.header.height);
+    const heightToolBar = useSelector((state: StateRoot)=>state.status.current.size.document.chessBoard.toolbar.height);
+
+    const lengthBoard = useMemo(()=>{
+        // height
+        const innerLengthShorter = innerWidth <= innerHeight ? innerWidth : innerHeight;
+        
+        if (innerLengthShorter <= 576){
+            if (innerHeight <= innerWidth + heightHeader + heightToolBar){
+                return (innerHeight - heightHeader - heightToolBar);
+            }
+            else {
+                return (innerLengthShorter);
+            }
+        }
+        else {
+            // 576 넘어갈때 갑자기 바뀌는 거 방지하면서 조정
+            const lengthMax = 700;
+            const lengthWhenHeightIsShort = innerHeight - heightHeader - heightToolBar;
+            return ( Math.min(lengthWhenHeightIsShort, lengthMax) );
+        }
+
+        // $device-xs__min-width: 320px;     
+        // $device-s__min-width: 576px;      
+        // $device-m__min-width: 768px;
+        // $device-l__min-width: 992px;
+    }, [innerWidth, innerHeight, heightHeader, heightToolBar  ]);
+
+
+    
 
     const [positionStart, setPositionStart] = useState<null | string>(null);
 
@@ -99,6 +127,7 @@ function ChessBoard({
         <div 
             className={`${styles['root']}`} data-pgn={pgn}
             onClick={e=>onClick_Board(e, positionStart)}
+            style={{width: lengthBoard, height: lengthBoard}}
         >
             {listSquare.map((row,iRow)=>row.map((e, iCol)=>
                 {

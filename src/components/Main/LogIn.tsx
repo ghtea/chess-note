@@ -6,7 +6,7 @@ import history from 'historyApp';
 import { FormattedMessage, useIntl } from 'react-intl';
 
 import {useSelector, useDispatch} from "react-redux";
-import {StateRoot} from 'store/reducers';
+import {StateRoot} from 'store/reducers'; 
 
 import * as actionsRoot from "store/actions";
 
