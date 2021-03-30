@@ -7,6 +7,7 @@
     "axios": "^0.21.0",
     "chess": "^0.5.0",
     "chess.js": "^0.11.0",
+    "clipboardy": "^2.3.0",
     "firebase": "^8.2.1",
     "history": "4.9.0",
     "immer": "^7.0.14",

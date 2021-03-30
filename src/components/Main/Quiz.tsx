@@ -1,6 +1,7 @@
 import ChessBoard from 'components/Global/ChessBoard';
 import React, { useCallback, useState } from 'react';
 import { Route, Switch } from "react-router-dom";
+import ToolBar from './Quiz/ToolBar';
 
 
 // import Football from "components/Main/Sports/Football";
@@ -30,13 +31,8 @@ function Quiz({}: PropsQuiz) {
 
   return (
     <div>
-      <div>
-        <button
-          type='button'
-          onClick={onClick_Button}
-        >paste pgn</button>
-      </div>
       <ChessBoard pgn={pgn} setPgn={setPgn}/>
+      <ToolBar />
     </div>
   );
 }

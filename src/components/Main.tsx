@@ -13,6 +13,7 @@ import NotFound from "./Main/NotFound";
 //import SignUp from "./components/Auth/SignUp";
 
 import styles from './Main.module.scss';
+import Quiz from './Main/Quiz';
 
 
 type PropsMain = {};
@@ -37,6 +38,10 @@ function Main({}: PropsMain) {
 
             <Route path="/opening" >
                 <Opening />
+            </Route>
+
+            <Route path="/quiz" >
+                <Quiz />
             </Route>
 
             <Route path="/test" >

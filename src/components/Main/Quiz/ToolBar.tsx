@@ -1,6 +1,6 @@
 import React, { useCallback, useEffect, useMemo, useState } from "react";
 import history from 'historyApp';
-
+import * as clipboardy from 'clipboardy';
 import { FormattedMessage } from 'react-intl';
 
 
@@ -15,30 +15,31 @@ import * as actions  from 'store/actions';
 import * as types  from 'store/types';
 
 import styles from './ToolBar.module.scss';
-// import IconSort from 'svgs/basic/IconSort';
+import IconPaste from 'svgs/basic/IconSignIn';
+import IconAngle from "svgs/basic/IconAngle";
 // import {Chess} from 'chess.js'; // => makes error
 
 type PropsToolBar = {
-    pgn: string;
-    setPgn: React.Dispatch<React.SetStateAction<string>>
+    
 };
 
 function ToolBar({
-    pgn,
-    setPgn
+    
 }: PropsToolBar) {
 
     const dispatch = useDispatch();
-    const leagueStandings = useSelector((state: StateRoot)=>state.data.football.leagueStandings);
-
-    const sorting = useSelector((state: StateRoot)=>state.status.current.football.leagueStandings.sorting);
-
+    const heightToolbar = useSelector((state: StateRoot)=>state.status.current.size.document.chessBoard.toolbar.height);
+    const lengthChessBoard = useSelector((state: StateRoot)=>state.status.current.size.document.chessBoard.length);
     // const gameCurrent:ChessInstance = useMemo(()=>{
     //     return new ChessReq(); 
     // }, []);
 
     // const [positionStart, setPositionStart] = useState<null | string>(null);
-
+    const onClick_ControlPaste = useCallback(
+        async (e:React.MouseEvent<HTMLButtonElement, MouseEvent>)=>{
+            const value = await clipboardy.read();
+            console.log(value)
+    }, []);
     // const onClick_Board = useCallback(
     //     (event:React.MouseEvent<HTMLDivElement, MouseEvent>, positionStart: string | null) => {
     //     let elementUsing = event.target as HTMLDivElement | HTMLImageElement;
@@ -86,14 +87,51 @@ function ToolBar({
 
     return (
         <div 
-            className={`${styles['root']}`} data-pgn={pgn}
+            className={`${styles['root']}`}
+            style={{
+                width: lengthChessBoard,
+                height: heightToolbar,
+            }}
         >
-            <div>
-                <button>answer</button>
+            <div
+                className={`${styles['back']}`}
+            >
+                <button> {'<-'} </button>
             </div>
 
-            <div>
-                <button>edit / solve</button>
+            <div
+                className={`${styles['mode']}`}
+            >
+                <button> editing </button>
+            </div>
+
+            <div
+                className={`${styles['control']}`}
+            >
+                <button>
+                    <IconAngle className={`${styles['icon__backward']}`} kind='light' directon='left'/>
+                </button>
+                <button
+                    type='button'
+                    onClick={onClick_ControlPaste}
+                >
+                    <IconPaste className={`${styles['icon__paste']}`} kind='light'/>
+                </button>
+                <button>
+                    <IconAngle className={`${styles['icon__forward']}`} kind='light' directon='right'/>
+                </button>
+            </div>
+
+            <div
+                className={`${styles['save']}`}
+            >
+                <button> save </button>
+            </div>
+
+            <div
+                className={`${styles['others']}`}
+            >
+                <button> ... </button>
             </div>
             
         </div>

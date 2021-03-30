@@ -28,6 +28,9 @@
         align-items: center;
 
         height: 100%;
+        &:nth-child(n+2){
+            margin-left: 10px;
+        }
 
         position: relative;
 

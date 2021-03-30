@@ -1,29 +1,35 @@
-
-
 # Opening
-
 ## Playing
-
-
 ## Editing
-
 
 
 
 # Quiz
 
 ## Playing
-- back to starting point 
 
+- backward/forward
+- hint
+
+## Solved
+
+- backward/forward
+- another random quiz
 
 ## Editing
-- 앞으로
-- 뒤로
 
-- 시작 지점 저장
-- - 모든 해답 삭제됨에 주의
+- backward/forward
 
-정답 여러개 있으면 그중 매번 한개 선택해서 수정 (탭)
-- 현시점 까지 해답으로 저장
-- 현재 정답 목록
-- 해당 해답 삭제
+- save
+- - as starting point (모든 해답 삭제됨에 주의)
+- - as current solution
+- - as new solution
+
+- others
+- - change solution
+- - delete current solution
+
+- 퀴즈 들어가자 마자 화면
+  랜덤 퀴즈
+  아이디 입력 해서 퀴즈
+  통계

@@ -48,7 +48,8 @@
     "Nav.LogIn": "로그인",
     "Nav.SignUp": "회원가입",
     "Nav.Opening": "오프닝",  
-    
+    "Nav.Quiz": "퀴즈",  
+
     "Notification.Test1__S": "테스트에 성공하였습니다 1 !",
     "Notification.Test2__H": "테스트에 성공하였습니다 2 !",
     "Notification.NotLoggedIn__E": "먼저 로그인해야 합니다",

@@ -58,6 +58,7 @@ const stateInitial = {
           height: 60,
         },
         chessBoard: {
+          length: 0,
           toolbar: {
             height: 60
           }

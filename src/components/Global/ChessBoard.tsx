@@ -42,26 +42,31 @@ function ChessBoard({
     const {innerWidth, innerHeight} = useSelector((state: StateRoot)=>state.status.current.size.window);
     const heightHeader = useSelector((state: StateRoot)=>state.status.current.size.document.header.height);
     const heightToolBar = useSelector((state: StateRoot)=>state.status.current.size.document.chessBoard.toolbar.height);
+    const lengthChessBoard = useSelector((state: StateRoot)=>state.status.current.size.document.chessBoard.length);
 
-    const lengthBoard = useMemo(()=>{
+    useEffect(()=>{
         // height
+        let lengthChessBoardNew = 0;
         const innerLengthShorter = innerWidth <= innerHeight ? innerWidth : innerHeight;
         
         if (innerLengthShorter <= 576){
             if (innerHeight <= innerWidth + heightHeader + heightToolBar){
-                return (innerHeight - heightHeader - heightToolBar);
+                lengthChessBoardNew = (innerHeight - heightHeader - heightToolBar);
             }
             else {
-                return (innerLengthShorter);
+                lengthChessBoardNew = (innerLengthShorter);
             }
         }
         else {
             // 576 넘어갈때 갑자기 바뀌는 거 방지하면서 조정
             const lengthMax = 700;
-            const lengthWhenHeightIsShort = innerHeight - heightHeader - heightToolBar;
-            return ( Math.min(lengthWhenHeightIsShort, lengthMax) );
+            const lengthWhenHeightIsShort = innerHeight - heightHeader - 20 - heightToolBar; // 20 은 header아래 margin
+            lengthChessBoardNew = ( Math.min(lengthWhenHeightIsShort, lengthMax, innerLengthShorter) );
         }
-
+        dispatch( actions.status.return__REPLACE({
+            listKey: ['current', 'size', 'document', 'chessBoard', 'length'],
+            replacement: lengthChessBoardNew
+        }) );
         // $device-xs__min-width: 320px;     
         // $device-s__min-width: 576px;      
         // $device-m__min-width: 768px;
@@ -127,7 +132,7 @@ function ChessBoard({
         <div 
             className={`${styles['root']}`} data-pgn={pgn}
             onClick={e=>onClick_Board(e, positionStart)}
-            style={{width: lengthBoard, height: lengthBoard}}
+            style={{width: lengthChessBoard, height: lengthChessBoard}}
         >
             {listSquare.map((row,iRow)=>row.map((e, iCol)=>
                 {

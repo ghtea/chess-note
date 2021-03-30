@@ -1,3 +1,4 @@
+import { rootCertificates } from "node:tls";
 import React, {useMemo} from "react";
 
 type PropsIcon = {
@@ -20,24 +21,29 @@ const Icon = ({ className, kind, directon }: PropsIcon) => {
 
     const transform: string = useMemo(()=>{
         if (directon === 'right'){
-            return 'rotate(0)'
+            return 'rotate(0deg)'
         }
         else if (directon === 'down'){
-            return 'rotate(90)'
+            return 'rotate(90deg)'
         }
         else if (directon === 'left'){
-            return 'rotate(180)'
+            return 'rotate(180deg)'
         }
         else if (directon === 'up'){
-            return 'rotate(270)'
+            return 'rotate(270deg)'
         }
         else {
-            return 'rotate(0)'
+            return 'rotate(0deg)'
         }
     },[directon]);
 
   return (
-    <span className={`${className} icon`} >
+    <span 
+      className={`${className} icon`} 
+      style={{
+        transform:transform
+      }}
+    >
   
     {(!kind || kind === 'regular') && 
       <svg
@@ -50,7 +56,6 @@ const Icon = ({ className, kind, directon }: PropsIcon) => {
         role="img"
         xmlns="http://www.w3.org/2000/svg"
         viewBox="0 0 192 512"
-        transform={transform}
       >
         <path  fill="currentColor" d="M187.8 264.5L41 412.5c-4.7 4.7-12.3 4.7-17 0L4.2 392.7c-4.7-4.7-4.7-12.3 0-17L122.7 256 4.2 136.3c-4.7-4.7-4.7-12.3 0-17L24 99.5c4.7-4.7 12.3-4.7 17 0l146.8 148c4.7 4.7 4.7 12.3 0 17z">
         </path>
