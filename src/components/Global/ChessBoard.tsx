@@ -18,25 +18,26 @@ import styles from './ChessBoard.module.scss';
 import ChessSquare from "./ChessBoard/ChessSquare";
 // import IconSort from 'svgs/basic/IconSort';
 // import {Chess} from 'chess.js'; // => makes error
-import { ChessInstance, Square } from 'chess.js'
+import { ChessInstance, PieceType, Square } from 'chess.js'
 
 const ChessReq:any = require('chess.js');
 // https://stackoverflow.com/questions/58598457/not-a-constructor-error-with-library-and-angular
 // const Chess:ChessInstance = new ChessReq();
 
 type PropsChessBoard = {
-    pgn: string;
-    setPgn: React.Dispatch<React.SetStateAction<string>>
+    //fen: string;
+    listSquare: ({
+        type: PieceType;
+        color: "b" | "w";
+    } | null)[][];
+    move: (from: string, to: string) => void
 };
 
 function ChessBoard({
-    pgn,
-    setPgn
+    //fen,
+    move,
+    listSquare,
 }: PropsChessBoard) {
-
-    const gameCurrent:ChessInstance = useMemo(()=>{
-        return new ChessReq(); 
-    }, []);
 
     const dispatch = useDispatch();
     const {innerWidth, innerHeight} = useSelector((state: StateRoot)=>state.status.current.size.window);
@@ -93,44 +94,22 @@ function ChessBoard({
             console.log(position);
         }
         else {
-            const result = gameCurrent.move({from: positionStart as Square, to: position as Square});
+            move(positionStart, position);
+            //const result = gameCurrent.move({from: positionStart as Square, to: position as Square});
             //console.log('result', result);
-            setPgn(gameCurrent.pgn());
+            //setPgn(gameCurrent.pgn());
             setPositionStart(null);
         }
         console.log(positionStart);
-        // const {value} = event.currentTarget;
-
-        // dispatch(actions.status.return__REPLACE({ 
-        //     listKey: ['current', 'football', 'leagueStandings', 'mode', 'element'],
-        //     replacement: value
-        // }));
     
-        },[gameCurrent]
+        },[]
     );
 
-    useEffect(()=>{
-        console.log('positionStart: ', positionStart);
-    },[positionStart])
-    
-
-    const [listSquare, setListSquare] = useState(gameCurrent.board())
-    useEffect(()=>{
-        if (gameCurrent){
-            //console.log(pgn)
-            gameCurrent.load_pgn(pgn);
-            setListSquare(gameCurrent.board())
-            //console.log(gameCurrent.history())
-        }
-    }, [pgn, gameCurrent]);
-
-    
-    
     
 
     return (
         <div 
-            className={`${styles['root']}`} data-pgn={pgn}
+            className={`${styles['root']}`}
             onClick={e=>onClick_Board(e, positionStart)}
             style={{width: lengthChessBoard, height: lengthChessBoard}}
         >
@@ -145,7 +124,7 @@ function ChessBoard({
                             position={{rank, file}}
                             focused={file+rank===positionStart}
                             color={color}
-                            key={`ChessSquare-${iRow}-${iCol}-${pgn}`}
+                            key={`ChessSquare-${iRow}-${iCol}`}
                         />
                     )
                 }

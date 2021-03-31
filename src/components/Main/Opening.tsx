@@ -30,13 +30,7 @@ function Opening({}: PropsOpening) {
 
   return (
     <div>
-      <div>
-        <button
-          type='button'
-          onClick={onClick_Button}
-        >paste pgn</button>
-      </div>
-      <ChessBoard pgn={pgn} setPgn={setPgn}/>
+      not yet
     </div>
   );
 }

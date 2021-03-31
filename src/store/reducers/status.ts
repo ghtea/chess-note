@@ -66,27 +66,21 @@ const stateInitial = {
       }
     },
 
-    football: {
-        leagueStandings: {
-            sorting: {
-                listOptionActive: [ 
-                    {property: 'points', direction: 'descending', isActive: true},
-                    {property: 'goals_diff', direction: 'descending', isActive: true},
-                ] as types.status.OptionSorting[],
-                
-                listOptionInactive: [ 
-                    {property: 'games_played', direction: 'ascending', isActive: false},
-                    {property: 'goals_scored', direction: 'descending', isActive: false},
-                    {property: 'goals_against', direction: 'ascending', isActive: false}, 
-                ] as types.status.OptionSorting[],
-            },
-            mode: {
-                format: 'table' as 'table' | 'cards',
-                element: 'text' as 'text' | 'graph',
-            }
-        }
+    quiz: {
+      mode: 'editing' as 'editing' | 'trying' | 'solved', 
+      fen: 'rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1',
+      // listMove: [],
+      instance: {
+        id: null,
+        side: 'white' as 'white' | 'black',
+        fenStart: 'rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1',
+        listListMoveCorrect: [] as string[][],
+        idUser: '',
+        record: [],
+      }
     },
-
+  // listListMoveCorrect: string[][];
+  // record: {date: string, result: boolean}[];
   },
   
   showing: {

@@ -17,14 +17,15 @@ import * as types  from 'store/types';
 import styles from './ToolBar.module.scss';
 import IconPaste from 'svgs/basic/IconSignIn';
 import IconAngle from "svgs/basic/IconAngle";
+import IconReverse from "svgs/basic/IconSyncAlt";
 // import {Chess} from 'chess.js'; // => makes error
 
 type PropsToolBar = {
-    
+    loadFen: (fen: string) => void
 };
 
 function ToolBar({
-    
+    loadFen
 }: PropsToolBar) {
 
     const dispatch = useDispatch();
@@ -37,8 +38,14 @@ function ToolBar({
     // const [positionStart, setPositionStart] = useState<null | string>(null);
     const onClick_ControlPaste = useCallback(
         async (e:React.MouseEvent<HTMLButtonElement, MouseEvent>)=>{
-            const value = await clipboardy.read();
-            console.log(value)
+            try { 
+                const value = await clipboardy.read();
+                //console.log(value)
+                loadFen(value)
+            }
+            catch (e){
+
+            }
     }, []);
     // const onClick_Board = useCallback(
     //     (event:React.MouseEvent<HTMLDivElement, MouseEvent>, positionStart: string | null) => {
@@ -76,14 +83,6 @@ function ToolBar({
     // },[positionStart])
     
 
-    /*
-    오프닝/문제 수정 => 저장, 뒤로돌리기
-
-    오프닝
-
-
-    직접 풀기 => 
-    */
 
     return (
         <div 
@@ -110,6 +109,12 @@ function ToolBar({
             >
                 <button>
                     <IconAngle className={`${styles['icon__backward']}`} kind='light' directon='left'/>
+                </button>
+                <button
+                    type='button'
+                    onClick={onClick_ControlPaste}
+                >
+                    <IconReverse className={`${styles['icon__reverse']}`} kind='light'/>
                 </button>
                 <button
                     type='button'

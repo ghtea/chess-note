@@ -1,21 +1,77 @@
 import ChessBoard from 'components/Global/ChessBoard';
-import React, { useCallback, useState } from 'react';
+import React, { useCallback, useState, useMemo} from 'react';
 import { Route, Switch } from "react-router-dom";
 import ToolBar from './Quiz/ToolBar';
+import { ChessInstance, Square } from 'chess.js'
+import { useDispatch, useSelector } from 'react-redux';
+import { StateRoot } from 'store/reducers';
+import * as actions  from 'store/actions';
+const ChessReq:any = require('chess.js');
+// https://stackoverflow.com/questions/58598457/not-a-constructor-error-with-library-and-angular
+// const Chess:ChessInstance = new ChessReq();
 
 
-// import Football from "components/Main/Sports/Football";
 
-// import styles from './Main.module.scss';
 
 
 type PropsQuiz = {};
 
 function Quiz({}: PropsQuiz) {
+  
+  const dispatch = useDispatch();
+  const fen = useSelector((state: StateRoot)=>state.status.current.quiz.fen);
 
-  const [pgn, setPgn] = useState('');
+  const gameCurrent:ChessInstance = useMemo(()=>{
+    const result = new ChessReq(); 
+    return result; 
+  }, []);
 
-  const onClick_Button = useCallback(
+  const move = useCallback(
+    (from: string, to: string)=>{
+      const result = gameCurrent.move({from: from as Square, to: to as Square});
+      if (result){
+        dispatch( actions.status.return__REPLACE({
+          listKey: ['current', 'quiz', 'fen'],
+          replacement: gameCurrent.fen()
+      }) );
+      }
+  }, [gameCurrent]);
+
+
+  const loadFen = useCallback(
+    (fen: string)=>{
+      const result = gameCurrent.load(fen);
+      if (result){
+        dispatch( actions.status.return__REPLACE({
+          listKey: ['current', 'quiz', 'fen'],
+          replacement: gameCurrent.fen()
+      }) );
+      }
+  }, [gameCurrent]);
+
+  const listSquare = useMemo(()=>{
+    return gameCurrent.board(); 
+  }, [fen, gameCurrent]);
+
+  return (
+    <div>
+      <ChessBoard
+        move={move}
+        listSquare={listSquare}
+      />
+      <ToolBar 
+        loadFen={loadFen}
+      />
+    </div>
+  );
+}
+
+export default Quiz;
+
+
+
+/*
+const onClick_Button = useCallback(
     (event: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
         //const {currentTarget: {value}} = event;
         setPgn(`
@@ -29,13 +85,4 @@ function Quiz({}: PropsQuiz) {
 );
 
 
-  return (
-    <div>
-      <ChessBoard pgn={pgn} setPgn={setPgn}/>
-      <ToolBar />
-    </div>
-  );
-}
-
-export default Quiz;
-
+*/
