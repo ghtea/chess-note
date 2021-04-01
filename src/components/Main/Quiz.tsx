@@ -2,7 +2,7 @@ import ChessBoard from 'components/Global/ChessBoard';
 import React, { useCallback, useState, useMemo} from 'react';
 import { Route, Switch } from "react-router-dom";
 import ToolBar from './Quiz/ToolBar';
-import { ChessInstance, Square } from 'chess.js'
+import { ChessInstance, Move, Square } from 'chess.js'
 import { useDispatch, useSelector } from 'react-redux';
 import { StateRoot } from 'store/reducers';
 import * as actions  from 'store/actions';
@@ -20,20 +20,27 @@ function Quiz({}: PropsQuiz) {
   
   const dispatch = useDispatch();
   const fen = useSelector((state: StateRoot)=>state.status.current.quiz.fen);
+  const side = useSelector((state: StateRoot)=>state.status.current.quiz.instance.side);
 
   const gameCurrent:ChessInstance = useMemo(()=>{
     const result = new ChessReq(); 
     return result; 
   }, []);
 
+
+  // 움직일 때마다 fen 을 변경해서, 리렌더링 잘하도록!
   const move = useCallback(
-    (from: string, to: string)=>{
+    (from: string, to: string): Move | null=>{
       const result = gameCurrent.move({from: from as Square, to: to as Square});
       if (result){
         dispatch( actions.status.return__REPLACE({
           listKey: ['current', 'quiz', 'fen'],
           replacement: gameCurrent.fen()
-      }) );
+        }) );
+        return result;
+      }
+      else {
+        return result;
       }
   }, [gameCurrent]);
 
@@ -49,15 +56,23 @@ function Quiz({}: PropsQuiz) {
       }
   }, [gameCurrent]);
 
+
   const listSquare = useMemo(()=>{
     return gameCurrent.board(); 
-  }, [fen, gameCurrent]);
+    // if (side==='white'){
+    //   return gameCurrent.board(); 
+    // }
+    // else {
+    //   return gameCurrent.board().reverse(); 
+    // }
+  }, [gameCurrent, fen]);
 
   return (
     <div>
       <ChessBoard
         move={move}
         listSquare={listSquare}
+        side={side}
       />
       <ToolBar 
         loadFen={loadFen}

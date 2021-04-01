@@ -36,12 +36,9 @@
     "Modal.MyProfile_Photo": "사진",
     "Modal.MyProfile_Update": "업데이트",
  
-    "Modal.SortingFootballLeagueStandings_Title": "테이블 정렬하기",
-    "Modal.SortingFootballLeagueStandings_Points": "포인트",
-    "Modal.SortingFootballLeagueStandings_GoalsDiff": "골 득실차",
-    "Modal.SortingFootballLeagueStandings_GoalsScored": "골 득점 수",
-    "Modal.SortingFootballLeagueStandings_GoalsAgainst": "골 실점 수",
-    "Modal.SortingFootballLeagueStandings_GamesPlayed": "경기 수",
+    "Modal.QuizSave_SaveAsStart": "시작 지점으로 저장",
+    "Modal.QuizSave_SaveAsCurrentAnswer": "현재 해답으로 저장",
+    "Modal.QuizSave_SaveAsNewAnswer": "새로운 해답으로 저장",
 
     "Nav.NameApp": "체스 노트",
     "Nav.Home": "홈",

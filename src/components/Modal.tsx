@@ -6,7 +6,7 @@ import {StateRoot} from 'store/reducers';
 import Setting from "./Modal/Setting";
 import MyProfile from "./Modal/MyProfile";
 
-//import SortingFootballLeagueStandings from "./Modal/Others/SortingFootballLeagueStandings";
+import QuizSave from "./Modal/Quiz/QuizSave";
 
 
 // import styles from './Modal.module.scss';
@@ -19,13 +19,14 @@ function Modal({}: PropsModal) {
     const showingSetting = useSelector((state: StateRoot) => state.status.showing.modal.setting);
     const showingMyProfile = useSelector((state: StateRoot) => state.status.showing.modal.myProfile); 
 
-    //const showingSortingFootballLeagueStandings = useSelector((state: StateRoot) => state.status.showing.modal.sortingFootballLeagueStandings);  
+    const showingQuizSave = useSelector((state: StateRoot) => state.status.showing.modal.quizSave);  
 
     return (        
         <>
             {showingSetting && <Setting />}
             {showingMyProfile && <MyProfile />}
 
+            {showingQuizSave && <QuizSave />}
         </>
     );
 }

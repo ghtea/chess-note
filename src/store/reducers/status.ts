@@ -95,7 +95,7 @@ const stateInitial = {
         setting: false,
         myProfile: false,
         
-        sortingFootballLeagueStandings: false,
+        quizSave: false,
         // editingPortal: false,
            
         // searching: false,

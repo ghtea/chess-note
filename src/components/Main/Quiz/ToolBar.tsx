@@ -29,11 +29,11 @@ function ToolBar({
 }: PropsToolBar) {
 
     const dispatch = useDispatch();
+
     const heightToolbar = useSelector((state: StateRoot)=>state.status.current.size.document.chessBoard.toolbar.height);
     const lengthChessBoard = useSelector((state: StateRoot)=>state.status.current.size.document.chessBoard.length);
-    // const gameCurrent:ChessInstance = useMemo(()=>{
-    //     return new ChessReq(); 
-    // }, []);
+    const side = useSelector((state: StateRoot)=>state.status.current.quiz.instance.side);
+
 
     // const [positionStart, setPositionStart] = useState<null | string>(null);
     const onClick_ControlPaste = useCallback(
@@ -46,6 +46,22 @@ function ToolBar({
             catch (e){
 
             }
+    }, []);
+
+    const onClick_Reverse = useCallback(
+        (e:React.MouseEvent<HTMLButtonElement, MouseEvent>)=>{
+            dispatch(actions.status.return__REPLACE({ 
+                listKey: ['current', 'quiz', 'instance', 'side'],
+                replacement: side === 'white' ? 'black' : 'white'
+            }));
+    }, [side]);
+
+    const onClick_Save = useCallback(
+        (e:React.MouseEvent<HTMLButtonElement, MouseEvent>)=>{
+            dispatch(actions.status.return__REPLACE({ 
+                listKey: ['showing', 'modal', 'quizSave'],
+                replacement: true,
+            }));
     }, []);
     // const onClick_Board = useCallback(
     //     (event:React.MouseEvent<HTMLDivElement, MouseEvent>, positionStart: string | null) => {
@@ -112,9 +128,9 @@ function ToolBar({
                 </button>
                 <button
                     type='button'
-                    onClick={onClick_ControlPaste}
+                    onClick={onClick_Reverse}
                 >
-                    <IconReverse className={`${styles['icon__reverse']}`} kind='light'/>
+                    {side === 'white' ? 'W' : 'B'}
                 </button>
                 <button
                     type='button'
@@ -130,7 +146,9 @@ function ToolBar({
             <div
                 className={`${styles['save']}`}
             >
-                <button> save </button>
+                <button
+                    onClick={onClick_Save}
+                > save </button>
             </div>
 
             <div

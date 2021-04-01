@@ -43,12 +43,9 @@
     "Modal.MyProfile_Photo": "Photo",
     "Modal.MyProfile_Update": "Update",
 
-    "Modal.SortingFootballLeagueStandings_Title": "Sort Table",
-    "Modal.SortingFootballLeagueStandings_Points": "Points",
-    "Modal.SortingFootballLeagueStandings_GoalsDiff": "Goals Diff",
-    "Modal.SortingFootballLeagueStandings_GoalsScored": "Goals Scored",
-    "Modal.SortingFootballLeagueStandings_GoalsAgainst": "Goals Against",
-    "Modal.SortingFootballLeagueStandings_GamesPlayed": "Games Played",
+    "Modal.QuizSave_SaveAsStart": "Save as Start",
+    "Modal.QuizSave_SaveAsCurrentAnswer": "Save as Current Answer",
+    "Modal.QuizSave_SaveAsNewAnswer": "Save as New Answer",
 
     "Notification.Test1__S": "Succuessfully tested 1 !",
     "Notification.Test2__H": "Succuessfully tested 2 !",

@@ -18,7 +18,7 @@ import styles from './ChessBoard.module.scss';
 import ChessSquare from "./ChessBoard/ChessSquare";
 // import IconSort from 'svgs/basic/IconSort';
 // import {Chess} from 'chess.js'; // => makes error
-import { ChessInstance, PieceType, Square } from 'chess.js'
+import { ChessInstance, Move, PieceType, Square } from 'chess.js'
 
 const ChessReq:any = require('chess.js');
 // https://stackoverflow.com/questions/58598457/not-a-constructor-error-with-library-and-angular
@@ -30,13 +30,15 @@ type PropsChessBoard = {
         type: PieceType;
         color: "b" | "w";
     } | null)[][];
-    move: (from: string, to: string) => void
+    move: (from: string, to: string) => (Move | null),
+    side: 'white' | 'black',
 };
 
 function ChessBoard({
     //fen,
     move,
     listSquare,
+    side,
 }: PropsChessBoard) {
 
     const dispatch = useDispatch();
@@ -91,21 +93,43 @@ function ChessBoard({
             //console.log(elementUsing.dataset['file'], )
             
             setPositionStart(position);
-            console.log(position);
+            //console.log(position);
         }
         else {
-            move(positionStart, position);
+            const result = move(positionStart, position);
+            console.log(positionStart, position, result)
             //const result = gameCurrent.move({from: positionStart as Square, to: position as Square});
             //console.log('result', result);
             //setPgn(gameCurrent.pgn());
+
             setPositionStart(null);
-        }
-        console.log(positionStart);
-    
+        }    
         },[]
     );
 
-    
+    // Junhyeon
+    // 8 => 13 => 6.5 
+
+    const listSquareForCurrentSide = useMemo(()=>{
+        console.log(listSquare)
+        if (side === 'white'){
+            console.log(listSquare)
+            return listSquare;
+        }
+        else {
+            const listSquareNew = [...listSquare].reverse().map(e=>[...e].reverse());
+            console.log(listSquareNew)
+            return listSquareNew;
+        }
+    },[listSquare, side]);
+
+    const {stringRank, stringFile, standardLight} = useMemo(()=>{
+        const stringRank = "87654321";
+        const stringFile = "abcdefgh";
+        const standardLight = side === 'white' ? 0 : 1;
+        
+        return ({stringRank, stringFile, standardLight})
+    },[side])
 
     return (
         <div 
@@ -113,18 +137,20 @@ function ChessBoard({
             onClick={e=>onClick_Board(e, positionStart)}
             style={{width: lengthChessBoard, height: lengthChessBoard}}
         >
-            {listSquare.map((row,iRow)=>row.map((e, iCol)=>
+            {listSquareForCurrentSide.map((row,iRow)=>row.map((e, iCol)=>
                 {
-                    const rank = (8-iRow).toString() as "1" | "2" | "3" | "4" | "5" | "6" | "7" | "8";
-                    const file = 'abcdefgh'[iCol] as "a" | "b" | "g" | "c" | "d" | "e" | "f" | "h";
-                    const color = (iRow + iCol) % 2 === 1 ? 'light' : 'dark';
+                    const iRowNew = side === 'white' ? iRow : 7-iRow;
+                    const iColNew = side === 'white' ? iCol : 7-iCol;
                     return (
                         <ChessSquare 
                             piece={e}
-                            position={{rank, file}}
-                            focused={file+rank===positionStart}
-                            color={color}
-                            key={`ChessSquare-${iRow}-${iCol}`}
+                            position={{
+                                rank: stringRank[iRowNew] as "1" | "2" | "3" | "4" | "5" | "6" | "7" | "8", 
+                                file: stringFile[iColNew] as "a" | "b" | "g" | "c" | "d" | "e" | "f" | "h"
+                            }}
+                            focused={stringFile[iColNew]+stringRank[iRowNew]===positionStart}
+                            color={(iRowNew + iColNew) % 2 === standardLight ? 'light' : 'dark'}
+                            key={`ChessSquare-${iRowNew}-${iColNew}`}
                         />
                     )
                 }
