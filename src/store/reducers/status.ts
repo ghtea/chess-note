@@ -96,6 +96,7 @@ const stateInitial = {
         myProfile: false,
         
         quizSave: false,
+        quizPut: false,
         // editingPortal: false,
            
         // searching: false,

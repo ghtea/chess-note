@@ -56,6 +56,14 @@ function ToolBar({
             }));
     }, [side]);
 
+    const onClick_Create = useCallback(
+        (e:React.MouseEvent<HTMLButtonElement, MouseEvent>)=>{
+            dispatch(actions.status.return__REPLACE({ 
+                listKey: ['showing', 'modal', 'quizPut'],
+                replacement: true,
+            }));
+    }, []);
+
     const onClick_Save = useCallback(
         (e:React.MouseEvent<HTMLButtonElement, MouseEvent>)=>{
             dispatch(actions.status.return__REPLACE({ 
@@ -117,7 +125,9 @@ function ToolBar({
             <div
                 className={`${styles['mode']}`}
             >
-                <button> editing </button>
+                <button
+                    onClick={onClick_Create}
+                > Create </button>
             </div>
 
             <div
@@ -148,7 +158,7 @@ function ToolBar({
             >
                 <button
                     onClick={onClick_Save}
-                > save </button>
+                > Save </button>
             </div>
 
             <div

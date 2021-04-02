@@ -7,6 +7,7 @@ import Setting from "./Modal/Setting";
 import MyProfile from "./Modal/MyProfile";
 
 import QuizSave from "./Modal/Quiz/QuizSave";
+import QuizPut from './Modal/Quiz/QuizPut';
 
 
 // import styles from './Modal.module.scss';
@@ -20,6 +21,7 @@ function Modal({}: PropsModal) {
     const showingMyProfile = useSelector((state: StateRoot) => state.status.showing.modal.myProfile); 
 
     const showingQuizSave = useSelector((state: StateRoot) => state.status.showing.modal.quizSave);  
+    const showingQuizPut = useSelector((state: StateRoot) => state.status.showing.modal.quizPut);  
 
     return (        
         <>
@@ -27,6 +29,7 @@ function Modal({}: PropsModal) {
             {showingMyProfile && <MyProfile />}
 
             {showingQuizSave && <QuizSave />}
+            {showingQuizPut && <QuizPut />}
         </>
     );
 }
