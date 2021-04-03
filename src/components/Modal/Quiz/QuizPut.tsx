@@ -49,9 +49,15 @@ function QuizPut({}: PropsQuizPut) {
     },[onClick_Window]);
 
 
-    const onClick_AnyButton = useCallback(
+    const onClick_Create = useCallback(
         (e:React.MouseEvent<HTMLButtonElement, MouseEvent>)=>{
-            
+            dispatch(actions.data.quiz.return__CREATE_QUIZ({ 
+                name: 'hello',
+                side: 'white',
+                fenStart: 'fen...',
+                listListMoveCorrect: [[]],
+                idUser: 'user',
+            }));
     }, []);
   
   return (
@@ -92,7 +98,7 @@ function QuizPut({}: PropsQuizPut) {
                         type='button'
                         value='create'
                         className={`${styles['button__put']}`}
-                        onClick={onClick_AnyButton}
+                        onClick={onClick_Create}
                     > <FormattedMessage id={`Global.Create`} /> </button>
                 </div>
                 

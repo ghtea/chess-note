@@ -76,7 +76,7 @@ const stateInitial = {
         fenStart: 'rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1',
         listListMoveCorrect: [] as string[][],
         idUser: '',
-        record: [],
+        record: [] as types.data.quiz.Record[],
       }
     },
   // listListMoveCorrect: string[][];

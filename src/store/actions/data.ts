@@ -1,5 +1,4 @@
-export * as football from './data/football';
-export * as weather from './data/weather';
+export * as quiz from './data/quiz';
 
 
 export const name__REPLACE: string = `data/REPLACE`;    // 뒤에 as const 를 붙이면 reducer 에서 auth.REPLACE 로 쓸때 오류 뜬다. 아직 이해못

@@ -14,14 +14,11 @@ export type State = typeof stateInitial;   // 아직 불확실
 
 const stateInitial = {
     
-    football: {
-        leagueStandings: null as types.data.football.LeagueStandings | null,
-        listTeam: [] as types.data.football.Team[]
-    },
+    // football: {
+    //     leagueStandings: null as types.data.football.LeagueStandings | null,
+    //     listTeam: [] as types.data.football.Team[]
+    // },
 
-    weather: {
-        weatherOne: null as types.data.weather.WeatherOne | null,
-    },
 
 };
 

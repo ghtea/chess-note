@@ -2,7 +2,8 @@ import { call, select, put } from "redux-saga/effects";
 import { firebaseFirestore } from "firebaseApp";
 
 import axios from "axios";
-import queryString from 'query-string';
+import apolloClient from 'apollo';
+import { gql, useQuery , FetchResult} from '@apollo/client';
 import { v4 as uuidv4 } from 'uuid';
 
 // import * as config from 'config';
@@ -10,41 +11,61 @@ import {StateRoot} from 'store/reducers';
 import * as actions from "store/actions";
 import * as types from "store/types";
 
-const requestGetTeamDirectly = (idTeam:string) => { 
-    return axios.get(`https://app.sportdataapi.com/api/v1/soccer/teams/${idTeam}?apikey=${process.env.REACT_APP_SPORT_DATA_API_API_KEY}`)
-};
+/*
+{
+            name: "test",
+            side: "white",
+            fenStart: "dd",
+            listListMoveCorrect: [[]],
+            idUser: "abc",
+        }
+*/
+const CREATE_QUIZ = gql`
+    mutation createQuiz ($argument: CreateQuizInputType){
+        createQuiz(createQuizInputType: $argument) {
+            id,
+            name,
+            side,
+            fenStart,
+            listListMoveCorrect,
+            idUser,
+        }
+    }
+`;
 
-const requestSetTeam = (idTeam: string, team: any) => {
-    return firebaseFirestore.collection("Football.Team_").doc(idTeam).set(team) 
+const requestCreateQuiz = (argument: any) => { 
+    return apolloClient.mutate({mutation: CREATE_QUIZ, variables: argument});
 };
 
 
 // directly access to sportdataAPI -> update firebase (get document on return)
-function* addTeam(action: actions.data.football.type__ADD_TEAM) {
+function* createQuiz(action: actions.data.quiz.type__CREATE_QUIZ) {
 
-    const {idTeam, triggeringGet } = action.payload;
+    const {name, side, fenStart, listListMoveCorrect, idUser} = action.payload;
 
     try {
-        
-        const {data: {data: teamRaw}} =  yield call( requestGetTeamDirectly, idTeam ); 
-
-        const team: Partial<types.data.football.Team> = {
-            name: teamRaw['name'],
-            code: teamRaw['short_code'],
-            pathLogo: teamRaw['logo'],
-            country: {
-                id: teamRaw['country']['country_id'],
-                name: teamRaw['country']['name'],
-                alpha2: teamRaw['country']['country_code'],
-                continent: teamRaw['country']['continent'],
-            },
+        const argument = {
+            name,
+            side,
+            fenStart,
+            listListMoveCorrect,
+            idUser,
         };
-        
-        yield call( requestSetTeam, idTeam, team );
 
-        if (triggeringGet){
-            yield put (actions.data.football.return__GET_LIST_TEAM({}));
-        }
+        const data: unknown =  yield call( requestCreateQuiz, argument ); 
+
+        // const team: Partial<types.data.football.Team> = {
+        //     name: teamRaw['name'],
+        //     code: teamRaw['short_code'],
+        //     pathLogo: teamRaw['logo'],
+        //     country: {
+        //         id: teamRaw['country']['country_id'],
+        //         name: teamRaw['country']['name'],
+        //         alpha2: teamRaw['country']['country_code'],
+        //         continent: teamRaw['country']['continent'],
+        //     },
+        // };
+
 
     } catch (error) {
         
@@ -56,7 +77,7 @@ function* addTeam(action: actions.data.football.type__ADD_TEAM) {
     }
 }
 
-export default addTeam;
+export default createQuiz;
 
 
 
