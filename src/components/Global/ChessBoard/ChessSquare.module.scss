@@ -5,15 +5,15 @@
   height: 1/8 * 100%;
 
   &:global(.color----light) {
-    background-color: hsl(50, 50%, 85%);
+    background-color: hsl(60, 46%, 88%);
     &:global(.focused----true) {
-      background-color: hsl(50, 60%, 75%);
+      background-color: hsl(60, 88%, 74%);
     }
   }
   &:global(.color----dark) {
-    background-color: hsl(140, 45%, 40%);
+    background-color: hsl(90, 31%, 46%); // hsl(90, 27%, 46%)
     &:global(.focused----true) {
-      background-color: hsl(140, 55%, 50%);
+      background-color: hsl(66, 58%, 52%);
     }
   }
 

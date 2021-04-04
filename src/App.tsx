@@ -28,7 +28,7 @@ function App({}: PropsApp) {
   
     let location = useLocation();
     const dispatch = useDispatch();
-
+    //console.log('REACT_APP_NODE_ENV', process.env.NODE_ENV)
 
     // Language
     const codeLanguageCurrent:string = useSelector((state: StateRoot) => state['status']['current']['language']);
