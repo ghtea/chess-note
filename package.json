@@ -40,6 +40,10 @@
   },
   "scripts": {
     "start": "react-scripts start",
+
+    "start:bd": "REACT_APP_BACK_WHICH=development react-scripts start",
+    "start:bp": "REACT_APP_BACK_WHICH=production react-scripts start",
+    
     "build": "react-scripts build",
     "eject": "react-scripts eject",
     "test": "react-scripts test"
