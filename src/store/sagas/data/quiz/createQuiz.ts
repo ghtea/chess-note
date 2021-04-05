@@ -21,8 +21,9 @@ import * as types from "store/types";
         }
 */
 const CREATE_QUIZ = gql`
-    mutation ($argument: CreateQuizInputType){
-        createQuiz(createQuizInputType: $argument) {
+    mutation CreateQuiz($argument: CreateQuizInputType){
+        createQuiz(createQuizInputType: $argument) 
+        {
             id,
             name,
             side,
@@ -33,14 +34,14 @@ const CREATE_QUIZ = gql`
     }
 `;
 
-const GET_LIST_QUIZ = gql`
-    query {
-        getListQuiz {
-            id,
-            name,
-        }
-    }
-`;
+// const GET_LIST_QUIZ = gql`
+//     query {
+//         getListQuiz {
+//             id
+//             name
+//         }
+//     }
+// `;
 
 
 
@@ -48,9 +49,12 @@ const requestCreateQuiz = (argument: any) => {
     return apolloClient.mutate({mutation: CREATE_QUIZ, variables: {argument}});
 };
 
-const requestGetListQuiz = () => { 
-    return apolloClient.query({query: GET_LIST_QUIZ});
-};
+// const requestGetListQuiz = () => { 
+//     return apolloClient.query({query: GET_LIST_QUIZ});
+// };
+
+
+
 
 // directly access to sportdataAPI -> update firebase (get document on return)
 function* createQuiz(action: actions.data.quiz.type__CREATE_QUIZ) {
@@ -67,8 +71,8 @@ function* createQuiz(action: actions.data.quiz.type__CREATE_QUIZ) {
         };
 
         //const data: unknown =  yield call( requestCreateQuiz, argument ); 
-        const data: unknown =  yield call( requestGetListQuiz ); 
-
+        const data: unknown =  yield call( requestCreateQuiz,  argument); 
+        console.log(data)
         // const team: Partial<types.data.football.Team> = {
         //     name: teamRaw['name'],
         //     code: teamRaw['short_code'],

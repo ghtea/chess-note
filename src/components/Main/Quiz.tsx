@@ -2,6 +2,9 @@ import ChessBoard from 'components/Global/ChessBoard';
 import React, { useCallback, useState, useMemo} from 'react';
 import { Route, Switch } from "react-router-dom";
 import ToolBar from './Quiz/ToolBar';
+
+//import { useQuery, gql } from '@apollo/client';
+
 import { ChessInstance, Move, Square } from 'chess.js'
 import { useDispatch, useSelector } from 'react-redux';
 import { StateRoot } from 'store/reducers';
@@ -13,7 +16,6 @@ const ChessReq:any = require('chess.js');
 
 
 
-
 type PropsQuiz = {};
 
 function Quiz({}: PropsQuiz) {
@@ -21,6 +23,8 @@ function Quiz({}: PropsQuiz) {
   const dispatch = useDispatch();
   const fen = useSelector((state: StateRoot)=>state.status.current.quiz.fen);
   const side = useSelector((state: StateRoot)=>state.status.current.quiz.instance.side);
+
+  //const { loading, error, data } = useQuery(GET_LIST_QUIZ);
 
   const gameCurrent:ChessInstance = useMemo(()=>{
     const result = new ChessReq(); 

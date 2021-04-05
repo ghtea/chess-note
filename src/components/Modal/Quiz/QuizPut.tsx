@@ -52,7 +52,7 @@ function QuizPut({}: PropsQuizPut) {
     const onClick_Create = useCallback(
         (e:React.MouseEvent<HTMLButtonElement, MouseEvent>)=>{
             dispatch(actions.data.quiz.return__CREATE_QUIZ({ 
-                name: 'hello',
+                name: 'goddddd',
                 side: 'white',
                 fenStart: 'fen...',
                 listListMoveCorrect: [[]],
