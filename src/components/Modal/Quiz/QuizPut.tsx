@@ -10,7 +10,7 @@ import {useSelector, useDispatch} from "react-redux";
 import {StateRoot} from 'store/reducers';
 import * as actions  from 'store/actions';
 
-import useInputBasic from 'tools/hooks/useInputBasic';
+import useInputQuizPut from './QuizPut/useInputQuizPut';
 import convertCase from 'tools/vanilla/convertCase';
 import IconX from 'svgs/basic/IconX';
 
@@ -26,11 +26,11 @@ function QuizPut({}: PropsQuizPut) {
     const dispatch = useDispatch();
     const intl = useIntl();
     
-    const {draft: draft_Main, onChange: onChange_Main} = useInputBasic({
+    const {draft: draft_Main, onChange: onChange_Main} = useInputQuizPut({
         name: '',
     });
 
-    //const languageCurrent:string = useSelector((state: StateRoot) => state['status']['current']['language']);
+    const quizFocusing = useSelector((state: StateRoot) => state.data.quiz.focusing);
     
     const refModal = useRef<HTMLDivElement>(null);
     const onClick_Window = useCallback(
@@ -52,13 +52,13 @@ function QuizPut({}: PropsQuizPut) {
     const onClick_Create = useCallback(
         (e:React.MouseEvent<HTMLButtonElement, MouseEvent>)=>{
             dispatch(actions.data.quiz.return__CREATE_QUIZ({ 
-                name: 'goddddd',
-                side: 'white',
-                fenStart: 'fen...',
-                listListMoveCorrect: [[]],
-                idUser: 'user',
+                name: quizFocusing.name,
+                side: quizFocusing.side,
+                fenStart: quizFocusing.fenStart,
+                listListMoveCorrect: quizFocusing.listListMoveCorrect,
+                idUser: quizFocusing.idUser,
             }));
-    }, []);
+    }, [quizFocusing]);
   
   return (
     <div 
@@ -82,7 +82,7 @@ function QuizPut({}: PropsQuizPut) {
                 <div className={`${stylesModal['content__section']} ${styles['input-name']}`} >
                     <InputText 
                         name='name'
-                        value={draft_Main.name}
+                        value={quizFocusing.name}
 
                         label={intl.formatMessage({ id: 'Global.Name'})}
                         placeholder={intl.formatMessage({ id: 'Global.Name'})}

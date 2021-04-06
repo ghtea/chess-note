@@ -37,8 +37,8 @@
     "Modal.MyProfile_Update": "업데이트",
     
     "Modal.QuizSave_SaveAsStart": "시작 지점으로 저장",
-    "Modal.QuizSave_SaveAsCurrentAnswer": "현재 해답으로 저장",
     "Modal.QuizSave_SaveAsNewAnswer": "새로운 해답으로 저장",
+    "Modal.QuizSave_SaveAsExistingAnswer": "해답 {index} (으)로 저장",
 
     "Nav.NameApp": "체스 노트",
     "Nav.Home": "홈",

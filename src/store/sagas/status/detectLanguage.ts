@@ -33,7 +33,7 @@ function* detectLanguage() {
 
     const codeLanguageFromBrowser = (navigator.languages && navigator.languages[0]) || navigator.language || 'en-US';
 
-    console.log(codeLanguageFromBrowser);
+    //console.log(codeLanguageFromBrowser);
 
     const codeStandardFromCookie = Cookies.get("codeLanguageStandard");
     

@@ -73,6 +73,22 @@ export const return__CREATE_QUIZ = (payload: Payload__CREATE_QUIZ) => {
 };
 export type type__CREATE_QUIZ = ReturnType<typeof return__CREATE_QUIZ>;
 
+
+export const name__SAVE_LIST_MOVE = 'data/quiz/SAVE_LIST_MOVE';
+type Payload__SAVE_LIST_MOVE = {
+    listMove: string[],
+    index?: number,
+}
+export const return__SAVE_LIST_MOVE= (payload: Payload__SAVE_LIST_MOVE) => {
+    return {
+        type: name__SAVE_LIST_MOVE,
+        payload: payload
+    }
+};
+export type type__SAVE_LIST_MOVE = ReturnType<typeof return__SAVE_LIST_MOVE>;
+
+
+
 /*
 export const name__MANIPULATE_DATA = 'data/MANIPULATE_DATA';
 type Payload__MANIPULATE_DATA = {

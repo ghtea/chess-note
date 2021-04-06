@@ -69,15 +69,8 @@ const stateInitial = {
     quiz: {
       mode: 'editing' as 'editing' | 'trying' | 'solved', 
       fen: 'rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1',
-      // listMove: [],
-      instance: {
-        id: null,
-        side: 'white' as 'white' | 'black',
-        fenStart: 'rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1',
-        listListMoveCorrect: [] as string[][],
-        idUser: '',
-        record: [] as types.data.quiz.Record[],
-      }
+      side: 'white' as 'white' | 'black',
+      listMove: [] as string[],
     },
   // listListMoveCorrect: string[][];
   // record: {date: string, result: boolean}[];

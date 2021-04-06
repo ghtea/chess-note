@@ -11,92 +11,26 @@ import {StateRoot} from 'store/reducers';
 import * as actions from "store/actions";
 import * as types from "store/types";
 
-/*
-{
-            name: "test",
-            side: "white",
-            fenStart: "dd",
-            listListMoveCorrect: [[]],
-            idUser: "abc",
-        }
-*/
-const CREATE_QUIZ = gql`
-    mutation CreateQuiz($argument: CreateQuizInputType!){
-        createQuiz(createQuizInputType: $argument) 
-        {
-            id,
-            name,
-            side,
-            fenStart,
-            listListMoveCorrect,
-            idUser
-        }
-    }
-`;
-
-// const GET_LIST_QUIZ = gql`
-//     query {
-//         getListQuiz {
-//             id
-//             name
-//         }
-//     }
-// `;
-
-
-
-const requestCreateQuiz = (argument: any) => { 
-    return apolloClient.mutate({mutation: CREATE_QUIZ, variables: {argument}});
-};
-
-// const requestGetListQuiz = () => { 
-//     return apolloClient.query({query: GET_LIST_QUIZ});
-// };
-
-
-
-
 // directly access to sportdataAPI -> update firebase (get document on return)
-function* createQuiz(action: actions.data.quiz.type__CREATE_QUIZ) {
+function* saveListMove(action: actions.data.quiz.type__SAVE_LIST_MOVE) {
 
-    const {name, side, fenStart, listListMoveCorrect, idUser} = action.payload;
+    const {listMove, index} = action.payload;
 
     try {
-        const argument = {
-            name,
-            side,
-            fenStart,
-            listListMoveCorrect,
-            idUser,
-        };
-
-        //const data: unknown =  yield call( requestCreateQuiz, argument ); 
-        const data: unknown =  yield call( requestCreateQuiz,  argument); 
-        //console.log(data)
-        // const team: Partial<types.data.football.Team> = {
-        //     name: teamRaw['name'],
-        //     code: teamRaw['short_code'],
-        //     pathLogo: teamRaw['logo'],
-        //     country: {
-        //         id: teamRaw['country']['country_id'],
-        //         name: teamRaw['country']['name'],
-        //         alpha2: teamRaw['country']['country_code'],
-        //         continent: teamRaw['country']['continent'],
-        //     },
-        // };
-
+        
+        
 
     } catch (error) {
         
         console.error(error);
         
-        yield put( actions.notification.return__ADD_DELETE_BANNER({
-            codeSituation: 'Football_AddTeam_UnknownError__E'
-        }) );
+        // yield put( actions.notification.return__ADD_DELETE_BANNER({
+        //     codeSituation: 'Football_AddTeam_UnknownError__E'
+        // }) );
     }
 }
 
-export default createQuiz;
+export default saveListMove;
 
 
 

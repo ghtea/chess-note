@@ -18,6 +18,17 @@ const stateInitial = {
     //     leagueStandings: null as types.data.football.LeagueStandings | null,
     //     listTeam: [] as types.data.football.Team[]
     // },
+    quiz: {
+      focusing: {
+        id: '',
+        name: '',
+        side: 'white' as 'white' | 'black',
+        fenStart: 'rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1',
+        listListMoveCorrect: [] as string[][],
+        idUser: '',
+        record: [] as types.data.quiz.Record[],
+      }
+    }
 
 
 };

@@ -21,18 +21,18 @@ import IconReverse from "svgs/basic/IconSyncAlt";
 // import {Chess} from 'chess.js'; // => makes error
 
 type PropsToolBar = {
-    loadFen: (fen: string) => void
+    loadFen: (fen: string) => void,
 };
 
 function ToolBar({
-    loadFen
+    loadFen,
 }: PropsToolBar) {
 
     const dispatch = useDispatch();
 
     const heightToolbar = useSelector((state: StateRoot)=>state.status.current.size.document.chessBoard.toolbar.height);
     const lengthChessBoard = useSelector((state: StateRoot)=>state.status.current.size.document.chessBoard.length);
-    const side = useSelector((state: StateRoot)=>state.status.current.quiz.instance.side);
+    const side = useSelector((state: StateRoot)=>state.status.current.quiz.side);
 
 
     // const [positionStart, setPositionStart] = useState<null | string>(null);

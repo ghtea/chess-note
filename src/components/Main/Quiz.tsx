@@ -22,8 +22,8 @@ function Quiz({}: PropsQuiz) {
   
   const dispatch = useDispatch();
   const fen = useSelector((state: StateRoot)=>state.status.current.quiz.fen);
-  const side = useSelector((state: StateRoot)=>state.status.current.quiz.instance.side);
-
+  const side = useSelector((state: StateRoot)=>state.status.current.quiz.side);
+ 
   //const { loading, error, data } = useQuery(GET_LIST_QUIZ);
 
   const gameCurrent:ChessInstance = useMemo(()=>{

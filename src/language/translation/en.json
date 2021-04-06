@@ -44,8 +44,9 @@
     "Modal.MyProfile_Update": "Update",
 
     "Modal.QuizSave_SaveAsStart": "Save as Start",
-    "Modal.QuizSave_SaveAsCurrentAnswer": "Save as Current Answer",
     "Modal.QuizSave_SaveAsNewAnswer": "Save as New Answer",
+    "Modal.QuizSave_SaveAsExistingAnswer": "Save as Answer {index}",
+
 
     "Notification.Test1__S": "Succuessfully tested 1 !",
     "Notification.Test2__H": "Succuessfully tested 2 !",

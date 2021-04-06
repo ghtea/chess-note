@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect, useRef, useMemo } from "react";
+import React, { useCallback, useEffect, useRef, useMemo, useState } from "react";
 import { firebaseAuth } from "firebaseApp";
 
 import history from 'historyApp';
@@ -12,7 +12,7 @@ import * as actions  from 'store/actions';
 
 import InputRadio from 'components/Global/Input/InputRadio';
 import convertCase from 'tools/vanilla/convertCase';
-import IconX from 'svgs/basic/IconX';
+import IconAngle from 'svgs/basic/IconAngle';
 
 import styles from './QuizSave.module.scss';
 import stylesModal from 'components/Modal.module.scss';
@@ -24,8 +24,10 @@ function QuizSave({}: PropsQuizSave) {
   
     const dispatch = useDispatch();
 
-    //const languageCurrent:string = useSelector((state: StateRoot) => state['status']['current']['language']);
-    
+    const statusQuiz = useSelector((state: StateRoot) => state.status.current.quiz);
+    const quizFocusing = useSelector((state: StateRoot) => state.data.quiz.focusing);
+    const [indexAnswer, setIndexAnswer] = useState<number>(0);
+
     const refModal = useRef<HTMLDivElement>(null);
     const onClick_Window = useCallback(
         (event:MouseEvent)=> {   
@@ -43,11 +45,53 @@ function QuizSave({}: PropsQuizSave) {
     },[onClick_Window]);
 
 
-    const onClick_AnyButton = useCallback(
+    const onClick_AnySaveButton = useCallback(
         (e:React.MouseEvent<HTMLButtonElement, MouseEvent>)=>{
+            const value = e.currentTarget.value;
+            console.log(value)
+            if (value === 'start'){
+                dispatch(actions.data.return__REPLACE({ 
+                    listKey: [ 'quiz', 'focusing', 'fenStart' ],
+                    replacement: statusQuiz.fen
+                }));
+            }
+            else if (value === 'new-answer'){
+                const replacement = [...quizFocusing.listListMoveCorrect, statusQuiz.listMove];
+                dispatch(actions.data.return__REPLACE({ 
+                    listKey: [ 'quiz', 'focusing', 'listListMoveCorrect' ],
+                    replacement,
+                }));
+            } 
+            else if (value === 'existing-answer'){
+                let replacement = [...quizFocusing.listListMoveCorrect];
+                replacement[indexAnswer] = statusQuiz.listMove;
+
+                dispatch(actions.data.return__REPLACE({ 
+                    listKey: [ 'quiz', 'focusing', 'listListMoveCorrect' ],
+                    replacement: replacement
+                }));
+            } 
+    }, [statusQuiz.listMove, quizFocusing.listListMoveCorrect]);
+    
+
+    const onClick_ButtonChangeAnswer = useCallback(
+        (e:React.MouseEvent<HTMLButtonElement, MouseEvent>)=>{
+            const numberAnswer = quizFocusing.listListMoveCorrect.length;
+            console.log(numberAnswer)
+            const value = e.currentTarget.value;
+            let indexAnswerNew = indexAnswer;
+            if (value === 'previous-answer'){
+                indexAnswerNew--;
+            }
+            else {
+                indexAnswerNew++;
+            }
+
+            setIndexAnswer( (indexAnswerNew+numberAnswer) % numberAnswer );
             
-    }, []);
-  
+    }, [quizFocusing.listListMoveCorrect.length, indexAnswer]);
+
+
   return (
     <div 
         className={`${styles['root']} ${stylesModal['root']}`} 
@@ -72,27 +116,57 @@ function QuizSave({}: PropsQuizSave) {
                         type='button'
                         value='start'
                         className={`${styles['button__start']}`}
-                        onClick={onClick_AnyButton}
+                        onClick={onClick_AnySaveButton}
                     > <FormattedMessage id={`Modal.QuizSave_SaveAsStart`} /> </button>
                 </div>
 
                 <div className={`${stylesModal['content__section']}`} >
                     <button
                         type='button'
-                        value='current-answer'
-                        className={`${styles['button__current-answer']}`}
-                        onClick={onClick_AnyButton}
-                    > <FormattedMessage id={`Modal.QuizSave_SaveAsCurrentAnswer`} /> </button>
-                </div>
-                
-                <div className={`${stylesModal['content__section']}`} >
-                    <button
-                        type='button'
                         value='new-answer'
                         className={`${styles['button__new-answer']}`}
-                        onClick={onClick_AnyButton}
+                        onClick={onClick_AnySaveButton}
                     > <FormattedMessage id={`Modal.QuizSave_SaveAsNewAnswer`} /> </button>
                 </div>
+
+                {quizFocusing.listListMoveCorrect.length > 0 &&
+                    <div className={`${stylesModal['content__section']}`} >
+                        <button
+                            type='button'
+                            value='existing-answer'
+                            className={`${styles['button__existing-answer']}`}
+                            onClick={onClick_AnySaveButton}
+                        > 
+                            <FormattedMessage 
+                                id={`Modal.QuizSave_SaveAsExistingAnswer`} 
+                                values={{index: `${(indexAnswer + 1)} / ${quizFocusing.listListMoveCorrect.length}`}}
+                            /> 
+                        </button>
+                        <button
+                            type='button'
+                            value='previous-answer'
+                            onClick={onClick_ButtonChangeAnswer}
+                            className={`${styles['button__previous-answer']}`}
+                        >
+                            <IconAngle 
+                                className={`${styles['icon__previous-answer']}`}
+                                directon='left' kind='regular' 
+                            />
+                        </button>
+                        <button
+                            type='button'
+                            value='next-answer'
+                            onClick={onClick_ButtonChangeAnswer}
+                            className={`${styles['button__next-answer']}`}
+                        >
+                            <IconAngle 
+                                className={`${styles['icon__next-answer']}`}
+                                directon='right' kind='regular' 
+                            />
+                        </button>
+                    </div>
+                }
+
             </div>
         
         </div>
