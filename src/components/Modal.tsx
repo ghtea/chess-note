@@ -6,9 +6,8 @@ import {StateRoot} from 'store/reducers';
 import Setting from "./Modal/Setting";
 import MyProfile from "./Modal/MyProfile";
 
-import QuizSave from "./Modal/Quiz/QuizSave";
-import QuizPut from './Modal/Quiz/QuizPut';
-
+import QuizEditingUpload from './Modal/Quiz/QuizEditingUpload';
+import QuizEditingSave from "./Modal/Quiz/QuizEditingSave";
 
 // import styles from './Modal.module.scss';
 
@@ -17,19 +16,18 @@ type PropsModal = {};
 
 function Modal({}: PropsModal) {
   
-    const showingSetting = useSelector((state: StateRoot) => state.status.showing.modal.setting);
-    const showingMyProfile = useSelector((state: StateRoot) => state.status.showing.modal.myProfile); 
-
-    const showingQuizSave = useSelector((state: StateRoot) => state.status.showing.modal.quizSave);  
-    const showingQuizPut = useSelector((state: StateRoot) => state.status.showing.modal.quizPut);  
-
+    const showing = useSelector((state: StateRoot) => state.status.showing.modal);
+    
     return (        
         <>
-            {showingSetting && <Setting />}
-            {showingMyProfile && <MyProfile />}
+            {showing.setting && <Setting />}
+            {showing.myProfile && <MyProfile />}
 
-            {showingQuizSave && <QuizSave />}
-            {showingQuizPut && <QuizPut />}
+            {showing.quizEditingUpload && <QuizEditingUpload />}
+            {showing.quizEditingSave && <QuizEditingSave />}
+            {showing.quizEditingOthers && <QuizEditingSave />}
+
+            {showing.quizTryingOthers && <QuizEditingSave />}
         </>
     );
 }

@@ -1,7 +1,7 @@
 import ChessBoard from 'components/Global/ChessBoard';
-import React, { useCallback, useState, useMemo} from 'react';
+import React, { useCallback, useState, useMemo, useEffect} from 'react';
 import { Route, Switch } from "react-router-dom";
-import ToolBar from './Quiz/ToolBar';
+import ToolBarEditing from './Quiz/ToolBarEditing';
 
 //import { useQuery, gql } from '@apollo/client';
 
@@ -21,15 +21,16 @@ type PropsQuiz = {};
 function Quiz({}: PropsQuiz) {
   
   const dispatch = useDispatch();
-  const fen = useSelector((state: StateRoot)=>state.status.current.quiz.fen);
-  const side = useSelector((state: StateRoot)=>state.status.current.quiz.side);
- 
+
+  const statusQuiz = useSelector((state: StateRoot)=>state.status.current.quiz);
+  const side = useSelector((state: StateRoot)=>state.data.quiz.focusing.side);
   //const { loading, error, data } = useQuery(GET_LIST_QUIZ);
 
   const gameCurrent:ChessInstance = useMemo(()=>{
     const result = new ChessReq(); 
     return result; 
   }, []);
+
 
 
   // 움직일 때마다 fen 을 변경해서, 리렌더링 잘하도록!
@@ -69,7 +70,7 @@ function Quiz({}: PropsQuiz) {
     // else {
     //   return gameCurrent.board().reverse(); 
     // }
-  }, [gameCurrent, fen]);
+  }, [gameCurrent, statusQuiz.fen]);
 
   return (
     <div>
@@ -78,9 +79,23 @@ function Quiz({}: PropsQuiz) {
         listSquare={listSquare}
         side={side}
       />
-      <ToolBar 
-        loadFen={loadFen}
-      />
+      { statusQuiz.mode === 'editing' ?
+        <ToolBarEditing 
+          loadFen={loadFen}
+        />
+        :
+        statusQuiz.mode === 'trying' ?
+        <ToolBarEditing 
+          loadFen={loadFen}
+        />
+        :
+        statusQuiz.mode === 'solved' ?
+        <ToolBarEditing 
+          loadFen={loadFen}
+        />
+        : null
+      }
+      
     </div>
   );
 }

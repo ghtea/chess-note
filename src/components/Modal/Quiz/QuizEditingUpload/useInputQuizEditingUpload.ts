@@ -3,7 +3,7 @@ import { useDispatch } from 'react-redux';
 import * as actions  from 'store/actions';
 
 
-const useInputQuizPut = <T>(draftInitial: T) => {
+const useInputQuizEditingUpload = <T>(draftInitial: T) => {
     const dispatch = useDispatch();
 	const [draft, setDraft] = useState<T>(draftInitial);
 	
@@ -31,4 +31,4 @@ const useInputQuizPut = <T>(draftInitial: T) => {
 	return {draft, onChange};
 }
 
-export default useInputQuizPut;
+export default useInputQuizEditingUpload;

@@ -10,23 +10,23 @@ import {useSelector, useDispatch} from "react-redux";
 import {StateRoot} from 'store/reducers';
 import * as actions  from 'store/actions';
 
-import useInputQuizPut from './QuizPut/useInputQuizPut';
+import useInputQuizEditingUpload from './QuizEditingUpload/useInputQuizEditingUpload';
 import convertCase from 'tools/vanilla/convertCase';
 import IconX from 'svgs/basic/IconX';
 
-import styles from './QuizPut.module.scss';
+import styles from './QuizEditingUpload.module.scss';
 import stylesModal from 'components/Modal.module.scss';
 import InputText from "components/Global/Input/InputText";
 
 
-type PropsQuizPut = {};
+type PropsQuizEditingUpload = {};
 
-function QuizPut({}: PropsQuizPut) {
+function QuizEditingUpload({}: PropsQuizEditingUpload) {
   
     const dispatch = useDispatch();
     const intl = useIntl();
     
-    const {draft: draft_Main, onChange: onChange_Main} = useInputQuizPut({
+    const {draft: draft_Main, onChange: onChange_Main} = useInputQuizEditingUpload({
         name: '',
     });
 
@@ -37,7 +37,7 @@ function QuizPut({}: PropsQuizPut) {
         (event:MouseEvent)=> {   
             if ( !refModal.current?.contains(event.target as Node)){
                 dispatch(actions.status.return__REPLACE({ 
-                    listKey: ['showing', 'modal', convertCase("QuizPut", 'camel')],
+                    listKey: ['showing', 'modal', convertCase("QuizEditingUpload", 'camel')],
                     replacement: false
                 }));
             } 
@@ -110,8 +110,8 @@ function QuizPut({}: PropsQuizPut) {
   );
 }
 
-QuizPut.defaultProps = {};
+QuizEditingUpload.defaultProps = {};
 
-export default QuizPut;
+export default QuizEditingUpload;
 
 

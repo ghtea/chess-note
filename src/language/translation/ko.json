@@ -36,9 +36,13 @@
     "Modal.MyProfile_Photo": "사진",
     "Modal.MyProfile_Update": "업데이트",
     
-    "Modal.QuizSave_SaveAsStart": "시작 지점으로 저장",
-    "Modal.QuizSave_SaveAsNewAnswer": "새로운 해답으로 저장",
-    "Modal.QuizSave_SaveAsExistingAnswer": "해답 {index} (으)로 저장",
+    "Modal.QuizEditingSave_SaveAsStart": "시작 지점으로 저장",
+    "Modal.QuizEditingSave_SaveAsNewAnswer": "새로운 해답으로 저장",
+    "Modal.QuizEditingSave_SaveAsExistingAnswer": "해답 {index} (으)로 저장",
+
+    "Modal.QuizEditingOthers_ChangeSide": "흑백 바꾸기",
+    "Modal.QuizEditingOthers_ShowAnswer": "해답 {index} 보기",
+    "Modal.QuizEditingOthers_DeleteAnswer": "해답 {index} 삭제하기",
 
     "Nav.NameApp": "체스 노트",
     "Nav.Home": "홈",

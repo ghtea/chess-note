@@ -14,19 +14,19 @@ import {StateRoot} from 'store/reducers';
 import * as actions  from 'store/actions';
 import * as types  from 'store/types';
 
-import styles from './ToolBar.module.scss';
+import styles from './ToolBarEditing.module.scss';
 import IconPaste from 'svgs/basic/IconSignIn';
 import IconAngle from "svgs/basic/IconAngle";
 import IconReverse from "svgs/basic/IconSyncAlt";
 // import {Chess} from 'chess.js'; // => makes error
 
-type PropsToolBar = {
+type PropsToolBarEditing = {
     loadFen: (fen: string) => void,
 };
 
-function ToolBar({
+function ToolBarEditing({
     loadFen,
-}: PropsToolBar) {
+}: PropsToolBarEditing) {
 
     const dispatch = useDispatch();
 
@@ -171,7 +171,7 @@ function ToolBar({
     );
 }
 
-ToolBar.defaultProps = {};
+ToolBarEditing.defaultProps = {};
 
-export default ToolBar;
+export default ToolBarEditing;
 

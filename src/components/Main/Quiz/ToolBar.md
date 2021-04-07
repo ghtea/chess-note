@@ -26,8 +26,8 @@
 - - as new solution
 
 - others
-- - change solution
-- - delete current solution
+- - show each solution
+- - delete each solution
 
 - 퀴즈 들어가자 마자 화면
   랜덤 퀴즈

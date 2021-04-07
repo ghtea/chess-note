@@ -14,13 +14,13 @@ import InputRadio from 'components/Global/Input/InputRadio';
 import convertCase from 'tools/vanilla/convertCase';
 import IconAngle from 'svgs/basic/IconAngle';
 
-import styles from './QuizSave.module.scss';
+import styles from './QuizEditingOthers.module.scss';
 import stylesModal from 'components/Modal.module.scss';
 
 
-type PropsQuizSave = {};
+type PropsQuizEditingOthers = {};
 
-function QuizSave({}: PropsQuizSave) {
+function QuizEditingOthers({}: PropsQuizEditingOthers) {
   
     const dispatch = useDispatch();
 
@@ -33,7 +33,7 @@ function QuizSave({}: PropsQuizSave) {
         (event:MouseEvent)=> {   
             if ( !refModal.current?.contains(event.target as Node)){
                 dispatch(actions.status.return__REPLACE({ 
-                    listKey: ['showing', 'modal', convertCase("QuizSave", 'camel')],
+                    listKey: ['showing', 'modal', convertCase("QuizEditingOthers", 'camel')],
                     replacement: false
                 }));
             } 
@@ -45,14 +45,14 @@ function QuizSave({}: PropsQuizSave) {
     },[onClick_Window]);
 
 
-    const onClick_AnySaveButton = useCallback(
+    const onClick_AnyMainButton = useCallback(
         (e:React.MouseEvent<HTMLButtonElement, MouseEvent>)=>{
             const value = e.currentTarget.value;
-            console.log(value)
-            if (value === 'start'){
+            //console.log(value)
+            if (value === 'change-side'){
                 dispatch(actions.data.return__REPLACE({ 
-                    listKey: [ 'quiz', 'focusing', 'fenStart' ],
-                    replacement: statusQuiz.fen
+                    listKey: [ 'quiz', 'focusing', 'side' ],
+                    replacement: quizFocusing.side === 'white' ? 'black' : 'white', 
                 }));
             }
             else if (value === 'new-answer'){
@@ -77,7 +77,7 @@ function QuizSave({}: PropsQuizSave) {
     const onClick_ButtonChangeAnswer = useCallback(
         (e:React.MouseEvent<HTMLButtonElement, MouseEvent>)=>{
             const numberAnswer = quizFocusing.listListMoveCorrect.length;
-            console.log(numberAnswer)
+            //console.log(numberAnswer)
             const value = e.currentTarget.value;
             let indexAnswerNew = indexAnswer;
             if (value === 'previous-answer'){
@@ -110,35 +110,25 @@ function QuizSave({}: PropsQuizSave) {
             <div 
                 className={`${stylesModal['content']} ${styles['content']}`} 
             >
-                
                 <div className={`${stylesModal['content__section']}`} >
                     <button
                         type='button'
-                        value='start'
-                        className={`${styles['button__start']}`}
-                        onClick={onClick_AnySaveButton}
-                    > <FormattedMessage id={`Modal.QuizSave_SaveAsStart`} /> </button>
-                </div>
-
-                <div className={`${stylesModal['content__section']}`} >
-                    <button
-                        type='button'
-                        value='new-answer'
-                        className={`${styles['button__new-answer']}`}
-                        onClick={onClick_AnySaveButton}
-                    > <FormattedMessage id={`Modal.QuizSave_SaveAsNewAnswer`} /> </button>
+                        value='change-side'
+                        className={`${styles['button__change-side']}`}
+                        onClick={onClick_AnyMainButton}
+                    > <FormattedMessage id={`Modal.QuizEditingOthers_ChangeSide`} /> </button>
                 </div>
 
                 {quizFocusing.listListMoveCorrect.length > 0 &&
                     <div className={`${stylesModal['content__section']}`} >
                         <button
                             type='button'
-                            value='existing-answer'
-                            className={`${styles['button__existing-answer']}`}
-                            onClick={onClick_AnySaveButton}
+                            value='show-answer'
+                            className={`${styles['button__show-answer']}`}
+                            onClick={onClick_AnyMainButton}
                         > 
                             <FormattedMessage 
-                                id={`Modal.QuizSave_SaveAsExistingAnswer`} 
+                                id={`Modal.QuizEditingOthers_ShowAnswer`} 
                                 values={{index: `${(indexAnswer + 1)} / ${quizFocusing.listListMoveCorrect.length}`}}
                             /> 
                         </button>
@@ -175,8 +165,8 @@ function QuizSave({}: PropsQuizSave) {
   );
 }
 
-QuizSave.defaultProps = {};
+QuizEditingOthers.defaultProps = {};
 
-export default QuizSave;
+export default QuizEditingOthers;
 
 

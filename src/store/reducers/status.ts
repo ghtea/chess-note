@@ -69,7 +69,7 @@ const stateInitial = {
     quiz: {
       mode: 'editing' as 'editing' | 'trying' | 'solved', 
       fen: 'rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1',
-      side: 'white' as 'white' | 'black',
+      // side: 'white' as 'white' | 'black',
       listMove: [] as string[],
     },
   // listListMoveCorrect: string[][];
@@ -88,11 +88,11 @@ const stateInitial = {
         setting: false,
         myProfile: false,
         
-        quizSave: false,
-        quizPut: false,
-        // editingPortal: false,
-           
-        // searching: false,
+        quizEditingSave: false,
+        quizEditingUpload: false,
+        quizEditingOthers: false,
+        
+        quizTryingOthers: false,
     }
   }
   
