@@ -4,7 +4,7 @@ import { firebaseAuth } from "firebaseApp";
 import history from 'historyApp';
 import { useLocation } from "react-router-dom";
 import { FormattedMessage } from 'react-intl';
-import Cookies from 'js-cookie';
+import * as clipboardy from 'clipboardy';
 
 import {useSelector, useDispatch} from "react-redux";
 import {StateRoot} from 'store/reducers';
@@ -15,6 +15,8 @@ import convertCase from 'tools/vanilla/convertCase';
 import IconAngle from 'svgs/basic/IconAngle';
 
 import styles from './QuizEditingOthers.module.scss';
+import stylesQEC from './QuizEditingCommon.module.scss';
+
 import stylesModal from 'components/Modal.module.scss';
 
 
@@ -46,10 +48,17 @@ function QuizEditingOthers({}: PropsQuizEditingOthers) {
 
 
     const onClick_AnyMainButton = useCallback(
-        (e:React.MouseEvent<HTMLButtonElement, MouseEvent>)=>{
+        async (e:React.MouseEvent<HTMLButtonElement, MouseEvent>)=>{
             const value = e.currentTarget.value;
             //console.log(value)
-            if (value === 'change-side'){
+            if (value === 'use-fen'){
+                const value = await clipboardy.read();
+                dispatch(actions.status.return__REPLACE({ 
+                    listKey: [ 'current', 'quiz', 'fenToLoad' ],
+                    replacement: value, 
+                }));
+            }
+            else if (value === 'change-side'){
                 dispatch(actions.data.return__REPLACE({ 
                     listKey: [ 'quiz', 'focusing', 'side' ],
                     replacement: quizFocusing.side === 'white' ? 'black' : 'white', 
@@ -71,7 +80,7 @@ function QuizEditingOthers({}: PropsQuizEditingOthers) {
                     replacement: replacement
                 }));
             } 
-    }, [statusQuiz.listMove, quizFocusing.listListMoveCorrect]);
+    }, [statusQuiz.listMove, quizFocusing]);
     
 
     const onClick_ButtonChangeAnswer = useCallback(
@@ -94,7 +103,7 @@ function QuizEditingOthers({}: PropsQuizEditingOthers) {
 
   return (
     <div 
-        className={`${styles['root']} ${stylesModal['root']}`} 
+        className={`${stylesQEC['root']} ${stylesModal['root']}`} 
     >
         <div
             className={`${stylesModal['outside']}`}
@@ -102,29 +111,52 @@ function QuizEditingOthers({}: PropsQuizEditingOthers) {
         />
 
         <div 
-            className={`${stylesModal['modal']} ${styles['modal']}`}
+            className={`${stylesModal['modal']} ${stylesQEC['modal']}`}
             role="dialog" aria-labelledby="Heading_Save"
             ref={refModal}
         >
         
             <div 
-                className={`${stylesModal['content']} ${styles['content']}`} 
+                className={`${stylesModal['content']} ${stylesQEC['content']}`} 
             >
                 <div className={`${stylesModal['content__section']}`} >
                     <button
                         type='button'
+                        value='use-fen'
+                        className={`${styles['button__use-fen']} ${stylesQEC['button__basic']}`}
+                        onClick={onClick_AnyMainButton}
+                    > <FormattedMessage id={`Modal.QuizEditingOthers_UseFen`} /> </button>
+                </div>
+
+                <div className={`${stylesModal['content__section']}`} >
+                    <button
+                        type='button'
                         value='change-side'
-                        className={`${styles['button__change-side']}`}
+                        className={`${styles['button__change-side']} ${stylesQEC['button__basic']}`}
                         onClick={onClick_AnyMainButton}
                     > <FormattedMessage id={`Modal.QuizEditingOthers_ChangeSide`} /> </button>
                 </div>
 
+                {quizFocusing.listListMoveCorrect.length === 0 &&
+                    <div className={`${stylesModal['content__section']}`} >
+                        <span
+                            className={`${stylesQEC['span__basic']}`}
+                        > 
+                            <span>
+                                <FormattedMessage id={`Modal.QuizEditingOthers_NoAnswer`} /> 
+                            </span>
+                        </span>
+                    </div>
+                }           
+
+
                 {quizFocusing.listListMoveCorrect.length > 0 &&
+                    <>
                     <div className={`${stylesModal['content__section']}`} >
                         <button
                             type='button'
                             value='show-answer'
-                            className={`${styles['button__show-answer']}`}
+                            className={`${styles['button__show-answer']} ${stylesQEC['button__basic']}`}
                             onClick={onClick_AnyMainButton}
                         > 
                             <FormattedMessage 
@@ -136,10 +168,10 @@ function QuizEditingOthers({}: PropsQuizEditingOthers) {
                             type='button'
                             value='previous-answer'
                             onClick={onClick_ButtonChangeAnswer}
-                            className={`${styles['button__previous-answer']}`}
+                            className={`${stylesQEC['button__previous-answer']}`}
                         >
                             <IconAngle 
-                                className={`${styles['icon__previous-answer']}`}
+                                className={`${stylesQEC['icon__previous-answer']}`}
                                 directon='left' kind='regular' 
                             />
                         </button>
@@ -147,14 +179,53 @@ function QuizEditingOthers({}: PropsQuizEditingOthers) {
                             type='button'
                             value='next-answer'
                             onClick={onClick_ButtonChangeAnswer}
-                            className={`${styles['button__next-answer']}`}
+                            className={`${stylesQEC['button__next-answer']}`}
                         >
                             <IconAngle 
-                                className={`${styles['icon__next-answer']}`}
+                                className={`${stylesQEC['icon__next-answer']}`}
                                 directon='right' kind='regular' 
                             />
                         </button>
                     </div>
+
+                    
+                    <div className={`${stylesModal['content__section']}`} >
+                        <button
+                            type='button'
+                            value='delete-answer'
+                            className={`${styles['button__delete-answer']} ${stylesQEC['button__basic']}`}
+                            onClick={onClick_AnyMainButton}
+                        > 
+                            <FormattedMessage 
+                                id={`Modal.QuizEditingOthers_DeleteAnswer`} 
+                                values={{index: `${(indexAnswer + 1)} / ${quizFocusing.listListMoveCorrect.length}`}}
+                            /> 
+                        </button>
+                        <button
+                            type='button'
+                            value='previous-answer'
+                            onClick={onClick_ButtonChangeAnswer}
+                            className={`${stylesQEC['button__previous-answer']}`}
+                        >
+                            <IconAngle 
+                                className={`${stylesQEC['icon__previous-answer']}`}
+                                directon='left' kind='regular' 
+                            />
+                        </button>
+                        <button
+                            type='button'
+                            value='next-answer'
+                            onClick={onClick_ButtonChangeAnswer}
+                            className={`${stylesQEC['button__next-answer']}`}
+                        >
+                            <IconAngle 
+                                className={`${stylesQEC['icon__next-answer']}`}
+                                directon='right' kind='regular' 
+                            />
+                        </button>
+                    </div>
+                    </>
+
                 }
 
             </div>

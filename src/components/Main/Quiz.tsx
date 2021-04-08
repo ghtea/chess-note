@@ -2,7 +2,7 @@ import ChessBoard from 'components/Global/ChessBoard';
 import React, { useCallback, useState, useMemo, useEffect} from 'react';
 import { Route, Switch } from "react-router-dom";
 import ToolBarEditing from './Quiz/ToolBarEditing';
-
+import {v4 as uuid} from 'uuid';
 //import { useQuery, gql } from '@apollo/client';
 
 import { ChessInstance, Move, Square } from 'chess.js'
@@ -26,10 +26,62 @@ function Quiz({}: PropsQuiz) {
   const side = useSelector((state: StateRoot)=>state.data.quiz.focusing.side);
   //const { loading, error, data } = useQuery(GET_LIST_QUIZ);
 
-  const gameCurrent:ChessInstance = useMemo(()=>{
-    const result = new ChessReq(); 
-    return result; 
-  }, []);
+  const gameCurrent: ChessInstance = useMemo(()=>{
+    return new ChessReq();
+  },[]);
+
+  // const loadFen = useCallback(
+  //   (fen: string)=>{
+  //     const result = gameCurrent.load(fen);
+  //     if (result){
+  //       dispatch( actions.status.return__REPLACE({
+  //         listKey: ['current', 'quiz', 'fen'],
+  //         replacement: gameCurrent.fen()
+  //     }) );
+  //     }
+  // }, [gameCurrent]);
+
+  // fenToLoad 가 바뀌면 그걸로 load 해보고 되면 다시 fenToLoad null 로 변경
+  useEffect(()=>{ 
+    if (statusQuiz.fenToLoad !== null){
+      const result = gameCurrent.load(statusQuiz.fenToLoad);
+      if (result){
+        dispatch( actions.status.return__REPLACE({
+          listKey: ['current', 'quiz', 'fen'],
+          replacement: gameCurrent.fen()
+        }) );
+
+        const side = statusQuiz.fenToLoad.includes(" w") ? 'white' : 'black';
+        dispatch( actions.data.return__REPLACE({
+          listKey: ['quiz', 'focusing', 'side'],
+          replacement: side
+        }) );
+        dispatch( actions.status.return__REPLACE({
+          listKey: ['current', 'quiz', 'turn'],
+          replacement: side
+        }) );
+      }
+      dispatch( actions.status.return__REPLACE({
+        listKey: ['current', 'quiz', 'fenToLoad'],
+        replacement: null,
+      }) );
+    }
+  },[statusQuiz.fenToLoad, gameCurrent])
+
+  // const [gameCurrent, setGameCurrent] = useState<null | ChessInstance>(null)
+  // useEffect(()=>{
+  //   // 우선 statusQuiz.idGame null
+  //   if (statusQuiz.idGame === null){
+  //     if (statusQuiz.fen === null){
+  //       setGameCurrent(new ChessReq());
+  //       dispatch( actions.status.return__REPLACE({
+  //         listKey: ['current', 'quiz', 'idGame'],
+  //         replacement: uuid(),
+  //       }) );
+  //     }
+      
+  //   }
+  // },[statusQuiz.idGame, statusQuiz.fen])
 
 
 
@@ -42,6 +94,10 @@ function Quiz({}: PropsQuiz) {
           listKey: ['current', 'quiz', 'fen'],
           replacement: gameCurrent.fen()
         }) );
+        dispatch( actions.status.return__REPLACE({
+          listKey: ['current', 'quiz', 'turn'],
+          replacement: result.color === 'w' ? 'black' : 'white'
+        }) );
         return result;
       }
       else {
@@ -50,16 +106,7 @@ function Quiz({}: PropsQuiz) {
   }, [gameCurrent]);
 
 
-  const loadFen = useCallback(
-    (fen: string)=>{
-      const result = gameCurrent.load(fen);
-      if (result){
-        dispatch( actions.status.return__REPLACE({
-          listKey: ['current', 'quiz', 'fen'],
-          replacement: gameCurrent.fen()
-      }) );
-      }
-  }, [gameCurrent]);
+  
 
 
   const listSquare = useMemo(()=>{
@@ -81,17 +128,14 @@ function Quiz({}: PropsQuiz) {
       />
       { statusQuiz.mode === 'editing' ?
         <ToolBarEditing 
-          loadFen={loadFen}
         />
         :
         statusQuiz.mode === 'trying' ?
         <ToolBarEditing 
-          loadFen={loadFen}
         />
         :
         statusQuiz.mode === 'solved' ?
         <ToolBarEditing 
-          loadFen={loadFen}
         />
         : null
       }

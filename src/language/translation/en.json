@@ -5,9 +5,13 @@
     "Global.Name": "Name",
     "Global.Add": "Add",
     "Global.Create": "Create",
+    "Global.Save": "Save",
     "Global.Delete": "Delete",
     "Global.Update": "Update",
     "Global.Search": "Search",
+
+    "Global.WhiteToMove": "White to move",
+    "Global.BlackToMove": "Black to move",
 
     
     "Header.Setting": "Setting",
@@ -29,8 +33,6 @@
     "Main.SignUp_SignUp": "Sign Up",
     "Main.SignUp_PasswordAgain": "Password Again",
 
-    "Main.Home_ConfirmDeletingPortal": "Are you sure you want to delete this portal?",
-
 
     "Modal.Setting_Title": "Setting",
     "Modal.Setting_Theme": "Theme",
@@ -47,9 +49,11 @@
     "Modal.QuizEditingSave_SaveAsNewAnswer": "Save as New Answer",
     "Modal.QuizEditingSave_SaveAsExistingAnswer": "Save as Answer {index}",
 
+    "Modal.QuizEditingOthers_UseFen": "Use FEN from Clipboard",    
     "Modal.QuizEditingOthers_ChangeSide": "Change Side",
     "Modal.QuizEditingOthers_ShowAnswer": "Show Answer {index}",
     "Modal.QuizEditingOthers_DeleteAnswer": "Delete Answer {index}",
+    "Modal.QuizEditingOthers_NoAnswer": "No Answer Yet",
 
     "Notification.Test1__S": "Succuessfully tested 1 !",
     "Notification.Test2__H": "Succuessfully tested 2 !",

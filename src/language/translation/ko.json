@@ -5,10 +5,13 @@
     "Global.Name": "이름",
     "Global.Add": "추가",
     "Global.Create": "만들기",
+    "Global.Save": "저장",
     "Global.Delete": "삭제",
     "Global.Update": "업데이트",
     "Global.Search": "검색",
- 
+    
+    "Global.WhiteToMove": "백 차례",
+    "Global.BlackToMove": "흑 차례",
 
     "Header.Setting": "설정",
 
@@ -22,7 +25,7 @@
     "Main.SignUp_SignUp": "회원가입",
     "Main.SignUp_PasswordAgain": "비밀번호 재입력",
 
-    "Main.Home_ConfirmDeletingPortal": "정말로 이 포털을 삭제 하시겠습니까?",
+    
 
 
     "Modal.Setting_Title": "설정",
@@ -40,9 +43,11 @@
     "Modal.QuizEditingSave_SaveAsNewAnswer": "새로운 해답으로 저장",
     "Modal.QuizEditingSave_SaveAsExistingAnswer": "해답 {index} (으)로 저장",
 
+    "Modal.QuizEditingOthers_UseFen": "클립보드의 FEN 이용",
     "Modal.QuizEditingOthers_ChangeSide": "흑백 바꾸기",
     "Modal.QuizEditingOthers_ShowAnswer": "해답 {index} 보기",
     "Modal.QuizEditingOthers_DeleteAnswer": "해답 {index} 삭제하기",
+    "Modal.QuizEditingOthers_NoAnswer": "현재 해답 없음",
 
     "Nav.NameApp": "체스 노트",
     "Nav.Home": "홈",

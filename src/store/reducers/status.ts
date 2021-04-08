@@ -67,8 +67,11 @@ const stateInitial = {
     },
 
     quiz: {
+      idGame: null as null | string,
       mode: 'editing' as 'editing' | 'trying' | 'solved', 
-      fen: 'rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1',
+      fen: null as null | string,
+      turn: 'white' as 'white' | 'black',
+      fenToLoad: null as null | string,
       // side: 'white' as 'white' | 'black',
       listMove: [] as string[],
     },

@@ -8,6 +8,7 @@ import MyProfile from "./Modal/MyProfile";
 
 import QuizEditingUpload from './Modal/Quiz/QuizEditingUpload';
 import QuizEditingSave from "./Modal/Quiz/QuizEditingSave";
+import QuizEditingOthers from "./Modal/Quiz/QuizEditingOthers";
 
 // import styles from './Modal.module.scss';
 
@@ -25,7 +26,7 @@ function Modal({}: PropsModal) {
 
             {showing.quizEditingUpload && <QuizEditingUpload />}
             {showing.quizEditingSave && <QuizEditingSave />}
-            {showing.quizEditingOthers && <QuizEditingSave />}
+            {showing.quizEditingOthers && <QuizEditingOthers />}
 
             {showing.quizTryingOthers && <QuizEditingSave />}
         </>
