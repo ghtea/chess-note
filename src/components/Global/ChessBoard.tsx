@@ -34,6 +34,8 @@ type PropsChessBoard = {
     side: 'white' | 'black',
 };
 
+
+
 function ChessBoard({
     //fen,
     move,
@@ -97,28 +99,28 @@ function ChessBoard({
         }
         else {
             const result = move(positionStart, position);
-            console.log(positionStart, position, result)
+            //console.log(positionStart, position, result)
             //const result = gameCurrent.move({from: positionStart as Square, to: position as Square});
             //console.log('result', result);
             //setPgn(gameCurrent.pgn());
 
             setPositionStart(null);
         }    
-        },[]
+        },[move] // move 같은 함수도 잊지 말고 dependency list 에 추가!
     );
 
     // Junhyeon
     // 8 => 13 => 6.5 
 
     const listSquareForCurrentSide = useMemo(()=>{
-        console.log(listSquare)
+        //console.log(listSquare)
         if (side === 'white'){
-            console.log(listSquare)
+            //console.log(listSquare)
             return listSquare;
         }
         else {
             const listSquareNew = [...listSquare].reverse().map(e=>[...e].reverse());
-            console.log(listSquareNew)
+            //console.log(listSquareNew)
             return listSquareNew;
         }
     },[listSquare, side]);

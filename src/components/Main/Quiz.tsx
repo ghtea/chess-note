@@ -68,42 +68,34 @@ function Quiz({}: PropsQuiz) {
     }
   },[statusQuiz.fenToLoad, gameCurrent])
 
-  // const [gameCurrent, setGameCurrent] = useState<null | ChessInstance>(null)
-  // useEffect(()=>{
-  //   // 우선 statusQuiz.idGame null
-  //   if (statusQuiz.idGame === null){
-  //     if (statusQuiz.fen === null){
-  //       setGameCurrent(new ChessReq());
-  //       dispatch( actions.status.return__REPLACE({
-  //         listKey: ['current', 'quiz', 'idGame'],
-  //         replacement: uuid(),
-  //       }) );
-  //     }
-      
-  //   }
-  // },[statusQuiz.idGame, statusQuiz.fen])
 
-
-
-  // 움직일 때마다 fen 을 변경해서, 리렌더링 잘하도록!
+  // 주의사항
+  // move 를 다른 컴포넌트로 넘기면, 이 move 가 여기선 dependency list 가 변하면 적용되지만,
+  // 다른 컴포넌트에서 리스너로 붙인건 업데이트 안될수도 있다?!
   const move = useCallback(
     (from: string, to: string): Move | null=>{
       const result = gameCurrent.move({from: from as Square, to: to as Square});
       if (result){
+        console.log(statusQuiz.listMove);
+
+        const replacement = {
+          ...statusQuiz,
+          fen: gameCurrent.fen(),
+          turn: result.color === 'w' ? 'black' : 'white',
+          listMove: [...statusQuiz.listMove, result.san],
+        }
+
         dispatch( actions.status.return__REPLACE({
-          listKey: ['current', 'quiz', 'fen'],
-          replacement: gameCurrent.fen()
+          listKey: ['current', 'quiz'],
+          replacement: replacement,
         }) );
-        dispatch( actions.status.return__REPLACE({
-          listKey: ['current', 'quiz', 'turn'],
-          replacement: result.color === 'w' ? 'black' : 'white'
-        }) );
+
         return result;
       }
       else {
         return result;
       }
-  }, [gameCurrent]);
+  }, [gameCurrent, statusQuiz]);
 
 
   

@@ -54,6 +54,10 @@ function QuizEditingSave({}: PropsQuizEditingSave) {
                     listKey: [ 'quiz', 'focusing', 'fenStart' ],
                     replacement: statusQuiz.fen
                 }));
+                dispatch(actions.status.return__REPLACE({ 
+                    listKey: [ 'current', 'quiz', 'listMove' ],
+                    replacement: [],
+                }));
             }
             else if (value === 'new-answer'){
                 const replacement = [...quizFocusing.listListMoveCorrect, statusQuiz.listMove];
