@@ -9,44 +9,47 @@ import Cookies from 'js-cookie';
 import { v4 as uuidv4 } from 'uuid';
 
 // import * as config from 'config';
-import * as actionsRoot from "store/actions";
- 
+
+import * as actions from "store/actions";
+
 //import * as actionsTheme from "../../actions/theme";
 
 
 
 
-const requestLogInGithub = (provider:any) => {
+const requestLogInTwitter = (provider:any) => {
     return firebaseAuth.signInWithPopup(provider)
 };
 
 
-function* logInGithub(action: actionsRoot.auth.type__LOG_IN_GITHUB) {
+function* logInTwitter(action: actions.auth.type__LOG_IN_TWITTER) {
     try {
 
-        const provider = new firebaseApp.auth.GithubAuthProvider();
+        const provider = new firebaseApp.auth.TwitterAuthProvider();
+            //provider = new firebaseApp.auth.GithubAuthProvider();
         
-        yield put( actionsRoot.notification.return__REPLACE({
+
+        yield put( actions.notification.return__REPLACE({
             listKey: ['listCodeSituationOthers'],
             replacement: []
         }) );
         
             
             try {
-                const {user} = yield call( requestLogInGithub, provider );
+                const {user} = yield call( requestLogInTwitter, provider );
                 //console.log(data.user);
 
-                yield put( actionsRoot.status.return__REPLACE({
+                yield put( actions.status.return__REPLACE({
                     listKey: ['loading', 'user'],
                     replacement: false
                 }) );
 
-                yield put( actionsRoot.status.return__REPLACE({
+                yield put( actions.status.return__REPLACE({
                     listKey: ['ready', 'user'],
                     replacement: true
                 }) );
 
-                yield put( actionsRoot.auth.return__REPLACE_USER({
+                yield put( actions.auth.return__REPLACE_USER({
                     user: user
                 }) );
 
@@ -54,31 +57,32 @@ function* logInGithub(action: actionsRoot.auth.type__LOG_IN_GITHUB) {
             } 
             catch (error){
 
-                yield put( actionsRoot.status.return__REPLACE({
+                yield put( actions.status.return__REPLACE({
                     listKey: ['ready', 'user'],
                     replacement: false
                 }) );
 
-                yield put( actionsRoot.status.return__REPLACE({
+                yield put( actions.status.return__REPLACE({
                     listKey: ['loading', 'user'],
                     replacement: false
                 }) );
 
-                yield put( actionsRoot.auth.return__REPLACE_USER({
-                    user: null
+                yield put( actions.auth.return__REPLACE({
+                    listKey: ['user'],
+                    replacement: null
                 }) );
 
 
                 console.error(error);
                 if (error.code === 'auth/account-exists-with-different-credential'){
-                    console.log(error.message);
-                    yield put( actionsRoot.notification.return__ADD_DELETE_BANNER({
+                    console.error(error.message);
+                    yield put( actions.notification.return__ADD_DELETE_BANNER({
                         codeSituation: 'LogIn_UnknownError__E'
                     }) );
                 }
                 else {
                     console.error(error);
-                    yield put( actionsRoot.notification.return__ADD_DELETE_BANNER({
+                    yield put( actions.notification.return__ADD_DELETE_BANNER({
                         codeSituation: 'LogIn_UnknownError__E'
                     }) );
                 }
@@ -92,27 +96,27 @@ function* logInGithub(action: actionsRoot.auth.type__LOG_IN_GITHUB) {
         
     } catch (error) {
         
-        yield put( actionsRoot.status.return__REPLACE({
+        yield put( actions.status.return__REPLACE({
             listKey: ['ready', 'user'],
             replacement: false
         }) );
 
-        yield put( actionsRoot.status.return__REPLACE({
+        yield put( actions.status.return__REPLACE({
             listKey: ['loading', 'user'],
             replacement: false
         }) );
 
-        yield put( actionsRoot.auth.return__REPLACE_USER({
+        yield put( actions.auth.return__REPLACE_USER({
             user: null
         }) );
-
-        console.error(error);
-        console.error('logInGithub has been failed');
         
-        yield put( actionsRoot.notification.return__ADD_CODE_SITUATION_OTHERS({
+        console.error(error);
+        console.error('logInTwitter has been failed');
+        
+        yield put( actions.notification.return__ADD_CODE_SITUATION_OTHERS({
             codeSituation: 'LogIn_UnknownError__E'
         }) );
     }
 }
 
-export default logInGithub;
+export default logInTwitter;

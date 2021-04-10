@@ -8,16 +8,18 @@
     );
 
     height: 100vh;
+
+    form {
+
+        width: $device-xs__min-width; 
+        height: auto;
+      
+        margin-top: $main__margin-top;  
+    
+    }
 }
 
-form {
 
-    width: $device-xs__min-width; 
-    height: auto;
-  
-    margin-top: $main__margin-top;  
-
-}
 
 
 
@@ -188,7 +190,7 @@ form {
         justify-content: center;
         align-items: center;
     
-    &:nth-child(2){
+    &:nth-child(n+2){
         margin-top: 8px;
     } 
 
@@ -209,6 +211,16 @@ form {
                 width: 23px;
                 height: 23px;
             }
+            margin-right: 12px;
+        }
+    }
+    &[value='twitter'] {
+        @include color-each-theme(background-color, twitter__bg);
+        @include color-each-theme(color, twitter__font);
+        
+        .icon {
+            width: 23px;
+            height: 23px;
             margin-right: 12px;
         }
     }

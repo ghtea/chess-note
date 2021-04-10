@@ -77,13 +77,13 @@ function* logInGoogle(action: actions.auth.type__LOG_IN_GOOGLE) {
                 if (error.code === 'auth/account-exists-with-different-credential'){
                     console.error(error.message);
                     yield put( actions.notification.return__ADD_DELETE_BANNER({
-                        codeSituation: 'LogInGoogle_UnknownError__E'
+                        codeSituation: 'LogIn_UnknownError__E'
                     }) );
                 }
                 else {
                     console.error(error);
                     yield put( actions.notification.return__ADD_DELETE_BANNER({
-                        codeSituation: 'LogInGoogle_UnknownError__E'
+                        codeSituation: 'LogIn_UnknownError__E'
                     }) );
                 }
                 
@@ -114,7 +114,7 @@ function* logInGoogle(action: actions.auth.type__LOG_IN_GOOGLE) {
         console.error('logInGoogle has been failed');
         
         yield put( actions.notification.return__ADD_CODE_SITUATION_OTHERS({
-            codeSituation: 'LogInGoogle_UnknownError__E'
+            codeSituation: 'LogIn_UnknownError__E'
         }) );
     }
 }

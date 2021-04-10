@@ -8,6 +8,7 @@ import logIn from 'store/sagas/auth/logIn';
 import logOut from 'store/sagas/auth/logOut';
 
 import logInGoogle from 'store/sagas/auth/logInGoogle';
+import logInTwitter from 'store/sagas/auth/logInTwitter';
 import logInGithub from 'store/sagas/auth/logInGithub';
 
 import logCheckSucceeded from 'store/sagas/auth/logCheckSucceeded';
@@ -30,6 +31,7 @@ export default function* sagaAuth() {
     yield takeLatest( actions.auth.name__LOG_OUT, logOut ); 
 
     yield takeLatest( actions.auth.name__LOG_IN_GOOGLE, logInGoogle ); 
+    yield takeLatest( actions.auth.name__LOG_IN_TWITTER, logInTwitter ); 
     yield takeLatest( actions.auth.name__LOG_IN_GITHUB, logInGithub ); 
 
     yield takeLatest( actions.auth.name__UPDATE_PROFILE, updateProfile ); 

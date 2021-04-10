@@ -20,7 +20,7 @@ import InputPassword from "components/Global/Input/InputPassword";
 //import IconLogIn from 'svgs/basic/IconLogIn';
 import imgGoogle from 'others/images/g-logo.png';
 import IconGithub from 'svgs/others/IconGithub';
-
+import IconTwitter from 'svgs/others/IconTwitter';
 
 import TopBar from './LogIn/TopBar';
 import styles from './LogIn.module.scss';
@@ -112,6 +112,9 @@ function LogIn({}:PropsLogIn) {
             if (value === 'google'){
                 dispatch(actionsRoot.auth.return__LOG_IN_GOOGLE() );
             }
+            else if (value === 'twitter'){
+                dispatch(actionsRoot.auth.return__LOG_IN_TWITTER() );
+            }
             else if (value === 'github'){
                 dispatch(actionsRoot.auth.return__LOG_IN_GITHUB() );
             }
@@ -177,6 +180,7 @@ function LogIn({}:PropsLogIn) {
             </div> 
             
             <div className={`${styles['collection-social']}`} >
+
                 <button 
                     type='button'
                     value='google'
@@ -185,6 +189,16 @@ function LogIn({}:PropsLogIn) {
                     <span className={`${styles['icon']}`}><img src={imgGoogle}/></span>
                     <span className={`${styles['text']}`}> <FormattedMessage id={`Main.LogIn_ContinueWithGoogle`} /> </span>
                 </button>
+                
+                <button 
+                    type='button'
+                    value='twitter'
+                    onClick={onClick_LogInSocial}
+                > 
+                    <span className={`${styles['icon']}`}> <IconTwitter className={`icon__twitter`} /></span>
+                    <span className={`${styles['text']}`}> <FormattedMessage id={`Main.LogIn_ContinueWithTwitter`} />  </span>
+                </button>
+
                 <button 
                     type='button'
                     value='github'
@@ -193,6 +207,7 @@ function LogIn({}:PropsLogIn) {
                     <span className={`${styles['icon']}`}> <IconGithub className={`icon__github`} /></span>
                     <span className={`${styles['text']}`}> <FormattedMessage id={`Main.LogIn_ContinueWithGithub`} />  </span>
                 </button>
+
             </div> 
             
             <nav className={`${styles['collection-link']}`} >

@@ -141,11 +141,11 @@ $width__side: 50px;
 
 .button__delete {
 
-    & > div:nth-child(1){
+    & > *:nth-child(1){
         display: flex;
 	}
       
-    & > div:nth-child(2){
+    & > *:nth-child(2){
 	    display: none;
 	}
 	  

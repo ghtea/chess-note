@@ -55,6 +55,7 @@ export const return__LOG_IN = (payload: Payload__LOG_IN) => {
 export type type__LOG_IN = ReturnType<typeof return__LOG_IN>;
 
 
+
 export const name__LOG_IN_GOOGLE = 'auth/LOG_IN_GOOGLE';
 export const return__LOG_IN_GOOGLE = () => {
     return {
@@ -62,6 +63,16 @@ export const return__LOG_IN_GOOGLE = () => {
     }
 };
 export type type__LOG_IN_GOOGLE = ReturnType<typeof return__LOG_IN_GOOGLE>;
+
+
+export const name__LOG_IN_TWITTER = 'auth/LOG_IN_TWITTER';
+export const return__LOG_IN_TWITTER = () => {
+    return {
+        type: name__LOG_IN_TWITTER
+    }
+};
+export type type__LOG_IN_TWITTER = ReturnType<typeof return__LOG_IN_TWITTER>;
+
 
 export const name__LOG_IN_GITHUB = 'auth/LOG_IN_GITHUB';
 export const return__LOG_IN_GITHUB = () => {

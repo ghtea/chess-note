@@ -132,10 +132,12 @@ function MyProfile({}: PropsMyProfile) {
                     <img  className={`${styles['photo-profile']}`} src={urlPhotoLocal} />
                 )}
                 
-                <div className={`${stylesModal['content__section']}`} >
-                    <h3>  <FormattedMessage id={`Modal.MyProfile_EmailAddress`} /></h3>
-                    <span className={`${styles['email']}`}> {user?.email} </span>
-                </div>
+                {user?.email &&  // twitter 이용할 때 등 이메일이 없을 때가 있다
+                    <div className={`${stylesModal['content__section']}`} >
+                        <h3>  <FormattedMessage id={`Modal.MyProfile_EmailAddress`} /></h3>
+                        <span className={`${styles['email']}`}> {user?.email} </span>
+                    </div>
+                }       
 
                 <div className={`${stylesModal['content__section']}`} >
                     <h3>  <FormattedMessage id={`Modal.MyProfile_Name`} /></h3>

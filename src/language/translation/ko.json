@@ -20,6 +20,7 @@
     "Main.LogIn_EmailAddress": "이메일 주소",
     "Main.LogIn_Password": "비밀번호",
     "Main.LogIn_ContinueWithGoogle": "구글로 계속하기",
+    "Main.LogIn_ContinueWithTwitter": "트위터로 계속하기",
     "Main.LogIn_ContinueWithGithub": "깃허브로 계속하기",
 
     "Main.SignUp_SignUp": "회원가입",
@@ -69,10 +70,7 @@
     "Notification.LogIn_InvalidEmail__E": "이메일 주소가 유효하지 않습니다",
     "Notification.LogIn_NoPassword__E": "비밀번호를 입력해주세요",
     "Notification.LogIn_WrongPassword__E": "비밀번호가 틀리거나, 이미 등록한 소셜 서비스를 이용해야 합니다",
-
-    "Notification.LogInGoogle_UnknownError__E": "알수 없는 에러가 발생했습니다",
-    "Notification.LogInGithub_UnknownError__E": "알수 없는 에러가 발생했습니다",
-
+    
     "Notification.SignUp_UnknownError__E": "알수 없는 에러가 발생했습니다",
     "Notification.SignUp_Succeeded__S": "성공적으로 회원가입하였습니다!",
 
