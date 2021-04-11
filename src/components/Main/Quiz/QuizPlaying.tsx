@@ -30,6 +30,17 @@ function QuizPlaying({}: PropsQuizPlaying) {
     return new ChessReq();
   },[]);
 
+
+  useEffect(()=>{
+    const idQuiz = (window.location.pathname.match(/[^/]*$/) || [])[0];
+    dispatch(actions.data.quiz.return__GET_QUIZ_BY_ID({ 
+      idQuiz: idQuiz,
+    }));
+
+    // console.log(idQuiz)
+    //console.log(window.location.pathname)
+  },[window.location.pathname])
+
   // const loadFen = useCallback(
   //   (fen: string)=>{
   //     const result = gameCurrent.load(fen);

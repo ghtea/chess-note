@@ -71,6 +71,18 @@ export const return__GET_LIST_QUIZ = (payload: Payload__GET_LIST_QUIZ) => {
 export type type__GET_LIST_QUIZ = ReturnType<typeof return__GET_LIST_QUIZ>;
 
 
+export const name__GET_QUIZ_BY_ID = 'data/quiz/GET_QUIZ_BY_ID';
+type Payload__GET_QUIZ_BY_ID = {
+    idQuiz: string
+}
+export const return__GET_QUIZ_BY_ID = (payload: Payload__GET_QUIZ_BY_ID) => {
+    return {
+        type: name__GET_QUIZ_BY_ID,
+        payload: payload
+    }
+};
+export type type__GET_QUIZ_BY_ID = ReturnType<typeof return__GET_QUIZ_BY_ID>;
+
 
 
 
