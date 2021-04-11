@@ -40,10 +40,6 @@
     "Modal.MyProfile_Photo": "사진",
     "Modal.MyProfile_Update": "업데이트",
     
-    "Modal.QuizEditingUpload_IsPublic": "공개 여부",
-    "Modal.QuizEditingUpload_Public": "공개",
-    "Modal.QuizEditingUpload_Private": "비공개",
-
     "Modal.QuizEditingSave_SaveAsStart": "시작 지점으로 저장",
     "Modal.QuizEditingSave_SaveAsNewAnswer": "새로운 해답으로 저장",
     "Modal.QuizEditingSave_SaveAsExistingAnswer": "해답 {index} (으)로 저장",
@@ -85,14 +81,20 @@
     "Notification.SignUp_PasswordsDifferent__E": "두 비밀번호가 서로 다릅니다",
     "Notification.SignUp_WeakPassword__E": "비밀번호는 6글자 이상이어야 합니다",
     
-    "Notification.CreateQuiz_Succeeded__S": "성공적으로 퀴즈를 만들었습니다!",
-    "Notification.CreateQuiz_UnknownError__E": "퀴즈를 만들지 못했습니다",
-    "Notification.GetListQuiz_UnknownError__E": "퀴즈들을 불러오지 못했습니다",
-    "Notification.GetQuiz_UnknownError__E": "퀴즈를 불러오지 못했습니다",
-    "Notification.UpdateQuiz_Succeeded__S": "성공적으로 퀴즈를 수정했습니다!",
-    "Notification.UpdateQuiz_UnknownError__E": "퀴즈를 수정하지 못했습니다",
-    "Notification.DeleteQuiz_Succeeded__S": "성공적으로 퀴즈를 삭제했습니다!",
-    "Notification.DeleteQuiz_UnknownError__E": "퀴즈를 삭제하지 못했습니다"
+    "Notification.Football_GetLeagueStandings_UnknownError__E": "리그 순위표를 불러오지 못했습니다",
+    "Notification.Football_UpdateLeagueStandings_UnknownError__E": "리그 순위표를 업데이트하지 못했습니다",
+    "Notification.Football_CheckListTeam_UnknownError__E": "팀 정보를 확인하지 못했습니다",
+    "Notification.Football_GetListTeam_UnknownError__E": "팀 정보를 불러오지 못했습니다",
+    "Notification.Football_AddTeam_UnknownError__E": "팀 정보를 찾지 못했습니다",
+
+    "Notification.CreatePortal_Succeeded__S": "성공적으로 포털을 만들었습니다!",
+    "Notification.CreatePortal_UnknownError__E": "포털을 만들지 못했습니다",
+    "Notification.GetListPortal_UnknownError__E": "포털들을 불러오지 못했습니다",
+    "Notification.VisitPortal_UnknownError__E": "방문한 포털의 상태를 업데이트하지 못했습니다",
+    "Notification.UpdatePortal_Succeeded__S": "성공적으로 포털을 수정했습니다!",
+    "Notification.UpdatePortal_UnknownError__E": "포털을 수정하지 못했습니다",
+    "Notification.DeletePortal_Succeeded__S": "성공적으로 포털을 삭제했습니다!",
+    "Notification.DeletePortal_UnknownError__E": "포털을 삭제하지 못했습니다"
 }
 
 

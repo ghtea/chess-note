@@ -1,19 +1,16 @@
 import ChessBoard from 'components/Global/ChessBoard';
 import React, { useCallback, useState, useMemo, useEffect} from 'react';
 import { Route, Switch } from "react-router-dom";
-import ToolBarEditing from './Quiz/ToolBarEditing';
-import {v4 as uuid} from 'uuid';
+
 //import { useQuery, gql } from '@apollo/client';
 
-import { ChessInstance, Move, Square } from 'chess.js'
 import { useDispatch, useSelector } from 'react-redux';
 import { StateRoot } from 'store/reducers';
 import * as actions  from 'store/actions';
-const ChessReq:any = require('chess.js');
-// https://stackoverflow.com/questions/58598457/not-a-constructor-error-with-library-and-angular
-// const Chess:ChessInstance = new ChessReq();
 
-
+import QuizEditing from './Quiz/QuizEditing';
+import QuizHome from './Quiz/QuizHome';
+import QuizPlaying from './Quiz/QuizPlaying';
 
 
 type PropsQuiz = {};
@@ -22,117 +19,38 @@ function Quiz({}: PropsQuiz) {
   
   const dispatch = useDispatch();
 
-  const statusQuiz = useSelector((state: StateRoot)=>state.status.current.quiz);
-  const side = useSelector((state: StateRoot)=>state.data.quiz.focusing.side);
-  //const { loading, error, data } = useQuery(GET_LIST_QUIZ);
+  const readyUser = useSelector((state: StateRoot) => state['status']['ready']['user']);
+  const loadingUser = useSelector((state: StateRoot) => state.status.loading.user);
 
-  const gameCurrent: ChessInstance = useMemo(()=>{
-    return new ChessReq();
-  },[]);
+  const idUser = useSelector((state: StateRoot) => state.auth.user?.id);
 
-  // const loadFen = useCallback(
-  //   (fen: string)=>{
-  //     const result = gameCurrent.load(fen);
-  //     if (result){
-  //       dispatch( actions.status.return__REPLACE({
-  //         listKey: ['current', 'quiz', 'fen'],
-  //         replacement: gameCurrent.fen()
-  //     }) );
-  //     }
-  // }, [gameCurrent]);
 
-  // fenToLoad 가 바뀌면 그걸로 load 해보고 되면 다시 fenToLoad null 로 변경
-  useEffect(()=>{ 
-    if (statusQuiz.fenToLoad !== null){
-      const result = gameCurrent.load(statusQuiz.fenToLoad);
-      if (result){
-        dispatch( actions.status.return__REPLACE({
-          listKey: ['current', 'quiz', 'fen'],
-          replacement: gameCurrent.fen()
-        }) );
-
-        const side = statusQuiz.fenToLoad.includes(" w") ? 'white' : 'black';
-        dispatch( actions.data.return__REPLACE({
-          listKey: ['quiz', 'focusing', 'side'],
-          replacement: side
-        }) );
-        dispatch( actions.status.return__REPLACE({
-          listKey: ['current', 'quiz', 'turn'],
-          replacement: side
-        }) );
-      }
-      dispatch( actions.status.return__REPLACE({
-        listKey: ['current', 'quiz', 'fenToLoad'],
-        replacement: null,
-      }) );
+  //const statusQuiz = useSelector((state: StateRoot)=>state.status.current.quiz);
+  useEffect(()=>{  // close sub menu when click outside of menu
+    
+    if (!loadingUser){
+      dispatch(actions.data.quiz.return__GET_LIST_QUIZ({
+        idUser: idUser
+      }));
     }
-  },[statusQuiz.fenToLoad, gameCurrent])
-
-
-  // 주의사항
-  // move 를 다른 컴포넌트로 넘기면, 이 move 가 여기선 dependency list 가 변하면 적용되지만,
-  // 다른 컴포넌트에서 리스너로 붙인건 업데이트 안될수도 있다?!
-  const move = useCallback(
-    (from: string, to: string): Move | null=>{
-      const result = gameCurrent.move({from: from as Square, to: to as Square});
-      if (result){
-        console.log(statusQuiz.listMove);
-
-        const replacement = {
-          ...statusQuiz,
-          fen: gameCurrent.fen(),
-          turn: result.color === 'w' ? 'black' : 'white',
-          listMove: [...statusQuiz.listMove, result.san],
-        }
-
-        dispatch( actions.status.return__REPLACE({
-          listKey: ['current', 'quiz'],
-          replacement: replacement,
-        }) );
-
-        return result;
-      }
-      else {
-        return result;
-      }
-  }, [gameCurrent, statusQuiz]);
-
-
-  
-
-
-  const listSquare = useMemo(()=>{
-    return gameCurrent.board(); 
-    // if (side==='white'){
-    //   return gameCurrent.board(); 
-    // }
-    // else {
-    //   return gameCurrent.board().reverse(); 
-    // }
-  }, [gameCurrent, statusQuiz.fen]);
+    
+  },[idUser, loadingUser]);
 
   return (
-    <div>
-      <ChessBoard
-        move={move}
-        listSquare={listSquare}
-        side={side}
-      />
-      { statusQuiz.mode === 'editing' ?
-        <ToolBarEditing 
-        />
-        :
-        statusQuiz.mode === 'trying' ?
-        <ToolBarEditing 
-        />
-        :
-        statusQuiz.mode === 'solved' ?
-        <ToolBarEditing 
-        />
-        : null
-      }
-      
-    </div>
+    <Switch>
+      <Route exact path="/quiz" >
+          <QuizHome />
+      </Route>
+
+      <Route path="/quiz/create" >
+          <QuizEditing />
+      </Route>
+
+      <Route path="/quiz/play/:idQuiz" >
+          <QuizPlaying />
+      </Route>
+
+    </Switch>
   );
 }
 

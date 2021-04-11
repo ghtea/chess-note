@@ -68,7 +68,7 @@ const stateInitial = {
 
     quiz: {
       idGame: null as null | string,
-      mode: 'editing' as 'editing' | 'trying' | 'solved', 
+      mode: 'editing' as 'editing' | 'playing' | 'solved', 
       fen: null as null | string,
       turn: 'white' as 'white' | 'black',
       fenToLoad: null as null | string,

@@ -3,13 +3,14 @@ import { firebaseFirestore } from "firebaseApp";
 
 import axios from "axios";
 import apolloClient from 'apollo';
-import { gql, useQuery , FetchResult} from '@apollo/client';
+import { gql, useQuery , FetchResult, DocumentNode} from '@apollo/client';
 import { v4 as uuidv4 } from 'uuid';
 
 // import * as config from 'config';
 import {StateRoot} from 'store/reducers';
 import * as actions from "store/actions";
 import * as types from "store/types";
+import { queryAllByAltText } from "@testing-library/dom";
 
 /*
 {
@@ -20,86 +21,65 @@ import * as types from "store/types";
             idUser: "abc",
         }
 */
-const CREATE_QUIZ = gql`
-    mutation CreateQuiz($argument: CreateQuizInputType!){
-        createQuiz(createQuizInputType: $argument) 
-        {
-            id,
-            name,
-            side,
-            fenStart,
-            listListMoveCorrect,
-            idUser
-        }
-    }
-`;
-
-// const GET_LIST_QUIZ = gql`
-//     query {
-//         getListQuiz {
-//             id
-//             name
-//         }
-//     }
-// `;
 
 
+// GraphQL query 문법에 이상 있으면 할당하는 시점에서 에러 발생시키기 때문에 에러 처리한 곳에서 해야 한다
 
-const requestCreateQuiz = (argument: any) => { 
-    return apolloClient.mutate({mutation: CREATE_QUIZ, variables: {argument}});
+const requestGetListQuiz = (query:DocumentNode, argument: any) => { 
+    return apolloClient.query({query, variables: {argument}});
 };
 
-// const requestGetListQuiz = () => { 
-//     return apolloClient.query({query: GET_LIST_QUIZ});
-// };
+const requestGetListQuizPublic = (query:DocumentNode) => { 
+    return apolloClient.query({query });
+};
 
 
+// idUser 있으면 개인 퀴즈들, 없으면 공개 퀴즈들
+function* getListQuiz(action: actions.data.quiz.type__CREATE_QUIZ) {
 
-
-// directly access to sportdataAPI -> update firebase (get document on return)
-function* createQuiz(action: actions.data.quiz.type__CREATE_QUIZ) {
-
-    const {name, side, fenStart, listListMoveCorrect, idUser, isPublic} = action.payload;
+    const { idUser} = action.payload;
 
     try {
-        const argument = {
-            name,
-            side,
-            fenStart,
-            listListMoveCorrect,
-            idUser,
-            isPublic,
-        };
+        const GET_LIST_QUIZ = gql`
+            query GetListQuiz($argument: GetListQuizInputType!){
+                getListQuiz(getListQuizInputType: $argument) {
+                    id
+                }
+            }
+        `;
 
-        //const data: unknown =  yield call( requestCreateQuiz, argument ); 
-        const data: unknown =  yield call( requestCreateQuiz,  argument); 
-        //console.log(data)
-        // const team: Partial<types.data.football.Team> = {
-        //     name: teamRaw['name'],
-        //     code: teamRaw['short_code'],
-        //     pathLogo: teamRaw['logo'],
-        //     country: {
-        //         id: teamRaw['country']['country_id'],
-        //         name: teamRaw['country']['name'],
-        //         alpha2: teamRaw['country']['country_code'],
-        //         continent: teamRaw['country']['continent'],
-        //     },
-        // };
-        yield put( actions.notification.return__ADD_DELETE_BANNER({
-            codeSituation: 'CreateQuiz_Succeeded__S'
-        }) );
+        const GET_LIST_QUIZ_PUBLIC = gql`
+            query {
+                getListQuizPublic {
+                    id
+                }
+            }
+        `;
+
+        let data: unknown;
+
+        if (idUser){
+            const argument = {
+                idUser,
+            };
+            data =  yield call( requestGetListQuiz,  GET_LIST_QUIZ, argument); 
+        }
+        else {
+            data =  yield call( requestGetListQuizPublic, GET_LIST_QUIZ_PUBLIC ); 
+        }
+        console.log(data)
 
     } catch (error) {
         
         console.error(error);
         
         yield put( actions.notification.return__ADD_DELETE_BANNER({
-            codeSituation: 'CreateQuiz_UnknownError__E'
+            codeSituation: 'GetListQuiz_UnknownError__E'
         }) );
     }
 }
 
-export default createQuiz;
+export default getListQuiz;
 
 
 

@@ -46,10 +46,6 @@
     "Modal.MyProfile_Photo": "Photo",
     "Modal.MyProfile_Update": "Update",
 
-    "Modal.QuizEditingUpload_IsPublic": "Is Public",
-    "Modal.QuizEditingUpload_Public": "Public",
-    "Modal.QuizEditingUpload_Private": "Private",
-
     "Modal.QuizEditingSave_SaveAsStart": "Save as Start",
     "Modal.QuizEditingSave_SaveAsNewAnswer": "Save as New Answer",
     "Modal.QuizEditingSave_SaveAsExistingAnswer": "Save as Answer {index}",
@@ -84,14 +80,20 @@
     "Notification.SignUp_PasswordsDifferent__E": "The two passwords are different",
     "Notification.SignUp_WeakPassword__E": "Password should be at least 6 characters long",
 
-    "Notification.CreateQuiz_Succeeded__S": "Successfully created the quiz!",
-    "Notification.CreateQuiz_UnknownError__E": "Failed to create the quiz",
-    "Notification.GetListQuiz_UnknownError__E": "Failed to get the quizes",
-    "Notification.GetQuiz_UnknownError__E": "Failed to get the quiz",
-    "Notification.UpdateQuiz_Succeeded__S": "Successfully updated the quiz!",
-    "Notification.UpdateQuiz_UnknownError__E": "Failed to update the quiz",
-    "Notification.DeleteQuiz_Succeeded__S": "Successfully deleted the quiz!",
-    "Notification.DeleteQuiz_UnknownError__E": "Failed to delete the quiz"
+    "Notification.Football_GetLeagueStandings_UnknownError__E": "Failed to get league standings",
+    "Notification.Football_UpdateLeagueStandings_UnknownError__E": "Failed to update league standings",
+    "Notification.Football_CheckListTeam_UnknownError__E": "Failed to check information of teams",
+    "Notification.Football_GetListTeam_UnknownError__E": "Failed to get information of teams",
+    "Notification.Football_AddTeam_UnknownError__E": "Failed to find information of the team",
+
+    "Notification.CreatePortal_Succeeded__S": "Successfully created portal!",
+    "Notification.CreatePortal_UnknownError__E": "Failed to create the portal",
+    "Notification.GetListPortal_UnknownError__E": "Failed to get portals",
+    "Notification.VisitPortal_UnknownError__E": "Failed to update the portal which you visited",
+    "Notification.UpdatePortal_Succeeded__S": "Successfully updated portal!",
+    "Notification.UpdatePortal_UnknownError__E": "Failed to update the portal",
+    "Notification.DeletePortal_Succeeded__S": "Successfully deleted portal!",
+    "Notification.DeletePortal_UnknownError__E": "Failed to delete the portal"
 }
 
 

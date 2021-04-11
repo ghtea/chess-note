@@ -48,7 +48,10 @@ function QuizEditingSave({}: PropsQuizEditingSave) {
     const onClick_AnyMainButton = useCallback(
         (e:React.MouseEvent<HTMLButtonElement, MouseEvent>)=>{
             const value = e.currentTarget.value;
-            //console.log(value)
+            dispatch(actions.status.return__REPLACE({ 
+                listKey: ['showing', 'modal', convertCase("QuizEditingSave", 'camel')],
+                replacement: false
+            }));
             if (value === 'start'){
                 dispatch(actions.data.return__REPLACE({ 
                     listKey: [ 'quiz', 'focusing', 'fenStart' ],

@@ -57,6 +57,24 @@ import * as types from "store/types";
 // export type type__CHECK_LIST_TEAM = ReturnType<typeof return__CHECK_LIST_TEAM>;
 
 
+// idUser 있으면 개인 퀴즈들, 없으면 공개 퀴즈들
+export const name__GET_LIST_QUIZ = 'data/quiz/GET_LIST_QUIZ';
+type Payload__GET_LIST_QUIZ = {
+    idUser?: string
+}
+export const return__GET_LIST_QUIZ = (payload: Payload__GET_LIST_QUIZ) => {
+    return {
+        type: name__GET_LIST_QUIZ,
+        payload: payload
+    }
+};
+export type type__GET_LIST_QUIZ = ReturnType<typeof return__GET_LIST_QUIZ>;
+
+
+
+
+
+
 export const name__CREATE_QUIZ = 'data/quiz/CREATE_QUIZ';
 type Payload__CREATE_QUIZ = {
     name?: string,
@@ -64,6 +82,7 @@ type Payload__CREATE_QUIZ = {
     fenStart: string,
     listListMoveCorrect: string[][],
     idUser: string,
+    isPublic: boolean,
 }
 export const return__CREATE_QUIZ = (payload: Payload__CREATE_QUIZ) => {
     return {

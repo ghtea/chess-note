@@ -17,6 +17,7 @@ import IconX from 'svgs/basic/IconX';
 import styles from './QuizEditingUpload.module.scss';
 import stylesModal from 'components/Modal.module.scss';
 import InputText from "components/Global/Input/InputText";
+import InputRadio from "components/Global/Input/InputRadio";
 
 
 type PropsQuizEditingUpload = {};
@@ -28,6 +29,7 @@ function QuizEditingUpload({}: PropsQuizEditingUpload) {
     
     const {draft: draft_Main, onChange: onChange_Main} = useInputQuizEditingUpload({
         name: '',
+        isPublic: true,
     });
 
     const quizFocusing = useSelector((state: StateRoot) => state.data.quiz.focusing);
@@ -57,6 +59,11 @@ function QuizEditingUpload({}: PropsQuizEditingUpload) {
                 fenStart: quizFocusing.fenStart,
                 listListMoveCorrect: quizFocusing.listListMoveCorrect,
                 idUser: quizFocusing.idUser,
+                isPublic: quizFocusing.isPublic,
+            }));
+            dispatch(actions.status.return__REPLACE({ 
+                listKey: ['showing', 'modal', convertCase("QuizEditingUpload", 'camel')],
+                replacement: false
             }));
     }, [quizFocusing]);
   
@@ -90,6 +97,30 @@ function QuizEditingUpload({}: PropsQuizEditingUpload) {
 
                         onChange={onChange_Main}
                     />
+                </div>
+
+
+                <div className={`${stylesModal['content__section']}`} >
+                    <h3>  <FormattedMessage id={`Modal.QuizEditingUpload_IsPublic`} /></h3>
+ 
+                    <div className={'container__input-radio'} > 
+                        <InputRadio 
+                            valueCurrent={draft_Main.isPublic}
+
+                            name='isPublic'
+                            value={true}
+                            label={intl.formatMessage({ id: 'Modal.QuizEditingUpload_Public'})}
+                            onChange={onChange_Main}
+                        />
+                        <InputRadio 
+                            valueCurrent={draft_Main.isPublic}
+
+                            name='isPublic'
+                            value={false}
+                            label={intl.formatMessage({ id: 'Modal.QuizEditingUpload_Private'})}
+                            onChange={onChange_Main}
+                        />
+                    </div>
                 </div>
 
 
