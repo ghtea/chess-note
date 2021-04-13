@@ -67,7 +67,7 @@ function QuizHome({}: PropsQuizHome) {
             value='play-public-random-quiz'
             onClick={onClick_MainButton}
           >
-            random public quiz
+            play public quiz
           </button>
         </div>
 
@@ -80,7 +80,7 @@ function QuizHome({}: PropsQuizHome) {
                 value='play-my-random-quiz'
                 onClick={onClick_MainButton}
               >
-                random my quiz
+                play my quiz
               </button>
             </div>
             <div>
