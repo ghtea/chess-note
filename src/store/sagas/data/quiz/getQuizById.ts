@@ -1,18 +1,17 @@
 import { call, select, put } from "redux-saga/effects";
 import { firebaseFirestore } from "firebaseApp";
-import history from 'historyApp';
 
 import axios from "axios";
 import apolloClient from 'apollo';
 import { gql, useQuery , FetchResult, DocumentNode, ApolloQueryResult} from '@apollo/client';
 import { v4 as uuidv4 } from 'uuid';
-
+import history from 'historyApp';
 // import * as config from 'config';
 import {StateRoot} from 'store/reducers';
 import * as actions from "store/actions";
 import * as types from "store/types";
 import { queryAllByAltText } from "@testing-library/dom";
-import { KindGetListQuiz } from "store/types/data/quiz";
+// import { KindGetListQuiz } from "store/types/data/quiz";
 
 /*
 {
@@ -27,97 +26,63 @@ import { KindGetListQuiz } from "store/types/data/quiz";
 
 // GraphQL query 문법에 이상 있으면 할당하는 시점에서 에러 발생시키기 때문에 에러 처리한 곳에서 해야 한다
 
-const requestGetQuizListQuiz = (query:DocumentNode, argument: any) => { 
+const requestGetQuizById = (query:DocumentNode, argument: any) => { 
     return apolloClient.query({query, variables: {argument}});
 };
 
 
 // idUser 있으면 개인 퀴즈들, 없으면 공개 퀴즈들
-function* getListQuiz( action: actions.data.quiz.type__GET_LIST_QUIZ) {
+function* getQuizById( action: actions.data.quiz.type__GET_QUIZ_BY_ID ) {
 
-    const { kind: valueKind, idUser } = action.payload;
+    const { idQuiz } = action.payload;
 
     try {
-        
-        const GET_LIST_QUIZ = gql`
-            query GetListQuiz($argument: GetListQuizInputType!){
-                getListQuiz(getListQuizInputType: $argument) {
-                    id
-                    name
-                    side
-                    fenStart
-                    listListMoveCorrect
-                    idUser
-                    isPublic
-                    dateCreated
+        const GET_QUIZ_BY_ID = gql`
+            query GetQuizById($id: String!){
+                getQuizById(id: $id) {
+                    id,
                 }
             }
         `;
+
+        let response: ApolloQueryResult<any> =  yield call( requestGetQuizById,  GET_QUIZ_BY_ID, idQuiz);
+        console.log(response);
+        const quizFromRes = response.data?.getQuizById as types.data.quiz.Quiz | undefined;
         
-        let kindUsing = ''
-        if (valueKind === KindGetListQuiz.publicQuiz){
-            kindUsing = 'publicQuiz'
-        }
-        else if (valueKind === KindGetListQuiz.publicQuizByRecord){
-            kindUsing = 'publicQuizByRecord'
-        }
-        else {  // KindGetListQuiz.myQuizByRecord
-            kindUsing = 'myQuizByRecord'
-        }
-        
-        const argument = {
-            kind: kindUsing,
-            idUser,
-        };
-
-        let response: ApolloQueryResult<any> =  yield call( requestGetQuizListQuiz,  GET_LIST_QUIZ, argument);
-
-        // console.log(response);
-
-
-        const list = (response.data?.getListQuiz || []) as types.data.quiz.Quiz[];
-
-        if (list.length > 0){
+        if (quizFromRes){
             yield put( actions.data.return__REPLACE({
                 listKey:['quiz'],
                 replacement: {
-                    list: list,
-                    index: 0,
-                    focusing: list[0]
+                    list: [],
+                    index: null,
+                    focusing: quizFromRes
                 }
             }));
-            history.push(`/quiz/play/${list[0].id}`);
+            // history.push(`/quiz/play/${list[0].id}`);
         }
         else {
             const quizDefault = {
-                index: null,
                 list: [],
-                focusing: {
-                    id: '',
-                    name: '',
-                    side: 'white',
-                    fenStart: 'rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1',
-                    listListMoveCorrect: [],
-                    idUser: '',
-                    isPublic: true,
-                }
+                index: null,
+                focusing: null,
             }
+            history.push('/quiz');
+            yield put( actions.notification.return__ADD_DELETE_BANNER({
+                codeSituation: 'GetQuiz_NoQuiz__E'
+            }) );
         }
-
-        
-
 
     } catch (error) {
         
         console.error(error);
         
         yield put( actions.notification.return__ADD_DELETE_BANNER({
-            codeSituation: 'GetListQuiz_UnknownError__E'
+            codeSituation: 'GetQuiz_UnknownError__E'
         }) );
     }
 }
 
-export default getListQuiz;
+export default getQuizById;
 
 
 

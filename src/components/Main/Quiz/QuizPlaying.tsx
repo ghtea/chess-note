@@ -23,7 +23,8 @@ function QuizPlaying({}: PropsQuizPlaying) {
   const dispatch = useDispatch();
 
   const statusQuiz = useSelector((state: StateRoot)=>state.status.current.quiz);
-  const side = useSelector((state: StateRoot)=>state.data.quiz.focusing.side);
+  const side = useSelector((state: StateRoot)=>state.data.quiz.focusing?.side);
+  const idQuiz = useSelector((state: StateRoot)=>state.data.quiz.focusing?.id);
   //const { loading, error, data } = useQuery(GET_LIST_QUIZ);
 
   const gameCurrent: ChessInstance = useMemo(()=>{
@@ -32,14 +33,17 @@ function QuizPlaying({}: PropsQuizPlaying) {
 
 
   useEffect(()=>{
-    const idQuiz = (window.location.pathname.match(/[^/]*$/) || [])[0];
-    dispatch(actions.data.quiz.return__GET_QUIZ_BY_ID({ 
-      idQuiz: idQuiz,
-    }));
+    const idQuizFromUri = (window.location.pathname.match(/[^/]*$/) || [])[0];
 
+    if (idQuizFromUri !== idQuiz || !idQuiz){
+      dispatch(actions.data.quiz.return__GET_QUIZ_BY_ID({ 
+        idQuiz: idQuizFromUri,
+      }));  
+    }
+    
     // console.log(idQuiz)
     //console.log(window.location.pathname)
-  },[window.location.pathname])
+  },[window.location.pathname, idQuiz])
 
   // const loadFen = useCallback(
   //   (fen: string)=>{
@@ -127,7 +131,7 @@ function QuizPlaying({}: PropsQuizPlaying) {
       <ChessBoard
         move={move}
         listSquare={listSquare}
-        side={side}
+        side={side || 'white'}
       />
       
       <ToolBarPlaying />

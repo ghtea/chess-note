@@ -15,6 +15,19 @@ const ChessReq:any = require('chess.js');
 
 
 
+/*
+{
+        id: '',
+        name: '',
+        side: 'white' as 'white' | 'black',
+        fenStart: 'rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1',
+        listListMoveCorrect: [] as string[][],
+        idUser: '',
+        isPublic: true,
+      }
+
+*/
+
 
 type PropsQuizEditing = {};
 
@@ -23,7 +36,7 @@ function QuizEditing({}: PropsQuizEditing) {
   const dispatch = useDispatch();
 
   const statusQuiz = useSelector((state: StateRoot)=>state.status.current.quiz);
-  const side = useSelector((state: StateRoot)=>state.data.quiz.focusing.side);
+  const side = useSelector((state: StateRoot)=>state.data.quiz.focusing?.side);
   //const { loading, error, data } = useQuery(GET_LIST_QUIZ);
 
   const gameCurrent: ChessInstance = useMemo(()=>{
@@ -116,7 +129,7 @@ function QuizEditing({}: PropsQuizEditing) {
       <ChessBoard
         move={move}
         listSquare={listSquare}
-        side={side}
+        side={side || 'white'}
       />
       
       <ToolBarEditing />

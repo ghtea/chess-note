@@ -89,6 +89,7 @@
     "Notification.CreateQuiz_UnknownError__E": "퀴즈를 만들지 못했습니다",
     "Notification.GetListQuiz_UnknownError__E": "퀴즈들을 불러오지 못했습니다",
     "Notification.GetQuiz_UnknownError__E": "퀴즈를 불러오지 못했습니다",
+    "Notification.GetQuiz_NoQuiz__E": "해당 퀴즈가 존재하지 않습니다",
     "Notification.UpdateQuiz_Succeeded__S": "성공적으로 퀴즈를 수정했습니다!",
     "Notification.UpdateQuiz_UnknownError__E": "퀴즈를 수정하지 못했습니다",
     "Notification.DeleteQuiz_Succeeded__S": "성공적으로 퀴즈를 삭제했습니다!",

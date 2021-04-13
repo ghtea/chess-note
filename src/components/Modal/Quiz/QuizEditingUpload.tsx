@@ -53,18 +53,21 @@ function QuizEditingUpload({}: PropsQuizEditingUpload) {
 
     const onClick_Create = useCallback(
         (e:React.MouseEvent<HTMLButtonElement, MouseEvent>)=>{
-            dispatch(actions.data.quiz.return__CREATE_QUIZ({ 
-                name: quizFocusing.name,
-                side: quizFocusing.side,
-                fenStart: quizFocusing.fenStart,
-                listListMoveCorrect: quizFocusing.listListMoveCorrect,
-                idUser: quizFocusing.idUser,
-                isPublic: quizFocusing.isPublic,
-            }));
-            dispatch(actions.status.return__REPLACE({ 
-                listKey: ['showing', 'modal', convertCase("QuizEditingUpload", 'camel')],
-                replacement: false
-            }));
+            if (quizFocusing){
+            
+                dispatch(actions.data.quiz.return__CREATE_QUIZ({ 
+                    name: quizFocusing.name,
+                    side: quizFocusing.side,
+                    fenStart: quizFocusing.fenStart,
+                    listListMoveCorrect: quizFocusing.listListMoveCorrect,
+                    idUser: quizFocusing.idUser,
+                    isPublic: quizFocusing.isPublic,
+                }));
+                dispatch(actions.status.return__REPLACE({ 
+                    listKey: ['showing', 'modal', convertCase("QuizEditingUpload", 'camel')],
+                    replacement: false
+                }));
+            }
     }, [quizFocusing]);
   
   return (
@@ -89,7 +92,7 @@ function QuizEditingUpload({}: PropsQuizEditingUpload) {
                 <div className={`${stylesModal['content__section']} ${styles['input-name']}`} >
                     <InputText 
                         name='name'
-                        value={quizFocusing.name}
+                        value={quizFocusing?.name}
 
                         label={intl.formatMessage({ id: 'Global.Name'})}
                         placeholder={intl.formatMessage({ id: 'Global.Name'})}

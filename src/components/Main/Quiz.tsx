@@ -19,22 +19,23 @@ function Quiz({}: PropsQuiz) {
   
   const dispatch = useDispatch();
 
-  const readyUser = useSelector((state: StateRoot) => state['status']['ready']['user']);
-  const loadingUser = useSelector((state: StateRoot) => state.status.loading.user);
+  // const readyUser = useSelector((state: StateRoot) => state['status']['ready']['user']);
+  // const loadingUser = useSelector((state: StateRoot) => state.status.loading.user);
 
-  const idUser = useSelector((state: StateRoot) => state.auth.user?.id);
+  // const idUser = useSelector((state: StateRoot) => state.auth.user?.id);
 
 
-  //const statusQuiz = useSelector((state: StateRoot)=>state.status.current.quiz);
-  useEffect(()=>{  // close sub menu when click outside of menu
+  // const statusQuiz = useSelector((state: StateRoot)=>state.status.current.quiz);
+  
+  // useEffect(()=>{  // close sub menu when click outside of menu
     
-    if (!loadingUser){
-      dispatch(actions.data.quiz.return__GET_LIST_QUIZ({
-        idUser: idUser
-      }));
-    }
+  //   if (!loadingUser){
+  //     dispatch(actions.data.quiz.return__GET_LIST_QUIZ({
+  //       idUser: idUser
+  //     }));
+  //   }
     
-  },[idUser, loadingUser]);
+  // },[idUser, loadingUser]);
 
   return (
     <Switch>

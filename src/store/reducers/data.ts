@@ -19,17 +19,12 @@ const stateInitial = {
     //     listTeam: [] as types.data.football.Team[]
     // },
     quiz: {
-      
-      focusing: {
-        id: '',
-        name: '',
-        side: 'white' as 'white' | 'black',
-        fenStart: 'rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1',
-        listListMoveCorrect: [] as string[][],
-        idUser: '',
-        isPublic: true,
-        record: [] as types.data.quiz.Record[],
-      }
+
+      list: [] as types.data.quiz.Quiz[],
+      index: null as number | null,
+
+      focusing: null as types.data.quiz.Quiz | null,
+
     }
 
 

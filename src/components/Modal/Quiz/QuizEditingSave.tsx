@@ -47,56 +47,67 @@ function QuizEditingSave({}: PropsQuizEditingSave) {
 
     const onClick_AnyMainButton = useCallback(
         (e:React.MouseEvent<HTMLButtonElement, MouseEvent>)=>{
-            const value = e.currentTarget.value;
-            dispatch(actions.status.return__REPLACE({ 
-                listKey: ['showing', 'modal', convertCase("QuizEditingSave", 'camel')],
-                replacement: false
-            }));
-            if (value === 'start'){
-                dispatch(actions.data.return__REPLACE({ 
-                    listKey: [ 'quiz', 'focusing', 'fenStart' ],
-                    replacement: statusQuiz.fen
-                }));
-                dispatch(actions.status.return__REPLACE({ 
-                    listKey: [ 'current', 'quiz', 'listMove' ],
-                    replacement: [],
-                }));
-            }
-            else if (value === 'new-answer'){
-                const replacement = [...quizFocusing.listListMoveCorrect, statusQuiz.listMove];
-                dispatch(actions.data.return__REPLACE({ 
-                    listKey: [ 'quiz', 'focusing', 'listListMoveCorrect' ],
-                    replacement,
-                }));
-            } 
-            else if (value === 'existing-answer'){
-                let replacement = [...quizFocusing.listListMoveCorrect];
-                replacement[indexAnswer] = statusQuiz.listMove;
 
-                dispatch(actions.data.return__REPLACE({ 
-                    listKey: [ 'quiz', 'focusing', 'listListMoveCorrect' ],
-                    replacement: replacement
+            if (!quizFocusing){
+
+            }
+            else {
+
+                const value = e.currentTarget.value;
+                dispatch(actions.status.return__REPLACE({ 
+                    listKey: ['showing', 'modal', convertCase("QuizEditingSave", 'camel')],
+                    replacement: false
                 }));
-            } 
-    }, [statusQuiz.listMove, quizFocusing.listListMoveCorrect]);
+                if (value === 'start'){
+                    dispatch(actions.data.return__REPLACE({ 
+                        listKey: [ 'quiz', 'focusing', 'fenStart' ],
+                        replacement: statusQuiz.fen
+                    }));
+                    dispatch(actions.status.return__REPLACE({ 
+                        listKey: [ 'current', 'quiz', 'listMove' ],
+                        replacement: [],
+                    }));
+                }
+                else if (value === 'new-answer'){
+                    const replacement = [...quizFocusing.listListMoveCorrect, statusQuiz.listMove];
+                    dispatch(actions.data.return__REPLACE({ 
+                        listKey: [ 'quiz', 'focusing', 'listListMoveCorrect' ],
+                        replacement,
+                    }));
+                } 
+                else if (value === 'existing-answer'){
+                    let replacement = [...quizFocusing.listListMoveCorrect];
+                    replacement[indexAnswer] = statusQuiz.listMove;
+
+                    dispatch(actions.data.return__REPLACE({ 
+                        listKey: [ 'quiz', 'focusing', 'listListMoveCorrect' ],
+                        replacement: replacement
+                    }));
+                } 
+            }
+    }, [statusQuiz.listMove, quizFocusing?.listListMoveCorrect]);
     
 
     const onClick_ButtonChangeAnswer = useCallback(
         (e:React.MouseEvent<HTMLButtonElement, MouseEvent>)=>{
-            const numberAnswer = quizFocusing.listListMoveCorrect.length;
-            //console.log(numberAnswer)
-            const value = e.currentTarget.value;
-            let indexAnswerNew = indexAnswer;
-            if (value === 'previous-answer'){
-                indexAnswerNew--;
-            }
-            else {
-                indexAnswerNew++;
+
+            if (quizFocusing){
+
+                const numberAnswer = quizFocusing.listListMoveCorrect.length;
+                //console.log(numberAnswer)
+                const value = e.currentTarget.value;
+                let indexAnswerNew = indexAnswer;
+                if (value === 'previous-answer'){
+                    indexAnswerNew--;
+                }
+                else {
+                    indexAnswerNew++;
+                }
+
+                setIndexAnswer( (indexAnswerNew+numberAnswer) % numberAnswer );
             }
 
-            setIndexAnswer( (indexAnswerNew+numberAnswer) % numberAnswer );
-            
-    }, [quizFocusing.listListMoveCorrect.length, indexAnswer]);
+    }, [quizFocusing?.listListMoveCorrect.length, indexAnswer]);
 
 
   return (
@@ -136,7 +147,7 @@ function QuizEditingSave({}: PropsQuizEditingSave) {
                     > <FormattedMessage id={`Modal.QuizEditingSave_SaveAsNewAnswer`} /> </button>
                 </div>
 
-                {quizFocusing.listListMoveCorrect.length > 0 &&
+                {quizFocusing && quizFocusing.listListMoveCorrect.length > 0 &&
                     <div className={`${stylesModal['content__section']}`} >
                         <button
                             type='button'

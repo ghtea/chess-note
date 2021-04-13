@@ -5,7 +5,7 @@ import store from 'tools/vanilla/store';
 
 // import instanceI18n from 'language/i18n';
 
-import * as actionsRoot from "store/actions";
+import * as actions from "store/actions";
 import {StateRoot} from 'store/reducers';
 
 
@@ -54,7 +54,7 @@ function* detectLanguage() {
     }
 
 
-    yield put( actionsRoot.status.return__REPLACE({
+    yield put( actions.status.return__REPLACE({
         listKey:['current', 'language'],
         replacement: replacement
     }));

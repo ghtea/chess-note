@@ -1,4 +1,5 @@
 import * as types from "store/types"; 
+import { KindGetListQuiz } from "store/types/data/quiz";
 
 // export const name__GET_LEAGUE_STANDINGS = 'data/football/GET_LEAGUE_STANDINGS';
 // type Payload__GET_LEAGUE_STANDINGS = {
@@ -57,19 +58,6 @@ import * as types from "store/types";
 // export type type__CHECK_LIST_TEAM = ReturnType<typeof return__CHECK_LIST_TEAM>;
 
 
-// idUser 있으면 개인 퀴즈들, 없으면 공개 퀴즈들
-export const name__GET_LIST_QUIZ = 'data/quiz/GET_LIST_QUIZ';
-type Payload__GET_LIST_QUIZ = {
-    idUser?: string
-}
-export const return__GET_LIST_QUIZ = (payload: Payload__GET_LIST_QUIZ) => {
-    return {
-        type: name__GET_LIST_QUIZ,
-        payload: payload
-    }
-};
-export type type__GET_LIST_QUIZ = ReturnType<typeof return__GET_LIST_QUIZ>;
-
 
 export const name__GET_QUIZ_BY_ID = 'data/quiz/GET_QUIZ_BY_ID';
 type Payload__GET_QUIZ_BY_ID = {
@@ -82,6 +70,22 @@ export const return__GET_QUIZ_BY_ID = (payload: Payload__GET_QUIZ_BY_ID) => {
     }
 };
 export type type__GET_QUIZ_BY_ID = ReturnType<typeof return__GET_QUIZ_BY_ID>;
+
+
+
+export const name__GET_LIST_QUIZ = 'data/quiz/GET_LIST_QUIZ';
+type Payload__GET_LIST_QUIZ = {
+    kind: KindGetListQuiz,
+    idUser?: string,
+}
+export const return__GET_LIST_QUIZ = (payload: Payload__GET_LIST_QUIZ) => {
+    return {
+        type: name__GET_LIST_QUIZ,
+        payload: payload
+    }
+};
+export type type__GET_LIST_QUIZ = ReturnType<typeof return__GET_LIST_QUIZ>;
+
 
 
 

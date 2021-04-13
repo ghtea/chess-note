@@ -88,6 +88,7 @@
     "Notification.CreateQuiz_UnknownError__E": "Failed to create the quiz",
     "Notification.GetListQuiz_UnknownError__E": "Failed to get the quizes",
     "Notification.GetQuiz_UnknownError__E": "Failed to get the quiz",
+    "Notification.GetQuiz_NoQuiz__E": "The quiz doesn't exist",
     "Notification.UpdateQuiz_Succeeded__S": "Successfully updated the quiz!",
     "Notification.UpdateQuiz_UnknownError__E": "Failed to update the quiz",
     "Notification.DeleteQuiz_Succeeded__S": "Successfully deleted the quiz!",
