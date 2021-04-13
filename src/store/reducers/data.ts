@@ -23,7 +23,15 @@ const stateInitial = {
       list: [] as types.data.quiz.Quiz[],
       index: null as number | null,
 
-      focusing: null as types.data.quiz.Quiz | null,
+      focusing: {
+        id: null,
+        name: '',
+        side: 'white',
+        fenStart: 'rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1',
+        listListMoveCorrect: [],
+        idUser: '',
+        isPublic: true,
+      } as types.data.quiz.Quiz,
 
     }
 

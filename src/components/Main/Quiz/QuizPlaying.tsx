@@ -91,7 +91,7 @@ function QuizPlaying({}: PropsQuizPlaying) {
     (from: string, to: string): Move | null=>{
       const result = gameCurrent.move({from: from as Square, to: to as Square});
       if (result){
-        console.log(statusQuiz.listMove);
+        //console.log(statusQuiz.listMove);
 
         const replacement = {
           ...statusQuiz,

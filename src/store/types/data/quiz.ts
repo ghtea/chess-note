@@ -12,7 +12,7 @@ export enum KindGetListQuiz {
 
 
 export type Quiz = {
-  id: string;
+  id: string | null;
   name: string;
   side: 'white' | 'black';
   fenStart: string;
