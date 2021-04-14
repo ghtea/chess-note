@@ -26,8 +26,9 @@
     "Main.SignUp_SignUp": "회원가입",
     "Main.SignUp_PasswordAgain": "비밀번호 재입력",
 
-    
-
+    "Main.QuizHome_PlayPublicQuiz": "공개 퀴즈 풀기",
+    "Main.QuizHome_PlayMyQuiz": "내 퀴즈 풀기",
+    "Main.QuizHome_CreateQuiz": "퀴즈 만들기",
 
     "Modal.Setting_Title": "설정",
     "Modal.Setting_Theme": "테마",
@@ -87,6 +88,8 @@
     
     "Notification.CreateQuiz_Succeeded__S": "성공적으로 퀴즈를 만들었습니다!",
     "Notification.CreateQuiz_UnknownError__E": "퀴즈를 만들지 못했습니다",
+    "Notification.CreateQuiz_NoAnswer__E": "해답을 지정해야 합니다",
+    
     "Notification.GetListQuiz_UnknownError__E": "퀴즈들을 불러오지 못했습니다",
     "Notification.GetQuiz_UnknownError__E": "퀴즈를 불러오지 못했습니다",
     "Notification.GetQuiz_NoQuiz__E": "해당 퀴즈가 존재하지 않습니다",

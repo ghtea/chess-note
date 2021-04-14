@@ -23,13 +23,15 @@ function QuizPlaying({}: PropsQuizPlaying) {
   const dispatch = useDispatch();
 
   const statusQuiz = useSelector((state: StateRoot)=>state.status.current.quiz);
-  const side = useSelector((state: StateRoot)=>state.data.quiz.focusing?.side);
+  const quizFocusing = useSelector((state: StateRoot)=>state.data.quiz.focusing);
   const idQuiz = useSelector((state: StateRoot)=>state.data.quiz.focusing?.id);
   //const { loading, error, data } = useQuery(GET_LIST_QUIZ);
 
   const gameCurrent: ChessInstance = useMemo(()=>{
-    return new ChessReq();
-  },[]);
+    const result: ChessInstance = new ChessReq();
+    result.load(quizFocusing.fenStart);
+    return result;
+  },[quizFocusing]);
 
 
   useEffect(()=>{
@@ -81,7 +83,7 @@ function QuizPlaying({}: PropsQuizPlaying) {
         replacement: null,
       }) );
     }
-  },[statusQuiz.fenToLoad, gameCurrent])
+  },[gameCurrent])
 
 
   // 주의사항
@@ -131,7 +133,7 @@ function QuizPlaying({}: PropsQuizPlaying) {
       <ChessBoard
         move={move}
         listSquare={listSquare}
-        side={side || 'white'}
+        side={quizFocusing.side || 'white'}
       />
       
       <ToolBarPlaying />

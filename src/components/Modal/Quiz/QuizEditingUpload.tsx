@@ -26,13 +26,15 @@ function QuizEditingUpload({}: PropsQuizEditingUpload) {
   
     const dispatch = useDispatch();
     const intl = useIntl();
-    
+    const readyUser = useSelector((state: StateRoot) => state['status']['ready']['user']);
+    const idUser = useSelector((state: StateRoot) => state.auth.user?.id);
+    const quizFocusing = useSelector((state: StateRoot) => state.data.quiz.focusing);
+
     const {draft: draft_Main, onChange: onChange_Main} = useInputQuizEditingUpload({
         name: '',
         isPublic: true,
     });
 
-    const quizFocusing = useSelector((state: StateRoot) => state.data.quiz.focusing);
     
     const refModal = useRef<HTMLDivElement>(null);
     const onClick_Window = useCallback(
@@ -53,14 +55,25 @@ function QuizEditingUpload({}: PropsQuizEditingUpload) {
 
     const onClick_Create = useCallback(
         (e:React.MouseEvent<HTMLButtonElement, MouseEvent>)=>{
-            if (quizFocusing){
+
+            if (!readyUser){
+                dispatch( actions.notification.return__ADD_DELETE_BANNER({
+                    codeSituation: 'NotLoggedIn__E'
+                }) );
+            }
+            else if (quizFocusing.listListMoveCorrect.length === 0){
+                dispatch( actions.notification.return__ADD_DELETE_BANNER({
+                    codeSituation: 'CreateQuiz_NoAnswer__E'
+                }) );
+            }
+            else if (quizFocusing && idUser){
             
                 dispatch(actions.data.quiz.return__CREATE_QUIZ({ 
                     name: quizFocusing.name,
                     side: quizFocusing.side,
                     fenStart: quizFocusing.fenStart,
                     listListMoveCorrect: quizFocusing.listListMoveCorrect,
-                    idUser: quizFocusing.idUser,
+                    idUser: idUser,
                     isPublic: quizFocusing.isPublic,
                 }));
                 dispatch(actions.status.return__REPLACE({ 
@@ -68,7 +81,7 @@ function QuizEditingUpload({}: PropsQuizEditingUpload) {
                     replacement: false
                 }));
             }
-    }, [quizFocusing]);
+    }, [quizFocusing, idUser, readyUser]);
   
   return (
     <div 

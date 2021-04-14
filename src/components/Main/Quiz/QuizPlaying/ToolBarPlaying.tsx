@@ -100,12 +100,12 @@ function ToolBarPlaying({
             <div
                 className={`${styles['mode']}`}
             >
-                <button
+                {/* <button
                     value='create'
                     type='button'
                     onClick={onClick_Main}
                 > <FormattedMessage id={'Global.Create'} /> 
-                </button>
+                </button> */}
             </div>
 
             <div
@@ -123,25 +123,25 @@ function ToolBarPlaying({
             <div
                 className={`${styles['save']}`}
             >
-                <button
+                {/* <button
                     type='button'
                     value='save'
                     onClick={onClick_Main}
                 >
                     <FormattedMessage id={'Global.Save'} />   
-                </button>
+                </button> */}
             </div>
 
             <div
                 className={`${styles['others']}`}
             >
-                <button
+                {/* <button
                     type='button'
                     value='others'
                     onClick={onClick_Main}
                 >
                     <IconOthers className={`${styles['icon__others']}`} kind='regular' />
-                </button>
+                </button> */}
             </div>
             
         </div>

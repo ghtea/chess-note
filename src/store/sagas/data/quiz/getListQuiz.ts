@@ -76,7 +76,7 @@ function* getListQuiz( action: actions.data.quiz.type__GET_LIST_QUIZ) {
 
 
         const list = (response.data?.getListQuiz || []) as types.data.quiz.Quiz[];
-
+        console.log(list);
         if (list.length > 0){
             yield put( actions.data.return__REPLACE({
                 listKey:['quiz'],

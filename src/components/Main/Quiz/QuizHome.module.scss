@@ -6,3 +6,25 @@
     justify-content: flex-start;
     align-items: center;
 }
+
+
+.button__main {
+
+    width: 210px;
+    height: 90px;
+    font-size: 1.1rem;
+
+    &:nth-child(n+2){
+        margin-top: 20px;
+    }
+
+    border-radius: 1px;
+    @include frame-each-theme(border, 2px, solid, basic__3);
+
+    &:hover {
+
+        @include frame-each-theme(border, 3px, solid, main__5);
+        @include color-each-theme(color, main__6);
+    }
+    
+}

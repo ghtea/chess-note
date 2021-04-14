@@ -34,6 +34,10 @@
     "Main.SignUp_SignUp": "Sign Up",
     "Main.SignUp_PasswordAgain": "Password Again",
 
+    "Main.QuizHome_PlayPublicQuiz": "Play Public Quiz",
+    "Main.QuizHome_PlayMyQuiz": "Play My Quiz",
+    "Main.QuizHome_CreateQuiz": "Create Quiz",
+
 
     "Modal.Setting_Title": "Setting",
     "Modal.Setting_Theme": "Theme",
@@ -86,6 +90,8 @@
 
     "Notification.CreateQuiz_Succeeded__S": "Successfully created the quiz!",
     "Notification.CreateQuiz_UnknownError__E": "Failed to create the quiz",
+    "Notification.CreateQuiz_NoAnswer__E": "You should set the anwser",
+    
     "Notification.GetListQuiz_UnknownError__E": "Failed to get the quizes",
     "Notification.GetQuiz_UnknownError__E": "Failed to get the quiz",
     "Notification.GetQuiz_NoQuiz__E": "The quiz doesn't exist",

@@ -61,37 +61,40 @@ function QuizHome({}: PropsQuizHome) {
 
     <div className={`${styles['root']}`} >
 
-        <div>
+        
           <button
+            className={`${styles['button__main']}`}
             type='button'
             value='play-public-random-quiz'
             onClick={onClick_MainButton}
           >
-            play public quiz
+            <FormattedMessage id={'Main.QuizHome_PlayPublicQuiz'} />
           </button>
-        </div>
+        
 
         {readyUser &&
           <>
 
-            <div>
+            
               <button
+                className={`${styles['button__main']}`}
                 type='button'
                 value='play-my-random-quiz'
                 onClick={onClick_MainButton}
               >
-                play my quiz
+                <FormattedMessage id={'Main.QuizHome_PlayMyQuiz'} />
               </button>
-            </div>
-            <div>
+            
+            
               <button
+                className={`${styles['button__main']}`}
                 type='button'
                 value='create'
                 onClick={onClick_MainButton}
               >
-                create
+                <FormattedMessage id={'Main.QuizHome_CreateQuiz'} />
               </button>
-            </div>
+            
 
           </>
         }
