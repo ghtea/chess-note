@@ -1,5 +1,7 @@
 import React, { useCallback, useEffect, useMemo, useState } from "react";
 import history from 'historyApp';
+import chessFocusing from 'chessApp';
+
 import * as clipboardy from 'clipboardy';
 import { FormattedMessage } from 'react-intl';
 
@@ -57,11 +59,25 @@ function ToolBarEditing({
                     replacement: true,
                 }));
             }
-            else if (value === 'save'){
+            else if (value === 'backward'){
                 dispatch(actions.status.return__REPLACE({ 
                     listKey: ['showing', 'modal', 'quizEditingSave'],
                     replacement: true,
                 }));
+            }
+            else if (value === 'forward'){
+                
+
+                // dispatch(actions.status.return__REPLACE({ 
+                //     listKey: ['showing', 'modal', 'quizEditingSave'],
+                //     replacement: true,
+                // }));
+            }
+            else if (value === 'save'){
+                // dispatch(actions.status.return__REPLACE({ 
+                //     listKey: ['showing', 'modal', 'quizEditingSave'],
+                //     replacement: true,
+                // }));
             }
             else if (value==='others'){
                 dispatch(actions.status.return__REPLACE({ 
@@ -111,11 +127,19 @@ function ToolBarEditing({
             <div
                 className={`${styles['control']}`}
             >
-                <button>
+                <button
+                    type='button'
+                    value='backward'
+                    onClick={onClick_Main}
+                >
                     <IconAngle className={`${styles['icon__backward']}`} kind='light' directon='left'/>
                 </button>
 
-                <button>
+                <button
+                    type='button'
+                    value='forward'
+                    onClick={onClick_Main}
+                >
                     <IconAngle className={`${styles['icon__forward']}`} kind='light' directon='right'/>
                 </button>
             </div>

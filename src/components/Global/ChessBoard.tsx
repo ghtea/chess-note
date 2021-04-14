@@ -30,15 +30,12 @@ type PropsChessBoard = {
         type: PieceType;
         color: "b" | "w";
     } | null)[][];
-    move: (from: string, to: string) => (Move | null),
     side: 'white' | 'black',
 };
 
 
 
 function ChessBoard({
-    //fen,
-    move,
     listSquare,
     side,
 }: PropsChessBoard) {
@@ -85,28 +82,27 @@ function ChessBoard({
 
     const onClick_Board = useCallback(
         (event:React.MouseEvent<HTMLDivElement, MouseEvent>, positionStart: string | null) => {
+
+        // because of event delegation  
         let elementUsing = event.target as HTMLDivElement | HTMLImageElement;
-        //console.log(elementUsing.dataset)
         while (!elementUsing.dataset || elementUsing.dataset['level'] !== 'square'){
             elementUsing = elementUsing.parentElement as HTMLDivElement | HTMLImageElement;
         }
-        const position = (elementUsing.dataset['file'] || '') + (elementUsing.dataset['rank'] || '')
-        if (positionStart === null){
-            //console.log(elementUsing.dataset['file'], )
-            
+        const position = (elementUsing.dataset['file'] || '') + (elementUsing.dataset['rank'] || '');
+        // when first clicking to choose pice to move
+        if (positionStart === null){            
             setPositionStart(position);
-            //console.log(position);
         }
+        // when clicking to move
         else {
-            const result = move(positionStart, position);
-            //console.log(positionStart, position, result)
-            //const result = gameCurrent.move({from: positionStart as Square, to: position as Square});
-            //console.log('result', result);
-            //setPgn(gameCurrent.pgn());
+            dispatch(actions.data.quiz.return__MOVE_IN_QUIZ({
+                from: positionStart,
+                to: position,
+            }))
 
             setPositionStart(null);
         }    
-        },[move] // move 같은 함수도 잊지 말고 dependency list 에 추가!
+        },[] // move 같은 함수도 잊지 말고 dependency list 에 추가!
     );
 
     // Junhyeon

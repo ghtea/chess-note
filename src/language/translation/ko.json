@@ -50,6 +50,7 @@
     "Modal.QuizEditingSave_SaveAsExistingAnswer": "해답 {index} (으)로 저장",
 
     "Modal.QuizEditingOthers_UseFen": "클립보드의 FEN 이용",
+    "Modal.QuizEditingOthers_NotValidFen": "올바른 FEN가 아닙니다",
     "Modal.QuizEditingOthers_ChangeSide": "흑백 바꾸기",
     "Modal.QuizEditingOthers_ShowAnswer": "해답 {index} 보기",
     "Modal.QuizEditingOthers_DeleteAnswer": "해답 {index} 삭제하기",

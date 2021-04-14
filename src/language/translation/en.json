@@ -59,6 +59,7 @@
     "Modal.QuizEditingSave_SaveAsExistingAnswer": "Save as Answer {index}",
 
     "Modal.QuizEditingOthers_UseFen": "Use FEN from Clipboard",    
+    "Modal.QuizEditingOthers_NotValidFen": "This is not valid FEN",
     "Modal.QuizEditingOthers_ChangeSide": "Change Side",
     "Modal.QuizEditingOthers_ShowAnswer": "Show Answer {index}",
     "Modal.QuizEditingOthers_DeleteAnswer": "Delete Answer {index}",

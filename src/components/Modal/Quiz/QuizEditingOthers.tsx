@@ -2,6 +2,7 @@ import React, { useCallback, useEffect, useRef, useMemo, useState } from "react"
 import { firebaseAuth } from "firebaseApp";
 
 import history from 'historyApp';
+import chessFocusing from 'chessApp';
 import { useLocation } from "react-router-dom";
 import { FormattedMessage } from 'react-intl';
 import * as clipboardy from 'clipboardy';
@@ -53,11 +54,33 @@ function QuizEditingOthers({}: PropsQuizEditingOthers) {
             
 
             if (value === 'use-fen'){
-                const value = await clipboardy.read();
-                dispatch(actions.status.return__REPLACE({ 
-                    listKey: [ 'current', 'quiz', 'fenToLoad' ],
-                    replacement: value, 
-                }));
+                const valueFromClipboard = await clipboardy.read();
+                const {valid} = chessFocusing.validate_fen(valueFromClipboard);
+
+                if (valid){
+                    chessFocusing.load(valueFromClipboard);
+                    const turn = chessFocusing.turn() === 'w' ? 'white' : 'black';
+
+                    dispatch(actions.data.return__REPLACE({ 
+                        listKey: [ 'quiz', 'focusing', 'fenStart' ],
+                        replacement: chessFocusing.fen(), 
+                    }));
+
+                    dispatch( actions.data.return__REPLACE({
+                        listKey: ['quiz', 'focusing', 'side'],
+                        replacement: turn,
+                    }) );
+                    dispatch( actions.status.return__REPLACE({
+                        listKey: ['current', 'quiz', 'turn'],
+                        replacement: turn,
+                    }) );
+                }
+                else {
+                    dispatch( actions.notification.return__ADD_DELETE_BANNER({
+                        codeSituation: 'QuizEditingOthers_NotValidFen'
+                    }) );
+                }
+                
             }
             else if (value === 'change-side'){
                 dispatch(actions.data.return__REPLACE({ 

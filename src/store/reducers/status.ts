@@ -68,10 +68,10 @@ const stateInitial = {
 
     quiz: {
       idGame: null as null | string,
-      mode: 'editing' as 'editing' | 'playing' | 'solved', 
+      mode: 'creating' as 'editing' | 'playing' | 'solved' | 'creating', 
       fen: null as null | string,
       turn: 'white' as 'white' | 'black',
-      fenToLoad: null as null | string,
+      //fenToLoad: null as null | string,
       // side: 'white' as 'white' | 'black',
       listMove: [] as string[],
     },

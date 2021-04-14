@@ -57,6 +57,20 @@ import { KindGetListQuiz } from "store/types/data/quiz";
 // };
 // export type type__CHECK_LIST_TEAM = ReturnType<typeof return__CHECK_LIST_TEAM>;
 
+export const name__MOVE_IN_QUIZ = 'data/quiz/MOVE_IN_QUIZ';
+type Payload__MOVE_IN_QUIZ = {
+    from?: string;
+    to?: string;
+    san?: string;
+}
+export const return__MOVE_IN_QUIZ = (payload: Payload__MOVE_IN_QUIZ) => {
+    return {
+        type: name__MOVE_IN_QUIZ,
+        payload: payload
+    }
+};
+export type type__MOVE_IN_QUIZ = ReturnType<typeof return__MOVE_IN_QUIZ>;
+
 
 
 export const name__GET_QUIZ_BY_ID = 'data/quiz/GET_QUIZ_BY_ID';

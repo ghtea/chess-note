@@ -19,23 +19,31 @@ function Quiz({}: PropsQuiz) {
   
   const dispatch = useDispatch();
 
-  // const readyUser = useSelector((state: StateRoot) => state['status']['ready']['user']);
-  // const loadingUser = useSelector((state: StateRoot) => state.status.loading.user);
+  useEffect(()=>{
+    const modeFromUrl = (window.location.pathname.match(/(?<=\/quiz\/)[^\/]*/) || [])[0];
+    let replacement = '';
 
-  // const idUser = useSelector((state: StateRoot) => state.auth.user?.id);
+    if (modeFromUrl === 'create'){
+      replacement = 'creating';
+    }
+    else if (modeFromUrl === 'edit'){
+      replacement = 'editing';
+    }
+    else if (modeFromUrl === 'play'){
+      replacement = 'playing';
+    }
+    else if (modeFromUrl === 'solved'){
+      replacement = 'solved';
+    }
 
+    dispatch(actions.status.return__REPLACE({ 
+      listKey: [ 'current', 'quiz', 'mode' ],
+      replacement: replacement,
+    }));  
 
-  // const statusQuiz = useSelector((state: StateRoot)=>state.status.current.quiz);
-  
-  // useEffect(()=>{  // close sub menu when click outside of menu
-    
-  //   if (!loadingUser){
-  //     dispatch(actions.data.quiz.return__GET_LIST_QUIZ({
-  //       idUser: idUser
-  //     }));
-  //   }
-    
-  // },[idUser, loadingUser]);
+    // console.log(idQuiz)
+    //console.log(window.location.pathname)
+  },[window.location.pathname])
 
   return (
     <Switch>

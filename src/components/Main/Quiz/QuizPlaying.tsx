@@ -47,76 +47,6 @@ function QuizPlaying({}: PropsQuizPlaying) {
     //console.log(window.location.pathname)
   },[window.location.pathname, idQuiz])
 
-  // const loadFen = useCallback(
-  //   (fen: string)=>{
-  //     const result = gameCurrent.load(fen);
-  //     if (result){
-  //       dispatch( actions.status.return__REPLACE({
-  //         listKey: ['current', 'quiz', 'fen'],
-  //         replacement: gameCurrent.fen()
-  //     }) );
-  //     }
-  // }, [gameCurrent]);
-
-  // fenToLoad 가 바뀌면 그걸로 load 해보고 되면 다시 fenToLoad null 로 변경
-  useEffect(()=>{ 
-    if (statusQuiz.fenToLoad !== null){
-      const result = gameCurrent.load(statusQuiz.fenToLoad);
-      if (result){
-        dispatch( actions.status.return__REPLACE({
-          listKey: ['current', 'quiz', 'fen'],
-          replacement: gameCurrent.fen()
-        }) );
-
-        const side = statusQuiz.fenToLoad.includes(" w") ? 'white' : 'black';
-        dispatch( actions.data.return__REPLACE({
-          listKey: ['quiz', 'focusing', 'side'],
-          replacement: side
-        }) );
-        dispatch( actions.status.return__REPLACE({
-          listKey: ['current', 'quiz', 'turn'],
-          replacement: side
-        }) );
-      }
-      dispatch( actions.status.return__REPLACE({
-        listKey: ['current', 'quiz', 'fenToLoad'],
-        replacement: null,
-      }) );
-    }
-  },[gameCurrent])
-
-
-  // 주의사항
-  // move 를 다른 컴포넌트로 넘기면, 이 move 가 여기선 dependency list 가 변하면 적용되지만,
-  // 다른 컴포넌트에서 리스너로 붙인건 업데이트 안될수도 있다?!
-  const move = useCallback(
-    (from: string, to: string): Move | null=>{
-      const result = gameCurrent.move({from: from as Square, to: to as Square});
-      if (result){
-        //console.log(statusQuiz.listMove);
-
-        const replacement = {
-          ...statusQuiz,
-          fen: gameCurrent.fen(),
-          turn: result.color === 'w' ? 'black' : 'white',
-          listMove: [...statusQuiz.listMove, result.san],
-        }
-
-        dispatch( actions.status.return__REPLACE({
-          listKey: ['current', 'quiz'],
-          replacement: replacement,
-        }) );
-
-        return result;
-      }
-      else {
-        return result;
-      }
-  }, [gameCurrent, statusQuiz]);
-
-
-  
-
 
   const listSquare = useMemo(()=>{
     return gameCurrent.board(); 
@@ -131,7 +61,6 @@ function QuizPlaying({}: PropsQuizPlaying) {
   return (
     <div>
       <ChessBoard
-        move={move}
         listSquare={listSquare}
         side={quizFocusing.side || 'white'}
       />

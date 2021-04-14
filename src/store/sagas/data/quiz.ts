@@ -5,8 +5,11 @@ import * as actions from "store/actions";
 import createQuiz from "./quiz/createQuiz";
 import getListQuiz from "./quiz/getListQuiz";
 import getQuizById from "./quiz/getQuizById";
+import moveInQuiz from "./quiz/moveInQuiz";
 
 export default function* sagaQuiz() {
+    yield takeEvery( actions.data.quiz.name__MOVE_IN_QUIZ ,  moveInQuiz);  
+    
     yield takeEvery( actions.data.quiz.name__CREATE_QUIZ,  createQuiz); 
     yield takeEvery( actions.data.quiz.name__GET_LIST_QUIZ,  getListQuiz);  
     yield takeEvery( actions.data.quiz.name__GET_QUIZ_BY_ID ,  getQuizById);  
