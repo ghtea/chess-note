@@ -18,13 +18,9 @@ export type type__REPLACE = ReturnType<typeof return__REPLACE>;  // 리덕스에
 
 
 export const name__REPLACE_USER: string = `auth/REPLACE_USER`;    // 뒤에 as const 를 붙이면 reducer 에서 auth.REPLACE 로 쓸때 오류 뜬다. 아직 이해못
-interface Payload__REPLACE_USER {
-    user: any
-}
-export const return__REPLACE_USER = (payload?: Payload__REPLACE_USER) => {
+export const return__REPLACE_USER = () => {
     return {
-        type: name__REPLACE_USER,
-        payload: payload
+        type: name__REPLACE_USER
     }
 };
 export type type__REPLACE_USER = ReturnType<typeof return__REPLACE_USER>;  // 리덕스에서의 type, 타입스크립트에서의 type 헷갈림 주의!

@@ -1,7 +1,13 @@
 
+export * as appearance from './actions/appearance';
+
+export * as auth from './actions/auth';
+
 export * as data from './actions/data';
 
-export * as status from './actions/status';
 export * as notification from './actions/notification';
-export * as auth from './actions/auth';
+
+export * as present from './actions/present';
+
+export * as status from './actions/status';
 

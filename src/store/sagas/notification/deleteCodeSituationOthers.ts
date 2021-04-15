@@ -1,11 +1,11 @@
 import { delay, put, takeEvery, select } from "redux-saga/effects";
 
-import * as actionsRoot from "store/actions";
+import * as actions  from "store/actions";
 import {StateRoot} from 'store/reducers';
 
 
 
-function* deleteCodeSituationOthers(action: actionsRoot.notification.type__DELETE_CODE_SITUATION_OTHERS) {
+function* deleteCodeSituationOthers(action: actions.notification.type__DELETE_CODE_SITUATION_OTHERS) {
     
     const listCodeSituationOthersPrevious: string[] =  yield select( (state:StateRoot) => state.notification.listCodeSituationOthers ); 
       
@@ -20,7 +20,7 @@ function* deleteCodeSituationOthers(action: actionsRoot.notification.type__DELET
       listCodeSituationOthersNew = listCodeSituationOthersPrevious.filter(code => action.payload.regex?.test(code));
     }
     
-    yield put( actionsRoot.notification.return__REPLACE({
+    yield put( actions.notification.return__REPLACE({
         listKey: ['listCodeSituationOthers'],
         replacement: listCodeSituationOthersNew
     }) );

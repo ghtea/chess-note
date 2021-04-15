@@ -25,7 +25,7 @@ function NotFound({}: PropsNotFound) {
   const intl = useIntl();
   
   useEffect(() => {
-    dispatch(actions.status.return__REPLACE({
+    dispatch(actions.appearance.return__REPLACE({
         listKey:['showing', 'header', 'root'],
         replacement: false
     }));

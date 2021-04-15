@@ -75,7 +75,8 @@ export type type__MOVE_IN_QUIZ = ReturnType<typeof return__MOVE_IN_QUIZ>;
 
 export const name__GET_QUIZ_BY_ID = 'data/quiz/GET_QUIZ_BY_ID';
 type Payload__GET_QUIZ_BY_ID = {
-    idQuiz: string
+    idQuiz: string,
+    idUserInApp?: string,
 }
 export const return__GET_QUIZ_BY_ID = (payload: Payload__GET_QUIZ_BY_ID) => {
     return {

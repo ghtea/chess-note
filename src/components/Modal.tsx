@@ -17,7 +17,7 @@ type PropsModal = {};
 
 function Modal({}: PropsModal) {
   
-    const showing = useSelector((state: StateRoot) => state.status.showing.modal);
+    const showing = useSelector((state: StateRoot) => state.appearance.showing.modal);
     
     return (        
         <>

@@ -4,7 +4,11 @@
 export const name__REPLACE: string = `status/REPLACE`;    
 interface Payload__REPLACE {
     listKey: (string | number)[];
-    replacement: any;
+    replacement: {
+        tried: boolean;
+        loading: boolean;
+        ready: boolean;
+    };
 }
 export const return__REPLACE = (payload: Payload__REPLACE) => {    
     return {

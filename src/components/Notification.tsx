@@ -18,7 +18,7 @@ function Notification({}: PropsNotification) {
   
   // const dispatch = useDispatch();
   
-  const listBanner:TypeBanner[] = useSelector((state: StateRoot) => state['notification']['listBanner']);
+  const listBanner:TypeBanner[] = useSelector((state: StateRoot) => state.notification.listBanner);
 
   return (
     

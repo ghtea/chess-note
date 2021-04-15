@@ -6,7 +6,7 @@ import { FormattedMessage, useIntl } from 'react-intl';
  
 import {useSelector, useDispatch} from "react-redux";
 import {StateRoot} from 'store/reducers';
-import * as actionsRoot from "store/actions";
+import * as actions from "store/actions";
 
 import convertCase from 'tools/vanilla/convertCase';
 import useInput from 'tools/hooks/useInput';
@@ -25,7 +25,7 @@ function MyProfile({}: PropsMyProfile) {
     const dispatch = useDispatch();
     const intl = useIntl();
 
-    const user = useSelector((state: StateRoot) => state['auth']['user']);
+    const user = useSelector((state: StateRoot) => state.auth.user);
 
     const [urlPhotoLocal, setUrlPhotoLocal] = useState("");
     const [displayNameEditing, setTisplayNameEditing] = useState(user?.displayName);
@@ -33,7 +33,7 @@ function MyProfile({}: PropsMyProfile) {
     const onClick_CloseModal = useCallback(
         (event:React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
         const {value} = event.currentTarget;
-        dispatch(actionsRoot.status.return__REPLACE({ 
+        dispatch(actions.appearance.return__REPLACE({ 
             listKey: ['showing', 'modal', value],
             replacement: false
         }));
@@ -44,7 +44,7 @@ function MyProfile({}: PropsMyProfile) {
     const onClick_Window = useCallback(
         (event:MouseEvent)=> {   
             if ( !refModal.current?.contains(event.target as Node)){
-                dispatch(actionsRoot.status.return__REPLACE({ 
+                dispatch(actions.appearance.return__REPLACE({ 
                     listKey: ['showing', 'modal', convertCase("MyProfile", 'camel')],
                     replacement: false
                 }));
@@ -82,7 +82,7 @@ function MyProfile({}: PropsMyProfile) {
     
     const onSubmit = useCallback( (event:React.FormEvent<HTMLFormElement>) => {
         event.preventDefault();
-        dispatch(actionsRoot.auth.return__UPDATE_PROFILE({
+        dispatch(actions.auth.return__UPDATE_PROFILE({
             urlPhotoLocal: urlPhotoLocal,
             displayName: displayNameEditing
         }));
@@ -90,7 +90,7 @@ function MyProfile({}: PropsMyProfile) {
 
     const onClick_LogOut = useCallback(
         () => {
-            dispatch(actionsRoot.auth.return__LOG_OUT());
+            dispatch(actions.auth.return__LOG_OUT());
         }, []
     );
 

@@ -4,11 +4,11 @@ import {Banner} from "store/reducers/notification";
 import {StateRoot} from 'store/reducers';
 
 import { v4 as uuidv4 } from 'uuid';
-import * as actionsRoot from "store/actions";
+import * as actions from "store/actions";
  
 //import catalogSituation from 'language/catalogSituation';
 
-function* deleteBanner(action: actionsRoot.notification.type__DELETE_BANNER ) {
+function* deleteBanner(action: actions.notification.type__DELETE_BANNER ) {
     
     const listBannerPrevious: Banner[] =  yield select( (state:StateRoot) => state.notification.listBanner ); 
         
@@ -17,7 +17,7 @@ function* deleteBanner(action: actionsRoot.notification.type__DELETE_BANNER ) {
     const listBannerNew = listBannerPrevious.filter(banner => banner.id !== id);
 
     
-    yield put( actionsRoot.notification.return__REPLACE({
+    yield put( actions.notification.return__REPLACE({
         listKey: ['listBanner'],
         replacement: listBannerNew
     }) );

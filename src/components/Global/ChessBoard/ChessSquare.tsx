@@ -98,12 +98,6 @@ function ChessSquare({
         
     }, [piece]);
 
-    useEffect(()=>{
-
-    });
-
-    
-    
     
 
     return (

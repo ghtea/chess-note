@@ -6,7 +6,7 @@ import { FormattedMessage, useIntl } from 'react-intl';
 
 import {useSelector, useDispatch} from "react-redux";
 import {StateRoot} from 'store/reducers';
-import * as actionsRoot from "store/actions";
+import * as actions from "store/actions";
 
 import useInputBasic from 'tools/hooks/useInputBasic';
 import useLink from 'tools/hooks/useLink'; 
@@ -22,6 +22,7 @@ import IconGithub from 'svgs/others/IconGithub';
  
 import styles from './SignUp.module.scss';
 import stylesLogIn from './LogIn.module.scss';
+import IconTwitter from "svgs/others/IconTwitter";
 
 type PropsSignUp = {};
 
@@ -30,9 +31,8 @@ function SignUp({}: PropsSignUp) {
     const dispatch = useDispatch();
     const intl = useIntl();
 
-    const readyUser = useSelector((state: StateRoot) => state['status']['ready']['user']);
-    const loadingUser = useSelector((state: StateRoot) => state['status']['loading']['user']);
-
+    const statusUser = useSelector((state: StateRoot) => state.status.auth.user);
+    
     const listCodeSituationOthers:string[] = useSelector((state: StateRoot) => state['notification']['listCodeSituationOthers']);
     
     const {onClick_LinkInsideApp} = useLink(history);
@@ -47,10 +47,10 @@ function SignUp({}: PropsSignUp) {
     const [codeSituationPassword, setCodeSituationPassword] = useState('');
     
     useEffect(()=>{
-        if (readyUser) {
+        if (statusUser.ready) {
             history.push('/');
         }
-    },[readyUser, loadingUser]);
+    },[statusUser.ready]);
 
     useEffect(()=>{
         if(listCodeSituationOthers.includes('SignUp_NoEmail__E')){
@@ -87,7 +87,7 @@ function SignUp({}: PropsSignUp) {
   
     const submitMain = useCallback(
         () => {
-            dispatch(actionsRoot.auth.return__SIGN_UP({
+            dispatch(actions.auth.return__SIGN_UP({
                 email: draft_Main.email,
                 password1: draft_Main.password1,
                 password2: draft_Main.password2,
@@ -115,11 +115,15 @@ function SignUp({}: PropsSignUp) {
         (event: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
             const {currentTarget: {value}} = event;
             if (value === 'google'){
-                dispatch(actionsRoot.auth.return__LOG_IN_GOOGLE() );
+                dispatch(actions.auth.return__LOG_IN_GOOGLE() );
+            }
+            else if (value === 'twitter'){
+                dispatch(actions.auth.return__LOG_IN_GITHUB() );
             }
             else if (value === 'github'){
-                dispatch(actionsRoot.auth.return__LOG_IN_GITHUB() );
+                dispatch(actions.auth.return__LOG_IN_TWITTER() );
             }
+            
         }, []
     );
   
@@ -207,6 +211,16 @@ function SignUp({}: PropsSignUp) {
                     <span className={`${stylesLogIn['icon']}`}><img src={imgGoogle}/></span>
                     <span className={`${styles['text']}`}> <FormattedMessage id={`Main.LogIn_ContinueWithGoogle`} /> </span>
                 </button>
+
+                <button 
+                    type='button'
+                    value='twitter'
+                    onClick={onClick_LogInSocial}
+                > 
+                    <span className={`${styles['icon']}`}> <IconTwitter className={`icon__twitter`} /></span>
+                    <span className={`${styles['text']}`}> <FormattedMessage id={`Main.LogIn_ContinueWithTwitter`} />  </span>
+                </button>
+                
                 <button 
                     type='button'
                     value='github'

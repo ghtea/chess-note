@@ -37,7 +37,7 @@ function Action({}: PropsAction) {
 
   const onClick_ShowModal = useCallback(
     (idModal:string) => {
-      dispatch(actionsRoot.status.return__REPLACE({ 
+      dispatch(actionsRoot.appearance.return__REPLACE({ 
         listKey: ['showing', 'modal', idModal],
         replacement: true
       }))

@@ -36,8 +36,8 @@ function Quiz({}: PropsQuiz) {
       replacement = 'solved';
     }
 
-    dispatch(actions.status.return__REPLACE({ 
-      listKey: [ 'current', 'quiz', 'mode' ],
+    dispatch(actions.present.return__REPLACE({ 
+      listKey: [ 'quiz', 'mode' ],
       replacement: replacement,
     }));  
 

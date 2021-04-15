@@ -27,7 +27,7 @@ function QuizEditingOthers({}: PropsQuizEditingOthers) {
   
     const dispatch = useDispatch();
 
-    const statusQuiz = useSelector((state: StateRoot) => state.status.current.quiz);
+    const quizPresent = useSelector((state: StateRoot) => state.present.quiz);
     const quizFocusing = useSelector((state: StateRoot) => state.data.quiz.focusing);
     const [indexAnswer, setIndexAnswer] = useState<number>(0);
 
@@ -35,7 +35,7 @@ function QuizEditingOthers({}: PropsQuizEditingOthers) {
     const onClick_Window = useCallback(
         (event:MouseEvent)=> {   
             if ( !refModal.current?.contains(event.target as Node)){
-                dispatch(actions.status.return__REPLACE({ 
+                dispatch(actions.appearance.return__REPLACE({ 
                     listKey: ['showing', 'modal', convertCase("QuizEditingOthers", 'camel')],
                     replacement: false
                 }));
@@ -70,8 +70,8 @@ function QuizEditingOthers({}: PropsQuizEditingOthers) {
                         listKey: ['quiz', 'focusing', 'side'],
                         replacement: turn,
                     }) );
-                    dispatch( actions.status.return__REPLACE({
-                        listKey: ['current', 'quiz', 'turn'],
+                    dispatch( actions.present.return__REPLACE({
+                        listKey: ['quiz', 'turn'],
                         replacement: turn,
                     }) );
                 }
@@ -89,7 +89,7 @@ function QuizEditingOthers({}: PropsQuizEditingOthers) {
                 }));
             }
             else if (value === 'new-answer'){
-                const replacement = [...quizFocusing.listListMoveCorrect, statusQuiz.listMove];
+                const replacement = [...quizFocusing.listListMoveCorrect, quizPresent.listMove];
                 dispatch(actions.data.return__REPLACE({ 
                     listKey: [ 'quiz', 'focusing', 'listListMoveCorrect' ],
                     replacement,
@@ -97,7 +97,7 @@ function QuizEditingOthers({}: PropsQuizEditingOthers) {
             } 
             else if (value === 'existing-answer'){
                 let replacement = [...quizFocusing.listListMoveCorrect];
-                replacement[indexAnswer] = statusQuiz.listMove;
+                replacement[indexAnswer] = quizPresent.listMove;
 
                 dispatch(actions.data.return__REPLACE({ 
                     listKey: [ 'quiz', 'focusing', 'listListMoveCorrect' ],
@@ -105,7 +105,7 @@ function QuizEditingOthers({}: PropsQuizEditingOthers) {
                 }));
             } 
         
-    }, [statusQuiz.listMove, quizFocusing]);
+    }, [quizPresent.listMove, quizFocusing]);
     
 
     const onClick_ButtonChangeAnswer = useCallback(

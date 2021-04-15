@@ -30,9 +30,9 @@ function ToolBarEditing({
 
     const dispatch = useDispatch();
 
-    const heightToolbar = useSelector((state: StateRoot)=>state.status.current.size.document.chessBoard.toolbar.height);
-    const lengthChessBoard = useSelector((state: StateRoot)=>state.status.current.size.document.chessBoard.length);
-    const statusQuiz = useSelector((state: StateRoot)=>state.status.current.quiz);
+    const heightToolbar = useSelector((state: StateRoot)=>state.present.size.document.chessBoard.toolbar.height);
+    const lengthChessBoard = useSelector((state: StateRoot)=>state.present.size.document.chessBoard.length);
+    const quizPresent = useSelector((state: StateRoot)=>state.present.quiz);
 
 
     // const [positionStart, setPositionStart] = useState<null | string>(null);
@@ -54,13 +54,13 @@ function ToolBarEditing({
         (e:React.MouseEvent<HTMLButtonElement, MouseEvent>)=>{
             const value = e.currentTarget.value;
             if (value === 'create'){
-                dispatch(actions.status.return__REPLACE({ 
+                dispatch(actions.appearance.return__REPLACE({ 
                     listKey: ['showing', 'modal', 'quizEditingUpload'],
                     replacement: true,
                 }));
             }
             else if (value === 'backward'){
-                dispatch(actions.status.return__REPLACE({ 
+                dispatch(actions.appearance.return__REPLACE({ 
                     listKey: ['showing', 'modal', 'quizEditingSave'],
                     replacement: true,
                 }));
@@ -80,7 +80,7 @@ function ToolBarEditing({
                 // }));
             }
             else if (value==='others'){
-                dispatch(actions.status.return__REPLACE({ 
+                dispatch(actions.appearance.return__REPLACE({ 
                     listKey: ['showing', 'modal', 'quizEditingOthers'],
                     replacement: true,
                 }));
@@ -104,7 +104,7 @@ function ToolBarEditing({
                 <span>
                     <FormattedMessage 
                         id={
-                            statusQuiz.turn==='white' ?
+                            quizPresent.turn==='white' ?
                             'Global.WhiteToMove'
                             :
                             'Global.BlackToMove'

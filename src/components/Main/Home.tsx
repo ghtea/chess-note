@@ -19,12 +19,9 @@ type PropsHome = {};
 
 function Home({}: PropsHome) {
   
-    const dispatch = useDispatch();     
-    const readyUser = useSelector((state: StateRoot) => state['status']['ready']['user']);
-    const loadingUser = useSelector((state: StateRoot) => state['status']['loading']['user']);
-
-    const idUser = useSelector((state: StateRoot) => state.auth.user?.id);
-
+  const dispatch = useDispatch();     
+  const statusUser = useSelector((state: StateRoot) => state.status.auth.user);
+    
 
   return (
 

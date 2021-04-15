@@ -11,24 +11,35 @@ export type State = typeof stateInitial;
 
 const stateInitial = {
   
-  auth: {
-    user: { tried: false, loading: false, ready: false },
-  },
+  
+  showing: {
 
-  data: {
-      quiz: {
-        list: { tried: false, loading: false, ready: false },
-        one: { tried: false, loading: false, ready: false },
-      }
-  },
+    header: {
+        root: false,
+        board: false,
+    },
+    footer: false,
+
+    modal: {
+        setting: false,
+        myProfile: false,
+        
+        quizEditingSave: false,
+        quizEditingUpload: false,
+        quizEditingOthers: false,
+        
+        quizTryingOthers: false,
+    }
+  }
+  
   
 };
 
 
 
-const reducerStatus = handleActions<State, any>({
+const reducerAppearance = handleActions<State, any>({
   
-  [actions.status.name__REPLACE]: (statePrevious, action: actions.status.type__REPLACE) => {
+  [actions.appearance.name__REPLACE]: (statePrevious, action: actions.appearance.type__REPLACE) => {
     
     return produce(statePrevious, stateNew => {
       if (action.payload === undefined) { 
@@ -51,7 +62,5 @@ const reducerStatus = handleActions<State, any>({
   
 }, stateInitial);
 
-export default reducerStatus;
-
-
+export default reducerAppearance;
 

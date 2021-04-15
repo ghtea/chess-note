@@ -41,10 +41,10 @@ function ChessBoard({
 }: PropsChessBoard) {
 
     const dispatch = useDispatch();
-    const {innerWidth, innerHeight} = useSelector((state: StateRoot)=>state.status.current.size.window);
-    const heightHeader = useSelector((state: StateRoot)=>state.status.current.size.document.header.height);
-    const heightToolBar = useSelector((state: StateRoot)=>state.status.current.size.document.chessBoard.toolbar.height);
-    const lengthChessBoard = useSelector((state: StateRoot)=>state.status.current.size.document.chessBoard.length);
+    const {innerWidth, innerHeight} = useSelector((state: StateRoot)=>state.present.size.window);
+    const heightHeader = useSelector((state: StateRoot)=>state.present.size.document.header.height);
+    const heightToolBar = useSelector((state: StateRoot)=>state.present.size.document.chessBoard.toolbar.height);
+    const lengthChessBoard = useSelector((state: StateRoot)=>state.present.size.document.chessBoard.length);
 
     useEffect(()=>{
         // height
@@ -65,8 +65,8 @@ function ChessBoard({
             const lengthWhenHeightIsShort = innerHeight - heightHeader - 20 - heightToolBar; // 20 은 header아래 margin
             lengthChessBoardNew = ( Math.min(lengthWhenHeightIsShort, lengthMax, innerLengthShorter) );
         }
-        dispatch( actions.status.return__REPLACE({
-            listKey: ['current', 'size', 'document', 'chessBoard', 'length'],
+        dispatch( actions.present.return__REPLACE({
+            listKey: [ 'size', 'document', 'chessBoard', 'length'],
             replacement: lengthChessBoardNew
         }) );
         // $device-xs__min-width: 320px;     

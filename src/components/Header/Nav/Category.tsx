@@ -38,7 +38,7 @@ function Category({
         event.preventDefault();
         const href = event.currentTarget.getAttribute("href");  // https://stackoverflow.com/questions/1550901/how-to-get-raw-href-contents-in-javascript
         if (href) {
-            dispatch(actions.status.return__REPLACE({ 
+            dispatch(actions.appearance.return__REPLACE({ 
                 listKey: ['showing', 'header', 'board'],
                 replacement: false 
             })); 

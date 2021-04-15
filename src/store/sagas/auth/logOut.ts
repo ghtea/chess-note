@@ -7,23 +7,27 @@ import Cookies from 'js-cookie';
 
 // import * as config from 'config';
 
-import * as actionsRoot from "store/actions";
+import * as actions from "store/actions";
 
 //import * as actionsTheme from "../../actions/theme";
 
 
-function* logOut(action: actionsRoot.auth.type__LOG_OUT) {
+function* logOut(action: actions.auth.type__LOG_OUT) {
 
     firebaseAuth.signOut();
 
-    yield put( actionsRoot.status.return__REPLACE({
-        listKey: ['ready', 'user'],
-        replacement: false
+    yield put( actions.status.return__REPLACE({
+        listKey: ['auth', 'user'],
+        replacement: {
+            tried: true,
+            loading: false,
+            ready: false,
+        }
     }) );
 
-    // history.push('/');
+    yield put( actions.auth.return__REPLACE_USER() );
 
-    window.location.reload(false);
+    window.location.reload();
     //window.location.href = window.location.href;
 
 }

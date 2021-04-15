@@ -55,7 +55,7 @@ function* moveInQuiz(action: actions.data.quiz.type__MOVE_IN_QUIZ) {
         turn: "white" | "black";
         listMove: string[];
     }
-    const statusQuiz: StatusQuiz =  yield select( (state:StateRoot) => state.status.current.quiz ); 
+    const quizPresent: StatusQuiz =  yield select( (state:StateRoot) => state.present.quiz ); 
     
     try {
 
@@ -74,14 +74,14 @@ function* moveInQuiz(action: actions.data.quiz.type__MOVE_IN_QUIZ) {
             // const fen = chessFocusing.fen();
 
             const replacement = {
-                ...statusQuiz,
+                ...quizPresent,
                 fen: chessFocusing.fen(),
                 turn: chessFocusing.turn() === 'w' ? 'white' : 'black',
-                listMove: [...statusQuiz.listMove, result.san],
+                listMove: [...quizPresent.listMove, result.san],
             }
     
-            yield put( actions.status.return__REPLACE({
-                listKey: ['current', 'quiz'],
+            yield put( actions.present.return__REPLACE({
+                listKey: [ 'quiz'],
                 replacement,
             }) );
     

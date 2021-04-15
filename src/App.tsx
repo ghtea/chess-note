@@ -32,7 +32,7 @@ function App({}: PropsApp) {
     //console.log('REACT_APP_NODE_ENV', process.env.NODE_ENV)
 
     // Language
-    const codeLanguageCurrent:string = useSelector((state: StateRoot) => state['status']['current']['language']);
+    const codeLanguageCurrent:string = useSelector((state: StateRoot) => state.present.language);
     const translationLanguageCurrent = useMemo(()=>{
         if (codeLanguageCurrent === 'ko'){
             return translationKo;
@@ -53,8 +53,8 @@ function App({}: PropsApp) {
 
 
     // theme
-    const optionThemeCurrent:string = useSelector((state: StateRoot) => state['status']['current']['theme']['option']);
-    const nameThemeCurrent:string = useSelector((state: StateRoot) => state['status']['current']['theme']['name']);
+    const optionThemeCurrent:string = useSelector((state: StateRoot) => state.present.theme.option);
+    const nameThemeCurrent:string = useSelector((state: StateRoot) => state.present.theme.name);
     useEffect(() => {
         dispatch(actions.status.return__READ_OPTION_THEME() );
     }, [optionThemeCurrent]);
@@ -73,10 +73,16 @@ function App({}: PropsApp) {
   
     // log check
     useEffect(() => {
+
         dispatch( actions.status.return__REPLACE({
-            listKey: ['loading', 'user'],
-            replacement: true
+            listKey: ['auth', 'user'],
+            replacement: {
+                tried: false,
+                loading: true,
+                ready: false,
+            }
         }) );
+
         try {
             firebaseAuth.onAuthStateChanged((user) => {
                 if (user) {
@@ -94,7 +100,7 @@ function App({}: PropsApp) {
     
 
     // whenever log out, clear user information 
-    const readyUser:boolean = useSelector((state: StateRoot) => state['status']['ready']['user']);
+    const readyUser:boolean = useSelector((state: StateRoot) => state.status.auth.user.ready);
     useEffect(()=>{
         if (!readyUser){
             dispatch( actions.auth.return__REPLACE({
@@ -106,22 +112,22 @@ function App({}: PropsApp) {
 
 
     useEffect(()=>{
-        dispatch( actions.status.return__REPLACE({
-            listKey: ['current', 'size', 'window', 'innerWidth'],
+        dispatch( actions.present.return__REPLACE({
+            listKey: [ 'size', 'window', 'innerWidth'],
             replacement: window.innerWidth
         }) );
-        dispatch( actions.status.return__REPLACE({
-            listKey: ['current', 'size', 'window', 'innerHeight'],
+        dispatch( actions.present.return__REPLACE({
+            listKey: [ 'size', 'window', 'innerHeight'],
             replacement: window.innerHeight
         }) );
         
         window.addEventListener('resize', (event) => {
-            dispatch( actions.status.return__REPLACE({
-                listKey: ['current', 'size', 'window', 'innerWidth'],
+            dispatch( actions.present.return__REPLACE({
+                listKey: [ 'size', 'window', 'innerWidth'],
                 replacement: window.innerWidth
             }) );
-            dispatch( actions.status.return__REPLACE({
-                listKey: ['current', 'size', 'window', 'innerHeight'],
+            dispatch( actions.present.return__REPLACE({
+                listKey: [ 'size', 'window', 'innerHeight'],
                 replacement: window.innerHeight
             }) );
         });

@@ -19,7 +19,7 @@ import * as actionsRoot from "store/actions";
 function* replaceUser(action: actionsRoot.auth.type__REPLACE_USER) {
     try {
 
-        const user = action.payload?.user || firebaseAuth.currentUser;
+        const user = firebaseAuth.currentUser;
 
         if (user) {
 
@@ -39,13 +39,22 @@ function* replaceUser(action: actionsRoot.auth.type__REPLACE_USER) {
         }
 
         else {
-            console.log('no user');
+            yield put( actionsRoot.auth.return__REPLACE({
+                listKey: ['user'],
+                replacement: null,
+            }) );
+            //console.log('no user');
         }
 
     } catch (error) {
         console.error(error);
         console.error('replaceUser has been failed');
         
+        yield put( actionsRoot.auth.return__REPLACE({
+            listKey: ['user'],
+            replacement: null,
+        }) );
+
         yield put( actionsRoot.notification.return__ADD_CODE_SITUATION_OTHERS({
             codeSituation: 'UnknownError__E'
         }) );

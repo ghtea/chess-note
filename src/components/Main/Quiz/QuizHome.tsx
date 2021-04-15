@@ -22,9 +22,7 @@ type PropsQuizHome = {};
 function QuizHome({}: PropsQuizHome) {
   
   const dispatch = useDispatch();     
-  const readyUser = useSelector((state: StateRoot) => state['status']['ready']['user']);
-  // const loadingUser = useSelector((state: StateRoot) => state['status']['loading']['user']);
-
+  const readyUser = useSelector((state: StateRoot) => state.status.auth.user.ready);
   const idUser = useSelector((state: StateRoot) => state.auth.user?.id);
 
 

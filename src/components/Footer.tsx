@@ -18,7 +18,7 @@ function Footer({}: PropsFooter) {
     const dispatch = useDispatch();
     const location = useLocation();
     
-    const showingFooter = useSelector((state: StateRoot) => state['status']['showing']['footer']);
+    const showingFooter = useSelector((state: StateRoot) => state.appearance.showing.footer);
   
   
   return (

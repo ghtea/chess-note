@@ -28,9 +28,9 @@ function ToolBarPlaying({
 
     const dispatch = useDispatch();
 
-    const heightToolbar = useSelector((state: StateRoot)=>state.status.current.size.document.chessBoard.toolbar.height);
-    const lengthChessBoard = useSelector((state: StateRoot)=>state.status.current.size.document.chessBoard.length);
-    const statusQuiz = useSelector((state: StateRoot)=>state.status.current.quiz);
+    const heightToolbar = useSelector((state: StateRoot)=>state.present.size.document.chessBoard.toolbar.height);
+    const lengthChessBoard = useSelector((state: StateRoot)=>state.present.size.document.chessBoard.length);
+    const statusQuiz = useSelector((state: StateRoot)=>state.present.quiz);
 
 
     // const [positionStart, setPositionStart] = useState<null | string>(null);
@@ -52,19 +52,19 @@ function ToolBarPlaying({
         (e:React.MouseEvent<HTMLButtonElement, MouseEvent>)=>{
             const value = e.currentTarget.value;
             if (value === 'create'){
-                dispatch(actions.status.return__REPLACE({ 
+                dispatch(actions.appearance.return__REPLACE({ 
                     listKey: ['showing', 'modal', 'quizEditingUpload'],
                     replacement: true,
                 }));
             }
             else if (value === 'save'){
-                dispatch(actions.status.return__REPLACE({ 
+                dispatch(actions.appearance.return__REPLACE({ 
                     listKey: ['showing', 'modal', 'quizEditingSave'],
                     replacement: true,
                 }));
             }
             else if (value==='others'){
-                dispatch(actions.status.return__REPLACE({ 
+                dispatch(actions.appearance.return__REPLACE({ 
                     listKey: ['showing', 'modal', 'quizEditingOthers'],
                     replacement: true,
                 }));

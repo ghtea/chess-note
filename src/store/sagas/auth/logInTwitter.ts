@@ -33,6 +33,15 @@ function* logInTwitter(action: actions.auth.type__LOG_IN_TWITTER) {
             listKey: ['listCodeSituationOthers'],
             replacement: []
         }) );
+
+        yield put( actions.status.return__REPLACE({
+            listKey: ['auth', 'user'],
+            replacement: {
+                tried: false,
+                loading: true,
+                ready: false,
+            }
+        }) );
         
             
             try {
@@ -40,38 +49,33 @@ function* logInTwitter(action: actions.auth.type__LOG_IN_TWITTER) {
                 //console.log(data.user);
 
                 yield put( actions.status.return__REPLACE({
-                    listKey: ['loading', 'user'],
-                    replacement: false
+                    listKey: ['auth', 'user'],
+                    replacement: {
+                        tried: true,
+                        loading: false,
+                        ready: true,
+                    }
                 }) );
-
-                yield put( actions.status.return__REPLACE({
-                    listKey: ['ready', 'user'],
-                    replacement: true
-                }) );
-
-                yield put( actions.auth.return__REPLACE_USER({
-                    user: user
-                }) );
+    
+                yield put( actions.auth.return__REPLACE_USER() );
+    
 
                 history.push('/');
             } 
             catch (error){
 
                 yield put( actions.status.return__REPLACE({
-                    listKey: ['ready', 'user'],
-                    replacement: false
+                    listKey: ['auth', 'user'],
+                    replacement: {
+                        tried: true,
+                        loading: false,
+                        ready: false,
+                    }
                 }) );
-
-                yield put( actions.status.return__REPLACE({
-                    listKey: ['loading', 'user'],
-                    replacement: false
-                }) );
-
-                yield put( actions.auth.return__REPLACE({
-                    listKey: ['user'],
-                    replacement: null
-                }) );
-
+    
+                yield put( actions.auth.return__REPLACE_USER() );
+    
+    
 
                 console.error(error);
                 if (error.code === 'auth/account-exists-with-different-credential'){
@@ -97,19 +101,17 @@ function* logInTwitter(action: actions.auth.type__LOG_IN_TWITTER) {
     } catch (error) {
         
         yield put( actions.status.return__REPLACE({
-            listKey: ['ready', 'user'],
-            replacement: false
+            listKey: ['auth', 'user'],
+            replacement: {
+                tried: true,
+                loading: false,
+                ready: false,
+            }
         }) );
 
-        yield put( actions.status.return__REPLACE({
-            listKey: ['loading', 'user'],
-            replacement: false
-        }) );
+        yield put( actions.auth.return__REPLACE_USER() );
 
-        yield put( actions.auth.return__REPLACE_USER({
-            user: null
-        }) );
-        
+
         console.error(error);
         console.error('logInTwitter has been failed');
         

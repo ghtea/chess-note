@@ -24,7 +24,7 @@ function QuizEditingSave({}: PropsQuizEditingSave) {
   
     const dispatch = useDispatch();
 
-    const statusQuiz = useSelector((state: StateRoot) => state.status.current.quiz);
+    const quizPresent = useSelector((state: StateRoot) => state.present.quiz);
     const quizFocusing = useSelector((state: StateRoot) => state.data.quiz.focusing);
     const [indexAnswer, setIndexAnswer] = useState<number>(0);
 
@@ -32,7 +32,7 @@ function QuizEditingSave({}: PropsQuizEditingSave) {
     const onClick_Window = useCallback(
         (event:MouseEvent)=> {   
             if ( !refModal.current?.contains(event.target as Node)){
-                dispatch(actions.status.return__REPLACE({ 
+                dispatch(actions.appearance.return__REPLACE({ 
                     listKey: ['showing', 'modal', convertCase("QuizEditingSave", 'camel')],
                     replacement: false
                 }));
@@ -49,22 +49,22 @@ function QuizEditingSave({}: PropsQuizEditingSave) {
         (e:React.MouseEvent<HTMLButtonElement, MouseEvent>)=>{
 
             const value = e.currentTarget.value;
-            dispatch(actions.status.return__REPLACE({ 
+            dispatch(actions.appearance.return__REPLACE({ 
                 listKey: ['showing', 'modal', convertCase("QuizEditingSave", 'camel')],
                 replacement: false
             }));
             if (value === 'start'){
                 dispatch(actions.data.return__REPLACE({ 
                     listKey: [ 'quiz', 'focusing', 'fenStart' ],
-                    replacement: statusQuiz.fen
+                    replacement: quizPresent.fen
                 }));
-                dispatch(actions.status.return__REPLACE({ 
-                    listKey: [ 'current', 'quiz', 'listMove' ],
+                dispatch(actions.present.return__REPLACE({ 
+                    listKey: [ 'quiz', 'listMove' ],
                     replacement: [],
                 }));
             }
             else if (value === 'new-answer'){
-                const replacement = [...quizFocusing.listListMoveCorrect, statusQuiz.listMove];
+                const replacement = [...quizFocusing.listListMoveCorrect, quizPresent.listMove];
                 dispatch(actions.data.return__REPLACE({ 
                     listKey: [ 'quiz', 'focusing', 'listListMoveCorrect' ],
                     replacement,
@@ -72,7 +72,7 @@ function QuizEditingSave({}: PropsQuizEditingSave) {
             } 
             else if (value === 'existing-answer'){
                 let replacement = [...quizFocusing.listListMoveCorrect];
-                replacement[indexAnswer] = statusQuiz.listMove;
+                replacement[indexAnswer] = quizPresent.listMove;
 
                 dispatch(actions.data.return__REPLACE({ 
                     listKey: [ 'quiz', 'focusing', 'listListMoveCorrect' ],
@@ -80,7 +80,7 @@ function QuizEditingSave({}: PropsQuizEditingSave) {
                 }));
             } 
         
-    }, [statusQuiz.listMove, quizFocusing.listListMoveCorrect]);
+    }, [quizPresent.listMove, quizFocusing.listListMoveCorrect]);
     
 
     const onClick_ButtonChangeAnswer = useCallback(

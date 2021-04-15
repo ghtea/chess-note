@@ -15,7 +15,14 @@ function* waitForStateChange<T>( selector: Selector<T>, value:T) {
 
     while (true) {
 
-        yield take([actions.auth.name__REPLACE, actions.data.name__REPLACE, actions.notification.name__REPLACE, actions.status.name__REPLACE]);
+        yield take([
+            actions.appearance.name__REPLACE, 
+            actions.auth.name__REPLACE, 
+            actions.data.name__REPLACE, 
+            actions.notification.name__REPLACE, 
+            actions.status.name__REPLACE,
+            actions.present.name__REPLACE,
+        ]);
         
         valueCurrent = yield select(selector);
         if (valueCurrent === value) return; 

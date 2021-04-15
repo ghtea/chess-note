@@ -34,9 +34,8 @@ function LogIn({}:PropsLogIn) {
     const dispatch = useDispatch();
     const intl = useIntl();
   
-    const readyUser = useSelector((state: StateRoot) => state['status']['ready']['user']);
-    const loadingUser = useSelector((state: StateRoot) => state['status']['loading']['user']);
-
+    const statusUser = useSelector((state: StateRoot) => state.status.auth.user);
+    
     // when login button is pushed, notification code of reaction is added to  this list, when login button is pushed again this list cleared once 
     const listCodeSituationOthers = useSelector((state: StateRoot) => state['notification']['listCodeSituationOthers']);
   
@@ -51,10 +50,10 @@ function LogIn({}:PropsLogIn) {
     const [codeSituationPassword, setCodeSituationPassword] = useState('');
   
     useEffect(()=>{
-        if (readyUser) {
+        if (statusUser.ready) {
             history.push('/');
         }
-    },[readyUser, loadingUser]);
+    },[statusUser.ready]);
 
     useEffect(()=>{
         if(listCodeSituationOthers.includes('LogIn_NoEmail__E')){

@@ -26,7 +26,7 @@ function QuizEditingUpload({}: PropsQuizEditingUpload) {
   
     const dispatch = useDispatch();
     const intl = useIntl();
-    const readyUser = useSelector((state: StateRoot) => state['status']['ready']['user']);
+    const readyUser = useSelector((state: StateRoot) => state.status.auth.user.ready);
     const idUser = useSelector((state: StateRoot) => state.auth.user?.id);
     const quizFocusing = useSelector((state: StateRoot) => state.data.quiz.focusing);
 
@@ -40,7 +40,7 @@ function QuizEditingUpload({}: PropsQuizEditingUpload) {
     const onClick_Window = useCallback(
         (event:MouseEvent)=> {   
             if ( !refModal.current?.contains(event.target as Node)){
-                dispatch(actions.status.return__REPLACE({ 
+                dispatch(actions.appearance.return__REPLACE({ 
                     listKey: ['showing', 'modal', convertCase("QuizEditingUpload", 'camel')],
                     replacement: false
                 }));
@@ -76,7 +76,7 @@ function QuizEditingUpload({}: PropsQuizEditingUpload) {
                     idUser: idUser,
                     isPublic: quizFocusing.isPublic,
                 }));
-                dispatch(actions.status.return__REPLACE({ 
+                dispatch(actions.appearance.return__REPLACE({ 
                     listKey: ['showing', 'modal', convertCase("QuizEditingUpload", 'camel')],
                     replacement: false
                 }));

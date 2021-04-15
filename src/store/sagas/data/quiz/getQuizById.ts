@@ -34,8 +34,18 @@ const requestGetQuizById = (query:DocumentNode, argument: any) => {
 // idUser 있으면 개인 퀴즈들, 없으면 공개 퀴즈들
 function* getQuizById( action: actions.data.quiz.type__GET_QUIZ_BY_ID ) {
 
-    const { idQuiz } = action.payload;
+    yield put( actions.status.return__REPLACE({
+        listKey: ['data', 'quiz', 'one'],
+        replacement: {
+            tried: false,
+            loading: true,
+            ready: false,
+        }
+    }) );
 
+
+    const { idQuiz, idUserInApp } = action.payload;
+    //console.log('getQuizById: ', idQuiz)
     try {
         const GET_QUIZ_BY_ID = gql`
             query GetQuizById($id: String!){
@@ -59,6 +69,15 @@ function* getQuizById( action: actions.data.quiz.type__GET_QUIZ_BY_ID ) {
                 }
             }));
             // history.push(`/quiz/play/${list[0].id}`);
+
+            yield put( actions.status.return__REPLACE({
+                listKey: ['data', 'quiz', 'one'],
+                replacement: {
+                    tried: true,
+                    loading: false,
+                    ready: true,
+                }
+            }) );
         }
         else {
             const quizDefault = {
@@ -70,6 +89,15 @@ function* getQuizById( action: actions.data.quiz.type__GET_QUIZ_BY_ID ) {
             yield put( actions.notification.return__ADD_DELETE_BANNER({
                 codeSituation: 'GetQuiz_NoQuiz__E'
             }) );
+
+            yield put( actions.status.return__REPLACE({
+                listKey: ['data', 'quiz', 'one'],
+                replacement: {
+                    tried: true,
+                    loading: false,
+                    ready: false,
+                }
+            }) );
         }
 
     } catch (error) {
@@ -78,6 +106,15 @@ function* getQuizById( action: actions.data.quiz.type__GET_QUIZ_BY_ID ) {
         
         yield put( actions.notification.return__ADD_DELETE_BANNER({
             codeSituation: 'GetQuiz_UnknownError__E'
+        }) );
+
+        yield put( actions.status.return__REPLACE({
+            listKey: ['data', 'quiz', 'one'],
+            replacement: {
+                tried: true,
+                loading: false,
+                ready: false,
+            }
         }) );
     }
 }

@@ -35,6 +35,14 @@ const requestGetQuizListQuiz = (query:DocumentNode, argument: any) => {
 // idUser 있으면 개인 퀴즈들, 없으면 공개 퀴즈들
 function* getListQuiz( action: actions.data.quiz.type__GET_LIST_QUIZ) {
 
+    yield put( actions.status.return__REPLACE({
+        listKey: ['data', 'quiz', 'list'],
+        replacement: {
+            tried: false,
+            loading: true,
+            ready: false,
+        }
+    }) );
     const { kind: valueKind, idUser } = action.payload;
 
     try {
@@ -87,6 +95,24 @@ function* getListQuiz( action: actions.data.quiz.type__GET_LIST_QUIZ) {
                 }
             }));
             history.push(`/quiz/play/${list[0].id}`);
+
+            yield put( actions.status.return__REPLACE({
+                listKey: ['data', 'quiz', 'list'],
+                replacement: {
+                    tried: true,
+                    loading: false,
+                    ready: false,
+                }
+            }) );
+
+            yield put( actions.status.return__REPLACE({
+                listKey: ['data', 'quiz', 'one'],
+                replacement: {
+                    tried: true,
+                    loading: false,
+                    ready: false,
+                }
+            }) );
         }
         else {
             const quizDefault = {
@@ -102,6 +128,24 @@ function* getListQuiz( action: actions.data.quiz.type__GET_LIST_QUIZ) {
                     isPublic: true,
                 }
             }
+
+            yield put( actions.status.return__REPLACE({
+                listKey: ['data', 'quiz', 'list'],
+                replacement: {
+                    tried: true,
+                    loading: false,
+                    ready: false,
+                }
+            }) );
+
+            yield put( actions.status.return__REPLACE({
+                listKey: ['data', 'quiz', 'one'],
+                replacement: {
+                    tried: true,
+                    loading: false,
+                    ready: false,
+                }
+            }) );
         }
 
         
@@ -113,6 +157,24 @@ function* getListQuiz( action: actions.data.quiz.type__GET_LIST_QUIZ) {
         
         yield put( actions.notification.return__ADD_DELETE_BANNER({
             codeSituation: 'GetListQuiz_UnknownError__E'
+        }) );
+
+        yield put( actions.status.return__REPLACE({
+            listKey: ['data', 'quiz', 'list'],
+            replacement: {
+                tried: true,
+                loading: false,
+                ready: false,
+            }
+        }) );
+
+        yield put( actions.status.return__REPLACE({
+            listKey: ['data', 'quiz', 'one'],
+            replacement: {
+                tried: true,
+                loading: false,
+                ready: false,
+            }
         }) );
     }
 }

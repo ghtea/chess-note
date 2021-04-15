@@ -31,11 +31,10 @@ function Header({}: PropsHeader) {
     const dispatch = useDispatch();
     const location = useLocation();
     
-    const showingHeader = useSelector((state: StateRoot) => state['status']['showing']['header']);
+    const showingHeader = useSelector((state: StateRoot) => state.appearance.showing.header);
     
-    const readyUser = useSelector((state: StateRoot) => state['status']['ready']['user']);
-    const loadingUser = useSelector((state: StateRoot) => state['status']['loading']['user']);
-    const user = useSelector((state: StateRoot) => state['auth']['user']);
+    const statusUser = useSelector((state: StateRoot) => state.status.auth.user);
+    const user = useSelector((state: StateRoot) => state.auth.user);
     // useEffect(()=>console.log(user),[user])
 
     const {onClick_LinkInsideApp} = useLink(history);
@@ -46,23 +45,23 @@ function Header({}: PropsHeader) {
             (/^\/log-in/).test(location.pathname) || 
             (/^\/sign-up/).test(location.pathname)
         ) {
-            dispatch(actions.status.return__REPLACE({
+            dispatch(actions.appearance.return__REPLACE({
                 listKey:['showing', 'header', 'root'],
                 replacement: false
             }));
         }
         else {
-            dispatch(actions.status.return__REPLACE({
+            dispatch(actions.appearance.return__REPLACE({
                 listKey:['showing', 'header', 'root'],
                 replacement: true
             }));
         }
     }, [location]);
 
-    const showingBoard = useSelector((state: StateRoot) => state.status.showing.header.board);
+    const showingBoard = useSelector((state: StateRoot) => state.appearance.showing.header.board);
     const onClick_OpenBoard = useCallback(
         (event: React.MouseEvent<HTMLButtonElement, MouseEvent> ) => {
-            dispatch(actions.status.return__REPLACE({ 
+            dispatch(actions.appearance.return__REPLACE({ 
                 listKey: ['showing', 'header', 'board'],
                 replacement: !showingBoard
             }));      
@@ -72,7 +71,7 @@ function Header({}: PropsHeader) {
     const onClick_ShowModal = useCallback(
         (event:React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
         const {value} = event.currentTarget;
-        dispatch(actions.status.return__REPLACE({ 
+        dispatch(actions.appearance.return__REPLACE({ 
             listKey: ['showing', 'modal', value],
             replacement: true
         }));
@@ -123,7 +122,7 @@ function Header({}: PropsHeader) {
             </div>
 
 
-            {!readyUser && !loadingUser && 
+            {!statusUser.ready && !statusUser.loading && 
                 <div className={`${styles['right']}`}>
                     <a 
                         className={`button__main--light`} 
@@ -148,7 +147,7 @@ function Header({}: PropsHeader) {
                     </button>
                 </div>
             }
-            {readyUser &&  
+            {statusUser.ready &&  
                 <div className={`${styles['right']}`}>
                     <button
                         type='button'

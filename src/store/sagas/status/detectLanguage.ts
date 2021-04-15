@@ -43,19 +43,19 @@ function* detectLanguage() {
     if (!codeStandardFromCookie && codeLanguageFromBrowser) {
 
         const codeStandard = returnCodeStandardFromCodeBrowser(codeLanguageFromBrowser);
-        console.log('codeStandard');
-        console.log(codeStandard);
+        //console.log('codeStandard');
+        //console.log(codeStandard);
         replacement = codeStandard;
     }
     else if (codeStandardFromCookie) {
-        console.log('codeStandardFromCookie');
-        console.log(codeStandardFromCookie);
+        //console.log('codeStandardFromCookie');
+        //console.log(codeStandardFromCookie);
         replacement = codeStandardFromCookie;
     }
 
 
-    yield put( actions.status.return__REPLACE({
-        listKey:['current', 'language'],
+    yield put( actions.present.return__REPLACE({
+        listKey:[ 'language'],
         replacement: replacement
     }));
 

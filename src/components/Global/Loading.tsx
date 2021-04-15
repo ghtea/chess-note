@@ -23,8 +23,7 @@ function Loading({}:PropsLoading) {
     const dispatch = useDispatch();
     const intl = useIntl();
   
-    const readyUser = useSelector((state: StateRoot) => state['status']['ready']['user']);
-    const loadingUser = useSelector((state: StateRoot) => state['status']['loading']['user']);
+    //const statusUser = useSelector((state: StateRoot) => state.status.auth.user);
 
 
   return (
@@ -32,7 +31,7 @@ function Loading({}:PropsLoading) {
         <IconSpinner className={`${styles['icon__spinner']}`}/>
     </div>
   );
-}
+} 
 
 Loading.defaultProps = {};
 

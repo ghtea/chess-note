@@ -21,11 +21,15 @@ type PropsQuizPlaying = {};
 function QuizPlaying({}: PropsQuizPlaying) {
   
   const dispatch = useDispatch();
+  
+  const statusUser = useSelector((state: StateRoot) => state.status.auth.user);
+  const idUser = useSelector((state: StateRoot) => state.auth.user?.id);
 
-  const statusQuiz = useSelector((state: StateRoot)=>state.status.current.quiz);
+  const quizPresent = useSelector((state: StateRoot)=>state.present.quiz);
   const quizFocusing = useSelector((state: StateRoot)=>state.data.quiz.focusing);
   const idQuiz = useSelector((state: StateRoot)=>state.data.quiz.focusing?.id);
   //const { loading, error, data } = useQuery(GET_LIST_QUIZ);
+  //const loadingOneQuiz = useSelector((state: StateRoot)=>state.status.loading.data.quiz.one);
 
   const gameCurrent: ChessInstance = useMemo(()=>{
     const result: ChessInstance = new ChessReq();
@@ -37,10 +41,15 @@ function QuizPlaying({}: PropsQuizPlaying) {
   useEffect(()=>{
     const idQuizFromUri = (window.location.pathname.match(/[^/]*$/) || [])[0];
 
-    if (idQuizFromUri !== idQuiz || !idQuiz){
-      dispatch(actions.data.quiz.return__GET_QUIZ_BY_ID({ 
-        idQuiz: idQuizFromUri,
-      }));  
+    // 처음 한번만 시도하고 싶은데...
+    if (true){
+      if (!idQuiz || idQuizFromUri !== idQuiz){
+        //console.log('idQuizFromUri: ', idQuizFromUri)
+        dispatch(actions.data.quiz.return__GET_QUIZ_BY_ID({ 
+          idQuiz: idQuizFromUri,
+          idUserInApp: idUser,
+        }));  
+      }
     }
     
     // console.log(idQuiz)
@@ -56,7 +65,7 @@ function QuizPlaying({}: PropsQuizPlaying) {
     // else {
     //   return gameCurrent.board().reverse(); 
     // }
-  }, [gameCurrent, statusQuiz.fen]);
+  }, [gameCurrent, quizPresent.fen]);
 
   return (
     <div>

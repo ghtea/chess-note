@@ -23,7 +23,7 @@ const updateProfileFirebase = (update: any) => {
 
 function* updateProfile(action: actionsRoot.auth.type__UPDATE_PROFILE) {
 
-    const readyUser: boolean  =  yield select( (state:StateRoot) => state.status.ready.user); 
+    const readyUser: boolean  =  yield select( (state:StateRoot) => state.status.auth.user.ready); 
     const idUserInApp: undefined | string =  yield select( (state:StateRoot) => state.auth.user?.id); 
    
     try {

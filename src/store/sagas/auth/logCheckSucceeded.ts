@@ -6,34 +6,22 @@ import { v4 as uuidv4 } from 'uuid';
 
 //import * as config from 'config';
 
-import * as actionsRoot from "store/actions";
+import * as actions from "store/actions";
 
 // action: actionsRoot.auth.type__LOG_CHECK_SUCCEEDED
 function* logCheckSucceeded() {
     
-    yield put( actionsRoot.status.return__REPLACE({
-        listKey: ['ready', 'user'],
-        replacement: true
+    yield put( actions.status.return__REPLACE({
+        listKey: ['auth', 'user'],
+        replacement: {
+            tried: true,
+            loading: false,
+            ready: true,
+        }
     }) );
     
-    yield put( actionsRoot.status.return__REPLACE({
-        listKey: ['loading', 'user'],
-        replacement: false
-    }) );
-    
-    const user = firebaseAuth.currentUser;
-    console.log(user);
+    yield put( actions.auth.return__REPLACE_USER() );
 
-
-    if (user) {   // 이미 성공했다는 걸 알고 있을 거니깐 왠만하면 있을것이다
-
-        yield put( actionsRoot.auth.return__REPLACE_USER({
-            user: user
-        }) );
-    }
-    
-    // go to home
-        
 }
 
 export default logCheckSucceeded;
