@@ -39,11 +39,12 @@ function QuizPlaying({}: PropsQuizPlaying) {
 
 
   useEffect(()=>{
-    const idQuizFromUri = (window.location.pathname.match(/[^/]*$/) || [])[0];
+    const idQuizFromUri = (window.location.pathname.match(/[^\/]*$/) || [])[0];
 
-    // 처음 한번만 시도하고 싶은데...
-    if (true){
+    // 로그인하고 아이디 얻었을 때, 로그인 체크 끝나고 로그인 안되어있을 때
+    if ( (statusUser.ready && idUser) || (statusUser.tried && !statusUser.ready) ){
       if (!idQuiz || idQuizFromUri !== idQuiz){
+        //console.log('here: ', idUser)
         //console.log('idQuizFromUri: ', idQuizFromUri)
         dispatch(actions.data.quiz.return__GET_QUIZ_BY_ID({ 
           idQuiz: idQuizFromUri,
@@ -54,17 +55,11 @@ function QuizPlaying({}: PropsQuizPlaying) {
     
     // console.log(idQuiz)
     //console.log(window.location.pathname)
-  },[window.location.pathname, idQuiz])
+  },[window.location.pathname, statusUser.tried, idUser])
 
 
   const listSquare = useMemo(()=>{
     return gameCurrent.board(); 
-    // if (side==='white'){
-    //   return gameCurrent.board(); 
-    // }
-    // else {
-    //   return gameCurrent.board().reverse(); 
-    // }
   }, [gameCurrent, quizPresent.fen]);
 
   return (
@@ -72,10 +67,10 @@ function QuizPlaying({}: PropsQuizPlaying) {
       <ChessBoard
         listSquare={listSquare}
         side={quizFocusing.side || 'white'}
+        page={'quiz'}
       />
       
       <ToolBarPlaying />
-        
       
     </div>
   );

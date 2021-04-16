@@ -12,7 +12,7 @@ function* readOptionTheme(action: actions.status.type__READ_OPTION_THEME) {
     
     const optionThemeCookie:string | undefined = Cookies.get('optionTheme');
     
-    console.log(optionThemeCookie);
+    //console.log(optionThemeCookie);
     
     if (typeof optionThemeCookie === 'string'){
         

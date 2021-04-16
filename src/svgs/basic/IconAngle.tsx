@@ -21,19 +21,19 @@ const Icon = ({ className, kind, directon }: PropsIcon) => {
 
     const transform: string = useMemo(()=>{
         if (directon === 'right'){
-            return 'rotate(0)'
+            return 'rotate(0deg)'
         }
         else if (directon === 'down'){
-            return 'rotate(90)'
+            return 'rotate(90deg)'
         }
         else if (directon === 'left'){
-            return 'rotate(180)'
+            return 'rotate(180deg)'
         }
         else if (directon === 'up'){
-            return 'rotate(270)'
+            return 'rotate(270deg)'
         }
         else {
-            return 'rotate(0)'
+            return 'rotate(0deg)'
         }
     },[directon]);
 
@@ -72,7 +72,6 @@ const Icon = ({ className, kind, directon }: PropsIcon) => {
         role="img"
         xmlns="http://www.w3.org/2000/svg"
         viewBox="0 0 192 512"
-        transform={transform}
       >
         <path  fill="currentColor" d="M166.9 264.5l-117.8 116c-4.7 4.7-12.3 4.7-17 0l-7.1-7.1c-4.7-4.7-4.7-12.3 0-17L127.3 256 25.1 155.6c-4.7-4.7-4.7-12.3 0-17l7.1-7.1c4.7-4.7 12.3-4.7 17 0l117.8 116c4.6 4.7 4.6 12.3-.1 17z">
         </path>
@@ -89,7 +88,6 @@ const Icon = ({ className, kind, directon }: PropsIcon) => {
         role="img"
         xmlns="http://www.w3.org/2000/svg"
         viewBox="0 0 256 512"
-        transform={transform}
       >
         <path  fill="currentColor" d="M224.3 273l-136 136c-9.4 9.4-24.6 9.4-33.9 0l-22.6-22.6c-9.4-9.4-9.4-24.6 0-33.9l96.4-96.4-96.4-96.4c-9.4-9.4-9.4-24.6 0-33.9L54.3 103c9.4-9.4 24.6-9.4 33.9 0l136 136c9.5 9.4 9.5 24.6.1 34z">
         </path>

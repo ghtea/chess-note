@@ -47,15 +47,28 @@ function* getQuizById( action: actions.data.quiz.type__GET_QUIZ_BY_ID ) {
     const { idQuiz, idUserInApp } = action.payload;
     //console.log('getQuizById: ', idQuiz)
     try {
+        
         const GET_QUIZ_BY_ID = gql`
-            query GetQuizById($id: String!){
-                getQuizById(id: $id) {
-                    id,
+            query GetQuizById($argument: GetQuizByIdInputType!){
+                getQuizById(getQuizByIdInputType: $argument) {
+                    id
+                    name
+                    side
+                    fenStart
+                    listListMoveCorrect
+                    idUser
+                    isPublic
+                    dateCreated
                 }
             }
         `;
+        
+        const argument = {
+            id: idQuiz,
+            idUser: idUserInApp,
+        };
 
-        let response: ApolloQueryResult<any> =  yield call( requestGetQuizById,  GET_QUIZ_BY_ID, idQuiz);
+        let response: ApolloQueryResult<any> =  yield call( requestGetQuizById,  GET_QUIZ_BY_ID, argument);
         console.log(response);
         const quizFromRes = response.data?.getQuizById as types.data.quiz.Quiz | undefined;
         
@@ -80,6 +93,7 @@ function* getQuizById( action: actions.data.quiz.type__GET_QUIZ_BY_ID ) {
             }) );
         }
         else {
+            //console.log('hello1')
             const quizDefault = {
                 list: [],
                 index: null,
@@ -101,7 +115,7 @@ function* getQuizById( action: actions.data.quiz.type__GET_QUIZ_BY_ID ) {
         }
 
     } catch (error) {
-        
+        //console.log('hello2')
         console.error(error);
         
         yield put( actions.notification.return__ADD_DELETE_BANNER({

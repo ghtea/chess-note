@@ -3,6 +3,7 @@ import {handleActions} from 'redux-actions';
 
 import * as actions from "store/actions";
 import * as types from "store/types"; 
+import { QuizPresent } from 'store/types/present';
 
 import putValueToNestedObject from 'tools/vanilla/putValueToNestedObject';
 
@@ -37,14 +38,13 @@ const stateInitial = {
   },
 
   quiz: {
-    idGame: null as null | string,
-    mode: 'creating' as 'editing' | 'playing' | 'solved' | 'creating', 
-    fen: null as null | string,
-    turn: 'white' as 'white' | 'black',
-    //fenToLoad: null as null | string,
-    // side: 'white' as 'white' | 'black',
-    listMove: [] as string[],
-  },
+    idGame: null,
+    mode: 'creating', 
+    fen: null,
+    turn: 'white',
+    listMove: [],
+    index: 0,
+  } as QuizPresent,
   
   
   

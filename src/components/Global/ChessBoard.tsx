@@ -30,7 +30,10 @@ type PropsChessBoard = {
         type: PieceType;
         color: "b" | "w";
     } | null)[][];
-    side: 'white' | 'black',
+
+    side: 'white' | 'black';
+
+    page: 'quiz' | 'opening';
 };
 
 
@@ -38,9 +41,17 @@ type PropsChessBoard = {
 function ChessBoard({
     listSquare,
     side,
+    page,
 }: PropsChessBoard) {
 
     const dispatch = useDispatch();
+
+    const mode = useSelector((state: StateRoot)=>{
+        if (page === 'quiz'){
+            return state.present.quiz.mode
+        }
+    });
+    
     const {innerWidth, innerHeight} = useSelector((state: StateRoot)=>state.present.size.window);
     const heightHeader = useSelector((state: StateRoot)=>state.present.size.document.header.height);
     const heightToolBar = useSelector((state: StateRoot)=>state.present.size.document.chessBoard.toolbar.height);
@@ -95,14 +106,25 @@ function ChessBoard({
         }
         // when clicking to move
         else {
-            dispatch(actions.data.quiz.return__MOVE_IN_QUIZ({
-                from: positionStart,
-                to: position,
-            }))
+
+            if (page === 'quiz'){
+                if (mode ==='creating' || mode === 'editing'){
+                    dispatch(actions.data.quiz.return__MOVE_IN_QUIZ_EDITING({
+                        from: positionStart,
+                        to: position,
+                    }))
+                }
+                else if (mode ==='playing' ){
+                    dispatch(actions.data.quiz.return__MOVE_IN_QUIZ_PLAYING({
+                        from: positionStart,
+                        to: position,
+                    }))
+                }
+            }
 
             setPositionStart(null);
         }    
-        },[] // move 같은 함수도 잊지 말고 dependency list 에 추가!
+        },[page, mode, positionStart] // move 같은 함수도 잊지 말고 dependency list 에 추가!
     );
 
     // Junhyeon

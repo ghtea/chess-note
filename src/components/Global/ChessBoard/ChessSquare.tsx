@@ -56,21 +56,7 @@ function ChessSquare({
 }: PropsChessSquare) {
     
     const dispatch = useDispatch();
-    //const leagueStandings = useSelector((state: StateRoot)=>state.data.football.leagueStandings);
-
-    //const sorting = useSelector((state: StateRoot)=>state.status.current.football.leagueStandings.sorting);
-
-    // const {file, rank, piece, typeSquare} = useMemo(()=>{
-
-    //     const result: Square = {...status, typeSquare: 'light'};
-    //     if (['a', 'c', 'e', 'g'].includes(status.file)){
-    //         result.typeSquare = status.rank % 2 === 0 ? 'light' : 'dark'
-    //     }
-    //     else {
-    //         result.typeSquare = status.rank % 2 === 0 ? 'dark' : 'light'
-    //     }
-    //     return result; 
-    // }, [status]);
+    
 
 
     const srcImg = useMemo(()=>{

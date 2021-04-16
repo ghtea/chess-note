@@ -51,6 +51,7 @@ function QuizEditing({}: PropsQuizEditing) {
       <ChessBoard
         listSquare={listSquare}
         side={side || 'white'}
+        page={'quiz'}
       />
       
       <ToolBarEditing />

@@ -57,19 +57,38 @@ import { KindGetListQuiz } from "store/types/data/quiz";
 // };
 // export type type__CHECK_LIST_TEAM = ReturnType<typeof return__CHECK_LIST_TEAM>;
 
-export const name__MOVE_IN_QUIZ = 'data/quiz/MOVE_IN_QUIZ';
-type Payload__MOVE_IN_QUIZ = {
+export const name__MOVE_IN_QUIZ_EDITING = 'data/quiz/MOVE_IN_QUIZ_EDITING';
+type Payload__MOVE_IN_QUIZ_EDITING = {
     from?: string;
     to?: string;
     san?: string;
 }
-export const return__MOVE_IN_QUIZ = (payload: Payload__MOVE_IN_QUIZ) => {
+export const return__MOVE_IN_QUIZ_EDITING = (payload: Payload__MOVE_IN_QUIZ_EDITING) => {
     return {
-        type: name__MOVE_IN_QUIZ,
+        type: name__MOVE_IN_QUIZ_EDITING,
         payload: payload
     }
 };
-export type type__MOVE_IN_QUIZ = ReturnType<typeof return__MOVE_IN_QUIZ>;
+export type type__MOVE_IN_QUIZ_EDITING = ReturnType<typeof return__MOVE_IN_QUIZ_EDITING>;
+
+
+
+export const name__MOVE_IN_QUIZ_PLAYING = 'data/quiz/MOVE_IN_QUIZ_PLAYING';
+type Payload__MOVE_IN_QUIZ_PLAYING = {
+    from?: string;
+    to?: string;
+    san?: string;
+}
+export const return__MOVE_IN_QUIZ_PLAYING = (payload: Payload__MOVE_IN_QUIZ_PLAYING) => {
+    return {
+        type: name__MOVE_IN_QUIZ_PLAYING,
+        payload: payload
+    }
+};
+export type type__MOVE_IN_QUIZ_PLAYING = ReturnType<typeof return__MOVE_IN_QUIZ_PLAYING>;
+
+
+
 
 
 

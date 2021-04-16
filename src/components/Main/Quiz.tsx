@@ -20,7 +20,9 @@ function Quiz({}: PropsQuiz) {
   const dispatch = useDispatch();
 
   useEffect(()=>{
-    const modeFromUrl = (window.location.pathname.match(/(?<=\/quiz\/)[^\/]*/) || [])[0];
+    // 중요!, 정규표현식 더 공부...
+    const modeFromUrl = window.location.pathname.replace(/^\/quiz\/([^\/]*)\/.*/, "$1");;
+    //console.log('modeFromUrl: ', modeFromUrl)
     let replacement = '';
 
     if (modeFromUrl === 'create'){
