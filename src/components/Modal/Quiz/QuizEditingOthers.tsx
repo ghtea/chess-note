@@ -89,29 +89,30 @@ function QuizEditingOthers({}: PropsQuizEditingOthers) {
                 }));
             }
             else if (value === 'new-answer'){
-                const replacement = [...quizFocusing.listListMoveCorrect, quizPresent.listMove];
-                dispatch(actions.data.return__REPLACE({ 
-                    listKey: [ 'quiz', 'focusing', 'listListMoveCorrect' ],
-                    replacement,
+                dispatch(actions.data.quiz.return__SAVE_LIST_SAN_MOVE_AS_ANSWER({ 
+                    listSanMove: quizPresent.listSanMove
                 }));
             } 
             else if (value === 'existing-answer'){
-                let replacement = [...quizFocusing.listListMoveCorrect];
-                replacement[indexAnswer] = quizPresent.listMove;
-
-                dispatch(actions.data.return__REPLACE({ 
-                    listKey: [ 'quiz', 'focusing', 'listListMoveCorrect' ],
-                    replacement: replacement
+                dispatch(actions.data.quiz.return__SAVE_LIST_SAN_MOVE_AS_ANSWER({ 
+                    listSanMove: quizPresent.listSanMove
                 }));
+                // let replacement = [...quizFocusing.listNodeMoveNextCorrect];
+                // replacement[indexAnswer] = quizPresent.listSanMove;
+
+                // dispatch(actions.data.return__REPLACE({ 
+                //     listKey: [ 'quiz', 'focusing', 'listNodeMoveNextCorrect' ],
+                //     replacement: replacement
+                // }));
             } 
         
-    }, [quizPresent.listMove, quizFocusing]);
+    }, [quizPresent.listSanMove, quizFocusing]);
     
 
     const onClick_ButtonChangeAnswer = useCallback(
         (e:React.MouseEvent<HTMLButtonElement, MouseEvent>)=>{
 
-            const numberAnswer = quizFocusing.listListMoveCorrect.length;
+            const numberAnswer = quizFocusing.listNodeMoveNextCorrect.length;
             //console.log(numberAnswer)
             const value = e.currentTarget.value;
             let indexAnswerNew = indexAnswer;
@@ -125,7 +126,7 @@ function QuizEditingOthers({}: PropsQuizEditingOthers) {
             setIndexAnswer( (indexAnswerNew+numberAnswer) % numberAnswer );
             
             
-    }, [quizFocusing.listListMoveCorrect.length, indexAnswer]);
+    }, [quizFocusing.listNodeMoveNextCorrect.length, indexAnswer]);
 
 
   return (
@@ -164,7 +165,7 @@ function QuizEditingOthers({}: PropsQuizEditingOthers) {
                     > <FormattedMessage id={`Modal.QuizEditingOthers_ChangeSide`} /> </button>
                 </div>
 
-                {quizFocusing.listListMoveCorrect.length === 0 &&
+                {quizFocusing.listNodeMoveNextCorrect.length === 0 &&
                     <div className={`${stylesModal['content__section']}`} >
                         <span
                             className={`${stylesQEC['span__basic']}`}
@@ -177,7 +178,7 @@ function QuizEditingOthers({}: PropsQuizEditingOthers) {
                 }           
 
 
-                { quizFocusing.listListMoveCorrect.length > 0 &&
+                { quizFocusing.listNodeMoveNextCorrect.length > 0 &&
                     <>
                     <div className={`${stylesModal['content__section']}`} >
                         <button
@@ -188,7 +189,7 @@ function QuizEditingOthers({}: PropsQuizEditingOthers) {
                         > 
                             <FormattedMessage 
                                 id={`Modal.QuizEditingOthers_ShowAnswer`} 
-                                values={{index: `${(indexAnswer + 1)} / ${quizFocusing.listListMoveCorrect.length}`}}
+                                values={{index: `${(indexAnswer + 1)} / ${quizFocusing.listNodeMoveNextCorrect.length}`}}
                             /> 
                         </button>
                         <button
@@ -225,7 +226,7 @@ function QuizEditingOthers({}: PropsQuizEditingOthers) {
                         > 
                             <FormattedMessage 
                                 id={`Modal.QuizEditingOthers_DeleteAnswer`} 
-                                values={{index: `${(indexAnswer + 1)} / ${quizFocusing.listListMoveCorrect.length}`}}
+                                values={{index: `${(indexAnswer + 1)} / ${quizFocusing.listNodeMoveNextCorrect.length}`}}
                             /> 
                         </button>
                         <button

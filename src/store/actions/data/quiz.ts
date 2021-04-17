@@ -1,61 +1,10 @@
 import * as types from "store/types"; 
+import NodeMove from "store/types/data/NodeMove";
 import { KindGetListQuiz } from "store/types/data/quiz";
 
-// export const name__GET_LEAGUE_STANDINGS = 'data/football/GET_LEAGUE_STANDINGS';
-// type Payload__GET_LEAGUE_STANDINGS = {
-//     idLeague: string
-// }
-// export const return__GET_LEAGUE_STANDINGS = (payload: Payload__GET_LEAGUE_STANDINGS) => {
-//     return {
-//         type: name__GET_LEAGUE_STANDINGS,
-//         payload: payload
-//     }
-// };
-// export type type__GET_LEAGUE_STANDINGS = ReturnType<typeof return__GET_LEAGUE_STANDINGS>;
-
-
-// export const name__UPDATE_LEAGUE_STANDINGS = 'data/football/UPDATE_LEAGUE_STANDINGS';
-// type Payload__UPDATE_LEAGUE_STANDINGS = {
-//     idLeague: string,
-//     triggeringGet?: boolean,
-// }
-// export const return__UPDATE_LEAGUE_STANDINGS = (payload: Payload__UPDATE_LEAGUE_STANDINGS) => {
-//     return {
-//         type: name__UPDATE_LEAGUE_STANDINGS,
-//         payload: payload
-//     }
-// };
-// export type type__UPDATE_LEAGUE_STANDINGS = ReturnType<typeof return__UPDATE_LEAGUE_STANDINGS>;
 
 
 
-
-
-
-// export const name__GET_LIST_TEAM = 'data/football/GET_LIST_TEAM';
-// type Payload__GET_LIST_TEAM = {
-//     idCountry?: string,
-// }
-// export const return__GET_LIST_TEAM = (payload: Payload__GET_LIST_TEAM) => {
-//     return {
-//         type: name__GET_LIST_TEAM,
-//         payload: payload
-//     }
-// };
-// export type type__GET_LIST_TEAM = ReturnType<typeof return__GET_LIST_TEAM>;
-
-
-// export const name__CHECK_LIST_TEAM = 'data/football/CHECK_LIST_TEAM';
-// type Payload__CHECK_LIST_TEAM = {
-//     listIdTeam: string[],
-// }
-// export const return__CHECK_LIST_TEAM = (payload: Payload__CHECK_LIST_TEAM) => {
-//     return {
-//         type: name__CHECK_LIST_TEAM,
-//         payload: payload
-//     }
-// };
-// export type type__CHECK_LIST_TEAM = ReturnType<typeof return__CHECK_LIST_TEAM>;
 
 export const name__MOVE_IN_QUIZ_EDITING = 'data/quiz/MOVE_IN_QUIZ_EDITING';
 type Payload__MOVE_IN_QUIZ_EDITING = {
@@ -130,7 +79,7 @@ type Payload__CREATE_QUIZ = {
     name?: string,
     side: 'white' | 'black',
     fenStart: string,
-    listListMoveCorrect: string[][],
+    listNodeMoveNextCorrect: NodeMove[],
     idUser: string,
     isPublic: boolean,
 }
@@ -143,18 +92,19 @@ export const return__CREATE_QUIZ = (payload: Payload__CREATE_QUIZ) => {
 export type type__CREATE_QUIZ = ReturnType<typeof return__CREATE_QUIZ>;
 
 
-export const name__SAVE_LIST_MOVE = 'data/quiz/SAVE_LIST_MOVE';
-type Payload__SAVE_LIST_MOVE = {
-    listMove: string[],
-    index?: number,
+
+
+export const name__SAVE_LIST_SAN_MOVE_AS_ANSWER = 'data/quiz/SAVE_LIST_SAN_MOVE_AS_ANSWER';
+type Payload__SAVE_LIST_SAN_MOVE_AS_ANSWER = {
+    listSanMove: string[],
 }
-export const return__SAVE_LIST_MOVE= (payload: Payload__SAVE_LIST_MOVE) => {
+export const return__SAVE_LIST_SAN_MOVE_AS_ANSWER= (payload: Payload__SAVE_LIST_SAN_MOVE_AS_ANSWER) => {
     return {
-        type: name__SAVE_LIST_MOVE,
+        type: name__SAVE_LIST_SAN_MOVE_AS_ANSWER,
         payload: payload
     }
 };
-export type type__SAVE_LIST_MOVE = ReturnType<typeof return__SAVE_LIST_MOVE>;
+export type type__SAVE_LIST_SAN_MOVE_AS_ANSWER = ReturnType<typeof return__SAVE_LIST_SAN_MOVE_AS_ANSWER>;
 
 
 

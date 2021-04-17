@@ -38,7 +38,7 @@ function* moveInQuizEditing(action: actions.data.quiz.type__MOVE_IN_QUIZ_EDITING
                 ...quizPresent,
                 fen: chessFocusing.fen(),
                 turn: chessFocusing.turn() === 'w' ? 'white' : 'black',
-                listMove: [...quizPresent.listMove, result.san],
+                listSanMove: [...quizPresent.listSanMove, result.san],
                 index: quizPresent.index + 1,
             }
     

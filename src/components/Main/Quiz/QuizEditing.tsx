@@ -17,19 +17,6 @@ const ChessReq:any = require('chess.js');
 
 
 
-/*
-{
-        id: '',
-        name: '',
-        side: 'white' as 'white' | 'black',
-        fenStart: 'rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1',
-        listListMoveCorrect: [] as string[][],
-        idUser: '',
-        isPublic: true,
-      }
-
-*/
-
 
 type PropsQuizEditing = {};
 

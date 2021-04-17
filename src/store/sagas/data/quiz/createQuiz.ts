@@ -11,15 +11,6 @@ import {StateRoot} from 'store/reducers';
 import * as actions from "store/actions";
 import * as types from "store/types";
 
-/*
-{
-            name: "test",
-            side: "white",
-            fenStart: "dd",
-            listListMoveCorrect: [[]],
-            idUser: "abc",
-        }
-*/
 const CREATE_QUIZ = gql`
     mutation CreateQuiz($argument: CreateQuizInputType!){
         createQuiz(createQuizInputType: $argument) 
@@ -28,7 +19,7 @@ const CREATE_QUIZ = gql`
             name,
             side,
             fenStart,
-            listListMoveCorrect,
+            listNodeMoveNextCorrect,
             idUser
         }
     }
@@ -59,14 +50,14 @@ const requestCreateQuiz = (argument: any) => {
 // directly access to sportdataAPI -> update firebase (get document on return)
 function* createQuiz(action: actions.data.quiz.type__CREATE_QUIZ) {
 
-    const {name, side, fenStart, listListMoveCorrect, idUser, isPublic} = action.payload;
+    const {name, side, fenStart, listNodeMoveNextCorrect, idUser, isPublic} = action.payload;
 
     try {
         const argument = {
             name,
             side,
             fenStart,
-            listListMoveCorrect,
+            listNodeMoveNextCorrect,
             idUser,
             isPublic,
         };

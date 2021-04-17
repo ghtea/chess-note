@@ -59,34 +59,34 @@ function QuizEditingSave({}: PropsQuizEditingSave) {
                     replacement: quizPresent.fen
                 }));
                 dispatch(actions.present.return__REPLACE({ 
-                    listKey: [ 'quiz', 'listMove' ],
+                    listKey: [ 'quiz', 'listSanMove' ],
                     replacement: [],
                 }));
             }
             else if (value === 'new-answer'){
-                const replacement = [...quizFocusing.listListMoveCorrect, quizPresent.listMove];
+                const replacement = [...quizFocusing.listNodeMoveNextCorrect, quizPresent.listSanMove];
                 dispatch(actions.data.return__REPLACE({ 
-                    listKey: [ 'quiz', 'focusing', 'listListMoveCorrect' ],
+                    listKey: [ 'quiz', 'focusing', 'listNodeMoveNextCorrect' ],
                     replacement,
                 }));
             } 
             else if (value === 'existing-answer'){
-                let replacement = [...quizFocusing.listListMoveCorrect];
-                replacement[indexAnswer] = quizPresent.listMove;
+                let replacement = [...quizFocusing.listNodeMoveNextCorrect];
+                replacement[indexAnswer] = quizPresent.listSanMove;
 
                 dispatch(actions.data.return__REPLACE({ 
-                    listKey: [ 'quiz', 'focusing', 'listListMoveCorrect' ],
+                    listKey: [ 'quiz', 'focusing', 'listNodeMoveNextCorrect' ],
                     replacement: replacement
                 }));
             } 
         
-    }, [quizPresent.listMove, quizFocusing.listListMoveCorrect]);
+    }, [quizPresent.listSanMove, quizFocusing.listNodeMoveNextCorrect]);
     
 
     const onClick_ButtonChangeAnswer = useCallback(
         (e:React.MouseEvent<HTMLButtonElement, MouseEvent>)=>{
 
-            const numberAnswer = quizFocusing.listListMoveCorrect.length;
+            const numberAnswer = quizFocusing.listNodeMoveNextCorrect.length;
             //console.log(numberAnswer)
             const value = e.currentTarget.value;
             let indexAnswerNew = indexAnswer;
@@ -100,7 +100,7 @@ function QuizEditingSave({}: PropsQuizEditingSave) {
             setIndexAnswer( (indexAnswerNew+numberAnswer) % numberAnswer );
         
 
-    }, [quizFocusing.listListMoveCorrect.length, indexAnswer]);
+    }, [quizFocusing.listNodeMoveNextCorrect.length, indexAnswer]);
 
 
   return (
@@ -140,7 +140,7 @@ function QuizEditingSave({}: PropsQuizEditingSave) {
                     > <FormattedMessage id={`Modal.QuizEditingSave_SaveAsNewAnswer`} /> </button>
                 </div>
 
-                {quizFocusing && quizFocusing.listListMoveCorrect.length > 0 &&
+                {quizFocusing && quizFocusing.listNodeMoveNextCorrect.length > 0 &&
                     <div className={`${stylesModal['content__section']}`} >
                         <button
                             type='button'
@@ -150,7 +150,7 @@ function QuizEditingSave({}: PropsQuizEditingSave) {
                         > 
                             <FormattedMessage 
                                 id={`Modal.QuizEditingSave_SaveAsExistingAnswer`} 
-                                values={{index: `${(indexAnswer + 1)} / ${quizFocusing.listListMoveCorrect.length}`}}
+                                values={{index: `${(indexAnswer + 1)} / ${quizFocusing.listNodeMoveNextCorrect.length}`}}
                             /> 
                         </button>
                         <button

@@ -42,7 +42,7 @@ const stateInitial = {
     mode: 'creating', 
     fen: null,
     turn: 'white',
-    listMove: [],
+    listSanMove: [],
     index: 0,
   } as QuizPresent,
   

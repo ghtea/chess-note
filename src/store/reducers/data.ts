@@ -28,7 +28,7 @@ const stateInitial = {
         name: '',
         side: 'white',
         fenStart: 'rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1',
-        listListMoveCorrect: [],
+        listNodeMoveNextCorrect: [],
         idUser: '',
         isPublic: true,
       } as types.data.quiz.Quiz,

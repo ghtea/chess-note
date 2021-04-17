@@ -10,14 +10,55 @@ import { v4 as uuidv4 } from 'uuid';
 import {StateRoot} from 'store/reducers';
 import * as actions from "store/actions";
 import * as types from "store/types";
+import NodeMove from "store/types/data/NodeMove";
 
-// directly access to sportdataAPI -> update firebase (get document on return)
-function* saveListMove(action: actions.data.quiz.type__SAVE_LIST_MOVE) {
 
-    const {listMove, index} = action.payload;
 
+function* saveListSanMoveAsAnswer(action: actions.data.quiz.type__SAVE_LIST_SAN_MOVE_AS_ANSWER) {
+
+    const {listSanMove} = action.payload;
+
+    const quizFocusing: types.data.quiz.Quiz =  yield select( (state:StateRoot) => state.data.quiz.focusing ); 
+    
     try {
         
+        let queueSanMove = [...listSanMove];
+        let depth = 0;
+        let turn = quizFocusing.side; // 처음에 두는 플레이어의 색상
+        let listNodeMoveNextCurrentDepth: NodeMove[] | undefined = [...quizFocusing.listNodeMoveNextCorrect];
+
+        let listSanUntil = []
+
+        // 매번 움직임이 현재 답 트리에 있으면, 새로 만들 트리를 작게 할 생각 (새로운 트리의 시작 노드를 늦춘다)
+        while (listNodeMoveNextCurrentDepth && listNodeMoveNextCurrentDepth.findIndex(e=>e.san === queueSanMove[0])){
+            listNodeMoveNextCurrentDepth = listNodeMoveNextCurrentDepth.find(e=>e.san === queueSanMove[0])?.listNodeMoveNext
+            listSanUntil.push( queueSanMove.shift() as string);
+            depth++;
+            turn = turn === 'white' ? 'black' : 'white';
+        }
+
+
+        // 이미 존재 하는데, 기존에 답 트리가 더 길 때
+        // 즉, 새로운 답이 기존 답보다 짧아서, 기존 답의 뒷부분을 없애야 할 때
+        if (queueSanMove.length === 0 && listNodeMoveNextCurrentDepth && listNodeMoveNextCurrentDepth.length > 0){
+            
+        }
+        // 남은 움직임 큐로 새로운 노트 트리를 만든다
+        else if (queueSanMove && queueSanMove.length > 0){
+            const san = queueSanMove.shift();
+            let nodeMoveRoot = new NodeMove(san as string, depth, turn, listSanUntil);
+            let nodeFocusing = nodeMoveRoot;
+            while (queueSanMove.length > 0){
+                // 맨 앞 san을 빼서 그걸 현재 노드에 추가하고, 이후에는 그 노드에 주목한다 
+                nodeFocusing = nodeFocusing.addNodeMoveNext(queueSanMove.shift() as string);
+            }
+        }
+
+
+
+        for (let sanMoveEach of listSanMove){
+            //const nodeMoveEach =
+        }
         
 
     } catch (error) {
@@ -30,7 +71,7 @@ function* saveListMove(action: actions.data.quiz.type__SAVE_LIST_MOVE) {
     }
 }
 
-export default saveListMove;
+export default saveListSanMoveAsAnswer;
 
 
 

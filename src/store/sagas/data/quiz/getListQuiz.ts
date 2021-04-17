@@ -14,15 +14,6 @@ import * as types from "store/types";
 import { queryAllByAltText } from "@testing-library/dom";
 import { KindGetListQuiz } from "store/types/data/quiz";
 
-/*
-{
-            name: "test",
-            side: "white",
-            fenStart: "dd",
-            listListMoveCorrect: [[]],
-            idUser: "abc",
-        }
-*/
 
 
 // GraphQL query 문법에 이상 있으면 할당하는 시점에서 에러 발생시키기 때문에 에러 처리한 곳에서 해야 한다
@@ -54,7 +45,7 @@ function* getListQuiz( action: actions.data.quiz.type__GET_LIST_QUIZ) {
                     name
                     side
                     fenStart
-                    listListMoveCorrect
+                    listNodeMoveNextCorrect
                     idUser
                     isPublic
                     dateCreated
@@ -123,7 +114,7 @@ function* getListQuiz( action: actions.data.quiz.type__GET_LIST_QUIZ) {
                     name: '',
                     side: 'white',
                     fenStart: 'rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1',
-                    listListMoveCorrect: [],
+                    listNodeMoveNextCorrect: [],
                     idUser: '',
                     isPublic: true,
                 }

@@ -1,7 +1,5 @@
-export type Record = {
-  date: string;
-  result: boolean;
-}
+import NodeMove from "./NodeMove";
+
 
 
 export enum KindGetListQuiz {
@@ -16,7 +14,7 @@ export type Quiz = {
   name: string;
   side: 'white' | 'black';
   fenStart: string;
-  listListMoveCorrect: string[][];
+  listNodeMoveNextCorrect: NodeMove[];
   idUser: string;
   isPublic: boolean;
 }

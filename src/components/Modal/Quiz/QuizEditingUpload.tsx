@@ -61,7 +61,7 @@ function QuizEditingUpload({}: PropsQuizEditingUpload) {
                     codeSituation: 'NotLoggedIn__E'
                 }) );
             }
-            else if (quizFocusing.listListMoveCorrect.length === 0){
+            else if (quizFocusing.listNodeMoveNextCorrect.length === 0){
                 dispatch( actions.notification.return__ADD_DELETE_BANNER({
                     codeSituation: 'CreateQuiz_NoAnswer__E'
                 }) );
@@ -72,7 +72,7 @@ function QuizEditingUpload({}: PropsQuizEditingUpload) {
                     name: quizFocusing.name,
                     side: quizFocusing.side,
                     fenStart: quizFocusing.fenStart,
-                    listListMoveCorrect: quizFocusing.listListMoveCorrect,
+                    listNodeMoveNextCorrect: quizFocusing.listNodeMoveNextCorrect,
                     idUser: idUser,
                     isPublic: quizFocusing.isPublic,
                 }));
