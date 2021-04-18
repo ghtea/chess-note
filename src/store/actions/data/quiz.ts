@@ -1,5 +1,5 @@
 import * as types from "store/types"; 
-import NodeMove from "store/types/data/NodeMove";
+import NodeMove from "store/types/data/TreeNode";
 import { KindGetListQuiz } from "store/types/data/quiz";
 
 
