@@ -43,14 +43,14 @@ function* moveInQuizPlaying(action: actions.data.quiz.type__MOVE_IN_QUIZ_PLAYING
         }
         else {
             
-            const listListMoveCorrect = quizFocusing.listNodeMoveNextCorrect
+            const listSeriesSanCorrect = quizFocusing.listSeriesSanCorrect
 
             // 이전까지의 listSanMove (quizPresent) 에 현재 움직임을 포함한 배열을 
             // 처음부터 포함하는 정답 움직임이 있어야 한다 
-            const listSanMoveUntilThis = [...quizPresent.listSanMove, result?.san];
+            const seriesSanUntilThis = [...quizPresent.seriesSan, result?.san];
             
-            const listListMoveCorrectIncluding = listListMoveCorrect.filter(listSanMoveCorrectEach=>{
-                const indexIncludingAll = listSanMoveCorrectEach.join('-').indexOf(listSanMoveUntilThis.join('-'));
+            const listSeriesSanCorrectIncluding = listSeriesSanCorrect.filter(seriesSanCorrectEach=>{
+                const indexIncludingAll = seriesSanCorrectEach.join('-').indexOf(seriesSanUntilThis.join('-'));
                 // 처음 움직임부터 동일해야 한다
                 if (indexIncludingAll === 0){
                     return true;
@@ -59,8 +59,8 @@ function* moveInQuizPlaying(action: actions.data.quiz.type__MOVE_IN_QUIZ_PLAYING
                     return false;
                 }
             });
-            if (listListMoveCorrectIncluding.length > 0){
-                const indexSameMove = listListMoveCorrectIncluding.findIndex(e=>e.length === listSanMoveUntilThis.length);
+            if (listSeriesSanCorrectIncluding.length > 0){
+                const indexSameMove = listSeriesSanCorrectIncluding.findIndex(e=>e.length === seriesSanUntilThis.length);
                 
                 // 끝까지 동일한 정답 움직임이 있다 => 정답!
                 if (indexSameMove !== -1){
@@ -71,7 +71,7 @@ function* moveInQuizPlaying(action: actions.data.quiz.type__MOVE_IN_QUIZ_PLAYING
                         ...quizPresent,
                         fen: chessFocusing.fen(),
                         turn: chessFocusing.turn() === 'w' ? 'white' : 'black',
-                        listSanMove: [...quizPresent.listSanMove, result.san],
+                        listSanMove: [...quizPresent.seriesSan, result.san],
                         index: quizPresent.index + 1,
                     }
             
@@ -84,7 +84,7 @@ function* moveInQuizPlaying(action: actions.data.quiz.type__MOVE_IN_QUIZ_PLAYING
                 // 움직임이 더 남아 있어서, 상대 움직임을 자동으로 실현해야줘야 한다
                 else {
                     // index 0 이 아무것도 안한 처음 상태, +1 한 상태가 방금 플레이어의 수, +2 한 상태가 다음 자동적으로 둘 수
-                    const sanNext = listListMoveCorrectIncluding[0][quizPresent.index + 2];
+                    const sanNext = listSeriesSanCorrectIncluding[0][quizPresent.index + 2];
 
                     let result = chessFocusing.move(sanNext);
 
@@ -100,7 +100,7 @@ function* moveInQuizPlaying(action: actions.data.quiz.type__MOVE_IN_QUIZ_PLAYING
                             ...quizPresent,
                             fen: chessFocusing.fen(),
                             turn: chessFocusing.turn() === 'w' ? 'white' : 'black',
-                            listSanMove: [...quizPresent.listSanMove, result.san],
+                            listSanMove: [...quizPresent.seriesSan, result.san],
                             index: quizPresent.index + 2, // 주의!
                         }
                 

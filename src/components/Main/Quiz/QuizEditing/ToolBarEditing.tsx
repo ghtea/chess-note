@@ -60,24 +60,16 @@ function ToolBarEditing({
                 }));
             }
             else if (value === 'backward'){
+                
+            }
+            else if (value === 'forward'){
+                
+            }
+            else if (value === 'save'){
                 dispatch(actions.appearance.return__REPLACE({ 
                     listKey: ['showing', 'modal', 'quizEditingSave'],
                     replacement: true,
                 }));
-            }
-            else if (value === 'forward'){
-                
-
-                // dispatch(actions.status.return__REPLACE({ 
-                //     listKey: ['showing', 'modal', 'quizEditingSave'],
-                //     replacement: true,
-                // }));
-            }
-            else if (value === 'save'){
-                // dispatch(actions.status.return__REPLACE({ 
-                //     listKey: ['showing', 'modal', 'quizEditingSave'],
-                //     replacement: true,
-                // }));
             }
             else if (value==='others'){
                 dispatch(actions.appearance.return__REPLACE({ 

@@ -26,9 +26,11 @@ const stateInitial = {
       focusing: {
         id: null,
         name: '',
-        side: 'white',
+
+        turnNext: 'white',
         fenStart: 'rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1',
-        listNodeMoveNextCorrect: [],
+        listSeriesSanCorrect: [],
+        
         idUser: '',
         isPublic: true,
       } as types.data.quiz.Quiz,

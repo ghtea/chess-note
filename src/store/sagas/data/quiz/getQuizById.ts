@@ -43,9 +43,9 @@ function* getQuizById( action: actions.data.quiz.type__GET_QUIZ_BY_ID ) {
                 getQuizById(getQuizByIdInputType: $argument) {
                     id
                     name
-                    side
+                    turnNext
                     fenStart
-                    listNodeMoveNextCorrect
+                    listSeriesSanCorrect
                     idUser
                     isPublic
                     dateCreated
@@ -59,7 +59,7 @@ function* getQuizById( action: actions.data.quiz.type__GET_QUIZ_BY_ID ) {
         };
 
         let response: ApolloQueryResult<any> =  yield call( requestGetQuizById,  GET_QUIZ_BY_ID, argument);
-        console.log(response);
+        // console.log(response);
         const quizFromRes = response.data?.getQuizById as types.data.quiz.Quiz | undefined;
         
         if (quizFromRes){

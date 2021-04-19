@@ -16,6 +16,7 @@ import IconAngle from 'svgs/basic/IconAngle';
 
 import styles from './QuizEditingSave.module.scss';
 import stylesModal from 'components/Modal.module.scss';
+import { treeMove } from "chessApp";
 
 
 type PropsQuizEditingSave = {};
@@ -53,54 +54,28 @@ function QuizEditingSave({}: PropsQuizEditingSave) {
                 listKey: ['showing', 'modal', convertCase("QuizEditingSave", 'camel')],
                 replacement: false
             }));
+
+
             if (value === 'start'){
                 dispatch(actions.data.return__REPLACE({ 
                     listKey: [ 'quiz', 'focusing', 'fenStart' ],
                     replacement: quizPresent.fen
                 }));
                 dispatch(actions.present.return__REPLACE({ 
-                    listKey: [ 'quiz', 'listSanMove' ],
+                    listKey: [ 'quiz', 'seriesSan' ],
                     replacement: [],
                 }));
             }
-            else if (value === 'new-answer'){
-                const replacement = [...quizFocusing.listNodeMoveNextCorrect, quizPresent.listSanMove];
+            else if (value === 'answer'){
+                treeMove.putSeriesSan(quizPresent.seriesSan);
                 dispatch(actions.data.return__REPLACE({ 
-                    listKey: [ 'quiz', 'focusing', 'listNodeMoveNextCorrect' ],
-                    replacement,
-                }));
-            } 
-            else if (value === 'existing-answer'){
-                let replacement = [...quizFocusing.listNodeMoveNextCorrect];
-                replacement[indexAnswer] = quizPresent.listSanMove;
-
-                dispatch(actions.data.return__REPLACE({ 
-                    listKey: [ 'quiz', 'focusing', 'listNodeMoveNextCorrect' ],
-                    replacement: replacement
+                    listKey: [ 'quiz', 'focusing', 'listSeriesSanCorrect' ],
+                    replacement: treeMove.returnListSeriesSan(),
                 }));
             } 
         
-    }, [quizPresent.listSanMove, quizFocusing.listNodeMoveNextCorrect]);
+    }, [quizPresent.seriesSan, quizFocusing.listSeriesSanCorrect]);
     
-
-    const onClick_ButtonChangeAnswer = useCallback(
-        (e:React.MouseEvent<HTMLButtonElement, MouseEvent>)=>{
-
-            const numberAnswer = quizFocusing.listNodeMoveNextCorrect.length;
-            //console.log(numberAnswer)
-            const value = e.currentTarget.value;
-            let indexAnswerNew = indexAnswer;
-            if (value === 'previous-answer'){
-                indexAnswerNew--;
-            }
-            else {
-                indexAnswerNew++;
-            }
-
-            setIndexAnswer( (indexAnswerNew+numberAnswer) % numberAnswer );
-        
-
-    }, [quizFocusing.listNodeMoveNextCorrect.length, indexAnswer]);
 
 
   return (
@@ -131,52 +106,15 @@ function QuizEditingSave({}: PropsQuizEditingSave) {
                     > <FormattedMessage id={`Modal.QuizEditingSave_SaveAsStart`} /> </button>
                 </div>
 
+
                 <div className={`${stylesModal['content__section']}`} >
                     <button
                         type='button'
-                        value='new-answer'
-                        className={`${styles['button__new-answer']}`}
+                        value='answer'
+                        className={`${styles['button__answer']}`}
                         onClick={onClick_AnyMainButton}
-                    > <FormattedMessage id={`Modal.QuizEditingSave_SaveAsNewAnswer`} /> </button>
+                    > <FormattedMessage id={`Modal.QuizEditingSave_SaveAsAnswer`} /> </button>
                 </div>
-
-                {quizFocusing && quizFocusing.listNodeMoveNextCorrect.length > 0 &&
-                    <div className={`${stylesModal['content__section']}`} >
-                        <button
-                            type='button'
-                            value='existing-answer'
-                            className={`${styles['button__existing-answer']}`}
-                            onClick={onClick_AnyMainButton}
-                        > 
-                            <FormattedMessage 
-                                id={`Modal.QuizEditingSave_SaveAsExistingAnswer`} 
-                                values={{index: `${(indexAnswer + 1)} / ${quizFocusing.listNodeMoveNextCorrect.length}`}}
-                            /> 
-                        </button>
-                        <button
-                            type='button'
-                            value='previous-answer'
-                            onClick={onClick_ButtonChangeAnswer}
-                            className={`${styles['button__previous-answer']}`}
-                        >
-                            <IconAngle 
-                                className={`${styles['icon__previous-answer']}`}
-                                directon='left' kind='regular' 
-                            />
-                        </button>
-                        <button
-                            type='button'
-                            value='next-answer'
-                            onClick={onClick_ButtonChangeAnswer}
-                            className={`${styles['button__next-answer']}`}
-                        >
-                            <IconAngle 
-                                className={`${styles['icon__next-answer']}`}
-                                directon='right' kind='regular' 
-                            />
-                        </button>
-                    </div>
-                }
 
             </div>
         

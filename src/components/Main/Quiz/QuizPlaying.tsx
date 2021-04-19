@@ -66,7 +66,7 @@ function QuizPlaying({}: PropsQuizPlaying) {
     <div>
       <ChessBoard
         listSquare={listSquare}
-        side={quizFocusing.side || 'white'}
+        side={quizFocusing.turnNext || 'white'}
         page={'quiz'}
       />
       

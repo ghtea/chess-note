@@ -1,4 +1,4 @@
-import NodeMove from "./TreeNode";
+import {NodeMove} from "./TreeMove";
 
 
 
@@ -12,9 +12,9 @@ export enum KindGetListQuiz {
 export type Quiz = {
   id: string | null;
   name: string;
-  side: 'white' | 'black';
+  turnNext: 'white' | 'black';
   fenStart: string;
-  listNodeMoveNextCorrect: NodeMove[];
+  listSeriesSanCorrect: string[][];
   idUser: string;
   isPublic: boolean;
 }

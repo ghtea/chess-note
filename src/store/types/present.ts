@@ -6,6 +6,6 @@ export type QuizPresent = {
   mode: 'creating' | "editing" | "playing" | "solved" ;
   fen: string | null;
   turn: "white" | "black";
-  listSanMove: string[];
+  seriesSan: string[];
   index: number;
 }

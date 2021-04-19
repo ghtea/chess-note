@@ -1,5 +1,5 @@
 import * as types from "store/types"; 
-import NodeMove from "store/types/data/TreeNode";
+import {NodeMove} from "store/types/data/TreeMove";
 import { KindGetListQuiz } from "store/types/data/quiz";
 
 
@@ -77,9 +77,9 @@ export type type__GET_LIST_QUIZ = ReturnType<typeof return__GET_LIST_QUIZ>;
 export const name__CREATE_QUIZ = 'data/quiz/CREATE_QUIZ';
 type Payload__CREATE_QUIZ = {
     name?: string,
-    side: 'white' | 'black',
+    turnNext: 'white' | 'black',
     fenStart: string,
-    listNodeMoveNextCorrect: NodeMove[],
+    listSeriesSanCorrect: string[][],
     idUser: string,
     isPublic: boolean,
 }
@@ -94,17 +94,27 @@ export type type__CREATE_QUIZ = ReturnType<typeof return__CREATE_QUIZ>;
 
 
 
-export const name__SAVE_LIST_SAN_MOVE_AS_ANSWER = 'data/quiz/SAVE_LIST_SAN_MOVE_AS_ANSWER';
-type Payload__SAVE_LIST_SAN_MOVE_AS_ANSWER = {
-    listSanMove: string[],
-}
-export const return__SAVE_LIST_SAN_MOVE_AS_ANSWER= (payload: Payload__SAVE_LIST_SAN_MOVE_AS_ANSWER) => {
+export const name__WATCH_FEN_START_CHANGE = 'data/quiz/WATCH_FEN_START_CHANGE';
+export const return__WATCH_FEN_START_CHANGE= () => {
     return {
-        type: name__SAVE_LIST_SAN_MOVE_AS_ANSWER,
-        payload: payload
+        type: name__WATCH_FEN_START_CHANGE
     }
 };
-export type type__SAVE_LIST_SAN_MOVE_AS_ANSWER = ReturnType<typeof return__SAVE_LIST_SAN_MOVE_AS_ANSWER>;
+export type type__WATCH_FEN_START_CHANGE = ReturnType<typeof return__WATCH_FEN_START_CHANGE>;
+
+
+// export const name__SAVE_LIST_SAN_MOVE_AS_ANSWER = 'data/quiz/SAVE_LIST_SAN_MOVE_AS_ANSWER';
+// type Payload__SAVE_LIST_SAN_MOVE_AS_ANSWER = {
+//     seriesSan: string[],
+// }
+// export const return__SAVE_LIST_SAN_MOVE_AS_ANSWER= (payload: Payload__SAVE_LIST_SAN_MOVE_AS_ANSWER) => {
+//     return {
+//         type: name__SAVE_LIST_SAN_MOVE_AS_ANSWER,
+//         payload: payload
+//     }
+// };
+// export type type__SAVE_LIST_SAN_MOVE_AS_ANSWER = ReturnType<typeof return__SAVE_LIST_SAN_MOVE_AS_ANSWER>;
+
 
 
 

@@ -46,8 +46,7 @@
     "Modal.QuizEditingUpload_Private": "비공개",
 
     "Modal.QuizEditingSave_SaveAsStart": "시작 지점으로 저장",
-    "Modal.QuizEditingSave_SaveAsNewAnswer": "새로운 해답으로 저장",
-    "Modal.QuizEditingSave_SaveAsExistingAnswer": "해답 {index} (으)로 저장",
+    "Modal.QuizEditingSave_SaveAsAnswer": "해답으로 저장",
 
     "Modal.QuizEditingOthers_UseFen": "클립보드의 FEN 이용",
     "Modal.QuizEditingOthers_NotValidFen": "올바른 FEN가 아닙니다",

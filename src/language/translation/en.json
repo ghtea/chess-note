@@ -55,8 +55,7 @@
     "Modal.QuizEditingUpload_Private": "Private",
 
     "Modal.QuizEditingSave_SaveAsStart": "Save as Start",
-    "Modal.QuizEditingSave_SaveAsNewAnswer": "Save as New Answer",
-    "Modal.QuizEditingSave_SaveAsExistingAnswer": "Save as Answer {index}",
+    "Modal.QuizEditingSave_SaveAsAnswer": "Save as an Answer",
 
     "Modal.QuizEditingOthers_UseFen": "Use FEN from Clipboard",    
     "Modal.QuizEditingOthers_NotValidFen": "This is not valid FEN",

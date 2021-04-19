@@ -2,7 +2,7 @@ import React, { useCallback, useEffect, useRef, useMemo, useState } from "react"
 import { firebaseAuth } from "firebaseApp";
 
 import history from 'historyApp';
-import chessFocusing from 'chessApp';
+import chessFocusing, { treeMove } from 'chessApp';
 import { useLocation } from "react-router-dom";
 import { FormattedMessage } from 'react-intl';
 import * as clipboardy from 'clipboardy';
@@ -82,37 +82,25 @@ function QuizEditingOthers({}: PropsQuizEditingOthers) {
                 }
                 
             }
-            else if (value === 'change-side'){
-                dispatch(actions.data.return__REPLACE({ 
-                    listKey: [ 'quiz', 'focusing', 'side' ],
-                    replacement: quizFocusing.side === 'white' ? 'black' : 'white', 
-                }));
-            }
-            else if (value === 'new-answer'){
-                dispatch(actions.data.quiz.return__SAVE_LIST_SAN_MOVE_AS_ANSWER({ 
-                    listSanMove: quizPresent.listSanMove
-                }));
+            else if (value === 'show-answer'){
+                console.log('show answer');
             } 
-            else if (value === 'existing-answer'){
-                dispatch(actions.data.quiz.return__SAVE_LIST_SAN_MOVE_AS_ANSWER({ 
-                    listSanMove: quizPresent.listSanMove
+            else if (value === 'delete-answer'){
+                console.log('delete answer');
+                treeMove.deleteNthSeriesSan(indexAnswer);
+                dispatch(actions.data.return__REPLACE({
+                    listKey: ['quiz', 'focusing', 'listSeriesSanCorrect'],
+                    replacement: treeMove.returnListSeriesSan()
                 }));
-                // let replacement = [...quizFocusing.listNodeMoveNextCorrect];
-                // replacement[indexAnswer] = quizPresent.listSanMove;
-
-                // dispatch(actions.data.return__REPLACE({ 
-                //     listKey: [ 'quiz', 'focusing', 'listNodeMoveNextCorrect' ],
-                //     replacement: replacement
-                // }));
             } 
         
-    }, [quizPresent.listSanMove, quizFocusing]);
+    }, [quizPresent.seriesSan, quizFocusing, indexAnswer]);
     
 
     const onClick_ButtonChangeAnswer = useCallback(
         (e:React.MouseEvent<HTMLButtonElement, MouseEvent>)=>{
 
-            const numberAnswer = quizFocusing.listNodeMoveNextCorrect.length;
+            const numberAnswer = quizFocusing.listSeriesSanCorrect.length;
             //console.log(numberAnswer)
             const value = e.currentTarget.value;
             let indexAnswerNew = indexAnswer;
@@ -126,7 +114,7 @@ function QuizEditingOthers({}: PropsQuizEditingOthers) {
             setIndexAnswer( (indexAnswerNew+numberAnswer) % numberAnswer );
             
             
-    }, [quizFocusing.listNodeMoveNextCorrect.length, indexAnswer]);
+    }, [quizFocusing.listSeriesSanCorrect.length, indexAnswer]);
 
 
   return (
@@ -156,16 +144,7 @@ function QuizEditingOthers({}: PropsQuizEditingOthers) {
                     > <FormattedMessage id={`Modal.QuizEditingOthers_UseFen`} /> </button>
                 </div>
 
-                <div className={`${stylesModal['content__section']}`} >
-                    <button
-                        type='button'
-                        value='change-side'
-                        className={`${styles['button__change-side']} ${stylesQEC['button__basic']}`}
-                        onClick={onClick_AnyMainButton}
-                    > <FormattedMessage id={`Modal.QuizEditingOthers_ChangeSide`} /> </button>
-                </div>
-
-                {quizFocusing.listNodeMoveNextCorrect.length === 0 &&
+                {quizFocusing.listSeriesSanCorrect.length === 0 &&
                     <div className={`${stylesModal['content__section']}`} >
                         <span
                             className={`${stylesQEC['span__basic']}`}
@@ -178,7 +157,7 @@ function QuizEditingOthers({}: PropsQuizEditingOthers) {
                 }           
 
 
-                { quizFocusing.listNodeMoveNextCorrect.length > 0 &&
+                { quizFocusing.listSeriesSanCorrect.length > 0 &&
                     <>
                     <div className={`${stylesModal['content__section']}`} >
                         <button
@@ -189,7 +168,7 @@ function QuizEditingOthers({}: PropsQuizEditingOthers) {
                         > 
                             <FormattedMessage 
                                 id={`Modal.QuizEditingOthers_ShowAnswer`} 
-                                values={{index: `${(indexAnswer + 1)} / ${quizFocusing.listNodeMoveNextCorrect.length}`}}
+                                values={{index: `${(indexAnswer + 1)} / ${quizFocusing.listSeriesSanCorrect.length}`}}
                             /> 
                         </button>
                         <button
@@ -226,7 +205,7 @@ function QuizEditingOthers({}: PropsQuizEditingOthers) {
                         > 
                             <FormattedMessage 
                                 id={`Modal.QuizEditingOthers_DeleteAnswer`} 
-                                values={{index: `${(indexAnswer + 1)} / ${quizFocusing.listNodeMoveNextCorrect.length}`}}
+                                values={{index: `${(indexAnswer + 1)} / ${quizFocusing.listSeriesSanCorrect.length}`}}
                             /> 
                         </button>
                         <button

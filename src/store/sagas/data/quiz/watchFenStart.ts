@@ -6,38 +6,27 @@ import apolloClient from 'apollo';
 import { gql, useQuery , FetchResult} from '@apollo/client';
 import { v4 as uuidv4 } from 'uuid';
 
+import {treeMove} from 'chessApp';
 // import * as config from 'config';
 import {StateRoot} from 'store/reducers';
 import * as actions from "store/actions";
 import * as types from "store/types";
-import NodeMove from "store/types/data/TreeNode";
+import { waitForStateChangeToDifferentValue } from "store/sagas/others/waitForStateChange";
+//import NodeMove from "store/types/data/TreeMove";
 
 
+// <Route path="/quiz" >    Quiz 컴포넌트가 마운트 되자마자, return__WATCH_FEN_START_CHANGE  디스패치 dispatch 한다!
+function* watchFenStartChange(action: actions.data.quiz.type__WATCH_FEN_START_CHANGE) {
 
-function* saveListSanMoveAsAnswer(action: actions.data.quiz.type__SAVE_LIST_SAN_MOVE_AS_ANSWER) {
 
-    const {listSanMove} = action.payload;
+    const fenStartNew: unknown = yield call(waitForStateChangeToDifferentValue, state => state.data.quiz.focusing.fenStart);
 
-    const quizFocusing: types.data.quiz.Quiz =  yield select( (state:StateRoot) => state.data.quiz.focusing ); 
-    
-    let nodeRootNew = 
+    console.log("fenStart of Quiz changed: ", fenStartNew);
 
-    try {
-        
-        
-        
 
-    } catch (error) {
-        
-        console.error(error);
-        
-        // yield put( actions.notification.return__ADD_DELETE_BANNER({
-        //     codeSituation: 'Football_AddTeam_UnknownError__E'
-        // }) );
-    }
 }
 
-export default saveListSanMoveAsAnswer;
+export default watchFenStartChange;
 
 
 

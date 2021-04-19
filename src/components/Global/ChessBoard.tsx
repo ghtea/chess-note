@@ -46,11 +46,17 @@ function ChessBoard({
 
     const dispatch = useDispatch();
 
-    const mode = useSelector((state: StateRoot)=>{
+    const modeQuiz = useSelector((state: StateRoot)=>state.present.quiz.mode);
+    
+    const mode = useMemo(( )=>{
+        console.log('modeQuiz: ', modeQuiz)
         if (page === 'quiz'){
-            return state.present.quiz.mode
+            return modeQuiz;
         }
-    });
+        else {
+            return 'opening'
+        }
+    }, [page, modeQuiz]);
     
     const {innerWidth, innerHeight} = useSelector((state: StateRoot)=>state.present.size.window);
     const heightHeader = useSelector((state: StateRoot)=>state.present.size.document.header.height);
@@ -106,7 +112,7 @@ function ChessBoard({
         }
         // when clicking to move
         else {
-
+            //console.log('mode: ', mode)
             if (page === 'quiz'){
                 if (mode ==='creating' || mode === 'editing'){
                     dispatch(actions.data.quiz.return__MOVE_IN_QUIZ_EDITING({
@@ -121,7 +127,6 @@ function ChessBoard({
                     }))
                 }
             }
-
             setPositionStart(null);
         }    
         },[page, mode, positionStart] // move 같은 함수도 잊지 말고 dependency list 에 추가!

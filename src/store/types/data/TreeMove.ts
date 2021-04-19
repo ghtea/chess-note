@@ -4,7 +4,7 @@ export type PayloadNodeMove = {
   san:string; 
   depth:number;
   turn: 'white' | 'black';
-  listSanMoveBefore: string[];
+  seriesSanBefore: string[];
   nodeMoveBefore: NodeMove | TreeMove;
 }
 
@@ -15,19 +15,19 @@ export class NodeMove {
   san: string;
   depth: number;
   turn: 'white' | 'black';
-  listSanMove: string[];
+  seriesSan: string[];
   listNodeMoveNext: NodeMove[];
   nodeMoveBefore: NodeMove | TreeMove;
 
   
   constructor (paylod: PayloadNodeMove) {
     
-    const {san, depth, turn, listSanMoveBefore, nodeMoveBefore} = paylod;
+    const {san, depth, turn, seriesSanBefore, nodeMoveBefore} = paylod;
 
     this.san = san;
     this.depth = depth;
     this.turn = turn;
-    this.listSanMove = listSanMoveBefore.concat([san]);
+    this.seriesSan = seriesSanBefore.concat([san]);
     this.listNodeMoveNext = [];
     this.nodeMoveBefore = nodeMoveBefore;
   }
@@ -41,7 +41,7 @@ export class NodeMove {
       san: san,
       depth: this.depth + 1,
       turn: this.turn === 'white' ? 'black' : 'white' ,
-      listSanMoveBefore: this.listSanMove,
+      seriesSanBefore: this.seriesSan,
       nodeMoveBefore: this
     }
     const nodeMoveNext = new NodeMove(payload);
@@ -73,7 +73,7 @@ export class NodeMove {
   // 해당 노드에서 위로 올라가면서, 해당 노드가 속하는 줄기 삭제
   // 해당 노드말고 다른 노드을 자식으로 가지는 노드 직전까지 삭제한다
   deleteUntilCurrentNodeMove() {
-    let queueSan = this.listSanMove;
+    let queueSan = this.seriesSan;
     let nodeFocusing: NodeMove | TreeMove = this;
     let sanLatest = '';
     // 해당 노드의 자식이 1개 or 0개뿐이면 그 부모로 올라간다 (단, 최상단인 TreeNode까지는 올라가지 않는다)
@@ -101,6 +101,10 @@ export class NodeMove {
 
 
 
+
+
+
+
 function isNodeMove(node: NodeMove | TreeMove): node is NodeMove {
   return (node as NodeMove).san !== undefined;
 }
@@ -108,19 +112,19 @@ function isNodeMove(node: NodeMove | TreeMove): node is NodeMove {
 
 
 export type PayloadTreeMove = {
-  fan:string | undefined; 
+  fenStart:string | undefined; 
   turnNext: 'white' | 'black';
 }
 
 export class TreeMove {
-  fan: string | undefined;
+  fenStart: string | undefined;
   turnNext: 'white' | 'black';
   listNodeMoveNext: NodeMove[];
 
   constructor(payload: PayloadTreeMove) {
-    const {fan, turnNext} = payload;
+    const {fenStart, turnNext} = payload;
 
-    this.fan = fan;
+    this.fenStart = fenStart;
     this.turnNext = turnNext;
     this.listNodeMoveNext = [];
   }
@@ -132,7 +136,7 @@ export class TreeMove {
       san: san,
       depth: 1,
       turn: this.turnNext,
-      listSanMoveBefore: [],
+      seriesSanBefore: [],
       nodeMoveBefore: this,
     }
     const nodeMoveNext = new NodeMove(payload);
@@ -153,18 +157,18 @@ export class TreeMove {
   }
 
 
-  returnListPath(): string[][]{
-    let listPath: string[][] = [];
+  returnListSeriesSan(): string[][]{
+    let listSeriesSan: string[][] = [];
 
     for (const nodeMoveFirst of this.listNodeMoveNext){
       dfs(nodeMoveFirst);
     }
-    return listPath;
+    return listSeriesSan;
     
     function dfs(nodeMove: NodeMove){
       // 더이상 앞으로 나아가는게 없으면 정답 리스트에 반환
       if (nodeMove && nodeMove.listNodeMoveNext && nodeMove.listNodeMoveNext.length === 0){
-        listPath.push(nodeMove.listSanMove);
+        listSeriesSan.push(nodeMove.seriesSan);
       }
       else if (nodeMove && nodeMove.listNodeMoveNext && nodeMove.listNodeMoveNext.length > 0){
         for (const nodeMoveNext of nodeMove.listNodeMoveNext){
@@ -174,8 +178,8 @@ export class TreeMove {
     }
   }
 
-  putPath(path: string[]){
-    let queueSan = [...path];
+  putSeriesSan(seriesSan: string[]){
+    let queueSan = [...seriesSan];
 
     let nodeMoveFocusing : TreeMove | NodeMove  = this;
 
@@ -200,7 +204,7 @@ export class TreeMove {
           san: queueSan.shift() as string,
           depth: isNodeMove(nodeMoveFocusing) ? nodeMoveFocusing.depth + 1 : 1,
           turn: turn,
-          listSanMoveBefore: isNodeMove(nodeMoveFocusing) ? nodeMoveFocusing.listSanMove : [],
+          seriesSanBefore: isNodeMove(nodeMoveFocusing) ? nodeMoveFocusing.seriesSan : [],
           nodeMoveBefore: nodeMoveFocusing,
         }
         const nodeMoveNew = new NodeMove(payload);
@@ -223,7 +227,7 @@ export class TreeMove {
   }
 
 
-  deleteNthPath(index: number){
+  deleteNthSeriesSan(index: number){
 
     let count = 0;
 
@@ -247,5 +251,11 @@ export class TreeMove {
     }
   }
 
+  restart(payload:PayloadTreeMove){
+    const {fenStart, turnNext} = payload;
+    this.fenStart = fenStart;
+    this.turnNext = turnNext;
+    this.listNodeMoveNext = [];
+  }
 
 }

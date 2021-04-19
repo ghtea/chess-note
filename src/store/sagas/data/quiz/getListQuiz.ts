@@ -43,9 +43,9 @@ function* getListQuiz( action: actions.data.quiz.type__GET_LIST_QUIZ) {
                 getListQuiz(getListQuizInputType: $argument) {
                     id
                     name
-                    side
+                    turnNext
                     fenStart
-                    listNodeMoveNextCorrect
+                    listSeriesSanCorrect
                     idUser
                     isPublic
                     dateCreated
@@ -75,7 +75,7 @@ function* getListQuiz( action: actions.data.quiz.type__GET_LIST_QUIZ) {
 
 
         const list = (response.data?.getListQuiz || []) as types.data.quiz.Quiz[];
-        console.log(list);
+        //console.log(list);
         if (list.length > 0){
             yield put( actions.data.return__REPLACE({
                 listKey:['quiz'],
@@ -112,9 +112,9 @@ function* getListQuiz( action: actions.data.quiz.type__GET_LIST_QUIZ) {
                 focusing: {
                     id: '',
                     name: '',
-                    side: 'white',
+                    turnNext: 'white',
                     fenStart: 'rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1',
-                    listNodeMoveNextCorrect: [],
+                    listSeriesSanCorrect: [],
                     idUser: '',
                     isPublic: true,
                 }

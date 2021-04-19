@@ -19,9 +19,14 @@ function Quiz({}: PropsQuiz) {
   
   const dispatch = useDispatch();
 
+  
+  useEffect(()=>{
+    dispatch(actions.data.quiz.return__WATCH_FEN_START_CHANGE()); 
+  }, [])
+
   useEffect(()=>{
     // 중요!, 정규표현식 더 공부...
-    const modeFromUrl = window.location.pathname.replace(/^\/quiz\/([^\/]*)\/.*/, "$1");;
+    const modeFromUrl = window.location.pathname.replace(/\/quiz\/([^/]*).*/, "$1");
     //console.log('modeFromUrl: ', modeFromUrl)
     let replacement = '';
 

@@ -25,7 +25,7 @@ function QuizEditing({}: PropsQuizEditing) {
   const dispatch = useDispatch();
 
   const statusQuiz = useSelector((state: StateRoot)=>state.present.quiz);
-  const side = useSelector((state: StateRoot)=>state.data.quiz.focusing.side);
+  const side = useSelector((state: StateRoot)=>state.data.quiz.focusing.turnNext);
   //const { loading, error, data } = useQuery(GET_LIST_QUIZ);
 
 
