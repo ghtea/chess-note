@@ -77,15 +77,23 @@ function* getListQuiz( action: actions.data.quiz.type__GET_LIST_QUIZ) {
         const list = (response.data?.getListQuiz || []) as types.data.quiz.Quiz[];
         //console.log(list);
         if (list.length > 0){
+
             yield put( actions.data.return__REPLACE({
-                listKey:['quiz'],
-                replacement: {
-                    list: list,
-                    index: 0,
-                    focusing: list[0]
-                }
+                listKey:['quiz', 'list'],
+                replacement: list,
             }));
-            history.push(`/quiz/play/${list[0].id}`);
+            yield put( actions.data.return__REPLACE({
+                listKey:['quiz', 'index'],
+                replacement: 0,
+            }));
+
+
+            yield put( actions.data.quiz.return__FOCUS_QUIZ({
+                quiz: list[0],
+                mode: 'playing',
+            }));
+
+
 
             yield put( actions.status.return__REPLACE({
                 listKey: ['data', 'quiz', 'list'],
@@ -106,19 +114,19 @@ function* getListQuiz( action: actions.data.quiz.type__GET_LIST_QUIZ) {
             }) );
         }
         else {
-            const quizDefault = {
-                index: null,
-                list: [],
-                focusing: {
-                    id: '',
-                    name: '',
-                    turnNext: 'white',
-                    fenStart: 'rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1',
-                    listSeriesSanCorrect: [],
-                    idUser: '',
-                    isPublic: true,
-                }
-            }
+            // const quizDefault = {
+            //     index: null,
+            //     list: [],
+            //     focusing: {
+            //         id: '',
+            //         name: '',
+            //         turnNext: 'white',
+            //         fenStart: 'rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1',
+            //         listSeriesSanCorrect: [],
+            //         idUser: '',
+            //         isPublic: true,
+            //     }
+            // }
 
             yield put( actions.status.return__REPLACE({
                 listKey: ['data', 'quiz', 'list'],

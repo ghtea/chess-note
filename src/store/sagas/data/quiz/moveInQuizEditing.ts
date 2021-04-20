@@ -39,7 +39,6 @@ function* moveInQuizEditing(action: actions.data.quiz.type__MOVE_IN_QUIZ_EDITING
                 fen: chessFocusing.fen(),
                 turn: chessFocusing.turn() === 'w' ? 'white' : 'black',
                 seriesSan: [...quizPresent.seriesSan, result.san],
-                index: quizPresent.index + 1,
             }
     
             yield put( actions.present.return__REPLACE({

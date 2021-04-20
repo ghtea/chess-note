@@ -7,5 +7,6 @@ export type QuizPresent = {
   fen: string | null;
   turn: "white" | "black";
   seriesSan: string[];
-  index: number;
 }
+
+export type ModeQuiz = 'playing' | 'solved' | 'creating' | 'editing';

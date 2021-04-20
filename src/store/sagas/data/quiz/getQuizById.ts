@@ -12,7 +12,7 @@ import * as actions from "store/actions";
 import * as types from "store/types";
 import { queryAllByAltText } from "@testing-library/dom";
 // import { KindGetListQuiz } from "store/types/data/quiz";
-
+import chessFocusing from 'chessApp';
 
 // GraphQL query 문법에 이상 있으면 할당하는 시점에서 에러 발생시키기 때문에 에러 처리한 곳에서 해야 한다
 
@@ -63,15 +63,11 @@ function* getQuizById( action: actions.data.quiz.type__GET_QUIZ_BY_ID ) {
         const quizFromRes = response.data?.getQuizById as types.data.quiz.Quiz | undefined;
         
         if (quizFromRes){
-            yield put( actions.data.return__REPLACE({
-                listKey:['quiz'],
-                replacement: {
-                    list: [],
-                    index: null,
-                    focusing: quizFromRes
-                }
+
+            yield put( actions.data.quiz.return__FOCUS_QUIZ({
+                quiz: quizFromRes,
+                mode: 'playing',
             }));
-            // history.push(`/quiz/play/${list[0].id}`);
 
             yield put( actions.status.return__REPLACE({
                 listKey: ['data', 'quiz', 'one'],
@@ -84,11 +80,11 @@ function* getQuizById( action: actions.data.quiz.type__GET_QUIZ_BY_ID ) {
         }
         else {
             //console.log('hello1')
-            const quizDefault = {
-                list: [],
-                index: null,
-                focusing: null,
-            }
+            // const quizDefault = {
+            //     list: [],
+            //     index: null,
+            //     focusing: null,
+            // }
             history.push('/quiz');
             yield put( actions.notification.return__ADD_DELETE_BANNER({
                 codeSituation: 'GetQuiz_NoQuiz__E'

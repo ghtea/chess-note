@@ -43,7 +43,6 @@ const stateInitial = {
     fen: null,
     turn: 'white',
     seriesSan: [],
-    index: 0,
   } as QuizPresent,
   
   

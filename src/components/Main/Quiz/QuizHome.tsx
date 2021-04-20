@@ -51,7 +51,11 @@ function QuizHome({}: PropsQuizHome) {
         }
       }
       else if (value === 'create'){
-        history.push('/quiz/create')
+        history.push('/quiz/create');
+        dispatch(actions.data.quiz.return__FOCUS_QUIZ({
+          quiz: undefined, 
+          mode: 'creating',
+        }));
       }
   }, [history, readyUser, idUser]);
 

@@ -4,6 +4,7 @@ import { call, spawn, put, takeEvery, takeLatest } from "redux-saga/effects";
 import * as actions from "store/actions";
 
 import createQuiz from "./quiz/createQuiz";
+import focusQuiz from "./quiz/focusQuiz";
 import getListQuiz from "./quiz/getListQuiz";
 import getQuizById from "./quiz/getQuizById";
 
@@ -15,6 +16,7 @@ import watchFenStart from "./quiz/watchFenStart";
 
 export default function* sagaQuiz() {
     
+    yield takeEvery( actions.data.quiz.name__FOCUS_QUIZ,  focusQuiz); 
 
     yield takeEvery( actions.data.quiz.name__CREATE_QUIZ,  createQuiz); 
     yield takeEvery( actions.data.quiz.name__GET_LIST_QUIZ,  getListQuiz);  

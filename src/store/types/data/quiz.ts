@@ -18,3 +18,5 @@ export type Quiz = {
   idUser: string;
   isPublic: boolean;
 }
+
+export type ModeQuiz = 'playing' | 'solved' | 'creating' | 'editing';

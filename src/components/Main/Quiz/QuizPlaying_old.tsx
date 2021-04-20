@@ -1,16 +1,14 @@
 import ChessBoard from 'components/Global/ChessBoard';
 import React, { useCallback, useState, useMemo, useEffect} from 'react';
 import { Route, Switch } from "react-router-dom";
-import ToolBarPlaying from './QuizPlaying/ToolBarPlaying';
 import {v4 as uuid} from 'uuid';
 //import { useQuery, gql } from '@apollo/client';
 
-import {ChessInstance, Move, Square } from 'chess.js'
-import chessPlaying from 'chessApp';
-
+import { ChessInstance, Move, Square } from 'chess.js'
 import { useDispatch, useSelector } from 'react-redux';
 import { StateRoot } from 'store/reducers';
 import * as actions  from 'store/actions';
+import ToolBarPlaying from './QuizPlaying/ToolBarPlaying';
 const ChessReq:any = require('chess.js');
 // https://stackoverflow.com/questions/58598457/not-a-constructor-error-with-library-and-angular
 // const Chess:ChessInstance = new ChessReq();
@@ -23,13 +21,21 @@ type PropsQuizPlaying = {};
 function QuizPlaying({}: PropsQuizPlaying) {
   
   const dispatch = useDispatch();
-
-  const statusQuiz = useSelector((state: StateRoot)=>state.present.quiz);
-  const side = useSelector((state: StateRoot)=>state.data.quiz.focusing.turnNext);
-  const idQuiz = useSelector((state: StateRoot)=>state.data.quiz.focusing?.id);
   
   const statusUser = useSelector((state: StateRoot) => state.status.auth.user);
   const idUser = useSelector((state: StateRoot) => state.auth.user?.id);
+
+  const quizPresent = useSelector((state: StateRoot)=>state.present.quiz);
+  const quizFocusing = useSelector((state: StateRoot)=>state.data.quiz.focusing);
+  const idQuiz = useSelector((state: StateRoot)=>state.data.quiz.focusing?.id);
+  //const { loading, error, data } = useQuery(GET_LIST_QUIZ);
+  //const loadingOneQuiz = useSelector((state: StateRoot)=>state.status.loading.data.quiz.one);
+
+  const gameCurrent: ChessInstance = useMemo(()=>{
+    const result: ChessInstance = new ChessReq();
+    result.load(quizFocusing.fenStart);
+    return result;
+  },[quizFocusing]);
 
 
   useEffect(()=>{
@@ -53,19 +59,20 @@ function QuizPlaying({}: PropsQuizPlaying) {
 
 
   const listSquare = useMemo(()=>{
-    return chessPlaying.board(); 
-  }, [statusQuiz.fen]);
+    const result = gameCurrent.board(); 
+    console.log(result)
+    return result;
+  }, [gameCurrent, quizPresent.fen]);
 
   return (
     <div>
       <ChessBoard
         listSquare={listSquare}
-        side={side || 'white'}
+        side={quizFocusing.turnNext || 'white'}
         page={'quiz'}
       />
       
       <ToolBarPlaying />
-        
       
     </div>
   );

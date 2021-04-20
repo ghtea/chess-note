@@ -29,6 +29,11 @@ function QuizEditing({}: PropsQuizEditing) {
   //const { loading, error, data } = useQuery(GET_LIST_QUIZ);
 
 
+  // useEffect(()=>{
+
+  // }, [])
+
+
   const listSquare = useMemo(()=>{
     return chessPlaying.board(); 
   }, [statusQuiz.fen]);

@@ -62,6 +62,10 @@ function Quiz({}: PropsQuiz) {
           <QuizEditing />
       </Route>
 
+      <Route path="/quiz/edit" >
+          <QuizEditing />
+      </Route>
+
       <Route path="/quiz/play/:idQuiz" >
           <QuizPlaying />
       </Route>
