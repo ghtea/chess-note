@@ -81,7 +81,7 @@ function Banner({
                 value={banner['id']}
                 onClick={onClick_DeleteBanner}
             >
-                <IconXCircle className={`${styles['icon__x-circle']}`} kind={'light'}  />
+                <IconXCircle className={`${styles['icon__x-circle']}`} kind={'regular'}  />
                 <IconXCircle className={`${styles['icon__x-circle']}`} kind={'solid'}  />
             </button>
 

@@ -80,16 +80,16 @@ $width__side: 50px;
     }
 
     .icon__success {
-        @include color-each-theme(color, success__6);
+        @include color-each-theme(color, success__5);
     }
     .icon__hint {
-        @include color-each-theme(color, hint__6);
+        @include color-each-theme(color, hint__5);
     }
     .icon__error {
-        @include color-each-theme(color, error__6);
+        @include color-each-theme(color, error__5);
     }
     .icon__warning {
-        @include color-each-theme(color, warning__6);
+        @include color-each-theme(color, warning__5);
     }
 
 
@@ -150,10 +150,10 @@ $width__side: 50px;
 	}
 	  
 	&:hover, &:active {
-	    & > div:nth-child(1){
+	    & > *:nth-child(1){
 	        display: none;
 	    }
-	    & > div:nth-child(2){
+	    & > *:nth-child(2){
             display: flex;
 	    }
     }

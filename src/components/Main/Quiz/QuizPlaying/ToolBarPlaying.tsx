@@ -32,6 +32,7 @@ function ToolBarPlaying({
     const lengthChessBoard = useSelector((state: StateRoot)=>state.present.size.document.chessBoard.length);
     const statusQuiz = useSelector((state: StateRoot)=>state.present.quiz);
 
+    const mode = useSelector((state: StateRoot)=>state.present.quiz.mode);
 
     // const [positionStart, setPositionStart] = useState<null | string>(null);
     // const onClick_ControlPaste = useCallback(
@@ -98,50 +99,66 @@ function ToolBarPlaying({
             </div>
 
             <div
-                className={`${styles['mode']}`}
+                className={`${styles['show-answer']}`}
             >
-                {/* <button
-                    value='create'
-                    type='button'
-                    onClick={onClick_Main}
-                > <FormattedMessage id={'Global.Create'} /> 
-                </button> */}
+                {mode==='playing' ?
+                    <button
+                        type='button'
+                        value='give-up'
+                        onClick={onClick_Main}
+                    >
+                        give up
+                        {/* <FormattedMessage id={'Global.Save'} />    */}
+                    </button>
+                    :
+                    <button
+                        type='button'
+                        value='show-answer'
+                        onClick={onClick_Main}
+                    >
+                        show answer
+                        {/* <FormattedMessage id={'Global.Save'} />    */}
+                    </button>
+                }
             </div>
 
             <div
                 className={`${styles['control']}`}
             >
-                <button>
+                {/* <button>
                     <IconAngle className={`${styles['icon__backward']}`} kind='light' directon='left'/>
                 </button>
 
                 <button>
                     <IconAngle className={`${styles['icon__forward']}`} kind='light' directon='right'/>
-                </button>
+                </button> */}
             </div>
 
             <div
-                className={`${styles['save']}`}
+                className={`${styles['another-quiz']}`}
             >
-                {/* <button
-                    type='button'
-                    value='save'
-                    onClick={onClick_Main}
-                >
-                    <FormattedMessage id={'Global.Save'} />   
-                </button> */}
+                {mode==='solved' &&
+                    <button
+                        type='button'
+                        value='another-quiz'
+                        onClick={onClick_Main}
+                    >
+                        another-quiz
+                        {/* <FormattedMessage id={'Global.Save'} />    */}
+                    </button>
+                }
             </div>
 
             <div
                 className={`${styles['others']}`}
             >
-                {/* <button
+                <button
                     type='button'
                     value='others'
                     onClick={onClick_Main}
                 >
                     <IconOthers className={`${styles['icon__others']}`} kind='regular' />
-                </button> */}
+                </button>
             </div>
             
         </div>

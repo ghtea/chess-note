@@ -9,7 +9,7 @@
     "Global.Delete": "Delete",
     "Global.Update": "Update",
     "Global.Search": "Search",
-
+    
     "Global.WhiteToMove": "White to move",
     "Global.BlackToMove": "Black to move",
 
@@ -87,6 +87,10 @@
     "Notification.SignUp_NoPassword__E": "Please enter both passwords",
     "Notification.SignUp_PasswordsDifferent__E": "The two passwords are different",
     "Notification.SignUp_WeakPassword__E": "Password should be at least 6 characters long",
+
+    "Notification.PlayQuiz_Correct__S": "Correct!",
+    "Notification.PlayQuiz_NotCorrect__W": "That's not the answer",
+    "Notification.PlayQuiz_NotAvailableMove__W": "Not Available Move",
 
     "Notification.CreateQuiz_Succeeded__S": "Successfully created the quiz!",
     "Notification.CreateQuiz_UnknownError__E": "Failed to create the quiz",

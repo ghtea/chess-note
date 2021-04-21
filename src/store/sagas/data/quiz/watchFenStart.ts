@@ -13,17 +13,21 @@ import * as actions from "store/actions";
 import * as types from "store/types";
 import { waitForStateChangeToDifferentValue } from "store/sagas/others/waitForStateChange";
 //import NodeMove from "store/types/data/TreeMove";
+import chessFocusing from 'chessApp';
 
 
 // <Route path="/quiz" >    Quiz 컴포넌트가 마운트 되자마자, return__WATCH_FEN_START_CHANGE  디스패치 dispatch 한다!
 function* watchFenStartChange(action: actions.data.quiz.type__WATCH_FEN_START_CHANGE) {
 
 
-    const fenStartNew: unknown = yield call(waitForStateChangeToDifferentValue, state => state.data.quiz.focusing.fenStart);
+   const fenStartNew: unknown = yield call(waitForStateChangeToDifferentValue, state => state.data.quiz.focusing.fenStart);
 
-    console.log("fenStart of Quiz changed: ", fenStartNew);
+   console.log("fenStart of Quiz changed: ", fenStartNew);
 
-
+   yield put (actions.data.return__REPLACE({
+      listKey: ['quiz', 'focusing', 'turnNext'],
+      replacement: chessFocusing.turn() === 'w' ? 'white' : 'black',
+   }))
 }
 
 export default watchFenStartChange;

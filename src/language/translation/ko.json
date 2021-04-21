@@ -86,6 +86,11 @@
     "Notification.SignUp_PasswordsDifferent__E": "두 비밀번호가 서로 다릅니다",
     "Notification.SignUp_WeakPassword__E": "비밀번호는 6글자 이상이어야 합니다",
     
+
+    "Notification.PlayQuiz_Correct__S": "정답입니다!",
+    "Notification.PlayQuiz_NotCorrect__W": "틀렸습니다",
+    "Notification.PlayQuiz_NotAvailableMove__W": "가능하지 않은 수입니다",
+
     "Notification.CreateQuiz_Succeeded__S": "성공적으로 퀴즈를 만들었습니다!",
     "Notification.CreateQuiz_UnknownError__E": "퀴즈를 만들지 못했습니다",
     "Notification.CreateQuiz_NoAnswer__E": "해답을 지정해야 합니다",
