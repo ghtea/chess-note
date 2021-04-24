@@ -21,8 +21,8 @@ const stateInitial = {
 
   size: {
     window: {
-      innerWidth: 0,
-      innerHeight: 0,
+      width: 0,
+      height: 0,
     },
     document: {
       header: {
@@ -30,7 +30,10 @@ const stateInitial = {
       },
       chessBoard: {
         length: 0,
-        toolbar: {
+        statusBar: {
+          height: 40
+        },
+        toolBar: {
           height: 60
         }
       }
@@ -39,7 +42,7 @@ const stateInitial = {
 
   quiz: {
     idGame: null,
-    mode: 'creating', 
+    situation: 'creating', 
     fen: null,
     turn: 'white',
     seriesSan: [],

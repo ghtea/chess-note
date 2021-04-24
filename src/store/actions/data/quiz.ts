@@ -43,7 +43,7 @@ export type type__MOVE_IN_QUIZ_PLAYING = ReturnType<typeof return__MOVE_IN_QUIZ_
 export const name__FOCUS_QUIZ = 'data/quiz/FOCUS_QUIZ';
 type Payload__FOCUS_QUIZ = {
     quiz?: types.data.quiz.Quiz,
-    mode: types.present.ModeQuiz,
+    situation: types.present.SituationQuiz, 
 }
 export const return__FOCUS_QUIZ = (payload: Payload__FOCUS_QUIZ) => {
     return {

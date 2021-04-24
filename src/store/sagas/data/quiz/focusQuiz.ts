@@ -22,7 +22,7 @@ function* focusQuiz( action: actions.data.quiz.type__FOCUS_QUIZ ) {
 
 
 
-    const { quiz, mode } = action.payload;
+    const { quiz, situation } = action.payload;
     
     const quizDefault: types.data.quiz.Quiz = {
         id: null,
@@ -51,7 +51,7 @@ function* focusQuiz( action: actions.data.quiz.type__FOCUS_QUIZ ) {
         listKey:['quiz'],
         replacement: {
             idGame: quizFocusing.id,
-            mode: mode, 
+            situation: situation, 
             fen: quizFocusing.fenStart,
             turn: quizFocusing.turnNext,
             seriesSan: [],
@@ -61,15 +61,15 @@ function* focusQuiz( action: actions.data.quiz.type__FOCUS_QUIZ ) {
 
     let modeUrl = 'play';
 
-    if (mode === 'playing'){
+    if (situation === 'playing'){
         modeUrl = 'play';
         history.push(`/quiz/${modeUrl}/${quizFocusing.id}`);
     }
-    else if (mode === 'creating'){
+    else if (situation === 'creating'){
         modeUrl = 'create';
         history.push(`/quiz/${modeUrl}`);
     }
-    else if (mode === 'editing'){
+    else if (situation === 'editing'){
         modeUrl = 'edit';
         history.push(`/quiz/${modeUrl}/${quizFocusing.id}`);
     }

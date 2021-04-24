@@ -44,7 +44,7 @@ function Quiz({}: PropsQuiz) {
     }
 
     dispatch(actions.present.return__REPLACE({ 
-      listKey: [ 'quiz', 'mode' ],
+      listKey: [ 'quiz', 'situation' ],
       replacement: replacement,
     }));  
 

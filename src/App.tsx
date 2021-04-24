@@ -113,22 +113,22 @@ function App({}: PropsApp) {
 
     useEffect(()=>{
         dispatch( actions.present.return__REPLACE({
-            listKey: [ 'size', 'window', 'innerWidth'],
-            replacement: window.innerWidth
+            listKey: [ 'size', 'window', 'width'],
+            replacement: document.documentElement.clientWidth
         }) );
         dispatch( actions.present.return__REPLACE({
-            listKey: [ 'size', 'window', 'innerHeight'],
-            replacement: window.innerHeight
+            listKey: [ 'size', 'window', 'height'],
+            replacement: document.documentElement.clientHeight
         }) );
         
         window.addEventListener('resize', (event) => {
             dispatch( actions.present.return__REPLACE({
-                listKey: [ 'size', 'window', 'innerWidth'],
-                replacement: window.innerWidth
+                listKey: [ 'size', 'window', 'width'],
+                replacement: document.documentElement.clientWidth
             }) );
             dispatch( actions.present.return__REPLACE({
-                listKey: [ 'size', 'window', 'innerHeight'],
-                replacement: window.innerHeight
+                listKey: [ 'size', 'window', 'height'],
+                replacement: document.documentElement.clientHeight
             }) );
         });
     },[]);

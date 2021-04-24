@@ -106,7 +106,7 @@ function* moveInQuizPlaying(action: actions.data.quiz.type__MOVE_IN_QUIZ_PLAYING
                     // }
             
                     yield put( actions.present.return__REPLACE({
-                        listKey: [ 'quiz', 'mode'],
+                        listKey: [ 'quiz', 'situation'],
                         replacement: 'solved',
                     }) );
 

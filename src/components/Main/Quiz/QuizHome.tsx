@@ -54,7 +54,7 @@ function QuizHome({}: PropsQuizHome) {
         history.push('/quiz/create');
         dispatch(actions.data.quiz.return__FOCUS_QUIZ({
           quiz: undefined, 
-          mode: 'creating',
+          situation: 'creating',
         }));
       }
   }, [history, readyUser, idUser]);

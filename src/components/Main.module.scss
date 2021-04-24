@@ -5,7 +5,7 @@
     height: auto;
     position: static;
 
-    margin-top: #{$header__height + 20px};
+    margin-top: #{$header__height + $main__between-header};
     // top: 0;
     // z-index: 0;
 

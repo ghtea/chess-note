@@ -1,12 +1,12 @@
 
 
+export type SituationQuiz = 'creating' | 'editing' | 'playing' | 'solved' | 'failed';
 
 export type QuizPresent = {
   idGame: string | null;
-  mode: 'creating' | "editing" | "playing" | "solved" ;
+  situation: SituationQuiz;
   fen: string | null;
   turn: "white" | "black";
   seriesSan: string[];
 }
 
-export type ModeQuiz = 'playing' | 'solved' | 'creating' | 'editing';

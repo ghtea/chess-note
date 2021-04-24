@@ -5,7 +5,7 @@
   width: $device-xs__min-width; 
   height: auto;
 
-  margin-top: $main__margin-top;  
+  margin-top: #{$header__height + $main__between-header};
 
 
   .icon__map-signs {

@@ -66,7 +66,7 @@ function* getQuizById( action: actions.data.quiz.type__GET_QUIZ_BY_ID ) {
 
             yield put( actions.data.quiz.return__FOCUS_QUIZ({
                 quiz: quizFromRes,
-                mode: 'playing',
+                situation: 'playing',
             }));
 
             yield put( actions.status.return__REPLACE({

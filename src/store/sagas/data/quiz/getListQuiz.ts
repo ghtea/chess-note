@@ -90,7 +90,7 @@ function* getListQuiz( action: actions.data.quiz.type__GET_LIST_QUIZ) {
 
             yield put( actions.data.quiz.return__FOCUS_QUIZ({
                 quiz: list[0],
-                mode: 'playing',
+                situation: 'playing',
             }));
 
 

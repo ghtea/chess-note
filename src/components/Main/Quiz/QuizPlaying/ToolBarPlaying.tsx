@@ -28,11 +28,11 @@ function ToolBarPlaying({
 
     const dispatch = useDispatch();
 
-    const heightToolbar = useSelector((state: StateRoot)=>state.present.size.document.chessBoard.toolbar.height);
+    const heightToolbar = useSelector((state: StateRoot)=>state.present.size.document.chessBoard.toolBar.height);
     const lengthChessBoard = useSelector((state: StateRoot)=>state.present.size.document.chessBoard.length);
     const statusQuiz = useSelector((state: StateRoot)=>state.present.quiz);
 
-    const mode = useSelector((state: StateRoot)=>state.present.quiz.mode);
+    const situation = useSelector((state: StateRoot)=>state.present.quiz.situation);
 
     // const [positionStart, setPositionStart] = useState<null | string>(null);
     // const onClick_ControlPaste = useCallback(
@@ -101,7 +101,7 @@ function ToolBarPlaying({
             <div
                 className={`${styles['show-answer']}`}
             >
-                {mode==='playing' ?
+                {situation==='playing' ?
                     <button
                         type='button'
                         value='give-up'
@@ -137,7 +137,7 @@ function ToolBarPlaying({
             <div
                 className={`${styles['another-quiz']}`}
             >
-                {mode==='solved' &&
+                {situation==='solved' &&
                     <button
                         type='button'
                         value='another-quiz'

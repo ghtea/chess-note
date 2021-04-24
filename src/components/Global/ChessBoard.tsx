@@ -46,41 +46,34 @@ function ChessBoard({
 
     const dispatch = useDispatch();
 
-    const modeQuiz = useSelector((state: StateRoot)=>state.present.quiz.mode);
+    const situationQuiz = useSelector((state: StateRoot)=>state.present.quiz.situation);
     
-    const mode = useMemo(( )=>{
-        console.log('modeQuiz: ', modeQuiz)
+    const situation = useMemo(( )=>{
+        // console.log('modeQuiz: ', situationQuiz)
         if (page === 'quiz'){
-            return modeQuiz;
+            return situationQuiz;
         }
         else {
             return 'opening'
         }
-    }, [page, modeQuiz]);
+    }, [page, situationQuiz]);
     
-    const {innerWidth, innerHeight} = useSelector((state: StateRoot)=>state.present.size.window);
+    const {width: widthWindow, height: heightWindow} = useSelector((state: StateRoot)=>state.present.size.window);
+    
     const heightHeader = useSelector((state: StateRoot)=>state.present.size.document.header.height);
-    const heightToolBar = useSelector((state: StateRoot)=>state.present.size.document.chessBoard.toolbar.height);
+    const heightStatusBar = useSelector((state: StateRoot)=>state.present.size.document.chessBoard.statusBar.height);
+    const heightToolBar = useSelector((state: StateRoot)=>state.present.size.document.chessBoard.toolBar.height);
+    
     const lengthChessBoard = useSelector((state: StateRoot)=>state.present.size.document.chessBoard.length);
 
     useEffect(()=>{
         // height
-        let lengthChessBoardNew = 0;
-        const innerLengthShorter = innerWidth <= innerHeight ? innerWidth : innerHeight;
-        
-        if (innerLengthShorter <= 576){
-            if (innerHeight <= innerWidth + heightHeader + heightToolBar){
-                lengthChessBoardNew = (innerHeight - heightHeader - heightToolBar);
-            }
-            else {
-                lengthChessBoardNew = (innerLengthShorter);
-            }
+        let lengthChessBoardNew = heightWindow - heightHeader - heightStatusBar - heightToolBar;
+        if (lengthChessBoardNew > 700) {
+            lengthChessBoardNew = 700;
         }
-        else {
-            // 576 넘어갈때 갑자기 바뀌는 거 방지하면서 조정
-            const lengthMax = 700;
-            const lengthWhenHeightIsShort = innerHeight - heightHeader - 20 - heightToolBar; // 20 은 header아래 margin
-            lengthChessBoardNew = ( Math.min(lengthWhenHeightIsShort, lengthMax, innerLengthShorter) );
+        if (widthWindow < lengthChessBoardNew){
+            lengthChessBoardNew = widthWindow;
         }
         dispatch( actions.present.return__REPLACE({
             listKey: [ 'size', 'document', 'chessBoard', 'length'],
@@ -90,7 +83,7 @@ function ChessBoard({
         // $device-s__min-width: 576px;      
         // $device-m__min-width: 768px;
         // $device-l__min-width: 992px;
-    }, [innerWidth, innerHeight, heightHeader, heightToolBar  ]);
+    }, [widthWindow, heightWindow, heightHeader, heightToolBar  ]);
 
 
     
@@ -114,13 +107,13 @@ function ChessBoard({
         else {
             //console.log('mode: ', mode)
             if (page === 'quiz'){
-                if (mode ==='creating' || mode === 'editing'){
+                if (situation ==='creating' || situation === 'editing'){
                     dispatch(actions.data.quiz.return__MOVE_IN_QUIZ_EDITING({
                         from: positionStart,
                         to: position,
                     }))
                 }
-                else if (mode ==='playing' ){
+                else if (situation ==='playing' || situation ==='failed' || situation === 'solved'){
                     dispatch(actions.data.quiz.return__MOVE_IN_QUIZ_PLAYING({
                         from: positionStart,
                         to: position,
@@ -129,7 +122,7 @@ function ChessBoard({
             }
             setPositionStart(null);
         }    
-        },[page, mode, positionStart] // move 같은 함수도 잊지 말고 dependency list 에 추가!
+        },[page, situation, positionStart] // move 같은 함수도 잊지 말고 dependency list 에 추가!
     );
 
     // Junhyeon

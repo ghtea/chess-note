@@ -30,7 +30,7 @@ function ToolBarEditing({
 
     const dispatch = useDispatch();
 
-    const heightToolbar = useSelector((state: StateRoot)=>state.present.size.document.chessBoard.toolbar.height);
+    const heightToolbar = useSelector((state: StateRoot)=>state.present.size.document.chessBoard.toolBar.height);
     const lengthChessBoard = useSelector((state: StateRoot)=>state.present.size.document.chessBoard.length);
     const quizPresent = useSelector((state: StateRoot)=>state.present.quiz);
 
