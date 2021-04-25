@@ -60,6 +60,7 @@
     - navigation links support web accessibility
         - press tab key to open menu for each category (rather than hovering)
 - Main
+    - [file](https://github.com/ghtea/chess-note/blob/master/src/components/Main.tsx)  
     - content which appear based on routes
     - LogIn, Home, ...
     ```javascript
@@ -82,6 +83,7 @@
           </Switch>
     ```
 - Modal
+    - [file](https://github.com/ghtea/chess-note/blob/master/src/components/Modal.tsx)   
     - box shows at the middle of screen for work like 'upload quiz'
     - designed thinking experince on mobile
     - added ARIA attributes for web accessibility
@@ -99,77 +101,12 @@
                 </>
         );
     ```
-- Notification
+- Notification!
+    -  [Screen Shot 2021-04-25 at 2 57 10 PM](https://user-images.githubusercontent.com/47841931/115982497-98cba780-a5d6-11eb-9047-8b9296340b71.png)
+    -  [sagas about notification](https://github.com/ghtea/chess-note/tree/master/src/store/sagas/notification)
     - banner shows shorty for notificate success, hint, warning, error
     - use 4 color palettes
     - work well with multi-language
-    ```javascript
-        function* addDeleteBanner(action: actionsNotification.type__ADD_DELETE_BANNER) {
-            
-            const listBannerPrevious: Banner[] =  yield select( (state:StateRoot) => state.notification.listBanner ); 
-                
-            const id = uuidv4();
-            
-            const codeSituation: string = action.payload.codeSituation;
-            
-            let kindSituation: actionsNotification.KindSituation = 'warning';
-            if (codeSituation.match(/__S$/)){
-                kindSituation = 'success';
-            }
-            else if (codeSituation.match(/__H$/)){
-                kindSituation = 'hint';
-            }
-            else if (codeSituation.match(/__W$/)){
-                kindSituation = 'warning';
-            }
-            else if (codeSituation.match(/__E$/)){
-                kindSituation = 'error';
-            }
-            
-            const idMessage: string = `Notification.${codeSituation}`;
-            
-            let levelTimeBanner:actionsNotification.LevelTimeBanner = 'normal';
-            
-            if ( kindSituation === 'success'){
-            levelTimeBanner = 'short';
-            }
-            else if ( kindSituation === 'hint'){
-            levelTimeBanner = 'normal';
-            }
-            else if ( kindSituation === 'error'){
-            levelTimeBanner = 'long';
-            }
-            else if ( kindSituation === 'warning'){
-            levelTimeBanner = 'normal';
-            }
-            
-            let msTime: actionsNotification.MsTimeBanner = actionsNotification.MsTimeBanner[levelTimeBanner];
-            
-            const bannerAdding = {
-            id: id,  
-            codeSituation: codeSituation, 
-            kindSituation: kindSituation,
-            idMessage: idMessage,
-            msTime: msTime 
-            }
-            
-            const listBannerNew = [bannerAdding, ...listBannerPrevious];
-                
-            yield put( actionsNotification.return__REPLACE({
-                listKey: ['listBanner'],
-                replacement: listBannerNew
-            }) );
-            
-            yield delay( msTime );
-
-            yield put( actionsNotification.return__DELETE_BANNER({
-                id: id
-            }) );
-        }
-    ```
-- Action
-    - small box which is for simple works like sharing
-    - made only design for now
 
 ---
 
@@ -302,7 +239,8 @@
 ---
 ### Icons
 [back to to top](#system)
-> svg components from font awesome svgs
+> svg components from Font Awesome svgs
+    - [template file](https://github.com/ghtea/chess-note/blob/master/src/svgs/_IconTemplateAdvanced.tsx)
     ```javascript
     import React from "react";
 
