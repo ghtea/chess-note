@@ -102,7 +102,7 @@
         );
     ```
 - Notification!
-    -  [Screen Shot 2021-04-25 at 2 57 10 PM](https://user-images.githubusercontent.com/47841931/115982497-98cba780-a5d6-11eb-9047-8b9296340b71.png)
+    -  [screen shot](https://user-images.githubusercontent.com/47841931/115982497-98cba780-a5d6-11eb-9047-8b9296340b71.png)
     -  [sagas about notification](https://github.com/ghtea/chess-note/tree/master/src/store/sagas/notification)
     - banner shows shorty for notificate success, hint, warning, error
     - use 4 color palettes
