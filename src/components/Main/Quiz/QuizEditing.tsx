@@ -1,8 +1,6 @@
 import ChessBoard from 'components/Global/ChessBoard';
 import React, { useCallback, useState, useMemo, useEffect} from 'react';
 import { Route, Switch } from "react-router-dom";
-import ToolBarEditing from './QuizEditing/ToolBarEditing';
-import {v4 as uuid} from 'uuid';
 //import { useQuery, gql } from '@apollo/client';
 
 import {ChessInstance, Move, Square } from 'chess.js'
@@ -11,6 +9,8 @@ import chessPlaying from 'chessApp';
 import { useDispatch, useSelector } from 'react-redux';
 import { StateRoot } from 'store/reducers';
 import * as actions  from 'store/actions';
+import ToolBarQE from './QuizEditing/ToolBarQE';
+import StatusBarQE from './QuizEditing/StatusBarQE';
 const ChessReq:any = require('chess.js');
 // https://stackoverflow.com/questions/58598457/not-a-constructor-error-with-library-and-angular
 // const Chess:ChessInstance = new ChessReq();
@@ -40,13 +40,16 @@ function QuizEditing({}: PropsQuizEditing) {
 
   return (
     <div>
+
+      <StatusBarQE />
+
       <ChessBoard
         listSquare={listSquare}
         side={side || 'white'}
         page={'quiz'}
       />
       
-      <ToolBarEditing />
+      <ToolBarQE />
         
       
     </div>

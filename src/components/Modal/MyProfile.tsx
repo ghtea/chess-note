@@ -113,6 +113,7 @@ function MyProfile({}: PropsMyProfile) {
                 <button 
                     type='button'
                     aria-label="Close MyProfile"
+                    aria-haspopup="true"
                     value={convertCase("MyProfile", 'camel')}
                     onClick={onClick_CloseModal}
                 > 

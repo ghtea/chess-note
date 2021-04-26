@@ -26,6 +26,17 @@
   :global(.icon){
     @include color-each-theme( color, basic__7);
   }
+
+  .back-to-start {
+
+    .icon__back-to-start {
+      width: 26px;
+      height: 26px;
+    }
+  }
+
+
+
   .control {
 
     display: grid;

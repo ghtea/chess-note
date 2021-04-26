@@ -59,29 +59,77 @@ function ChessSquare({
     
 
 
-    const srcImg = useMemo(()=>{
+    const {src, alt} = useMemo(()=>{
+
+        let src: string | undefined = undefined;
+        let alt: string = '';
+
         if (!piece){
-            return undefined;
+            
         }
         else if (piece.type === 'p'){
-            return piece.color === 'w' ? srcImgWhitePawn : srcImgBlackPawn
+            if (piece.color === 'w'){
+                src = srcImgWhitePawn;
+                alt = 'white pawn'
+            }
+            else {
+                src = srcImgBlackPawn;
+                alt = 'black pawn'
+            }
         }
         else if (piece.type === 'n'){
-            return piece.color === 'w' ? srcImgWhiteKnight : srcImgBlackKnight
+            if (piece.color === 'w'){
+                src = srcImgWhiteKing;
+                alt = 'white knight'
+            }
+            else {
+                src = srcImgBlackKnight;
+                alt = 'black knight'
+            }
         }
         else if (piece.type === 'b'){
-            return piece.color === 'w' ? srcImgWhiteBishop : srcImgBlackBishop
+            if (piece.color === 'w'){
+                src = srcImgWhiteBishop;
+                alt = 'white bishop'
+            }
+            else {
+                src = srcImgBlackBishop;
+                alt = 'black bishop'
+            }
         }
         else if (piece.type === 'r'){
-            return piece.color === 'w' ? srcImgWhiteRook : srcImgBlackRook
+            if (piece.color === 'w'){
+                src = srcImgWhiteRook;
+                alt = 'white rook'
+            }
+            else {
+                src = srcImgBlackRook;
+                alt = 'black rook'
+            }
         }
         else if (piece.type === 'q'){
-            return piece.color === 'w' ? srcImgWhiteQueen : srcImgBlackQueen
+            if (piece.color === 'w'){
+                src = srcImgWhiteQueen;
+                alt = 'white queen'
+            }
+            else {
+                src = srcImgBlackQueen;
+                alt = 'black queen'
+            }
         }
         else if (piece.type === 'k'){
-            return piece.color === 'w' ? srcImgWhiteKing : srcImgBlackKing
+            if (piece.color === 'w'){
+                src = srcImgWhiteKing;
+                alt = 'white king'
+            }
+            else {
+                src = srcImgBlackKing;
+                alt = 'black king'
+            }
         }
         
+        return ({src, alt})
+
     }, [piece]);
 
     
@@ -94,16 +142,18 @@ function ChessSquare({
             data-level={'square'}
         >
             {!piece ? null : 
-                <div
+                <button
                     className={`${styles['piece']} piece-${piece.type}`}
                     data-level={'piece'}
+                    aria-label={alt}
                 >
                     <img 
                         className={`piece-${piece.type}`}
-                        src={srcImg}
+                        src={src}
+                        alt={alt}
                     >
                     </img>
-                </div>
+                </button>
             }
         </div>
     );

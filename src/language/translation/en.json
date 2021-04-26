@@ -10,6 +10,8 @@
     "Global.Update": "Update",
     "Global.Search": "Search",
     
+    "Global.Opening": "Opening",
+    "Global.Quiz": "Quiz",
     "Global.WhiteToMove": "White to move",
     "Global.BlackToMove": "Black to move",
 
@@ -23,6 +25,9 @@
     "Nav.SignUp": "Sign Up",
     "Nav.Opening": "Opening",  
     "Nav.Quiz": "Quiz",  
+
+    "Main.Home_Opening_Introduction": "Create your own opening and repeat practicing to improve your skills!",
+    "Main.Home_Quiz_Introduction": "Save specific situation and the correct moves, then repeat practicing to improve your skills!",
 
     "Main.LogIn_LogIn": "Log In",
     "Main.LogIn_EmailAddress": "Email Address",
@@ -38,6 +43,8 @@
     "Main.QuizHome_PlayMyQuiz": "Play My Quiz",
     "Main.QuizHome_CreateQuiz": "Create Quiz",
 
+    "Main.QuizPlay_StatusBar_Solved": "Solved!",
+    "Main.QuizPlay_StatusBar_Failed": "Failed",
 
     "Modal.Setting_Title": "Setting",
     "Modal.Setting_Theme": "Theme",

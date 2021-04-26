@@ -38,6 +38,14 @@ export type type__MOVE_IN_QUIZ_PLAYING = ReturnType<typeof return__MOVE_IN_QUIZ_
 
 
 
+export const name__BACK_TO_START = 'data/quiz/BACK_TO_START';
+export const return__BACK_TO_START = ( ) => {
+    return {
+        type: name__BACK_TO_START    
+    }
+};
+export type type__BACK_TO_START = ReturnType<typeof return__BACK_TO_START>;
+
 
 
 export const name__FOCUS_QUIZ = 'data/quiz/FOCUS_QUIZ';

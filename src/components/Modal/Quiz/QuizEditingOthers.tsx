@@ -185,6 +185,7 @@ function QuizEditingOthers({}: PropsQuizEditingOthers) {
                         <button
                             type='button'
                             value='next-answer'
+                            aria-label="next answer"
                             onClick={onClick_ButtonChangeAnswer}
                             className={`${stylesQEC['button__next-answer']}`}
                         >

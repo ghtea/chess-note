@@ -46,9 +46,10 @@ function* moveInQuizPlaying(action: actions.data.quiz.type__MOVE_IN_QUIZ_PLAYING
         // 없으면 최종 성공, 있으면 다음 상대 움직임 자동 실행
         if (result === null) {
             //console.log('move was not valid');
-            yield put( actions.notification.return__ADD_DELETE_BANNER({
-                codeSituation: 'PlayQuiz_NotAvailableMove__W'
-            }) );
+            
+            // yield put( actions.notification.return__ADD_DELETE_BANNER({
+            //     codeSituation: 'PlayQuiz_NotAvailableMove__W'
+            // }) );
         }
         else {
 
@@ -148,10 +149,15 @@ function* moveInQuizPlaying(action: actions.data.quiz.type__MOVE_IN_QUIZ_PLAYING
             } 
             else { // 가능한 움직임이지만, 정답에 속한 움직임은 아닐때
                 console.log('wrong move!!!');
-
-                yield put( actions.notification.return__ADD_DELETE_BANNER({
-                    codeSituation: 'PlayQuiz_NotAnswer__W'
+                
+                yield put( actions.present.return__REPLACE({
+                    listKey: [ 'quiz', 'situation'],
+                    replacement: 'failed',
                 }) );
+
+                // yield put( actions.notification.return__ADD_DELETE_BANNER({
+                //     codeSituation: 'PlayQuiz_NotAnswer__W'
+                // }) );
 
                 // 해당 움직임 취소
                 chessFocusing.undo();

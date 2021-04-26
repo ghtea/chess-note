@@ -117,6 +117,7 @@ function Setting({}: PropsSetting) {
                 <button
                     type='button'
                     aria-label="Close Setting"
+                    aria-haspopup="true"
                     value={convertCase("Setting", 'camel')}
                     onClick={onClick_CloseModal}
                 > 

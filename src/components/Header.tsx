@@ -140,8 +140,9 @@ function Header({}: PropsHeader) {
                     </a>
                     <button
                         type='button'
-                        aria-label="Open Setting"
                         value='setting'
+                        aria-label="Open Setting"
+                        aria-haspopup="true"
                         onClick={onClick_ShowModal}
                     > <IconSetting className={`${styles['icon__setting']}`} kind='regular'/>  
                     </button>
@@ -151,8 +152,9 @@ function Header({}: PropsHeader) {
                 <div className={`${styles['right']}`}>
                     <button
                         type='button'
-                        aria-label="Open Profile"
                         value='myProfile'
+                        aria-label="Open Profile"
+                        aria-haspopup="true"
                         onClick={onClick_ShowModal}
                     > 
                     {user?.photoURL ? 

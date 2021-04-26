@@ -1,10 +1,8 @@
 import React, { useCallback, useEffect, useMemo, useState } from "react";
 import history from 'historyApp';
-import chessFocusing from 'chessApp';
-
 import * as clipboardy from 'clipboardy';
 import { FormattedMessage } from 'react-intl';
-
+import chessFocusing from 'chessApp';
 
 import {useSelector, useDispatch} from "react-redux";
 import {StateRoot} from 'store/reducers';
@@ -16,24 +14,26 @@ import {StateRoot} from 'store/reducers';
 import * as actions  from 'store/actions';
 import * as types  from 'store/types';
 
-import styles from './ToolBarEditing.module.scss';
+import styles from './ToolBarQP.module.scss';
 import IconPaste from 'svgs/basic/IconSignIn';
 import IconAngle from "svgs/basic/IconAngle";
 import IconOthers from "svgs/basic/IconThreeDots";
+import IconArrowToEnd from "svgs/basic/IconArrowToEnd";
 // import {Chess} from 'chess.js'; // => makes error
 
-type PropsToolBarEditing = {
+type PropsToolBarQP = {
 };
 
-function ToolBarEditing({
-}: PropsToolBarEditing) {
+function ToolBarQP({
+}: PropsToolBarQP) {
 
     const dispatch = useDispatch();
 
     const heightToolbar = useSelector((state: StateRoot)=>state.present.size.document.chessBoard.toolBar.height);
     const lengthChessBoard = useSelector((state: StateRoot)=>state.present.size.document.chessBoard.length);
-    const quizPresent = useSelector((state: StateRoot)=>state.present.quiz);
+    const statusQuiz = useSelector((state: StateRoot)=>state.present.quiz);
 
+    const situation = useSelector((state: StateRoot)=>state.present.quiz.situation);
 
     // const [positionStart, setPositionStart] = useState<null | string>(null);
     // const onClick_ControlPaste = useCallback(
@@ -53,17 +53,8 @@ function ToolBarEditing({
     const onClick_Main = useCallback(
         (e:React.MouseEvent<HTMLButtonElement, MouseEvent>)=>{
             const value = e.currentTarget.value;
-            if (value === 'create'){
-                dispatch(actions.appearance.return__REPLACE({ 
-                    listKey: ['showing', 'modal', 'quizEditingUpload'],
-                    replacement: true,
-                }));
-            }
-            else if (value === 'backward'){
-                
-            }
-            else if (value === 'forward'){
-                
+            if (value === 'back-to-start'){
+                dispatch(actions.data.quiz.return__BACK_TO_START());
             }
             else if (value === 'save'){
                 dispatch(actions.appearance.return__REPLACE({ 
@@ -90,73 +81,58 @@ function ToolBarEditing({
                 height: heightToolbar,
             }}
         >
-            <div
-                className={`${styles['back']}`}
-            >
-                <span>
-                    <FormattedMessage 
-                        id={
-                            quizPresent.turn==='white' ?
-                            'Global.WhiteToMove'
-                            :
-                            'Global.BlackToMove'
-                        } 
-                    />
-                </span>
-            </div>
 
             <div
-                className={`${styles['mode']}`}
+                className={`${styles['back-to-start']}`}
             >
                 <button
-                    value='create'
-                    type='button'
-                    onClick={onClick_Main}
-                > <FormattedMessage id={'Global.Create'} /> 
+                        type='button'
+                        value='back-to-start'
+                        aria-label='back to start'
+                        onClick={onClick_Main}
+                    >
+                    <IconArrowToEnd className={`${styles['icon__back-to-start']}`} kind='regular' direction='left' />
                 </button>
             </div>
 
             <div
-                className={`${styles['control']}`}
+                className={`${styles['...']}`}
+            >
+            </div>
+
+            
+            <div
+                className={`${styles['show-answer']}`}
             >
                 <button
-                    type='button'
-                    value='backward'
-                    onClick={onClick_Main}
-                >
-                    <IconAngle className={`${styles['icon__backward']}`} kind='light' directon='left'/>
-                </button>
-
-                <button
-                    type='button'
-                    value='forward'
-                    onClick={onClick_Main}
-                >
-                    <IconAngle className={`${styles['icon__forward']}`} kind='light' directon='right'/>
+                        type='button'
+                        value='show-answer'
+                        aria-label='show answer'
+                        onClick={onClick_Main}
+                    >
+                    show answer
+                    {/* <FormattedMessage id={'Global.Save'} />    */}
                 </button>
             </div>
 
+            
+
             <div
-                className={`${styles['save']}`}
+                className={`${styles['...']}`}
             >
-                <button
-                    type='button'
-                    value='save'
-                    onClick={onClick_Main}
-                >
-                    <FormattedMessage id={'Global.Save'} />   
-                </button>
             </div>
 
             <div
-                className={`${styles['others']}`}
+                className={`${styles['another-quiz']}`}
             >
                 <button
                     type='button'
-                    value='others'
+                    value='another-quiz'
+                    aria-label='another quiz'
                     onClick={onClick_Main}
                 >
-                    <IconOthers className={`${styles['icon__others']}`} kind='regular' />
+                    another-quiz
+                    {/* <FormattedMessage id={'Global.Save'} />    */}
                 </button>
             </div>
             
@@ -164,7 +140,7 @@ function ToolBarEditing({
     );
 }
 
-ToolBarEditing.defaultProps = {};
+ToolBarQP.defaultProps = {};
 
-export default ToolBarEditing;
+export default ToolBarQP;
 

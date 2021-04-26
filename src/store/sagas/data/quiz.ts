@@ -11,6 +11,9 @@ import getQuizById from "./quiz/getQuizById";
 import moveInQuizEditing from "./quiz/moveInQuizEditing";
 import moveInQuizPlaying from "./quiz/moveInQuizPlaying";
 
+import backToStart from "./quiz/backToStart";
+
+
 import watchFenStart from "./quiz/watchFenStart";
 
 
@@ -25,6 +28,9 @@ export default function* sagaQuiz() {
     
     yield takeEvery( actions.data.quiz.name__MOVE_IN_QUIZ_EDITING ,  moveInQuizEditing);  
     yield takeEvery( actions.data.quiz.name__MOVE_IN_QUIZ_PLAYING,  moveInQuizPlaying);  
+
+
+    yield takeEvery( actions.data.quiz.name__BACK_TO_START ,  backToStart);  
 
     yield takeEvery( actions.data.quiz.name__WATCH_FEN_START_CHANGE ,  watchFenStart);  
 

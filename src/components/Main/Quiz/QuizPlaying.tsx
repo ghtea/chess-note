@@ -1,7 +1,7 @@
 import ChessBoard from 'components/Global/ChessBoard';
 import React, { useCallback, useState, useMemo, useEffect} from 'react';
 import { Route, Switch } from "react-router-dom";
-import ToolBarPlaying from './QuizPlaying/ToolBarPlaying';
+import ToolBarQP from './QuizPlaying/ToolBarQP';
 import {v4 as uuid} from 'uuid';
 //import { useQuery, gql } from '@apollo/client';
 
@@ -12,7 +12,7 @@ import styles from './QuizPlaying.module.scss';
 import { useDispatch, useSelector } from 'react-redux';
 import { StateRoot } from 'store/reducers';
 import * as actions  from 'store/actions';
-import StatusBarPlaying from './QuizPlaying/StatusBarPlaying';
+import StatusBarQP from './QuizPlaying/StatusBarQP';
 const ChessReq:any = require('chess.js');
 
 
@@ -65,7 +65,7 @@ function QuizPlaying({}: PropsQuizPlaying) {
       className={`${styles['root']}`}
     >
 
-      <StatusBarPlaying />
+      <StatusBarQP />
 
       <ChessBoard
         listSquare={listSquare}
@@ -73,7 +73,7 @@ function QuizPlaying({}: PropsQuizPlaying) {
         page={'quiz'}
       />
       
-      <ToolBarPlaying />
+      <ToolBarQP />
         
       
     </div>

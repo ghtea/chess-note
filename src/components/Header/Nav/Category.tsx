@@ -74,7 +74,9 @@ function Category({
                 id={idButton}
                 
                 aria-labelledby={idLabel}
-                aria-haspopup="menu" aria-expanded={idCategoryOpen === idCategory}
+                aria-haspopup="menu" 
+                aria-expanded={idCategoryOpen === idCategory}
+                
                 onClick={onClick}
             >
                 <label id={idLabel}> <FormattedMessage id={`Nav.${convertCase(idCategory, 'pascal')}`} /> </label >

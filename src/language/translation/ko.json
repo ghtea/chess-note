@@ -9,12 +9,17 @@
     "Global.Delete": "삭제",
     "Global.Update": "업데이트",
     "Global.Search": "검색",
-    
+
+    "Global.Opening": "오프닝",
+    "Global.Quiz": "퀴즈",
     "Global.WhiteToMove": "백 차례",
     "Global.BlackToMove": "흑 차례",
 
     "Header.Setting": "설정",
 
+    
+    "Main.Home_Opening_Introduction": "자신만의 오프닝을 만들어서, 반복학습해서 실력을 향상시키세요!",
+    "Main.Home_Quiz_Introduction": "특정 상황과 그에 대한 올바른 수를 저장해서, 반복학습해서 실력을 향상시키세요!",
 
     "Main.LogIn_LogIn": "로그인",
     "Main.LogIn_EmailAddress": "이메일 주소",
@@ -29,6 +34,9 @@
     "Main.QuizHome_PlayPublicQuiz": "공개 퀴즈 풀기",
     "Main.QuizHome_PlayMyQuiz": "내 퀴즈 풀기",
     "Main.QuizHome_CreateQuiz": "퀴즈 만들기",
+
+    "Main.QuizPlay_StatusBar_Solved": "정답입니다!",
+    "Main.QuizPlay_StatusBar_Failed": "틀렸습니다",
 
     "Modal.Setting_Title": "설정",
     "Modal.Setting_Theme": "테마",

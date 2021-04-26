@@ -25,27 +25,33 @@
 }
 
 
-.playing-white {
+.white {
   background-color: #fff;
+  border: 2px solid #ccc;
+
   color: #000;
-  border: 2px solid #000;
 }
 
-.playing-black {
+.black {
   background-color: #000;
+  border: 2px solid #333;
+
   color: #fff;
-  border: 2px solid #fff;
 }
 
 .solved {
-  @include color-each-theme( background-color, error__4);
-  @include color-each-theme( color, basic__8);
-  @include frame-each-theme(border, 2px, solid, basic__8);
+  @include color-each-theme( background-color, success__4);
+  @include color-each-theme( color, success__9);
+  @include frame-each-theme(border, 2px, solid, success__6);
 }
 
 .failed {
   @include color-each-theme( background-color, error__4);
-  @include color-each-theme( color, basic__8);
-  @include frame-each-theme(border, 2px, solid, basic__8);
+  @include color-each-theme( color, error__9);
+  @include frame-each-theme(border, 2px, solid, error__6);
+}
+
+.series-san {
+  border-left-style: none;
 }
 

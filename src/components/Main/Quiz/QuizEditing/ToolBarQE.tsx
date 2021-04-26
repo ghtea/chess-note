@@ -1,5 +1,7 @@
 import React, { useCallback, useEffect, useMemo, useState } from "react";
 import history from 'historyApp';
+import chessFocusing from 'chessApp';
+
 import * as clipboardy from 'clipboardy';
 import { FormattedMessage } from 'react-intl';
 
@@ -14,25 +16,25 @@ import {StateRoot} from 'store/reducers';
 import * as actions  from 'store/actions';
 import * as types  from 'store/types';
 
-import styles from './ToolBarPlaying.module.scss';
+import styles from './ToolBarQE.module.scss';
 import IconPaste from 'svgs/basic/IconSignIn';
 import IconAngle from "svgs/basic/IconAngle";
 import IconOthers from "svgs/basic/IconThreeDots";
+import IconArrowToEnd from "svgs/basic/IconArrowToEnd";
 // import {Chess} from 'chess.js'; // => makes error
 
-type PropsToolBarPlaying = {
+type PropsToolBarQE = {
 };
 
-function ToolBarPlaying({
-}: PropsToolBarPlaying) {
+function ToolBarQE({
+}: PropsToolBarQE) {
 
     const dispatch = useDispatch();
 
     const heightToolbar = useSelector((state: StateRoot)=>state.present.size.document.chessBoard.toolBar.height);
     const lengthChessBoard = useSelector((state: StateRoot)=>state.present.size.document.chessBoard.length);
-    const statusQuiz = useSelector((state: StateRoot)=>state.present.quiz);
+    const quizPresent = useSelector((state: StateRoot)=>state.present.quiz);
 
-    const situation = useSelector((state: StateRoot)=>state.present.quiz.situation);
 
     // const [positionStart, setPositionStart] = useState<null | string>(null);
     // const onClick_ControlPaste = useCallback(
@@ -57,6 +59,12 @@ function ToolBarPlaying({
                     listKey: ['showing', 'modal', 'quizEditingUpload'],
                     replacement: true,
                 }));
+            }
+            else if (value === 'back-to-start'){
+                dispatch(actions.data.quiz.return__BACK_TO_START());
+            }
+            else if (value === 'forward'){
+                
             }
             else if (value === 'save'){
                 dispatch(actions.appearance.return__REPLACE({ 
@@ -84,70 +92,67 @@ function ToolBarPlaying({
             }}
         >
             <div
-                className={`${styles['back']}`}
+                className={`${styles['back-to-start']}`}
             >
-                <span>
-                    <FormattedMessage 
-                        id={
-                            statusQuiz.turn==='white' ?
-                            'Global.WhiteToMove'
-                            :
-                            'Global.BlackToMove'
-                        } 
-                    />
-                </span>
+                <button
+                        type='button'
+                        value='back-to-start'
+                        aria-label='back to start'
+                        onClick={onClick_Main}
+                    >
+                    <IconArrowToEnd className={`${styles['icon__back-to-start']}`} kind='regular' direction='left' />
+                </button>
             </div>
 
+
             <div
-                className={`${styles['show-answer']}`}
+                className={`${styles['mode']}`}
             >
-                {situation==='playing' ?
-                    <button
-                        type='button'
-                        value='give-up'
-                        onClick={onClick_Main}
-                    >
-                        give up
-                        {/* <FormattedMessage id={'Global.Save'} />    */}
-                    </button>
-                    :
-                    <button
-                        type='button'
-                        value='show-answer'
-                        onClick={onClick_Main}
-                    >
-                        show answer
-                        {/* <FormattedMessage id={'Global.Save'} />    */}
-                    </button>
-                }
+                <button
+                    value='create'
+                    type='button'
+                    onClick={onClick_Main}
+                > 
+                    <FormattedMessage id={'Global.Create'} /> 
+                </button>
             </div>
+
 
             <div
                 className={`${styles['control']}`}
             >
-                {/* <button>
+                <button
+                    type='button'
+                    value='backward'
+                    aria-label='backward'
+                    onClick={onClick_Main}
+                >
                     <IconAngle className={`${styles['icon__backward']}`} kind='light' directon='left'/>
                 </button>
 
-                <button>
+                <button
+                    type='button'
+                    value='forward'
+                    aria-label='forward'
+                    onClick={onClick_Main}
+                >
                     <IconAngle className={`${styles['icon__forward']}`} kind='light' directon='right'/>
-                </button> */}
+                </button>
             </div>
 
+
             <div
-                className={`${styles['another-quiz']}`}
+                className={`${styles['save']}`}
             >
-                {situation==='solved' &&
-                    <button
-                        type='button'
-                        value='another-quiz'
-                        onClick={onClick_Main}
-                    >
-                        another-quiz
-                        {/* <FormattedMessage id={'Global.Save'} />    */}
-                    </button>
-                }
+                <button
+                    type='button'
+                    value='save'
+                    onClick={onClick_Main}
+                >
+                    <FormattedMessage id={'Global.Save'} />   
+                </button>
             </div>
+
 
             <div
                 className={`${styles['others']}`}
@@ -155,6 +160,7 @@ function ToolBarPlaying({
                 <button
                     type='button'
                     value='others'
+                    aria-label='others'
                     onClick={onClick_Main}
                 >
                     <IconOthers className={`${styles['icon__others']}`} kind='regular' />
@@ -165,7 +171,7 @@ function ToolBarPlaying({
     );
 }
 
-ToolBarPlaying.defaultProps = {};
+ToolBarQE.defaultProps = {};
 
-export default ToolBarPlaying;
+export default ToolBarQE;
 

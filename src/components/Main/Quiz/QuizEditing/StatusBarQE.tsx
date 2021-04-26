@@ -11,20 +11,20 @@ import {StateRoot} from 'store/reducers';
 
 //import IconGraph from 'svgs/basic/IconChartBar';
 
-import * as actions  from 'store/actions';
+import * as actions  from 'store/actions'; 
 import * as types  from 'store/types';
 
-import styles from './StatusBarPlaying.module.scss';
+import stylesQP from '../QuizPlaying/StatusBarQP.module.scss';
 import IconPaste from 'svgs/basic/IconSignIn';
 import IconAngle from "svgs/basic/IconAngle";
 import IconOthers from "svgs/basic/IconThreeDots";
 // import {Chess} from 'chess.js'; // => makes error
 
-type PropsStatusBarPlaying = {
+type PropsStatusBarQE = {
 };
 
-function StatusBarPlaying({
-}: PropsStatusBarPlaying) {
+function StatusBarQE({
+}: PropsStatusBarQE) {
 
     const dispatch = useDispatch();
 
@@ -32,7 +32,7 @@ function StatusBarPlaying({
     const lengthChessBoard = useSelector((state: StateRoot)=>state.present.size.document.chessBoard.length);
     
     const turn = useSelector((state: StateRoot)=>state.present.quiz.turn);
-    const situation = useSelector((state: StateRoot)=>state.present.quiz.situation);
+    const seriesSan = useSelector((state: StateRoot)=>state.present.quiz.seriesSan);
 
 
 
@@ -47,46 +47,39 @@ function StatusBarPlaying({
             //     }));
             // }
             
-            
     }, []);
 
 
     return (
         <div 
-            className={`${styles['root']}`}
+            className={`${stylesQP['root']}`}
             style={{
                 width: lengthChessBoard,
                 height: heightStatusBar,
             }}
         >
-            {situation === 'playing' && 
-                turn === 'white' ? 
-                    <div className={`${styles['playing-white']}`}>
-                        <FormattedMessage id='Global.WhiteToMove' />
-                    </div>
+            
+            <div className={`${stylesQP[`playing-${turn}`]}  ${stylesQP[`${turn}`]}`}>
+                {turn === 'white' ?
+                    <FormattedMessage id='Global.WhiteToMove' />
                     :
-                    <div className={`${styles['playing-black']}`}>
-                        <FormattedMessage id='Global.BlackToMove' />
-                    </div>
-            }
+                    <FormattedMessage id='Global.BlackToMove' />
+                }
+                
+            </div>
 
-            {situation === 'failed' && 
-                <div className={`${styles['failed']}`}>
-                    <FormattedMessage id='Global.WhiteToMove' />
+            {seriesSan.length > 0 && 
+                <div className={`${stylesQP['series-san']}  ${stylesQP[`${turn}`]}`}>
+                    {seriesSan.reduce((acc, cur)=>`${acc}, ${cur}`)}
                 </div>
             }
 
-            {situation === 'solved' && 
-                <div className={`${styles['solved']}`}>
-                    <FormattedMessage id='Global.WhiteToMove' />
-                </div>
-            }
             
         </div>
     );
 }
 
-StatusBarPlaying.defaultProps = {};
+StatusBarQE.defaultProps = {};
 
-export default StatusBarPlaying;
+export default StatusBarQE;
 
