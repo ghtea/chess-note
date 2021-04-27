@@ -15,19 +15,27 @@ import convertCase from 'tools/vanilla/convertCase';
 import IconX from 'svgs/basic/IconX';
 
 import styles from './QuizEditingUpload.module.scss';
+import stylesQEC from './QuizEditingCommon.module.scss';
 import stylesModal from 'components/Modal.module.scss';
+
 import InputText from "components/Global/Input/InputText";
 import InputRadio from "components/Global/Input/InputRadio";
 
 
-type PropsQuizEditingUpload = {};
+type PropsQuizEditingUpload = {
+    top: number;
+};
 
-function QuizEditingUpload({}: PropsQuizEditingUpload) {
+function QuizEditingUpload({
+    top
+}: PropsQuizEditingUpload) {
   
     const dispatch = useDispatch();
     const intl = useIntl();
     const readyUser = useSelector((state: StateRoot) => state.status.auth.user.ready);
     const idUser = useSelector((state: StateRoot) => state.auth.user?.id);
+
+    const situation = useSelector((state: StateRoot) => state.present.quiz.situation);
     const quizFocusing = useSelector((state: StateRoot) => state.data.quiz.focusing);
 
     const {draft: draft_Main, onChange: onChange_Main} = useInputQuizEditingUpload({
@@ -53,7 +61,8 @@ function QuizEditingUpload({}: PropsQuizEditingUpload) {
     },[onClick_Window]);
 
 
-    const onClick_Create = useCallback(
+
+    const onClick_Upload = useCallback(
         (e:React.MouseEvent<HTMLButtonElement, MouseEvent>)=>{
 
             if (!readyUser){
@@ -67,25 +76,36 @@ function QuizEditingUpload({}: PropsQuizEditingUpload) {
                 }) );
             }
             else if (quizFocusing && idUser){
-            
-                dispatch(actions.data.quiz.return__CREATE_QUIZ({ 
-                    name: quizFocusing.name,
-                    turnNext: quizFocusing.turnNext,
-                    fenStart: quizFocusing.fenStart,
-                    listSeriesSanCorrect: quizFocusing.listSeriesSanCorrect,
-                    idUser: idUser,
-                    isPublic: quizFocusing.isPublic,
-                }));
-                dispatch(actions.appearance.return__REPLACE({ 
-                    listKey: ['showing', 'modal', convertCase("QuizEditingUpload", 'camel')],
-                    replacement: false
-                }));
+                if (situation==='creating'){
+                    dispatch(actions.data.quiz.return__CREATE_QUIZ({ 
+                        name: quizFocusing.name,
+                        turnNext: quizFocusing.turnNext,
+                        fenStart: quizFocusing.fenStart,
+                        listSeriesSanCorrect: quizFocusing.listSeriesSanCorrect,
+                        idUser: idUser,
+                        isPublic: quizFocusing.isPublic,
+                    }));
+                    dispatch(actions.appearance.return__REPLACE({ 
+                        listKey: ['showing', 'modal', convertCase("QuizEditingUpload", 'camel')],
+                        replacement: false
+                    }));
+
+                    
+                }
+                else { // update
+
+                }
             }
     }, [quizFocusing, idUser, readyUser]);
+
+
+
+    
+
   
   return (
     <div 
-        className={`${styles['root']} ${stylesModal['root']}`} 
+        className={`${styles['root']} ${stylesQEC['root']} ${stylesModal['root']}`} 
     >
         <div
             className={`${stylesModal['outside']}`}
@@ -93,13 +113,14 @@ function QuizEditingUpload({}: PropsQuizEditingUpload) {
         />
 
         <div 
-            className={`${stylesModal['modal']} ${styles['modal']}`}
+            className={`${stylesModal['modal']} ${stylesQEC['modal']} ${styles['modal']}`}
             role="dialog" aria-labelledby="Heading_Put"
             ref={refModal}
+            style={{top: top}}
         >
         
             <div 
-                className={`${stylesModal['content']} ${styles['content']}`} 
+                className={`${stylesModal['content']} ${stylesQEC['content']} ${styles['content']}`} 
             >
                 
                 <div className={`${stylesModal['content__section']} ${styles['input-name']}`} >
@@ -141,12 +162,25 @@ function QuizEditingUpload({}: PropsQuizEditingUpload) {
 
 
                 <div className={`${stylesModal['content__section']}`} >
-                    <button
-                        type='button'
-                        value='create'
-                        className={`${styles['button__put']}`}
-                        onClick={onClick_Create}
-                    > <FormattedMessage id={`Global.Create`} /> </button>
+                    {situation === 'creating' ? 
+                        <button
+                            type='button'
+                            value='create'
+                            className={`${styles['button__put']}`}
+                            onClick={onClick_Upload}
+                        > 
+                            <FormattedMessage id={`Global.Create`} /> 
+                        </button>
+                        :
+                        <button
+                            type='button'
+                            value='update'
+                            className={`${styles['button__put']}`}
+                            onClick={onClick_Upload}
+                        > 
+                            <FormattedMessage id={`Global.Update`} /> 
+                        </button>
+                    }
                 </div>
                 
             </div>

@@ -19,38 +19,53 @@ function Quiz({}: PropsQuiz) {
   
   const dispatch = useDispatch();
 
+  // const readyUser = useSelector((state: StateRoot) => state.status.auth.user.ready);
+  // const idUser = useSelector((state: StateRoot) => state.auth.user?.id);
+  // const idQuizFocusing = useSelector((state: StateRoot) => state.data.quiz.focusing.id);
+
+  const situationCurrent = useSelector((state: StateRoot) => state.present.quiz.situation);
   
+
+
   useEffect(()=>{
     dispatch(actions.data.quiz.return__WATCH_FEN_START_CHANGE()); 
   }, [])
+
 
   useEffect(()=>{
     // 중요!, 정규표현식 더 공부...
     const modeFromUrl = window.location.pathname.replace(/\/quiz\/([^/]*).*/, "$1");
     //console.log('modeFromUrl: ', modeFromUrl)
-    let replacement = '';
+    let situationNew = '';
 
     if (modeFromUrl === 'create'){
-      replacement = 'creating';
+      situationNew = 'creating';
     }
     else if (modeFromUrl === 'edit'){
-      replacement = 'editing';
+      situationNew = 'editing';
     }
     else if (modeFromUrl === 'play'){
-      replacement = 'playing';
+      situationNew = 'playing';
     }
     else if (modeFromUrl === 'solved'){
-      replacement = 'solved';
+      situationNew = 'solved';
     }
-
-    dispatch(actions.present.return__REPLACE({ 
-      listKey: [ 'quiz', 'situation' ],
-      replacement: replacement,
-    }));  
-
+    if (situationCurrent !== situationNew){
+      dispatch(actions.present.return__REPLACE({ 
+        listKey: [ 'quiz', 'situation' ],
+        replacement: situationNew,
+      })); 
+    }
+    
     // console.log(idQuiz)
     //console.log(window.location.pathname)
-  },[window.location.pathname])
+  },[window.location.pathname]);
+
+
+  
+
+
+
 
   return (
     <Switch>

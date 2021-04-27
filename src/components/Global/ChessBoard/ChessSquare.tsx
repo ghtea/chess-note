@@ -79,7 +79,7 @@ function ChessSquare({
         }
         else if (piece.type === 'n'){
             if (piece.color === 'w'){
-                src = srcImgWhiteKing;
+                src = srcImgWhiteKnight;
                 alt = 'white knight'
             }
             else {

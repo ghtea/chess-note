@@ -1,9 +1,11 @@
 import { call, select, put } from "redux-saga/effects";
 import { firebaseFirestore } from "firebaseApp";
 
+import history from 'historyApp';
+
 import axios from "axios";
 import apolloClient from 'apollo';
-import { gql, useQuery , FetchResult} from '@apollo/client';
+import { gql, useQuery , FetchResult, ApolloQueryResult} from '@apollo/client';
 import { v4 as uuidv4 } from 'uuid';
 
 // import * as config from 'config';
@@ -50,11 +52,18 @@ function* createQuiz(action: actions.data.quiz.type__CREATE_QUIZ) {
         };
 
         //const data: unknown =  yield call( requestCreateQuiz, argument ); 
-        const data: unknown =  yield call( requestCreateQuiz,  argument); 
+        const res: ApolloQueryResult<any> =  yield call( requestCreateQuiz,  argument); 
         
         yield put( actions.notification.return__ADD_DELETE_BANNER({
             codeSituation: 'CreateQuiz_Succeeded__S'
         }) );
+
+        console.log(res)
+        
+        const quizFromRes = res.data?.createQuiz as types.data.quiz.Quiz | undefined;
+        if (quizFromRes?.id){
+            history.push(`/quiz/edit/${quizFromRes.id}`);
+        }
 
     } catch (error) {
         

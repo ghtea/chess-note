@@ -58,13 +58,13 @@ function ChessBoard({
         }
     }, [page, situationQuiz]);
     
-    const {width: widthWindow, height: heightWindow} = useSelector((state: StateRoot)=>state.present.size.window);
+    const {width: widthWindow, height: heightWindow} = useSelector((state: StateRoot)=>state.appearance.layout.window);
     
-    const heightHeader = useSelector((state: StateRoot)=>state.present.size.document.header.height);
-    const heightStatusBar = useSelector((state: StateRoot)=>state.present.size.document.chessBoard.statusBar.height);
-    const heightToolBar = useSelector((state: StateRoot)=>state.present.size.document.chessBoard.toolBar.height);
+    const heightHeader = useSelector((state: StateRoot)=>state.appearance.layout.document.header.height);
+    const heightStatusBar = useSelector((state: StateRoot)=>state.appearance.layout.document.chessBoard.statusBar.height);
+    const heightToolBar = useSelector((state: StateRoot)=>state.appearance.layout.document.chessBoard.toolBar.height);
     
-    const lengthChessBoard = useSelector((state: StateRoot)=>state.present.size.document.chessBoard.length);
+    const lengthChessBoard = useSelector((state: StateRoot)=>state.appearance.layout.document.chessBoard.length);
 
     useEffect(()=>{
         // height
@@ -75,8 +75,8 @@ function ChessBoard({
         if (widthWindow < lengthChessBoardNew){
             lengthChessBoardNew = widthWindow;
         }
-        dispatch( actions.present.return__REPLACE({
-            listKey: [ 'size', 'document', 'chessBoard', 'length'],
+        dispatch( actions.appearance.return__REPLACE({
+            listKey: [ 'layout', 'document', 'chessBoard', 'length'],
             replacement: lengthChessBoardNew
         }) );
         // $device-xs__min-width: 320px;     
@@ -85,6 +85,14 @@ function ChessBoard({
         // $device-l__min-width: 992px;
     }, [widthWindow, heightWindow, heightHeader, heightToolBar  ]);
 
+    useEffect(()=>{
+        const chessBoard = document.getElementsByClassName('ChessBoard')[0];
+
+        dispatch( actions.appearance.return__REPLACE({
+            listKey: [ 'layout', 'document', 'chessBoard', 'top'],
+            replacement: chessBoard.getBoundingClientRect().top,
+        }) );
+    },[lengthChessBoard])
 
     
 
@@ -151,7 +159,7 @@ function ChessBoard({
 
     return (
         <div 
-            className={`${styles['root']}`}
+            className={`${styles['root']} ChessBoard`}
             onClick={e=>onClick_Board(e, positionStart)}
             style={{width: lengthChessBoard, height: lengthChessBoard}}
         >

@@ -15,13 +15,20 @@ import convertCase from 'tools/vanilla/convertCase';
 import IconAngle from 'svgs/basic/IconAngle';
 
 import styles from './QuizEditingSave.module.scss';
+import stylesQEC from './QuizEditingCommon.module.scss';
 import stylesModal from 'components/Modal.module.scss';
+
+
 import { treeMove } from "chessApp";
 
 
-type PropsQuizEditingSave = {};
+type PropsQuizEditingSave = {
+    top: number;
+};
 
-function QuizEditingSave({}: PropsQuizEditingSave) {
+function QuizEditingSave({
+    top
+}: PropsQuizEditingSave) {
   
     const dispatch = useDispatch();
 
@@ -80,7 +87,7 @@ function QuizEditingSave({}: PropsQuizEditingSave) {
 
   return (
     <div 
-        className={`${styles['root']} ${stylesModal['root']}`} 
+        className={`${styles['root']} ${stylesQEC['root']} ${stylesModal['root']}`} 
     >
         <div
             className={`${stylesModal['outside']}`}
@@ -88,13 +95,14 @@ function QuizEditingSave({}: PropsQuizEditingSave) {
         />
 
         <div 
-            className={`${stylesModal['modal']} ${styles['modal']}`}
+            className={`${styles['modal']} ${stylesQEC['modal']} ${stylesModal['modal']}`}
             role="dialog" aria-labelledby="Heading_Save"
             ref={refModal}
+            style={{top: top}}
         >
         
             <div 
-                className={`${stylesModal['content']} ${styles['content']}`} 
+                className={`${stylesModal['content']} ${stylesQEC['content']} ${styles['content']}`} 
             >
                 
                 <div className={`${stylesModal['content__section']}`} >

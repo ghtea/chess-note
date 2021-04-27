@@ -4,9 +4,7 @@
     display: flex;
     flex-flow: row nowrap;
     justify-content: center;
-    align-items: center;
-
-    
+    align-items: stretch;
 
     & > * {
         
@@ -14,9 +12,7 @@
         min-width: 100px;
         max-width: 500px;
 
-        height: 100%;
-        min-height: 200px;
-        max-height: 600px;
+        height: auto;
 
         padding: 20px;
 

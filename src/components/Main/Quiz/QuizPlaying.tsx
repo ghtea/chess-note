@@ -36,29 +36,37 @@ function QuizPlaying({}: PropsQuizPlaying) {
   const idUser = useSelector((state: StateRoot) => state.auth.user?.id);
 
 
-  useEffect(()=>{
-    const idQuizFromUri = (window.location.pathname.match(/[^\/]*$/) || [])[0];
-
-    // 로그인하고 아이디 얻었을 때, 로그인 체크 끝나고 로그인 안되어있을 때
-    if ( (statusUser.ready && idUser) || (statusUser.tried && !statusUser.ready) ){
-      if (!idQuiz || idQuizFromUri !== idQuiz){
-        //console.log('here: ', idUser)
-        //console.log('idQuizFromUri: ', idQuizFromUri)
-        dispatch(actions.data.quiz.return__GET_QUIZ_BY_ID({ 
-          idQuiz: idQuizFromUri,
-          idUserInApp: idUser,
-        }));  
-      }
-    }
-    
-    // console.log(idQuiz)
-    //console.log(window.location.pathname)
-  },[window.location.pathname, statusUser.tried, idUser])
-
-
   const listSquare = useMemo(()=>{
     return chessPlaying.board(); 
   }, [statusQuiz.fen]);
+
+
+
+  useEffect(()=>{
+    //const idQuizFromUri = (window.location.pathname.match(/[^\/]*$/) || [])[0];
+    const modeFromUrl = window.location.pathname.replace(/\/quiz\/([^/]*).*/, "$1");
+    const idQuizFromUri = window.location.pathname.replace(/\/quiz\/play\/([^/]*).*/, "$1");
+    console.log('play-idQuizFromUri: ', idQuizFromUri)
+
+    if (modeFromUrl === 'play' && idQuizFromUri){
+
+      // 로그인하고 아이디 얻었을 때, 로그인 체크 끝나고 로그인 안되어있을 때
+      if ( (statusUser.ready && idUser) || (statusUser.tried && !statusUser.ready) ){
+        // 현재 로컬에 있는 퀴즈 아이디와 uri에 있는 퀴즈 아이디가 서로 다를 때
+        if ( !idQuiz || idQuizFromUri !== idQuiz){
+          //console.log('here: ', idUser)
+          //console.log('idQuizFromUri: ', idQuizFromUri)
+          dispatch(actions.data.quiz.return__GET_QUIZ_BY_ID({ 
+            idQuiz: idQuizFromUri,
+            idUserInApp: idUser,
+            situation: 'playing',
+          }));  
+        }
+      }
+
+    }
+    
+  }, [window.location.pathname, statusUser, idQuiz])
 
   return (
     <div

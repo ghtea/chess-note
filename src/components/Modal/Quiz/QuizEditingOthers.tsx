@@ -17,13 +17,16 @@ import IconAngle from 'svgs/basic/IconAngle';
 
 import styles from './QuizEditingOthers.module.scss';
 import stylesQEC from './QuizEditingCommon.module.scss';
-
 import stylesModal from 'components/Modal.module.scss';
 
 
-type PropsQuizEditingOthers = {};
+type PropsQuizEditingOthers = {
+    top: number;
+};
 
-function QuizEditingOthers({}: PropsQuizEditingOthers) {
+function QuizEditingOthers({
+    top
+}: PropsQuizEditingOthers) {
   
     const dispatch = useDispatch();
 
@@ -60,6 +63,7 @@ function QuizEditingOthers({}: PropsQuizEditingOthers) {
                 if (valid){
                     chessFocusing.load(valueFromClipboard);
                     const turn = chessFocusing.turn() === 'w' ? 'white' : 'black';
+                    
 
                     dispatch(actions.data.return__REPLACE({ 
                         listKey: [ 'quiz', 'focusing', 'fenStart' ],
@@ -70,9 +74,17 @@ function QuizEditingOthers({}: PropsQuizEditingOthers) {
                         listKey: ['quiz', 'focusing', 'side'],
                         replacement: turn,
                     }) );
+
+                    const replacementQuizPresent = {
+                        ...quizPresent,
+                        fen: chessFocusing.fen(),
+                        turn: turn,
+                        seriesSan: [],
+                    }
+
                     dispatch( actions.present.return__REPLACE({
-                        listKey: ['quiz', 'turn'],
-                        replacement: turn,
+                        listKey: ['quiz' ],
+                        replacement: replacementQuizPresent,
                     }) );
                 }
                 else {
@@ -119,7 +131,7 @@ function QuizEditingOthers({}: PropsQuizEditingOthers) {
 
   return (
     <div 
-        className={`${stylesQEC['root']} ${stylesModal['root']}`} 
+        className={`${stylesQEC['root']} ${stylesQEC['root']} ${stylesModal['root']}`} 
     >
         <div
             className={`${stylesModal['outside']}`}
@@ -127,13 +139,14 @@ function QuizEditingOthers({}: PropsQuizEditingOthers) {
         />
 
         <div 
-            className={`${stylesModal['modal']} ${stylesQEC['modal']}`}
+            className={`${stylesModal['modal']} ${stylesQEC['modal']} ${stylesQEC['modal']}`}
             role="dialog" aria-labelledby="Heading_Save"
             ref={refModal}
+            style={{top: top}}
         >
         
             <div 
-                className={`${stylesModal['content']} ${stylesQEC['content']}`} 
+                className={`${stylesModal['content']} ${stylesQEC['content']} ${stylesQEC['content']}`} 
             >
                 <div className={`${stylesModal['content__section']}`} >
                     <button

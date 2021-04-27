@@ -31,8 +31,8 @@ function ToolBarQE({
 
     const dispatch = useDispatch();
 
-    const heightToolbar = useSelector((state: StateRoot)=>state.present.size.document.chessBoard.toolBar.height);
-    const lengthChessBoard = useSelector((state: StateRoot)=>state.present.size.document.chessBoard.length);
+    const heightToolbar = useSelector((state: StateRoot)=>state.appearance.layout.document.chessBoard.toolBar.height);
+    const lengthChessBoard = useSelector((state: StateRoot)=>state.appearance.layout.document.chessBoard.length);
     const quizPresent = useSelector((state: StateRoot)=>state.present.quiz);
 
 

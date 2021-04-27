@@ -34,7 +34,7 @@ function* getQuizById( action: actions.data.quiz.type__GET_QUIZ_BY_ID ) {
     }) );
 
 
-    const { idQuiz, idUserInApp } = action.payload;
+    const { idQuiz, idUserInApp, situation } = action.payload;
     //console.log('getQuizById: ', idQuiz)
     try {
         
@@ -66,7 +66,7 @@ function* getQuizById( action: actions.data.quiz.type__GET_QUIZ_BY_ID ) {
 
             yield put( actions.data.quiz.return__FOCUS_QUIZ({
                 quiz: quizFromRes,
-                situation: 'playing',
+                situation: situation,
             }));
 
             yield put( actions.status.return__REPLACE({

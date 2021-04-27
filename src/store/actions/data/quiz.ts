@@ -68,6 +68,7 @@ export const name__GET_QUIZ_BY_ID = 'data/quiz/GET_QUIZ_BY_ID';
 type Payload__GET_QUIZ_BY_ID = {
     idQuiz: string,
     idUserInApp?: string,
+    situation: types.present.SituationQuiz, 
 }
 export const return__GET_QUIZ_BY_ID = (payload: Payload__GET_QUIZ_BY_ID) => {
     return {

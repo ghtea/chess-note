@@ -24,8 +24,18 @@
   align-items: center;
 
   :global(.icon){
-    @include color-each-theme( color, basic__7);
+    @include color-each-theme( color, basic__6);
   }
+
+
+  .back-to-start {
+    .icon__back-to-start {
+      width: 26px;
+      height: 26px;
+    }
+  }
+
+
   .control {
 
     display: grid;

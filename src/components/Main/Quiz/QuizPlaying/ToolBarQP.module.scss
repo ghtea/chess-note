@@ -24,43 +24,29 @@
   align-items: center;
 
   :global(.icon){
-    @include color-each-theme( color, basic__7);
+    @include color-each-theme( color, basic__6);
   }
 
   .back-to-start {
-
     .icon__back-to-start {
       width: 26px;
       height: 26px;
     }
   }
 
-
-
-  .control {
-
-    display: grid;
-    grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
-    grid-template-rows: 1fr;
-    gap: 10px 0;
-
-    .icon__paste {
-      transform: rotate(90deg);
+  .show-answer {
+    .icon__show-answer {
       width: 26px;
       height: 26px;
     }
-
-    .icon__backward, .icon__forward {
-      width: 30px;
-      height: 30px;
-    }
-
   }
 
-  .others {
-    .icon__others {
-      width: 30px;
-      height: 30px;
+
+
+  .another-quiz {
+    .icon__another-quiz {
+      width: 28px;
+      height: 28px;
     }
   }
   

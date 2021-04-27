@@ -28,8 +28,8 @@ function StatusBarQE({
 
     const dispatch = useDispatch();
 
-    const heightStatusBar = useSelector((state: StateRoot)=>state.present.size.document.chessBoard.statusBar.height);
-    const lengthChessBoard = useSelector((state: StateRoot)=>state.present.size.document.chessBoard.length);
+    const heightStatusBar = useSelector((state: StateRoot)=>state.appearance.layout.document.chessBoard.statusBar.height);
+    const lengthChessBoard = useSelector((state: StateRoot)=>state.appearance.layout.document.chessBoard.length);
     
     const turn = useSelector((state: StateRoot)=>state.present.quiz.turn);
     const seriesSan = useSelector((state: StateRoot)=>state.present.quiz.seriesSan);

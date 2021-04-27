@@ -5,6 +5,7 @@ import { Route, Switch } from "react-router-dom";
 
 import {ChessInstance, Move, Square } from 'chess.js'
 import chessPlaying from 'chessApp';
+import styles from './QuizEditing.module.scss';
 
 import { useDispatch, useSelector } from 'react-redux';
 import { StateRoot } from 'store/reducers';
@@ -26,12 +27,39 @@ function QuizEditing({}: PropsQuizEditing) {
 
   const statusQuiz = useSelector((state: StateRoot)=>state.present.quiz);
   const side = useSelector((state: StateRoot)=>state.data.quiz.focusing.turnNext);
-  //const { loading, error, data } = useQuery(GET_LIST_QUIZ);
+  const idQuiz = useSelector((state: StateRoot)=>state.data.quiz.focusing?.id);
+  
+  const statusUser = useSelector((state: StateRoot) => state.status.auth.user);
+  const idUser = useSelector((state: StateRoot) => state.auth.user?.id);
+
+  useEffect(()=>{
+    //const idQuizFromUri = (window.location.pathname.match(/[^\/]*$/) || [])[0];
+    const modeFromUrl = window.location.pathname.replace(/\/quiz\/([^/]*).*/, "$1");
+    const idQuizFromUri = window.location.pathname.replace(/\/quiz\/edit\/([^/]*).*/, "$1");
+    
+    console.log('edit-idQuizFromUri: ', idQuizFromUri)
 
 
-  // useEffect(()=>{
+    if (modeFromUrl === 'edit' && idQuizFromUri){
 
-  // }, [])
+      // 로그인하고 아이디 얻었을 때, 로그인 체크 끝나고 로그인 안되어있을 때
+      if ( (statusUser.ready && idUser) || (statusUser.tried && !statusUser.ready) ){
+        // 현재 로컬에 있는 퀴즈 아이디와 uri에 있는 퀴즈 아이디가 서로 다를 때
+        if ( !idQuiz || idQuizFromUri !== idQuiz){
+          //console.log('here: ', idUser)
+          //console.log('idQuizFromUri: ', idQuizFromUri)
+          dispatch(actions.data.quiz.return__GET_QUIZ_BY_ID({ 
+            idQuiz: idQuizFromUri,
+            idUserInApp: idUser,
+            situation: 'editing',
+          }));  
+        }
+      }
+
+    }
+
+    
+  }, [window.location.pathname, statusUser, idQuiz ])
 
 
   const listSquare = useMemo(()=>{
@@ -39,7 +67,9 @@ function QuizEditing({}: PropsQuizEditing) {
   }, [statusQuiz.fen]);
 
   return (
-    <div>
+    <div
+      className={`${styles['root']}`}
+    >
 
       <StatusBarQE />
 

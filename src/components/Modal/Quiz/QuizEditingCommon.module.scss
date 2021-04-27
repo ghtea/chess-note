@@ -7,8 +7,13 @@
         //margin-top: auto !important;
         //margin-bottom: auto !important;
         //position: absolute;
-        top: unset;
-        bottom: 60px;
+
+        // top: unset;
+        // bottom: 50px;
+
+        bottom: unset;
+
+        transform: translateY(-100%) translateY(-10px);
     }
     .content {
   

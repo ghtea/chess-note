@@ -19,26 +19,6 @@ const stateInitial = {
       name: 'light'
   },
 
-  size: {
-    window: {
-      width: 0,
-      height: 0,
-    },
-    document: {
-      header: {
-        height: 60,
-      },
-      chessBoard: {
-        length: 0,
-        statusBar: {
-          height: 40
-        },
-        toolBar: {
-          height: 60
-        }
-      }
-    }
-  },
 
   quiz: {
     idGame: null,
