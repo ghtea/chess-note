@@ -46,6 +46,7 @@ function* getListQuiz( action: actions.data.quiz.type__GET_LIST_QUIZ) {
                     turnNext
                     fenStart
                     listSeriesSanCorrect
+                    listSeriesSanMention
                     idUser
                     isPublic
                     dateCreated

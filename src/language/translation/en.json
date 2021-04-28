@@ -6,6 +6,7 @@
     "Global.Add": "Add",
     "Global.Create": "Create",
     "Global.Save": "Save",
+    "Global.Set": "Set",
     "Global.Delete": "Delete",
     "Global.Update": "Update",
     "Global.Search": "Search",
@@ -61,9 +62,10 @@
     "Modal.QuizEditingUpload_Public": "Public",
     "Modal.QuizEditingUpload_Private": "Private",
 
-    "Modal.QuizEditingSave_SaveAsStart": "Save as Start",
-    "Modal.QuizEditingSave_SaveAsAnswer": "Save as an Answer",
-
+    "Modal.QuizEditingSet_SetAsStart": "Set as Start",
+    "Modal.QuizEditingSet_SetAsAnswer": "Set as an Answer",
+    "Modal.QuizEditingSet_SetAsMention": "Set as a Mention",
+    
     "Modal.QuizEditingOthers_UseFen": "Use FEN from Clipboard",    
     "Modal.QuizEditingOthers_NotValidFen": "This is not valid FEN",
     "Modal.QuizEditingOthers_ChangeSide": "Change Side",
@@ -101,7 +103,8 @@
 
     "Notification.CreateQuiz_Succeeded__S": "Successfully created the quiz!",
     "Notification.CreateQuiz_UnknownError__E": "Failed to create the quiz",
-    "Notification.CreateQuiz_NoAnswer__E": "You should set the anwser",
+    "Notification.CreateQuiz_NoAnswer__E": "You should set anwser",
+    "Notification.CreateQuiz_NoFenStart__E": "You should set starting position",
     
     "Notification.GetListQuiz_UnknownError__E": "Failed to get the quizes",
     "Notification.GetQuiz_UnknownError__E": "Failed to get the quiz",

@@ -7,7 +7,7 @@ import Setting from "./Modal/Setting";
 import MyProfile from "./Modal/MyProfile";
 
 import QuizEditingUpload from './Modal/Quiz/QuizEditingUpload';
-import QuizEditingSave from "./Modal/Quiz/QuizEditingSave";
+import QuizEditingSet from "./Modal/Quiz/QuizEditingSet";
 import QuizEditingOthers from "./Modal/Quiz/QuizEditingOthers";
 
 // import styles from './Modal.module.scss';
@@ -33,10 +33,10 @@ function Modal({}: PropsModal) {
             {showing.myProfile && <MyProfile />}
 
             {showing.quizEditingUpload && <QuizEditingUpload top={topModalQuiz}/>}
-            {showing.quizEditingSave && <QuizEditingSave top={topModalQuiz}/>}
+            {showing.quizEditingSet && <QuizEditingSet top={topModalQuiz}/>}
             {showing.quizEditingOthers && <QuizEditingOthers top={topModalQuiz}/>}
 
-            {showing.quizTryingOthers && <QuizEditingSave top={topModalQuiz}/>}
+            {showing.quizTryingOthers && <QuizEditingSet top={topModalQuiz}/>}
         </>
     );
 }

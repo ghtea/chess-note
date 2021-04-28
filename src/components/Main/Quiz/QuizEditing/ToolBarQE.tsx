@@ -66,9 +66,9 @@ function ToolBarQE({
             else if (value === 'forward'){
                 
             }
-            else if (value === 'save'){
+            else if (value === 'set'){
                 dispatch(actions.appearance.return__REPLACE({ 
-                    listKey: ['showing', 'modal', 'quizEditingSave'],
+                    listKey: ['showing', 'modal', 'quizEditingSet'],
                     replacement: true,
                 }));
             }
@@ -142,14 +142,14 @@ function ToolBarQE({
 
 
             <div
-                className={`${styles['save']}`}
+                className={`${styles['set']}`}
             >
                 <button
                     type='button'
-                    value='save'
+                    value='set'
                     onClick={onClick_Main}
                 >
-                    <FormattedMessage id={'Global.Save'} />   
+                    <FormattedMessage id={'Global.Set'} />   
                 </button>
             </div>
 

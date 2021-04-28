@@ -46,6 +46,7 @@ function* getQuizById( action: actions.data.quiz.type__GET_QUIZ_BY_ID ) {
                     turnNext
                     fenStart
                     listSeriesSanCorrect
+                    listSeriesSanMention
                     idUser
                     isPublic
                     dateCreated

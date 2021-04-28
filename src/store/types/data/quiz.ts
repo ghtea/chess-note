@@ -15,6 +15,7 @@ export type Quiz = {
   turnNext: 'white' | 'black';
   fenStart: string;
   listSeriesSanCorrect: string[][];
+  listSeriesSanMention: string[][];
   idUser: string;
   isPublic: boolean;
 }
