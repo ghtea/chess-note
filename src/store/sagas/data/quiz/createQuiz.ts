@@ -16,15 +16,7 @@ import * as types from "store/types";
 const CREATE_QUIZ = gql`
     mutation CreateQuiz($argument: CreateQuizInputType!){
         createQuiz(createQuizInputType: $argument) 
-        {
-            id,
-            name,
-            turnNext,
-            fenStart,
-            listSeriesSanCorrect,
-            listSeriesSanMention,
-            idUser
-        }
+            ${types.data.quiz.stringGqlQuiz}
     }
 `;
 

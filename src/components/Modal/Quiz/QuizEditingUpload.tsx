@@ -35,8 +35,8 @@ function QuizEditingUpload({
     const readyUser = useSelector((state: StateRoot) => state.status.auth.user.ready);
     const idUser = useSelector((state: StateRoot) => state.auth.user?.id);
 
-    const situation = useSelector((state: StateRoot) => state.present.quiz.situation);
-    const quizFocusing = useSelector((state: StateRoot) => state.data.quiz.focusing);
+    const situation = useSelector((state: StateRoot) => state.present.quiz.focusing.situation);
+    const quizData = useSelector((state: StateRoot) => state.data.quiz.focusing);
 
     const {draft: draft_Main, onChange: onChange_Main} = useInputQuizEditingUpload({
         name: '',
@@ -70,16 +70,16 @@ function QuizEditingUpload({
                     codeSituation: 'NotLoggedIn__E'
                 }) );
             }
-            else if (quizFocusing && idUser){
+            else if (quizData && idUser){
                 if (situation==='creating'){
                     dispatch(actions.data.quiz.return__CREATE_QUIZ({ 
-                        name: quizFocusing.name,
-                        turnNext: quizFocusing.turnNext,
-                        fenStart: quizFocusing.fenStart,
-                        listSeriesSanCorrect: quizFocusing.listSeriesSanCorrect,
-                        listSeriesSanMention: quizFocusing.listSeriesSanMention,
+                        name: quizData.name,
+                        turnNext: quizData.turnNext,
+                        fenStart: quizData.fenStart,
+                        listSeriesSanCorrect: quizData.listSeriesSanCorrect,
+                        listSeriesSanMention: quizData.listSeriesSanMention,
                         idUser: idUser,
-                        isPublic: quizFocusing.isPublic,
+                        isPublic: quizData.isPublic,
                     }));
                     dispatch(actions.appearance.return__REPLACE({ 
                         listKey: ['showing', 'modal', convertCase("QuizEditingUpload", 'camel')],
@@ -92,7 +92,7 @@ function QuizEditingUpload({
 
                 }
             }
-    }, [quizFocusing, idUser, readyUser]);
+    }, [quizData, idUser, readyUser]);
 
 
 
@@ -122,7 +122,7 @@ function QuizEditingUpload({
                 <div className={`${stylesModal['content__section']} ${styles['input-name']}`} >
                     <InputText 
                         name='name'
-                        value={quizFocusing?.name}
+                        value={quizData?.name}
 
                         label={intl.formatMessage({ id: 'Global.Name'})}
                         placeholder={intl.formatMessage({ id: 'Global.Name'})}

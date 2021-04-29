@@ -1,0 +1,34 @@
+@import 'styles/every.scss';
+
+.root {
+    display: flex;
+    flex-flow: row nowrap;
+    justify-content: space-around;
+    align-items: stretch;
+}
+
+
+.button__main {
+
+    width: 30%;
+    max-width: 210px;
+    min-width: 120px;
+
+    height: auto;
+    padding: 10px 6px 10px 6px;
+    font-size: 1rem;
+
+    &:nth-child(n+2){
+        margin-left: 8px;
+    }
+
+    @include color-each-theme(background-color, basic__0);
+    border-radius: 4px;
+    @include frame-each-theme(border, 1px, solid, basic__2);
+
+    &:hover {
+        @include frame-each-theme(border, 1px, solid, main__4);
+        @include color-each-theme(color, main__5);
+    }
+    
+}

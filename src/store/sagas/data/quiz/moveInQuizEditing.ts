@@ -16,7 +16,7 @@ function* moveInQuizEditing(action: actions.data.quiz.type__MOVE_IN_QUIZ_EDITING
 
     const {from, to, san} = action.payload;
 
-    const quizPresent: types.present.QuizPresent =  yield select( (state:StateRoot) => state.present.quiz ); 
+    const quizPresent: types.present.quiz.Quiz =  yield select( (state:StateRoot) => state.present.quiz.focusing ); 
     
     try {
 
@@ -42,7 +42,7 @@ function* moveInQuizEditing(action: actions.data.quiz.type__MOVE_IN_QUIZ_EDITING
             }
     
             yield put( actions.present.return__REPLACE({
-                listKey: [ 'quiz'],
+                listKey: [ 'quiz', 'focusing'],
                 replacement,
             }) );
     

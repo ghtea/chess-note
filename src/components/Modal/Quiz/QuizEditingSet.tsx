@@ -32,8 +32,8 @@ function QuizEditingSet({
   
     const dispatch = useDispatch();
 
-    const quizPresent = useSelector((state: StateRoot) => state.present.quiz);
-    const quizFocusing = useSelector((state: StateRoot) => state.data.quiz.focusing);
+    const quizPresent = useSelector((state: StateRoot) => state.present.quiz.focusing);
+    const quizData = useSelector((state: StateRoot) => state.data.quiz.focusing);
     const [indexAnswer, setIndexAnswer] = useState<number>(0);
 
     const refModal = useRef<HTMLDivElement>(null);
@@ -69,7 +69,7 @@ function QuizEditingSet({
                     replacement: quizPresent.fen
                 }));
                 dispatch(actions.present.return__REPLACE({ 
-                    listKey: [ 'quiz', 'seriesSan' ],
+                    listKey: [ 'quiz', 'focusing', 'seriesSan' ],
                     replacement: [],
                 }));
             }
@@ -81,17 +81,17 @@ function QuizEditingSet({
                 }));
             } 
         
-    }, [quizPresent.seriesSan, quizFocusing.listSeriesSanCorrect]);
+    }, [quizPresent.seriesSan, quizData.listSeriesSanCorrect]);
     
 
     const showingOtherOptions = useMemo(()=>{
-        if (quizFocusing.fenStart && quizPresent.seriesSan.length > 0){
+        if (quizData.fenStart && quizPresent.seriesSan.length > 0){
             return true;
         }
         else {
             return false;
         }
-    },[quizFocusing.fenStart, quizPresent.seriesSan])
+    },[quizData.fenStart, quizPresent.seriesSan])
 
   return (
     <div 

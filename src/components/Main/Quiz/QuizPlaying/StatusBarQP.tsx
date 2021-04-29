@@ -32,8 +32,8 @@ function StatusBarQP({
     const heightStatusBar = useSelector((state: StateRoot)=>state.appearance.layout.document.chessBoard.statusBar.height);
     const lengthChessBoard = useSelector((state: StateRoot)=>state.appearance.layout.document.chessBoard.length);
     
-    const turn = useSelector((state: StateRoot)=>state.present.quiz.turn);
-    const situation = useSelector((state: StateRoot)=>state.present.quiz.situation);
+    const turn = useSelector((state: StateRoot)=>state.present.quiz.focusing.turn);
+    const situation = useSelector((state: StateRoot)=>state.present.quiz.focusing.situation);
 
 
 

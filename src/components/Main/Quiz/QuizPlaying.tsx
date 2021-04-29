@@ -28,7 +28,7 @@ function QuizPlaying({}: PropsQuizPlaying) {
   
   const dispatch = useDispatch();
 
-  const statusQuiz = useSelector((state: StateRoot)=>state.present.quiz);
+  const quizPresent = useSelector((state: StateRoot)=>state.present.quiz.focusing);
   const side = useSelector((state: StateRoot)=>state.data.quiz.focusing.turnNext);
   const idQuiz = useSelector((state: StateRoot)=>state.data.quiz.focusing?.id);
   
@@ -38,7 +38,7 @@ function QuizPlaying({}: PropsQuizPlaying) {
 
   const listSquare = useMemo(()=>{
     return chessPlaying.board(); 
-  }, [statusQuiz.fen]);
+  }, [quizPresent.fen]);
 
 
 
@@ -46,7 +46,7 @@ function QuizPlaying({}: PropsQuizPlaying) {
     //const idQuizFromUri = (window.location.pathname.match(/[^\/]*$/) || [])[0];
     const modeFromUrl = window.location.pathname.replace(/\/quiz\/([^/]*).*/, "$1");
     const idQuizFromUri = window.location.pathname.replace(/\/quiz\/play\/([^/]*).*/, "$1");
-    console.log('play-idQuizFromUri: ', idQuizFromUri)
+    //console.log('play-idQuizFromUri: ', idQuizFromUri)
 
     if (modeFromUrl === 'play' && idQuizFromUri){
 

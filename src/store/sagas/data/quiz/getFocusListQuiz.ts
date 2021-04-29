@@ -12,19 +12,19 @@ import {StateRoot} from 'store/reducers';
 import * as actions from "store/actions";
 import * as types from "store/types";
 import { queryAllByAltText } from "@testing-library/dom";
-import { KindGetListQuiz } from "store/types/data/quiz";
+import { KindGetFocusListQuiz } from "store/types/data/quiz";
 
 
 
 // GraphQL query 문법에 이상 있으면 할당하는 시점에서 에러 발생시키기 때문에 에러 처리한 곳에서 해야 한다
 
-const requestGetQuizListQuiz = (query:DocumentNode, argument: any) => { 
+const requestGetFocusListQuiz = (query:DocumentNode, argument: any) => { 
     return apolloClient.query({query, variables: {argument}});
 };
 
 
 // idUser 있으면 개인 퀴즈들, 없으면 공개 퀴즈들
-function* getListQuiz( action: actions.data.quiz.type__GET_LIST_QUIZ) {
+function* getFocusListQuiz( action: actions.data.quiz.type__GET_FOCUS_LIST_QUIZ) {
 
     yield put( actions.status.return__REPLACE({
         listKey: ['data', 'quiz', 'list'],
@@ -38,9 +38,9 @@ function* getListQuiz( action: actions.data.quiz.type__GET_LIST_QUIZ) {
 
     try {
         
-        const GET_LIST_QUIZ = gql`
-            query GetListQuiz($argument: GetListQuizInputType!){
-                getListQuiz(getListQuizInputType: $argument) {
+        const GET_FOCUS_LIST_QUIZ = gql`
+            query GetFocusListQuiz($argument: GetFocusListQuizInputType!){
+                getFocusListQuiz(getFocusListQuizInputType: $argument) {
                     id
                     name
                     turnNext
@@ -50,18 +50,19 @@ function* getListQuiz( action: actions.data.quiz.type__GET_LIST_QUIZ) {
                     idUser
                     isPublic
                     dateCreated
+                    dateUpdated
                 }
             }
         `;
         
         let kindUsing = ''
-        if (valueKind === KindGetListQuiz.publicQuiz){
+        if (valueKind === KindGetFocusListQuiz.publicQuiz){
             kindUsing = 'publicQuiz'
         }
-        else if (valueKind === KindGetListQuiz.publicQuizByRecord){
+        else if (valueKind === KindGetFocusListQuiz.publicQuizByRecord){
             kindUsing = 'publicQuizByRecord'
         }
-        else {  // KindGetListQuiz.myQuizByRecord
+        else {  // KindGetFocusListQuiz.myQuizByRecord
             kindUsing = 'myQuizByRecord'
         }
         
@@ -70,7 +71,7 @@ function* getListQuiz( action: actions.data.quiz.type__GET_LIST_QUIZ) {
             idUser,
         };
 
-        let response: ApolloQueryResult<any> =  yield call( requestGetQuizListQuiz,  GET_LIST_QUIZ, argument);
+        let response: ApolloQueryResult<any> =  yield call( requestGetFocusListQuiz,  GET_FOCUS_LIST_QUIZ, argument);
 
         // console.log(response);
 
@@ -101,7 +102,7 @@ function* getListQuiz( action: actions.data.quiz.type__GET_LIST_QUIZ) {
                 replacement: {
                     tried: true,
                     loading: false,
-                    ready: false,
+                    ready: true,
                 }
             }) );
 
@@ -110,7 +111,7 @@ function* getListQuiz( action: actions.data.quiz.type__GET_LIST_QUIZ) {
                 replacement: {
                     tried: true,
                     loading: false,
-                    ready: false,
+                    ready: true,
                 }
             }) );
         }
@@ -156,7 +157,7 @@ function* getListQuiz( action: actions.data.quiz.type__GET_LIST_QUIZ) {
         console.error(error);
         
         yield put( actions.notification.return__ADD_DELETE_BANNER({
-            codeSituation: 'GetListQuiz_UnknownError__E'
+            codeSituation: 'GetFocusListQuiz_UnknownError__E'
         }) );
 
         yield put( actions.status.return__REPLACE({
@@ -179,7 +180,7 @@ function* getListQuiz( action: actions.data.quiz.type__GET_LIST_QUIZ) {
     }
 }
 
-export default getListQuiz;
+export default getFocusListQuiz;
 
 
 
