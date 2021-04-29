@@ -36,6 +36,7 @@ function Category({
     const onClick_Link = useCallback(
         (event: React.MouseEvent<HTMLAnchorElement>) => {
         event.preventDefault();
+        console.log('haha')
         const href = event.currentTarget.getAttribute("href");  // https://stackoverflow.com/questions/1550901/how-to-get-raw-href-contents-in-javascript
         if (href) {
             dispatch(actions.appearance.return__REPLACE({ 

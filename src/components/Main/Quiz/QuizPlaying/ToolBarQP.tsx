@@ -18,7 +18,10 @@ import styles from './ToolBarQP.module.scss';
 import IconPaste from 'svgs/basic/IconSignIn';
 import IconAngle from "svgs/basic/IconAngle";
 import IconOthers from "svgs/basic/IconThreeDots";
-import IconArrowToEnd from "svgs/basic/IconArrowToEnd";
+
+import IconBackToStart from "svgs/basic/IconAngleDouble";
+import IconBackOneMove from "svgs/basic/IconAngle";
+
 import IconBookSpell from "svgs/basic/IconBookSpell";
 import IconArrowInSquare from "svgs/basic/IconArrowInSquare";
 // import {Chess} from 'chess.js'; // => makes error
@@ -85,7 +88,7 @@ function ToolBarQP({
         >
 
             <div
-                className={`${styles['back-to-start']}`}
+                className={`${styles['back']}`}
             >
                 <button
                         type='button'
@@ -93,7 +96,16 @@ function ToolBarQP({
                         aria-label='back to start'
                         onClick={onClick_Main}
                     >
-                    <IconArrowToEnd className={`${styles['icon__back-to-start']}`} kind='regular' direction='left' />
+                    <IconBackToStart className={`${styles['icon__back-to-start']}`} kind='regular' direction='left' />
+                </button>
+
+                <button
+                        type='button'
+                        value='back-one-move'
+                        aria-label='Back One Move'
+                        onClick={onClick_Main}
+                    >
+                    <IconBackOneMove className={`${styles['icon__back-one-move']}`} kind='regular' direction ='left' />
                 </button>
             </div>
 

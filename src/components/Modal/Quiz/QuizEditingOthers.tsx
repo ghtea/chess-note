@@ -192,7 +192,7 @@ function QuizEditingOthers({
                         >
                             <IconAngle 
                                 className={`${stylesQEC['icon__previous-answer']}`}
-                                directon='left' kind='regular' 
+                                direction='left' kind='regular' 
                             />
                         </button>
                         <button
@@ -204,7 +204,7 @@ function QuizEditingOthers({
                         >
                             <IconAngle 
                                 className={`${stylesQEC['icon__next-answer']}`}
-                                directon='right' kind='regular' 
+                                direction='right' kind='regular' 
                             />
                         </button>
                     </div>
@@ -230,7 +230,7 @@ function QuizEditingOthers({
                         >
                             <IconAngle 
                                 className={`${stylesQEC['icon__previous-answer']}`}
-                                directon='left' kind='regular' 
+                                direction='left' kind='regular' 
                             />
                         </button>
                         <button
@@ -241,7 +241,7 @@ function QuizEditingOthers({
                         >
                             <IconAngle 
                                 className={`${stylesQEC['icon__next-answer']}`}
-                                directon='right' kind='regular' 
+                                direction='right' kind='regular' 
                             />
                         </button>
                     </div>

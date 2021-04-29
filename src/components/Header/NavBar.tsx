@@ -84,7 +84,8 @@ function NavBar({}: PropsNavBar) {
                         <LinkSolo  
                             kind={(itemEach as TypeLInk).kind}
                             id={(itemEach as TypeLInk).id}
-                            
+                             
+                            setIdCategoryOpen={setIdCategoryOpen}
                             key={`NavBar__Item-${iEach}`}
                         />
                     )
