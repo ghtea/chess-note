@@ -14,7 +14,7 @@ import InputRadio from 'components/Global/Input/InputRadio';
 import convertCase from 'tools/vanilla/convertCase';
 import IconAngle from 'svgs/basic/IconAngle';
 
-import styles from './QuizEditingSave.module.scss';
+import styles from './QuizEditingSet.module.scss';
 import stylesQEC from './QuizEditingCommon.module.scss';
 import stylesModal from 'components/Modal.module.scss';
 
@@ -22,13 +22,13 @@ import stylesModal from 'components/Modal.module.scss';
 import { treeMove } from "chessApp";
 
 
-type PropsQuizEditingSave = {
+type PropsQuizEditingSet = {
     top: number;
 };
 
-function QuizEditingSave({
+function QuizEditingSet({
     top
-}: PropsQuizEditingSave) {
+}: PropsQuizEditingSet) {
   
     const dispatch = useDispatch();
 
@@ -41,7 +41,7 @@ function QuizEditingSave({
         (event:MouseEvent)=> {   
             if ( !refModal.current?.contains(event.target as Node)){
                 dispatch(actions.appearance.return__REPLACE({ 
-                    listKey: ['showing', 'modal', convertCase("QuizEditingSave", 'camel')],
+                    listKey: ['showing', 'modal', convertCase("QuizEditingSet", 'camel')],
                     replacement: false
                 }));
             } 
@@ -58,7 +58,7 @@ function QuizEditingSave({
 
             const value = e.currentTarget.value;
             dispatch(actions.appearance.return__REPLACE({ 
-                listKey: ['showing', 'modal', convertCase("QuizEditingSave", 'camel')],
+                listKey: ['showing', 'modal', convertCase("QuizEditingSet", 'camel')],
                 replacement: false
             }));
 
@@ -84,6 +84,14 @@ function QuizEditingSave({
     }, [quizPresent.seriesSan, quizFocusing.listSeriesSanCorrect]);
     
 
+    const showingOtherOptions = useMemo(()=>{
+        if (quizFocusing.fenStart && quizPresent.seriesSan.length > 0){
+            return true;
+        }
+        else {
+            return false;
+        }
+    },[quizFocusing.fenStart, quizPresent.seriesSan])
 
   return (
     <div 
@@ -91,12 +99,12 @@ function QuizEditingSave({
     >
         <div
             className={`${stylesModal['outside']}`}
-            aria-label="Outside Save"
+            aria-label="Outside Set"
         />
 
         <div 
             className={`${styles['modal']} ${stylesQEC['modal']} ${stylesModal['modal']}`}
-            role="dialog" aria-labelledby="Heading_Save"
+            role="dialog" aria-labelledby="Heading_Set"
             ref={refModal}
             style={{top: top}}
         >
@@ -111,18 +119,30 @@ function QuizEditingSave({
                         value='start'
                         className={`${styles['button__start']}`}
                         onClick={onClick_AnyMainButton}
-                    > <FormattedMessage id={`Modal.QuizEditingSave_SaveAsStart`} /> </button>
+                    > <FormattedMessage id={`Modal.QuizEditingSet_SetAsStart`} /> </button>
                 </div>
 
 
-                <div className={`${stylesModal['content__section']}`} >
-                    <button
-                        type='button'
-                        value='answer'
-                        className={`${styles['button__answer']}`}
-                        onClick={onClick_AnyMainButton}
-                    > <FormattedMessage id={`Modal.QuizEditingSave_SaveAsAnswer`} /> </button>
-                </div>
+                {showingOtherOptions && <>
+
+                    <div className={`${stylesModal['content__section']}`} >
+                        <button
+                            type='button'
+                            value='answer'
+                            className={`${styles['button__answer']}`}
+                            onClick={onClick_AnyMainButton}
+                        > <FormattedMessage id={`Modal.QuizEditingSet_SetAsAnswer`} /> </button>
+                    </div>
+                    
+                    <div className={`${stylesModal['content__section']}`} >
+                        <button
+                            type='button'
+                            value='memo'
+                            className={`${styles['button__memo']}`}
+                            onClick={onClick_AnyMainButton}
+                        > <FormattedMessage id={`Modal.QuizEditingSet_SetAsMention`} /> </button>
+                    </div>
+                </>}
 
             </div>
         
@@ -132,8 +152,8 @@ function QuizEditingSave({
   );
 }
 
-QuizEditingSave.defaultProps = {};
+QuizEditingSet.defaultProps = {};
 
-export default QuizEditingSave;
+export default QuizEditingSet;
 
 

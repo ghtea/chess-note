@@ -6,6 +6,7 @@
     "Global.Add": "추가",
     "Global.Create": "만들기",
     "Global.Save": "저장",
+    "Global.Set": "지정",
     "Global.Delete": "삭제",
     "Global.Update": "업데이트",
     "Global.Search": "검색",
@@ -53,8 +54,10 @@
     "Modal.QuizEditingUpload_Public": "공개",
     "Modal.QuizEditingUpload_Private": "비공개",
 
-    "Modal.QuizEditingSave_SaveAsStart": "시작 지점으로 저장",
-    "Modal.QuizEditingSave_SaveAsAnswer": "해답으로 저장",
+    "Modal.QuizEditingSet_SetAsStart": "시작 지점으로 지정",
+    "Modal.QuizEditingSet_SetAsAnswer": "해답으로 지정",
+    "Modal.QuizEditingSet_SetAsMention": "참고하라고 지정",
+
 
     "Modal.QuizEditingOthers_UseFen": "클립보드의 FEN 이용",
     "Modal.QuizEditingOthers_NotValidFen": "올바른 FEN가 아닙니다",
@@ -102,7 +105,8 @@
     "Notification.CreateQuiz_Succeeded__S": "성공적으로 퀴즈를 만들었습니다!",
     "Notification.CreateQuiz_UnknownError__E": "퀴즈를 만들지 못했습니다",
     "Notification.CreateQuiz_NoAnswer__E": "해답을 지정해야 합니다",
-    
+    "Notification.CreateQuiz_NoFenStart__E": "시작지점을 지정해야 합니다",
+
     "Notification.GetListQuiz_UnknownError__E": "퀴즈들을 불러오지 못했습니다",
     "Notification.GetQuiz_UnknownError__E": "퀴즈를 불러오지 못했습니다",
     "Notification.GetQuiz_NoQuiz__E": "해당 퀴즈가 존재하지 않습니다",

@@ -23,35 +23,48 @@
   justify-content: center;
   align-items: center;
 
+  & > * {
+    display: flex;
+    flex-wrap: nowrap;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+  }
+  
   :global(.icon){
     @include color-each-theme( color, basic__6);
   }
+  
 
-
-  .back-to-start {
+  .back  {
     .icon__back-to-start {
       width: 26px;
       height: 26px;
     }
-  }
 
-
-  .control {
-
-    display: grid;
-    grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
-    grid-template-rows: 1fr;
-    gap: 10px 0;
-
-    .icon__paste {
-      transform: rotate(90deg);
+    .icon__back-one-move {
       width: 26px;
       height: 26px;
     }
+  }
 
-    .icon__backward, .icon__forward {
-      width: 30px;
-      height: 30px;
+
+  .count {
+
+    button {
+      & > *:nth-child(n+2){
+        margin-left: 5px;
+      }
+    }
+
+    .icon__answer {
+      width: 24px;
+      height: 24px;
+    }
+
+    .icon__mention {
+      width: 24px;
+      height: 24px;
     }
 
   }

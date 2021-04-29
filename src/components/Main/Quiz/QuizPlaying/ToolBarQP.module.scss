@@ -23,12 +23,27 @@
   justify-content: center;
   align-items: center;
 
+
+  & > * {
+    display: flex;
+    flex-wrap: nowrap;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+  }
+
+
   :global(.icon){
     @include color-each-theme( color, basic__6);
   }
 
-  .back-to-start {
+  .back {
     .icon__back-to-start {
+      width: 26px;
+      height: 26px;
+    }
+
+    .icon__back-one-move {
       width: 26px;
       height: 26px;
     }

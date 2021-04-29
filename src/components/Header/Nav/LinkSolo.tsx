@@ -17,10 +17,12 @@ import IconAngle from 'svgs/basic/IconAngle';
 
 
 type PropsLinkSolo = TypeLink & {
+    setIdCategoryOpen:  React.Dispatch<React.SetStateAction<string | undefined>>
 }; 
  
 function LinkSolo({
     id: idLinkSolo, 
+    setIdCategoryOpen,
 }: PropsLinkSolo) {
 
     const dispatch = useDispatch();
@@ -28,9 +30,16 @@ function LinkSolo({
     const onClick_Link = useCallback(
         (event: React.MouseEvent<HTMLAnchorElement>) => {
         event.preventDefault();
-        const href = (event.currentTarget as HTMLAnchorElement).getAttribute("href");  // https://stackoverflow.com/questions/1550901/how-to-get-raw-href-contents-in-javascript
+        console.log('haha')
+        const href = event.currentTarget.getAttribute("href");  // https://stackoverflow.com/questions/1550901/how-to-get-raw-href-contents-in-javascript
         if (href) {
+            dispatch(actions.appearance.return__REPLACE({ 
+                listKey: ['showing', 'header', 'board'],
+                replacement: false 
+            })); 
+
             history.push(href);
+            setIdCategoryOpen(undefined); 
         }
         },[]
     );

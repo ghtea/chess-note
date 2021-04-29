@@ -24,7 +24,7 @@ const stateInitial = {
         setting: false,
         myProfile: false,
         
-        quizEditingSave: false,
+        quizEditingSet: false,
         quizEditingUpload: false,
         quizEditingOthers: false,
         

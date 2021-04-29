@@ -24,7 +24,7 @@
 
     width: calc(100vw - 20px); max-width: $device-xs__min-width - 20px; min-width: $modal__min-width;
     // width: $device-xs__min-width - 20px;
-    height: auto; max-height: 90vh;  min-height: 100px;
+    height: auto; max-height: 90vh;  //min-height: 100px;
 
     @include color-each-theme(background-color, basic__0);
     @include color-each-theme(color, basic__5);

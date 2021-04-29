@@ -20,7 +20,12 @@ import styles from './ToolBarQE.module.scss';
 import IconPaste from 'svgs/basic/IconSignIn';
 import IconAngle from "svgs/basic/IconAngle";
 import IconOthers from "svgs/basic/IconThreeDots";
-import IconArrowToEnd from "svgs/basic/IconArrowToEnd";
+
+import IconAnswer from "svgs/basic/IconCheckCircle";
+import IconMention from "svgs/basic/IconExclamationCircle";
+
+import IconBackToStart from "svgs/basic/IconAngleDouble";
+import IconBackOneMove from "svgs/basic/IconAngle";
 // import {Chess} from 'chess.js'; // => makes error
 
 type PropsToolBarQE = {
@@ -34,7 +39,7 @@ function ToolBarQE({
     const heightToolbar = useSelector((state: StateRoot)=>state.appearance.layout.document.chessBoard.toolBar.height);
     const lengthChessBoard = useSelector((state: StateRoot)=>state.appearance.layout.document.chessBoard.length);
     const quizPresent = useSelector((state: StateRoot)=>state.present.quiz);
-
+    const quizFocusing = useSelector((state: StateRoot)=>state.data.quiz.focusing);
 
     // const [positionStart, setPositionStart] = useState<null | string>(null);
     // const onClick_ControlPaste = useCallback(
@@ -66,9 +71,9 @@ function ToolBarQE({
             else if (value === 'forward'){
                 
             }
-            else if (value === 'save'){
+            else if (value === 'set'){
                 dispatch(actions.appearance.return__REPLACE({ 
-                    listKey: ['showing', 'modal', 'quizEditingSave'],
+                    listKey: ['showing', 'modal', 'quizEditingSet'],
                     replacement: true,
                 }));
             }
@@ -92,15 +97,24 @@ function ToolBarQE({
             }}
         >
             <div
-                className={`${styles['back-to-start']}`}
+                className={`${styles['back']}`}
             >
                 <button
                         type='button'
                         value='back-to-start'
-                        aria-label='back to start'
+                        aria-label='Back to Start'
                         onClick={onClick_Main}
                     >
-                    <IconArrowToEnd className={`${styles['icon__back-to-start']}`} kind='regular' direction='left' />
+                    <IconBackToStart className={`${styles['icon__back-to-start']}`} kind='regular' direction ='left' />
+                </button>
+
+                <button
+                        type='button'
+                        value='back-one-move'
+                        aria-label='Back One Move'
+                        onClick={onClick_Main}
+                    >
+                    <IconBackOneMove className={`${styles['icon__back-one-move']}`} kind='regular' direction ='left' />
                 </button>
             </div>
 
@@ -119,37 +133,43 @@ function ToolBarQE({
 
 
             <div
-                className={`${styles['control']}`}
+                className={`${styles['count']}`}
             >
                 <button
                     type='button'
-                    value='backward'
-                    aria-label='backward'
+                    value='show-answers'
+                    aria-label='Show Answers'
                     onClick={onClick_Main}
                 >
-                    <IconAngle className={`${styles['icon__backward']}`} kind='light' directon='left'/>
+                    <IconAnswer className={`${styles['icon__answer']}`}
+                        kind={quizFocusing.listSeriesSanCorrect.length === 0 ? 'light' : 'solid'}
+                    />
+                    <span> {quizFocusing.listSeriesSanCorrect.length} </span>
                 </button>
 
                 <button
                     type='button'
-                    value='forward'
-                    aria-label='forward'
+                    value='show-mentions'
+                    aria-label='Show Mentions'
                     onClick={onClick_Main}
                 >
-                    <IconAngle className={`${styles['icon__forward']}`} kind='light' directon='right'/>
+                    <IconMention className={`${styles['icon__mention']}`} 
+                        kind={quizFocusing.listSeriesSanMention.length === 0 ? 'light' : 'solid'}
+                    />
+                    <span> {quizFocusing.listSeriesSanMention.length} </span>
                 </button>
             </div>
 
 
             <div
-                className={`${styles['save']}`}
+                className={`${styles['set']}`}
             >
                 <button
                     type='button'
-                    value='save'
+                    value='set'
                     onClick={onClick_Main}
                 >
-                    <FormattedMessage id={'Global.Save'} />   
+                    <FormattedMessage id={'Global.Set'} />   
                 </button>
             </div>
 

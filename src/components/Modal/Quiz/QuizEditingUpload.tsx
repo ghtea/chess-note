@@ -70,11 +70,6 @@ function QuizEditingUpload({
                     codeSituation: 'NotLoggedIn__E'
                 }) );
             }
-            else if (quizFocusing.listSeriesSanCorrect.length === 0){
-                dispatch( actions.notification.return__ADD_DELETE_BANNER({
-                    codeSituation: 'CreateQuiz_NoAnswer__E'
-                }) );
-            }
             else if (quizFocusing && idUser){
                 if (situation==='creating'){
                     dispatch(actions.data.quiz.return__CREATE_QUIZ({ 
@@ -82,6 +77,7 @@ function QuizEditingUpload({
                         turnNext: quizFocusing.turnNext,
                         fenStart: quizFocusing.fenStart,
                         listSeriesSanCorrect: quizFocusing.listSeriesSanCorrect,
+                        listSeriesSanMention: quizFocusing.listSeriesSanMention,
                         idUser: idUser,
                         isPublic: quizFocusing.isPublic,
                     }));
