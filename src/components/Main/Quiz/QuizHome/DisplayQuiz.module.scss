@@ -39,10 +39,10 @@
         .row {   
             // sharing styles with tr in thead and tr in tbody
             // rank, logo, points, games,  result, goals
-            grid-template-columns: 30px 50px 50px 30px 1fr 1fr;
+            grid-template-columns: 2fr 1fr 1fr 1fr 50px 50px;
 
             @media (min-width: $device-m__min-width){
-                grid-template-columns: 30px 1fr 50px 70px 1fr 1fr;
+                // grid-template-columns: 1fr 50px 50px 50px 30px 30px;
             }
         }
         // colgroup 는 잔문제가 많아서 사용하지 않기로 결정

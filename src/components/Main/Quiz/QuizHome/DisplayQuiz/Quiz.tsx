@@ -14,6 +14,8 @@ import * as types  from 'store/types';
 
 import styles from './Quiz.module.scss';
 import stylesDisplay from '../DisplayQuiz.module.scss';
+import IconThreeDots from "svgs/basic/IconThreeDots";
+import IconPlay from "svgs/basic/IconPlay";
 
  
 // import IconSort from 'svgs/basic/IconSort';
@@ -54,31 +56,39 @@ function Quiz({
     //     return dictStyle;
     // },[statQuiz, numberResultMax]);
 
-    // const dictStyleGoals = useMemo(()=>{
-    //     let dictStyle: any = {};
-    //     for (const result of ['goals_scored', 'goals_against' ] ){
-    //         dictStyle[result]= {
-    //             width: `${statQuiz.overall[result as 'goals_scored'|'goals_against' ] / numberGoalsMax * 100}%`
-    //         };
-    //     }
-    //     return dictStyle;
-    // },[statQuiz, numberGoalsMax]);
+    
 
-    // const diffGoal = useMemo(()=>{
-    //     if (statQuiz.overall.goals_diff > 0){
-    //         return ({ text: `+${statQuiz.overall.goals_diff.toString()}`, className: 'plus-goals'});
-    //     }
-    //     else {
-    //         return ({ text: `${statQuiz.overall.goals_diff.toString()}`, className: 'minus-goals'});
-    //     }
-    // },[statQuiz]);
+    const textData = useMemo(()=>{
+        const yearCurrent = new Date().getFullYear();
+        
+        if (quiz.dateCreated){
+            const dateQC = new Date(quiz.dateCreated);
+
+            const year = dateQC.getFullYear();
+            const month = dateQC.getMonth()+1;
+            const date = dateQC.getDate()+1;
+            const hour = dateQC.getHours().toString().padStart(2, '0');
+            const min = dateQC.getMinutes().toString().padStart(2, '0');
+
+            if (yearCurrent === dateQC.getFullYear()){
+                return `${month}/${date} ${hour}:${min}`;
+            }
+            else {
+                return `${year}.${month}`;
+            }
+        }
+        else {
+            return ''
+        }
+
+    },[quiz.dateCreated]);
 
 
     return (
         <tr className={`${styles['root']} ${stylesDisplay['row']}` }>
 
             <td className={`${styles['id']}`}> 
-                {quiz.id}
+            {`${quiz.id?.toString().slice(0,16)}...`}
             </td>
             
 
@@ -88,12 +98,20 @@ function Quiz({
 
 
             <td className={`${styles['author']}`}>
-                
+                {`${quiz.idUser.slice(0,6)}...`}
             </td>
             
 
             <td className={`${styles['created']}`}>
-                {quiz.dateCreated}
+                {textData}
+            </td>
+
+            <td className={`${styles['play']}`}>
+                <IconPlay className={styles['icon__play']} kind='solid' />
+            </td>
+
+            <td className={`${styles['others']}`}>
+                <IconThreeDots className={styles['icon__others']} kind='regular' />
             </td>
             
         </tr>

@@ -16,6 +16,8 @@ import Loading from 'components/Global/Loading';
 
 import styles from './ShortCuts.module.scss';
 import { KindGetFocusListQuiz } from "store/types/data/quiz";
+import IconPlus from "svgs/basic/IconPlus";
+import IconShuffle from "svgs/basic/IconShuffle";
 // import IconSort from 'svgs/basic/IconSort';
 type PropsShortCuts = {};
 
@@ -69,7 +71,8 @@ function ShortCuts({}: PropsShortCuts) {
             value='play-public-random-quiz'
             onClick={onClick_MainButton}
           >
-            <FormattedMessage id={'Main.QuizHome_ShortCuts_PlayPublicQuiz'} />
+            <IconShuffle className={`${styles['icon__shuffle']}`} kind='regular'/>
+            <span><FormattedMessage id={'Main.QuizHome_ShortCuts_PlayPublicQuiz'} /></span>
           </button>
         
 
@@ -83,7 +86,8 @@ function ShortCuts({}: PropsShortCuts) {
                 value='play-my-random-quiz'
                 onClick={onClick_MainButton}
               >
-                <FormattedMessage id={'Main.QuizHome_ShortCuts_PlayMyQuiz'} />
+                <IconShuffle className={`${styles['icon__shuffle']}`} kind='regular'/>
+                <span><FormattedMessage id={'Main.QuizHome_ShortCuts_PlayMyQuiz'} /></span>
               </button>
             
             
@@ -93,7 +97,8 @@ function ShortCuts({}: PropsShortCuts) {
                 value='create'
                 onClick={onClick_MainButton}
               >
-                <FormattedMessage id={'Main.QuizHome_ShortCuts_CreateQuiz'} />
+                <IconPlus className={`${styles['icon__plus']}`} kind='regular'/>
+                <span><FormattedMessage id={'Main.QuizHome_ShortCuts_CreateQuiz'} /></span>
               </button>
             
           </>

@@ -75,7 +75,24 @@ function DisplayQuiz({}: PropsDisplayQuiz) {
         ];
 
         return result;
-    },[])
+    },[]);
+
+
+
+  const onClick_InsideTable = useCallback(
+    (event:React.MouseEvent<HTMLTableElement, MouseEvent>)=>{
+    
+        let element = event.target as HTMLElement;
+        console.log(element.tagName);
+        
+        if (element.tagName === 'BUTTON'){
+
+            if ((element as HTMLButtonElement).value === 'play-this-quiz'){
+                console.log('play!')
+            }
+        
+      }
+  }, [  ]);
 
 
   return (
@@ -128,12 +145,16 @@ function DisplayQuiz({}: PropsDisplayQuiz) {
 
 
         {statusListMyPublic.ready && 
-            <table className={`${styles['table']}`} aria-label='Display of Quiz'>
+            <table 
+                className={`${styles['table']}`} 
+                aria-label='Display of Quiz'
+                onClick={onClick_InsideTable}
+            >
 
                 <thead>
                     <tr className={`${styles['row']}`} >
                         <th scope="col">
-                            <span></span>
+                            <span>ID</span>
                             <span>ID</span>
                         </th>
                         <th scope="col">
@@ -141,18 +162,31 @@ function DisplayQuiz({}: PropsDisplayQuiz) {
                             <span>My Result</span>
                         </th>
                         <th scope="col">
-                            <span></span>
+                            <span>Author</span>
                             <span>Author</span>
                         </th>
                         <th scope="col">
                             <span></span>
                             <span>Created</span>
                         </th>
+                        <th scope="col">
+                            <span></span>
+                            <span>Play</span>
+                        </th>
+                        <th scope="col">
+                            <span></span>
+                            <span></span>
+                        </th>
                     </tr>
                 </thead>
 
                 <tbody>
-                    {listPublicQuiz.map( (quizEach:types.data.quiz.Quiz, index: number) => (
+                    {(
+                        mode === 'my-quiz' ? 
+                            listMyQuiz
+                            :
+                            listPublicQuiz
+                    ).map( (quizEach:types.data.quiz.Quiz, index: number) => (
                         <Quiz  
                             quiz={quizEach}
 
