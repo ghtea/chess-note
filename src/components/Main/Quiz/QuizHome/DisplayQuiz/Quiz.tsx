@@ -27,7 +27,30 @@ function Quiz({
     quiz, 
 }: PropsQuiz) {
 
+    const dispatch = useDispatch();    
 
+    // const situation = useSelector((state: StateRoot)=> state.present.quiz.focusing.situation);
+    
+    const onClick_Button = useCallback(
+        (event:React.MouseEvent<HTMLButtonElement, MouseEvent>)=>{
+        
+            
+        if (event.currentTarget.value === 'play-this-quiz'){
+            console.log('play!');
+            dispatch(actions.data.quiz.return__FOCUS_QUIZ({
+                quiz: quiz,
+                situation: 'playing',
+            }));
+
+            // 단 하나만 플레이 리스트로서 대체
+            dispatch(actions.present.return__REPLACE({
+                listKey: ['quiz', 'listIdPlaying'],
+                replacement: [quiz.id],
+            }));
+        }
+            
+        
+    }, [  ]);
     // const team = useSelector((state: StateRoot)=> state.data.football.listQuiz).find(team => team.id === idQuiz);
     // const mode = useSelector((state: StateRoot)=> state.status.current.football.leagueStandings.mode);
 
@@ -85,10 +108,13 @@ function Quiz({
 
 
     return (
-        <tr className={`${styles['root']} ${stylesDisplay['row']}` }>
+        <tr 
+            className={`${styles['root']} 
+            ${stylesDisplay['row']}` }  
+        >
 
             <td className={`${styles['id']}`}> 
-            {`${quiz.id?.toString().slice(0,16)}...`}
+                {`${quiz.id?.toString().slice(0,16)}...`}
             </td>
             
 
@@ -107,7 +133,14 @@ function Quiz({
             </td>
 
             <td className={`${styles['play']}`}>
-                <IconPlay className={styles['icon__play']} kind='solid' />
+                <button
+                    type='button'
+                    onClick={onClick_Button}
+                    value='play-this-quiz'
+                    aria-label='Play This Quiz'
+                >
+                    <IconPlay className={styles['icon__play']} kind='solid' />
+                </button>
             </td>
 
             <td className={`${styles['others']}`}>

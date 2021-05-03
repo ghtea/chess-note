@@ -24,6 +24,9 @@ const stateInitial = {
     display: {
       mode: 'public-quiz' as types.present.quiz.ModeDisplay,
     },
+
+    listIdPlaying: [],
+
     focusing: {
       idGame: null,
       situation: 'creating', 

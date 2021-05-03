@@ -79,20 +79,6 @@ function DisplayQuiz({}: PropsDisplayQuiz) {
 
 
 
-  const onClick_InsideTable = useCallback(
-    (event:React.MouseEvent<HTMLTableElement, MouseEvent>)=>{
-    
-        let element = event.target as HTMLElement;
-        console.log(element.tagName);
-        
-        if (element.tagName === 'BUTTON'){
-
-            if ((element as HTMLButtonElement).value === 'play-this-quiz'){
-                console.log('play!')
-            }
-        
-      }
-  }, [  ]);
 
 
   return (
@@ -148,7 +134,6 @@ function DisplayQuiz({}: PropsDisplayQuiz) {
             <table 
                 className={`${styles['table']}`} 
                 aria-label='Display of Quiz'
-                onClick={onClick_InsideTable}
             >
 
                 <thead>

@@ -25,6 +25,10 @@ td {
     align-items: center;
 
     height: 40px;
+    
+    :global(.icon) {
+        @include color-each-theme(color, basic__5);
+    }
 
     &.play {
         .icon__play {
