@@ -38,7 +38,14 @@ function* focusQuiz( action: actions.data.quiz.type__FOCUS_QUIZ ) {
     }
     
 
-    const quizData: types.data.quiz.Quiz = quiz || quizDefault;
+    let quizData: types.data.quiz.Quiz = quiz || quizDefault;
+
+    let fenUsing = quizData.fenStart;
+
+    if (situation === 'creating'){
+        chessFocusing.reset();
+        fenUsing = chessFocusing.fen();
+    }
 
 
     chessFocusing.load(quizData.fenStart);
@@ -53,7 +60,7 @@ function* focusQuiz( action: actions.data.quiz.type__FOCUS_QUIZ ) {
         replacement: {
             idGame: quizData.id,
             situation: situation, 
-            fen: quizData.fenStart,
+            fen: fenUsing,
             turn: quizData.turnNext,
             seriesSan: [],
         }
