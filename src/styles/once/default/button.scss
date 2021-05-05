@@ -17,7 +17,8 @@ button {
     @include color-each-theme(color, basic__8, $is-module: false);
     &:focus {
         outline-style: none;
-        @include shadow-each-theme(box-shadow, 0, 0, 0, 2px, basic__6, $is-module: false);
+        box-shadow:none;
+        //@include shadow-each-theme(box-shadow, 0, 0, 0, 2px, basic__6, $is-module: false);
     }
     
     width: auto;

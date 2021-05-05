@@ -21,8 +21,8 @@ function* moveInQuizPlaying(action: actions.data.quiz.type__MOVE_IN_QUIZ_PLAYING
     // yield put( actions.data.quiz.return__MOVE_IN_QUIZ_EDITING({
     //     from, to, san
     // }) );
-    const quizFocusing: types.data.quiz.Quiz =  yield select( (state:StateRoot) => state.data.quiz.focusing ); 
-    const quizPresent: types.present.QuizPresent =  yield select( (state:StateRoot) => state.present.quiz ); 
+    const quizData: types.data.quiz.Quiz =  yield select( (state:StateRoot) => state.data.quiz.focusing ); 
+    const quizPresent: types.present.quiz.Quiz =  yield select( (state:StateRoot) => state.present.quiz.focusing ); 
     
     let seriesSan = quizPresent.seriesSan || [];
 
@@ -62,13 +62,13 @@ function* moveInQuizPlaying(action: actions.data.quiz.type__MOVE_IN_QUIZ_PLAYING
                 seriesSan: seriesSan,
             }
             yield put( actions.present.return__REPLACE({
-                listKey: [ 'quiz'],
+                listKey: [ 'quiz', 'focusing'],
                 replacement,
             }) );
 
             yield delay(1000);
             
-            const listSeriesSanCorrect = quizFocusing.listSeriesSanCorrect
+            const listSeriesSanCorrect = quizData.listSeriesSanCorrect
 
             // 이전까지의 listSanMove (quizPresent) 에 현재 움직임을 포함한 배열을 
             // 처음부터 포함하는 정답 움직임이 있어야 한다 
@@ -107,7 +107,7 @@ function* moveInQuizPlaying(action: actions.data.quiz.type__MOVE_IN_QUIZ_PLAYING
                     // }
             
                     yield put( actions.present.return__REPLACE({
-                        listKey: [ 'quiz', 'situation'],
+                        listKey: [ 'quiz', 'focusing', 'situation'],
                         replacement: 'solved',
                     }) );
 
@@ -140,7 +140,7 @@ function* moveInQuizPlaying(action: actions.data.quiz.type__MOVE_IN_QUIZ_PLAYING
 
                 
                         yield put( actions.present.return__REPLACE({
-                            listKey: [ 'quiz'],
+                            listKey: [ 'quiz', 'focusing'],
                             replacement,
                         }) );
                 
@@ -151,7 +151,7 @@ function* moveInQuizPlaying(action: actions.data.quiz.type__MOVE_IN_QUIZ_PLAYING
                 console.log('wrong move!!!');
                 
                 yield put( actions.present.return__REPLACE({
-                    listKey: [ 'quiz', 'situation'],
+                    listKey: [ 'quiz', 'focusing', 'situation'],
                     replacement: 'failed',
                 }) );
 

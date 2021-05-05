@@ -32,9 +32,9 @@
     "Main.SignUp_SignUp": "회원가입",
     "Main.SignUp_PasswordAgain": "비밀번호 재입력",
 
-    "Main.QuizHome_PlayPublicQuiz": "공개 퀴즈 풀기",
-    "Main.QuizHome_PlayMyQuiz": "내 퀴즈 풀기",
-    "Main.QuizHome_CreateQuiz": "퀴즈 만들기",
+    "Main.QuizHome_ShortCuts_PlayPublicQuiz": "공개 퀴즈 풀기",
+    "Main.QuizHome_ShortCuts_PlayMyQuiz": "내 퀴즈 풀기",
+    "Main.QuizHome_ShortCuts_CreateQuiz": "퀴즈 만들기",
 
     "Main.QuizPlay_StatusBar_Solved": "정답입니다!",
     "Main.QuizPlay_StatusBar_Failed": "틀렸습니다",
@@ -107,7 +107,7 @@
     "Notification.CreateQuiz_NoAnswer__E": "해답을 지정해야 합니다",
     "Notification.CreateQuiz_NoFenStart__E": "시작지점을 지정해야 합니다",
 
-    "Notification.GetListQuiz_UnknownError__E": "퀴즈들을 불러오지 못했습니다",
+    "Notification.GetFocusListQuiz_UnknownError__E": "퀴즈들을 불러오지 못했습니다",
     "Notification.GetQuiz_UnknownError__E": "퀴즈를 불러오지 못했습니다",
     "Notification.GetQuiz_NoQuiz__E": "해당 퀴즈가 존재하지 않습니다",
     "Notification.UpdateQuiz_Succeeded__S": "성공적으로 퀴즈를 수정했습니다!",

@@ -46,7 +46,7 @@ function ChessBoard({
 
     const dispatch = useDispatch();
 
-    const situationQuiz = useSelector((state: StateRoot)=>state.present.quiz.situation);
+    const situationQuiz = useSelector((state: StateRoot)=>state.present.quiz.focusing.situation);
     
     const situation = useMemo(( )=>{
         // console.log('modeQuiz: ', situationQuiz)

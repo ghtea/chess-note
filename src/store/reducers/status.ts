@@ -17,6 +17,9 @@ const stateInitial = {
 
   data: {
       quiz: {
+        listPublicQuiz: { tried: false, loading: false, ready: false },
+        listMyQuiz: { tried: false, loading: false, ready: false },
+        
         list: { tried: false, loading: false, ready: false },
         one: { tried: false, loading: false, ready: false },
       }

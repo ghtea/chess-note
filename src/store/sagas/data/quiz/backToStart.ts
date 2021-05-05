@@ -13,20 +13,20 @@ import * as types from "store/types";
 
 function* backToStart(action: actions.data.quiz.type__BACK_TO_START) {
 
-    const quizFocusing: types.data.quiz.Quiz =  yield select( (state:StateRoot) => state.data.quiz.focusing ); 
-    const quizPresent: types.present.QuizPresent =  yield select( (state:StateRoot) => state.present.quiz ); 
+    const quizData: types.data.quiz.Quiz =  yield select( (state:StateRoot) => state.data.quiz.focusing ); 
+    const quizPresent: types.present.quiz.Quiz =  yield select( (state:StateRoot) => state.present.quiz.focusing ); 
     
 
-    chessFocusing.load(quizFocusing.fenStart);
+    chessFocusing.load(quizData.fenStart);
 
     const replacement = {
         ...quizPresent,
-        fen: quizFocusing.fenStart,
+        fen: quizData.fenStart,
         turn: chessFocusing.turn() === 'w' ? 'white' : 'black',
         seriesSan: [],
     }
     yield put(actions.present.return__REPLACE({
-        listKey: ['quiz'],
+        listKey: ['quiz', 'focusing'],
         replacement: replacement,
     }));
     

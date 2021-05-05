@@ -1,107 +1,121 @@
 import { call, select, put } from "redux-saga/effects";
 import { firebaseFirestore } from "firebaseApp";
+import history from 'historyApp';
 
 import axios from "axios";
 import apolloClient from 'apollo';
 import { gql, useQuery , FetchResult, DocumentNode, ApolloQueryResult} from '@apollo/client';
 import { v4 as uuidv4 } from 'uuid';
-import history from 'historyApp';
+
 // import * as config from 'config';
 import {StateRoot} from 'store/reducers';
 import * as actions from "store/actions";
 import * as types from "store/types";
 import { queryAllByAltText } from "@testing-library/dom";
-// import { KindGetListQuiz } from "store/types/data/quiz";
-import chessFocusing from 'chessApp';
+//import { KindGetListQuiz } from "store/types/data/quiz";
+
+
 
 // GraphQL query 문법에 이상 있으면 할당하는 시점에서 에러 발생시키기 때문에 에러 처리한 곳에서 해야 한다
 
-const requestGetQuizById = (query:DocumentNode, argument: any) => { 
+const requestGetDictListQuiz = (query:DocumentNode, argument: any) => { 
     return apolloClient.query({query, variables: {argument}});
 };
 
 
 // idUser 있으면 개인 퀴즈들, 없으면 공개 퀴즈들
-function* getQuizById( action: actions.data.quiz.type__GET_QUIZ_BY_ID ) {
+function* getDictListQuiz( action: actions.data.quiz.type__GET_DICT_LIST_QUIZ) {
 
     yield put( actions.status.return__REPLACE({
-        listKey: ['data', 'quiz', 'one'],
+        listKey: ['data', 'quiz', 'listPublicQuiz'],
         replacement: {
             tried: false,
             loading: true,
             ready: false,
         }
     }) );
+    yield put( actions.status.return__REPLACE({
+        listKey: ['data', 'quiz', 'listMyQuiz'],
+        replacement: {
+            tried: false,
+            loading: true,
+            ready: false,
+        }
+    }) );
+    const { idUser } = action.payload;
 
-
-    const { idQuiz, idUserInApp, situation } = action.payload;
-    //console.log('getQuizById: ', idQuiz)
     try {
         
-        const GET_QUIZ_BY_ID = gql`
-            query GetQuizById($argument: GetQuizByIdInputType!){
-                getQuizById(getQuizByIdInputType: $argument)
-                    ${types.data.quiz.stringGqlQuiz}
+        const GET_LIST_QUIZ = gql`
+            query GetDictListQuiz($argument: GetDictListQuizInputType!){
+                getDictListQuiz(getDictListQuizInputType: $argument) {
+                    listPublicQuiz ${types.data.quiz.stringGqlQuiz}
+                    listMyQuiz ${types.data.quiz.stringGqlQuiz}
+                }
             }
         `;
         
         const argument = {
-            id: idQuiz,
-            idUser: idUserInApp,
+            idUser,
         };
 
-        let response: ApolloQueryResult<any> =  yield call( requestGetQuizById,  GET_QUIZ_BY_ID, argument);
+        let response: ApolloQueryResult<any> =  yield call( requestGetDictListQuiz,  GET_LIST_QUIZ, argument);
+
         // console.log(response);
-        const quizFromRes = response.data?.getQuizById as types.data.quiz.Quiz | undefined;
+
+
+        const listPublicQuiz = (response.data?.getDictListQuiz.listPublicQuiz || []) as types.data.quiz.Quiz[];
+        const listMyQuiz = (response.data?.getDictListQuiz.listMyQuiz || []) as types.data.quiz.Quiz[];
+
+
+        yield put( actions.data.return__REPLACE({
+            listKey:['quiz', 'listPublicQuiz'],
+            replacement: listPublicQuiz,
+        }));
+        yield put( actions.data.return__REPLACE({
+            listKey:['quiz', 'listMyQuiz'],
+            replacement: listMyQuiz,
+        }));
+
+
+        yield put( actions.status.return__REPLACE({
+            listKey: ['data', 'quiz', 'listPublicQuiz'],
+            replacement: {
+                tried: true,
+                loading: false,
+                ready: true,
+            }
+        }) );
+        yield put( actions.status.return__REPLACE({
+            listKey: ['data', 'quiz', 'listMyQuiz'],
+            replacement: {
+                tried: true,
+                loading: false,
+                ready: true,
+            }
+        }) );
         
-        if (quizFromRes){
 
-            yield put( actions.data.quiz.return__FOCUS_QUIZ({
-                quiz: quizFromRes,
-                situation: situation,
-            }));
-
-            yield put( actions.status.return__REPLACE({
-                listKey: ['data', 'quiz', 'one'],
-                replacement: {
-                    tried: true,
-                    loading: false,
-                    ready: true,
-                }
-            }) );
-        }
-        else {
-            //console.log('hello1')
-            // const quizDefault = {
-            //     list: [],
-            //     index: null,
-            //     focusing: null,
-            // }
-            history.push('/quiz');
-            yield put( actions.notification.return__ADD_DELETE_BANNER({
-                codeSituation: 'GetQuiz_NoQuiz__E'
-            }) );
-
-            yield put( actions.status.return__REPLACE({
-                listKey: ['data', 'quiz', 'one'],
-                replacement: {
-                    tried: true,
-                    loading: false,
-                    ready: false,
-                }
-            }) );
-        }
 
     } catch (error) {
-        //console.log('hello2')
+        
         console.error(error);
         
         yield put( actions.notification.return__ADD_DELETE_BANNER({
-            codeSituation: 'GetQuiz_UnknownError__E'
+            codeSituation: 'GetListQuiz_UnknownError__E'
         }) );
 
         yield put( actions.status.return__REPLACE({
-            listKey: ['data', 'quiz', 'one'],
+            listKey: ['data', 'quiz', 'listPublicQuiz'],
+            replacement: {
+                tried: true,
+                loading: false,
+                ready: false,
+            }
+        }) );
+
+        yield put( actions.status.return__REPLACE({
+            listKey: ['data', 'quiz', 'listMyQuiz'],
             replacement: {
                 tried: true,
                 loading: false,
@@ -111,7 +125,7 @@ function* getQuizById( action: actions.data.quiz.type__GET_QUIZ_BY_ID ) {
     }
 }
 
-export default getQuizById;
+export default getDictListQuiz;
 
 
 
