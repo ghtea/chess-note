@@ -5,7 +5,7 @@ import React, { useMemo } from "react";
 type PropsInputPassword = {
 
     name: string;
-    value: any;
+    value: string;
 
     label: string;
     placeholder: string;

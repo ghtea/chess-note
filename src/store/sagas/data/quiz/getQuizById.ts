@@ -16,7 +16,7 @@ import chessFocusing from 'libraries/chess';
 
 // GraphQL query 문법에 이상 있으면 할당하는 시점에서 에러 발생시키기 때문에 에러 처리한 곳에서 해야 한다
 
-const requestGetQuizById = (query:DocumentNode, argument: any) => { 
+const requestGetQuizById = (query:DocumentNode, argument: Record<string, unknown>) => { 
     return apolloClient.query({query, variables: {argument}});
 };
 
@@ -50,7 +50,7 @@ function* getQuizById( action: actions.data.quiz.type__GET_QUIZ_BY_ID ) {
             idUser: idUserInApp,
         };
 
-        const response: ApolloQueryResult<any> =  yield call( requestGetQuizById,  GET_QUIZ_BY_ID, argument);
+        const response: ApolloQueryResult<any> =  yield call( requestGetQuizById,  GET_QUIZ_BY_ID, argument);// eslint-disable-line @typescript-eslint/no-explicit-any
         // console.log(response);
         const quizFromRes = response.data?.getQuizById as types.data.quiz.Quiz | undefined;
         

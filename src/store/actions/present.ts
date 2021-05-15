@@ -1,7 +1,7 @@
 export const name__REPLACE = 'present/REPLACE';
 interface Payload__REPLACE {
   listKey: (string | number)[];
-  replacement: any;
+  replacement: unknown;
 }
 export const return__REPLACE = (payload: Payload__REPLACE) => {
   return {

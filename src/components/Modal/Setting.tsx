@@ -84,19 +84,17 @@ function Setting() {
   }, []);
 
   const draft = useMemo(() => {
-    const result: any = {};
-
-    result['optionTheme'] = [
-      { value: 'auto', label: 'auto' },
-      { value: 'always-light', label: 'light' },
-      { value: 'always-dark', label: 'dark' },
-    ];
-
-    result['language'] = [
-      { value: 'ko', label: '한국어' },
-      { value: 'en', label: 'English' },
-    ];
-
+    const result = {
+      optionTheme: [
+        { value: 'auto', label: 'auto' },
+        { value: 'always-light', label: 'light' },
+        { value: 'always-dark', label: 'dark' },
+      ],
+      language: [
+        { value: 'ko', label: '한국어' },
+        { value: 'en', label: 'English' },
+      ],
+    };
     return result;
   }, []);
 
@@ -136,7 +134,7 @@ function Setting() {
             </h3>
 
             <div className={'container__input-radio'}>
-              {draft['optionTheme'].map((element: any, index: number) => (
+              {draft['optionTheme'].map((element, index: number) => (
                 <InputRadio
                   valueCurrent={optionThemeCurrent}
                   name="optionTheme"
@@ -156,7 +154,7 @@ function Setting() {
             </h3>
 
             <div className={'container__input-radio'}>
-              {draft['language'].map((element: any, index: number) => (
+              {draft['language'].map((element, index: number) => (
                 <InputRadio
                   valueCurrent={languageCurrent}
                   name="language"

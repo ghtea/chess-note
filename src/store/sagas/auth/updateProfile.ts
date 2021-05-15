@@ -1,82 +1,82 @@
-import { call, select, put, getContext } from "redux-saga/effects";
-import { firebaseAuth, firebaseStorage } from "libraries/firebase";
+import { call, select, put, getContext } from 'redux-saga/effects';
+import firebase, { firebaseAuth, firebaseStorage } from 'libraries/firebase';
 
-import { v4 as uuidv4 } from "uuid";
+import { v4 as uuidv4 } from 'uuid';
 
 // import * as config from 'config';
-import {StateRoot} from 'store/reducers';
-import * as actionsRoot from "store/actions";
-import {User} from 'store/reducers/auth'
-import * as actionsPortal from "store/actions/data";
+import { StateRoot } from 'store/reducers';
+import * as actionsRoot from 'store/actions';
+import { User } from 'store/reducers/auth';
+import * as actionsPortal from 'store/actions/data';
 //import * as actionsTheme from "../../actions/theme";
 
-const uploadPhoto = (refFirebase: any, urlPhotoLocal: string) => {
-    return refFirebase.putString(urlPhotoLocal, "data_url")
-}
-const getUrlPhotoFirebase = (response: any) => {
-    return response.ref.getDownloadURL()
-}
-const updateProfileFirebase = (update: any) => {
-    return firebaseAuth?.currentUser?.updateProfile(update)
-}
-
+const uploadPhoto = (refFirebase: firebase.storage.Reference, urlPhotoLocal: string) => {
+  return refFirebase.putString(urlPhotoLocal, 'data_url');
+};
+const getUrlPhotoFirebase = async (response: firebase.storage.UploadTask) => {
+  return (await response).ref.getDownloadURL();
+};
+const updateProfileFirebase = (update: {
+  displayName?: string | null | undefined;
+  photoURL?: string | null | undefined;
+}) => {
+  return firebaseAuth?.currentUser?.updateProfile(update);
+};
 
 function* updateProfile(action: actionsRoot.auth.type__UPDATE_PROFILE) {
+  const readyUser: boolean = yield select((state: StateRoot) => state.status.auth.user.ready);
+  const idUserInApp: undefined | string = yield select((state: StateRoot) => state.auth.user?.id);
 
-    const readyUser: boolean  =  yield select( (state:StateRoot) => state.status.auth.user.ready); 
-    const idUserInApp: undefined | string =  yield select( (state:StateRoot) => state.auth.user?.id); 
-   
-    try {
-
-        if (!readyUser){
-            yield put(actionsRoot.notification.return__ADD_DELETE_BANNER({
-                codeSituation: 'NotLoggedIn__E'
-            }) );
-        }
-        /*
+  try {
+    if (!readyUser) {
+      yield put(
+        actionsRoot.notification.return__ADD_DELETE_BANNER({
+          codeSituation: 'NotLoggedIn__E',
+        }),
+      );
+    } else {
+    /*
         else if (action.payload.initials.length > 3) {
             yield put( actionsNotification.return__ADD_DELETE_BANNER({
                 codeSituation: 'Portal_InitialsTooLong__E'
             }) );
         }
         */
-        else {
-            // let userFirebase = firebaseAuth.currentUser;
-            const {payload: {displayName, urlPhotoLocal}} = action;
-                        
-            const update: any = {};
+      // let userFirebase = firebaseAuth.currentUser;
+      const {
+        payload: { displayName, urlPhotoLocal },
+      } = action;
 
-            if (displayName){
-                update['displayName'] = displayName;
-            }
+      const update: Record<string, unknown> = {};
 
-            if (urlPhotoLocal){
-                const refFirebase = firebaseStorage
-                .ref()
-                .child(`${idUserInApp}/${uuidv4()}`);
+      if (displayName) {
+        update['displayName'] = displayName;
+      }
 
-                const response: unknown = yield call( uploadPhoto, refFirebase, urlPhotoLocal); // upload photo
-                const urlPhotoFirebase:string = yield call (getUrlPhotoFirebase, response);
+      if (urlPhotoLocal) {
+        const refFirebase = firebaseStorage.ref().child(`${idUserInApp}/${uuidv4()}`);
 
-                update['photoURL'] = urlPhotoFirebase;
-            }
+        const response: firebase.storage.UploadTask = yield call(uploadPhoto, refFirebase, urlPhotoLocal); // upload photo
+        const urlPhotoFirebase: string = yield call(getUrlPhotoFirebase, response);
 
-            yield call (updateProfileFirebase, update);
-            yield put (actionsRoot.auth.return__REPLACE_USER());
+        update['photoURL'] = urlPhotoFirebase;
+      }
 
-            console.log('updateProfile worked successfully!');
-            
-        }
+      yield call(updateProfileFirebase, update);
+      yield put(actionsRoot.auth.return__REPLACE_USER());
 
-    } catch (error) {
-        
-        console.error(error);
-        console.error('updateProfile has been failed');
-        
-        yield put( actionsRoot.notification.return__ADD_DELETE_BANNER({
-            codeSituation: 'UnknownError__E'
-        }) );
+      console.log('updateProfile worked successfully!');
     }
+  } catch (error) {
+    console.error(error);
+    console.error('updateProfile has been failed');
+
+    yield put(
+      actionsRoot.notification.return__ADD_DELETE_BANNER({
+        codeSituation: 'UnknownError__E',
+      }),
+    );
+  }
 }
 
 export default updateProfile;

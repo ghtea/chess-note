@@ -3,7 +3,7 @@ import history from 'libraries/history';
 
 import axios from "axios";
 import queryString from 'query-string';
-import firebaseApp, { firebaseAuth } from "libraries/firebase";
+import firebase, { firebaseAuth } from "libraries/firebase";
 
 import Cookies from 'js-cookie';
 import { v4 as uuidv4 } from 'uuid';
@@ -17,7 +17,7 @@ import * as actions from "store/actions";
 
 
 
-const requestLogInGoogle = (provider:any) => {
+const requestLogInGoogle = (provider:firebase.auth.AuthProvider) => {
     return firebaseAuth.signInWithPopup(provider)
 };
 
@@ -25,7 +25,7 @@ const requestLogInGoogle = (provider:any) => {
 function* logInGoogle(action: actions.auth.type__LOG_IN_GOOGLE) {
     try {
 
-        const provider = new firebaseApp.auth.GoogleAuthProvider();
+        const provider = new firebase.auth.GoogleAuthProvider();
             //provider = new firebaseApp.auth.GithubAuthProvider();
         
 

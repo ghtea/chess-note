@@ -1,4 +1,4 @@
-import produce from 'immer';
+import {produce} from 'immer';
 import {handleActions} from 'redux-actions';
 
 
@@ -45,7 +45,7 @@ const stateInitial = {
 
 
 
-const reducerNotification = handleActions<State, any>({
+const reducerNotification = handleActions<State, any>({ // eslint-disable-line @typescript-eslint/no-explicit-any
   
   [actions.notification.name__REPLACE]: (statePrevious, action: actions.notification.type__REPLACE) => {
     

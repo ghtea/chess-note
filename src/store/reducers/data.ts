@@ -1,4 +1,4 @@
-import produce from 'immer';
+import {produce} from 'immer';
 import {handleActions} from 'redux-actions';
 import * as actions from "store/actions";
 import * as types from "store/types";
@@ -47,7 +47,7 @@ const stateInitial = {
 
  
  
-const reducerData = handleActions<State, any>({
+const reducerData = handleActions<State, any>({ // eslint-disable-line @typescript-eslint/no-explicit-any
   
   [actions.data.name__REPLACE]: (statePrevious, action: actions.data.type__REPLACE) => {
 

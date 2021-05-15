@@ -18,7 +18,7 @@ import { queryAllByAltText } from "@testing-library/dom";
 
 // GraphQL query 문법에 이상 있으면 할당하는 시점에서 에러 발생시키기 때문에 에러 처리한 곳에서 해야 한다
 
-const requestGetDictListQuiz = (query:DocumentNode, argument: any) => { 
+const requestGetDictListQuiz = (query:DocumentNode, argument: Record<string, unknown>) => { 
     return apolloClient.query({query, variables: {argument}});
 };
 
@@ -59,7 +59,7 @@ function* getDictListQuiz( action: actions.data.quiz.type__GET_DICT_LIST_QUIZ) {
             idUser,
         };
 
-        const response: ApolloQueryResult<any> =  yield call( requestGetDictListQuiz,  GET_LIST_QUIZ, argument);
+        const response: ApolloQueryResult<any> =  yield call( requestGetDictListQuiz,  GET_LIST_QUIZ, argument); // eslint-disable-line @typescript-eslint/no-explicit-any
 
         // console.log(response);
 

@@ -16,6 +16,12 @@ const useInputQuizEditingUpload = <T>(draftInitial: T) => {
                     replacement: event.currentTarget.value
                 }));
             }
+            else if (event.currentTarget.name === 'isPublic'){
+                dispatch(actions.data.return__REPLACE({ 
+                    listKey: ['quiz', 'focusing', 'isPublic'],
+                    replacement: event.currentTarget.value === 'isPublic'
+                }));
+            }
             else {
                 const draftReplacement = {
                     ...draft, 

@@ -2,7 +2,6 @@ import React, { useCallback, useEffect, useMemo, useState } from "react";
 import history from 'libraries/history';
 import chessFocusing from 'libraries/chess';
 
-import * as clipboardy from 'clipboardy';
 import { FormattedMessage } from 'react-intl';
 
 
@@ -18,7 +17,6 @@ import * as types  from 'store/types';
 
 import styles from './ToolBarQE.module.scss';
 import IconPaste from 'svgs/basic/IconSignIn';
-import IconAngle from "svgs/basic/IconAngle";
 import IconOthers from "svgs/basic/IconThreeDots";
 
 import IconAnswer from "svgs/basic/IconCheckCircle";

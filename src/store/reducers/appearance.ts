@@ -1,4 +1,4 @@
-import produce from 'immer';
+import {produce} from 'immer';
 import {handleActions} from 'redux-actions';
 
 import * as actions from "store/actions";
@@ -60,7 +60,7 @@ const stateInitial = {
 
 
 
-const reducerAppearance = handleActions<State, any>({
+const reducerAppearance = handleActions<State, any>({ // eslint-disable-line @typescript-eslint/no-explicit-any
   
   [actions.appearance.name__REPLACE]: (statePrevious, action: actions.appearance.type__REPLACE) => {
     

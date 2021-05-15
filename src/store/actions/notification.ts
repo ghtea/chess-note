@@ -2,7 +2,7 @@ export const name__REPLACE = `notification/REPLACE`; // 뒤에 as const 를 붙�
 
 interface Payload__REPLACE {
   listKey: (string | number)[];
-  replacement: any;
+  replacement: unknown;
 }
 
 export const return__REPLACE = (payload: Payload__REPLACE) => {

@@ -16,7 +16,6 @@ import * as types  from 'store/types';
 
 import styles from './ToolBarQP.module.scss';
 import IconPaste from 'svgs/basic/IconSignIn';
-import IconAngle from "svgs/basic/IconAngle";
 import IconOthers from "svgs/basic/IconThreeDots";
 
 import IconBackToStart from "svgs/basic/IconAngleDouble";

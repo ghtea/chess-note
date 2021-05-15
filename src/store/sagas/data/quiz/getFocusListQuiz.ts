@@ -18,7 +18,7 @@ import { KindGetFocusListQuiz } from "store/types/data/quiz";
 
 // GraphQL query 문법에 이상 있으면 할당하는 시점에서 에러 발생시키기 때문에 에러 처리한 곳에서 해야 한다
 
-const requestGetFocusListQuiz = (query:DocumentNode, argument: any) => { 
+const requestGetFocusListQuiz = (query:DocumentNode, argument: Record<string, unknown>) => { 
     return apolloClient.query({query, variables: {argument}});
 };
 
@@ -71,7 +71,7 @@ function* getFocusListQuiz( action: actions.data.quiz.type__GET_FOCUS_LIST_QUIZ)
             idUser,
         };
 
-        const response: ApolloQueryResult<any> =  yield call( requestGetFocusListQuiz,  GET_FOCUS_LIST_QUIZ, argument);
+        const response: ApolloQueryResult<any> =  yield call( requestGetFocusListQuiz,  GET_FOCUS_LIST_QUIZ, argument); // eslint-disable-line @typescript-eslint/no-explicit-any
 
         // console.log(response);
 

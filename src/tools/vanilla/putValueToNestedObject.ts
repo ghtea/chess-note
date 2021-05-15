@@ -1,8 +1,5 @@
-interface Object {
-  [key: string ]: any;
-}
 
-const putValueToNestedObject = function (obj:Record<string, unknown>, listKey: (string | number)[], value:any) {
+const putValueToNestedObject = function (obj:Record<string, unknown>, listKey: (string | number)[], value:unknown) {
 
 	// Cache the path length and current spot in the object
 	const length:number = listKey.length;

@@ -23,7 +23,7 @@ const CREATE_QUIZ = gql`
 
 
 
-const requestCreateQuiz = (argument: any) => { 
+const requestCreateQuiz = (argument: Record<string, unknown>) => { 
     return apolloClient.mutate({mutation: CREATE_QUIZ, variables: {argument}});
 };
 
@@ -61,13 +61,13 @@ function* createQuiz(action: actions.data.quiz.type__CREATE_QUIZ) {
             };
 
             //const data: unknown =  yield call( requestCreateQuiz, argument ); 
-            const res: ApolloQueryResult<any> =  yield call( requestCreateQuiz,  argument); 
+            const res: ApolloQueryResult<any> =  yield call( requestCreateQuiz,  argument);  // eslint-disable-line @typescript-eslint/no-explicit-any
             
             yield put( actions.notification.return__ADD_DELETE_BANNER({
                 codeSituation: 'CreateQuiz_Succeeded__S'
             }) );
 
-            console.log(res)
+            // console.log(res)
             
             const quizFromRes = res.data?.createQuiz as types.data.quiz.Quiz | undefined;
             if (quizFromRes?.id){

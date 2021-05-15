@@ -40,7 +40,7 @@ function QuizEditingUpload({
 
     const {draft: draft_Main, onChange: onChange_Main} = useInputQuizEditingUpload({
         name: '',
-        isPublic: true,
+        isPublic: 'isPublic',
     });
 
     
@@ -141,7 +141,7 @@ function QuizEditingUpload({
                             valueCurrent={draft_Main.isPublic}
 
                             name='isPublic'
-                            value={true}
+                            value='isPublic'
                             label={intl.formatMessage({ id: 'Modal.QuizEditingUpload_Public'})}
                             onChange={onChange_Main}
                         />
@@ -149,7 +149,7 @@ function QuizEditingUpload({
                             valueCurrent={draft_Main.isPublic}
 
                             name='isPublic'
-                            value={false}
+                            value='isNotPublic'
                             label={intl.formatMessage({ id: 'Modal.QuizEditingUpload_Private'})}
                             onChange={onChange_Main}
                         />

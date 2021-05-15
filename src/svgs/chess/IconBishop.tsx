@@ -12,19 +12,6 @@ const propsDefault = {
 };
 
  
-
-// opacity:1,
-//           fill:none, 
-//           fill-rule:evenodd, 
-//           fill-opacity:1, 
-//           stroke:#000000, 
-//           stroke-width:1.5, 
-//           stroke-linecap:round, 
-//           stroke-linejoin:round, 
-//           stroke-miterlimit:4, 
-//           stroke-dasharray:none, 
-//           stroke-opacity:1,
-// Bishop
 const Icon = ({ className, side }: PropsIcon) => {
 
 

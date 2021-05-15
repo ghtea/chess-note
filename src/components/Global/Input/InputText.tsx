@@ -5,7 +5,7 @@ import React, { useMemo } from "react";
 type PropsInputText = {
 
     name: string;
-    value: any;
+    value: string | number | readonly string[] | undefined;
 
     label: string;
     placeholder: string;
