@@ -1,5 +1,5 @@
 import React, { useCallback, useEffect, useMemo, useState } from "react";
-import history from 'historyApp';
+import history from 'libraries/history';
 import * as clipboardy from 'clipboardy';
 import { FormattedMessage } from 'react-intl';
 

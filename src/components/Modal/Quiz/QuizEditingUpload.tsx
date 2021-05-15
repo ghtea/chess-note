@@ -1,7 +1,7 @@
 import React, { useCallback, useEffect, useRef, useMemo } from "react";
-import { firebaseAuth } from "firebaseApp";
+import { firebaseAuth } from "libraries/firebase";
 
-import history from 'historyApp';
+import history from 'libraries/history';
 import { useLocation } from "react-router-dom";
 import { FormattedMessage, useIntl } from 'react-intl';
 import Cookies from 'js-cookie';

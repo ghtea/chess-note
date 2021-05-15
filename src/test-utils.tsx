@@ -5,11 +5,9 @@ import { render as renderRtl, RenderOptions } from '@testing-library/react';
 import { IntlProvider } from 'react-intl';
 import translationEn from 'language/translation/en.json';
 
-// action 하나로 합쳐볼까?!!!
-// import * as actionsRoot from 'store/actions'; 
 
 import { Router} from "react-router-dom";  // BrowserRouter
-import history from 'historyApp';
+import history from 'libraries/history';
 
 import {Provider, useSelector, useDispatch} from 'react-redux' 
 import store from './store';
@@ -56,14 +54,3 @@ export const render = (ui: Ui, option: Option = undefined) =>{
 }
 
 
-
-/*
-
-import { 
-    render, beforeAllDefault, 
-    screen, fireEvent, waitFor
-} from 'test-utils'; 
-import '@testing-library/jest-dom/extend-expect';
-
-
-*/

@@ -3,14 +3,7 @@ import React, { useCallback, useState } from 'react';
 import { Route, Switch } from "react-router-dom";
 
 
-// import Football from "components/Main/Sports/Football";
-
-// import styles from './Main.module.scss';
-
-
-type PropsOpening = {};
-
-function Opening({}: PropsOpening) {
+function Opening() {
 
   const [pgn, setPgn] = useState('');
 

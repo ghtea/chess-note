@@ -11,10 +11,7 @@ import styles from './Notification.module.scss';
 
 
 
-
-type PropsNotification = {};
-
-function Notification({}: PropsNotification) {
+function Notification() {
   
   // const dispatch = useDispatch();
   

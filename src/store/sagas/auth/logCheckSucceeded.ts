@@ -1,5 +1,5 @@
 import { call, spawn, put, takeEvery } from "redux-saga/effects";
-import { firebaseAuth } from 'firebaseApp';
+import { firebaseAuth } from 'libraries/firebase';
 
 import Cookies from 'js-cookie';
 import { v4 as uuidv4 } from 'uuid';

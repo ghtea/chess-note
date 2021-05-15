@@ -1,7 +1,7 @@
 import React, { useCallback, useEffect, useRef, useMemo, useState } from "react";
-import { firebaseAuth } from "firebaseApp";
+import { firebaseAuth } from "libraries/firebase";
 
-import history from 'historyApp';
+import history from 'libraries/history';
 import { useLocation } from "react-router-dom";
 import { FormattedMessage } from 'react-intl';
 import Cookies from 'js-cookie';
@@ -19,7 +19,7 @@ import stylesQEC from './QuizEditingCommon.module.scss';
 import stylesModal from 'components/Modal.module.scss';
 
 
-import { treeMove } from "chessApp";
+import { treeMove } from "libraries/chess";
 
 
 type PropsQuizEditingSet = {

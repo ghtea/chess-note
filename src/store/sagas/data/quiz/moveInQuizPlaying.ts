@@ -2,7 +2,7 @@ import { call, select, put, delay } from "redux-saga/effects";
 //import { firebaseFirestore } from "firebaseApp";
 
 import {ChessInstance, Move, Square } from 'chess.js'
-import chessFocusing from 'chessApp';
+import chessFocusing from 'libraries/chess';
 
 // import * as config from 'config';
 import {StateRoot} from 'store/reducers';
@@ -30,13 +30,13 @@ function* moveInQuizPlaying(action: actions.data.quiz.type__MOVE_IN_QUIZ_PLAYING
 
         chessFocusing.turn();
         //console.log('fen: ', chessFocusing.fen())
-        let result = null as Move | null;
+        let moveTried = null as Move | null;
 
         if (san){
-            result = chessFocusing.move(san);
+            moveTried = chessFocusing.move(san);
         }
         else {
-            result = chessFocusing.move({from: from as Square, to: to as Square});
+            moveTried = chessFocusing.move({from: from as Square, to: to as Square});
         }
 
         // if move was valid
@@ -44,7 +44,7 @@ function* moveInQuizPlaying(action: actions.data.quiz.type__MOVE_IN_QUIZ_PLAYING
         // 정답의 움직임에 속하는지 파악
         // 정답에 속하면 다음 상대 움직임이 있는지 파악하고, 
         // 없으면 최종 성공, 있으면 다음 상대 움직임 자동 실행
-        if (result === null) {
+        if (moveTried === null) {
             //console.log('move was not valid');
             
             // yield put( actions.notification.return__ADD_DELETE_BANNER({
@@ -53,7 +53,7 @@ function* moveInQuizPlaying(action: actions.data.quiz.type__MOVE_IN_QUIZ_PLAYING
         }
         else {
 
-            seriesSan = [...seriesSan, result.san];
+            seriesSan = [...seriesSan, moveTried.san];
             // 먼저 플레이어가 둔 수 둔다
             const replacement = {
                 ...quizPresent,
@@ -118,7 +118,7 @@ function* moveInQuizPlaying(action: actions.data.quiz.type__MOVE_IN_QUIZ_PLAYING
                     const sanNext = listSeriesSanCorrectIncluding[0][seriesSan.length -1 + 1];
 
 
-                    let result = chessFocusing.move(sanNext);
+                    const result = chessFocusing.move(sanNext);
 
 
                     if (!result) {

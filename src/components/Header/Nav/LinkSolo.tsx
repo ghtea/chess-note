@@ -1,5 +1,5 @@
 import React, { useCallback, useEffect, useMemo  } from "react";
-import history from 'historyApp';
+import history from 'libraries/history';
 import { useLocation } from "react-router-dom";
 import { FormattedMessage } from 'react-intl';
 

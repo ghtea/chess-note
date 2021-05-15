@@ -16,4 +16,5 @@ test('test convertCase', () => {
 
     const value2 = 'test-test'
     expect(convertCase(value2, 'camel')).toBe('testTest');
+    
 });

@@ -1,6 +1,6 @@
 import React, { useCallback, useEffect, useState } from "react";
 
-import history from 'historyApp';
+import history from 'libraries/history';
 import { useLocation } from "react-router-dom";
 import { FormattedMessage, useIntl } from 'react-intl';
 
@@ -24,9 +24,8 @@ import styles from './SignUp.module.scss';
 import stylesLogIn from './LogIn.module.scss';
 import IconTwitter from "svgs/others/IconTwitter";
 
-type PropsSignUp = {};
 
-function SignUp({}: PropsSignUp) {
+function SignUp() {
   
     const dispatch = useDispatch();
     const intl = useIntl();

@@ -1,7 +1,7 @@
 import { call, spawn, put, takeEvery } from "redux-saga/effects";
-import history from 'historyApp';
+import history from 'libraries/history';
 
-import { firebaseAuth } from "firebaseApp";
+import { firebaseAuth } from "libraries/firebase";
 
 import Cookies from 'js-cookie';
 

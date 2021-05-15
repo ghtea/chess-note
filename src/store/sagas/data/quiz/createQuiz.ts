@@ -1,7 +1,7 @@
 import { call, select, put } from "redux-saga/effects";
-import { firebaseFirestore } from "firebaseApp";
+import { firebaseFirestore } from "libraries/firebase";
 
-import history from 'historyApp';
+import history from 'libraries/history';
 
 import axios from "axios";
 import apolloClient from 'apollo';

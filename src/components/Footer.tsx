@@ -1,5 +1,5 @@
 import React, { useCallback, useEffect } from "react";
-import history from 'historyApp';
+import history from 'libraries/history';
 import { useLocation } from "react-router-dom";
 import { FormattedMessage } from 'react-intl';
 
@@ -11,9 +11,8 @@ import styles from './Footer.module.scss';
 
 //import IconLogo from 'svgs/others/IconLogo';
 
-type PropsFooter = {};
 
-function Footer({}: PropsFooter) {
+function Footer() {
 
     const dispatch = useDispatch();
     const location = useLocation();

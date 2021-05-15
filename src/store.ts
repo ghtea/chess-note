@@ -1,38 +1,31 @@
-import createSagaMiddleware, { END } from "redux-saga";
-import history from 'historyApp';
+import createSagaMiddleware, { END } from 'redux-saga';
+import history from 'libraries/history';
 
-import {applyMiddleware, compose, createStore} from "redux";
+import { applyMiddleware, compose, createStore } from 'redux';
 import logger from 'redux-logger';
 
 import reducerRoot from './store/reducers';
 import sagaRoot from './store/sagas';
 
-
 const sagaMiddleware = createSagaMiddleware({
-    context: {
-        history: history
-    }
+  context: {
+    history: history,
+  },
 });
 
 // type State = ReturnType<typeof reducerRoot>;
 
-
 // example: dont show logger when testing
-let listMiddleware = []
+let listMiddleware = [];
 if (process.env.NODE_ENV === 'production') {
   listMiddleware = [sagaMiddleware];
 } else {
   listMiddleware = [sagaMiddleware, logger];
 }
 
-const store = createStore(
-    reducerRoot,
-    applyMiddleware(...listMiddleware)
-);
+const store = createStore(reducerRoot, applyMiddleware(...listMiddleware));
 
 sagaMiddleware.run(sagaRoot);
-
-
 
 export default store;
 

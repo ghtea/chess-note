@@ -1,8 +1,8 @@
 import React, { useCallback, useEffect, useRef, useMemo, useState } from "react";
-import { firebaseAuth } from "firebaseApp";
+import { firebaseAuth } from "libraries/firebase";
 
-import history from 'historyApp';
-import chessFocusing, { treeMove } from 'chessApp';
+import history from 'libraries/history';
+import chessFocusing, { treeMove } from 'libraries/chess';
 import { useLocation } from "react-router-dom";
 import { FormattedMessage } from 'react-intl';
 import * as clipboardy from 'clipboardy';

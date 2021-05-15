@@ -2,7 +2,7 @@ import { call, select, put } from "redux-saga/effects";
 //import { firebaseFirestore } from "firebaseApp";
 
 import {ChessInstance, Move, Square } from 'chess.js'
-import chessFocusing from 'chessApp';
+import chessFocusing from 'libraries/chess';
 
 // import * as config from 'config';
 import {StateRoot} from 'store/reducers';

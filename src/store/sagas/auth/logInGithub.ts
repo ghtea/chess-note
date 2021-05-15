@@ -1,9 +1,9 @@
 import { call, spawn, put, takeEvery } from "redux-saga/effects";
-import history from 'historyApp';
+import history from 'libraries/history';
 
 import axios from "axios";
 import queryString from 'query-string';
-import firebaseApp, { firebaseAuth } from "firebaseApp";
+import firebaseApp, { firebaseAuth } from "libraries/firebase";
 
 import Cookies from 'js-cookie';
 import { v4 as uuidv4 } from 'uuid';

@@ -1,5 +1,5 @@
 import React, { useCallback, useEffect, useState } from "react";
-import history from 'historyApp';
+import history from 'libraries/history';
 
 import { FormattedMessage, useIntl } from 'react-intl';
 
@@ -16,9 +16,8 @@ import styles from './Loading.module.scss';
 
 
 
-type PropsLoading = {};
 
-function Loading({}:PropsLoading) {
+function Loading() {
   
     const dispatch = useDispatch();
     const intl = useIntl();

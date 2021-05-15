@@ -1,19 +1,19 @@
 import { call, select, put } from "redux-saga/effects";
-import { firebaseFirestore } from "firebaseApp";
+import { firebaseFirestore } from "libraries/firebase";
 
 import axios from "axios";
 import apolloClient from 'apollo';
 import { gql, useQuery , FetchResult} from '@apollo/client';
 import { v4 as uuidv4 } from 'uuid';
 
-import {treeMove} from 'chessApp';
+import {treeMove} from 'libraries/chess';
 // import * as config from 'config';
 import {StateRoot} from 'store/reducers';
 import * as actions from "store/actions";
 import * as types from "store/types";
 import { waitForStateChangeToDifferentValue } from "store/sagas/others/waitForStateChange";
 //import NodeMove from "store/types/data/TreeMove";
-import chessFocusing from 'chessApp';
+import chessFocusing from 'libraries/chess';
 
 
 // <Route path="/quiz" >    Quiz 컴포넌트가 마운트 되자마자, return__WATCH_FEN_START_CHANGE  디스패치 dispatch 한다!

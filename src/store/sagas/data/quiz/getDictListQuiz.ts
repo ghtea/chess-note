@@ -1,6 +1,6 @@
 import { call, select, put } from "redux-saga/effects";
-import { firebaseFirestore } from "firebaseApp";
-import history from 'historyApp';
+import { firebaseFirestore } from "libraries/firebase";
+import history from 'libraries/history';
 
 import axios from "axios";
 import apolloClient from 'apollo';
@@ -59,7 +59,7 @@ function* getDictListQuiz( action: actions.data.quiz.type__GET_DICT_LIST_QUIZ) {
             idUser,
         };
 
-        let response: ApolloQueryResult<any> =  yield call( requestGetDictListQuiz,  GET_LIST_QUIZ, argument);
+        const response: ApolloQueryResult<any> =  yield call( requestGetDictListQuiz,  GET_LIST_QUIZ, argument);
 
         // console.log(response);
 

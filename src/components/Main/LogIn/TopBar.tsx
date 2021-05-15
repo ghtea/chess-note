@@ -1,7 +1,6 @@
-import React, { useCallback, useEffect } from "react";
+import React, { useCallback, useEffect } from 'react';
 
-import history from 'historyApp';
-import { useLocation } from "react-router-dom";
+import history from 'libraries/history';
 import { FormattedMessage } from 'react-intl';
 
 //import {useSelector, useDispatch} from "react-redux";
@@ -11,32 +10,22 @@ import IconLogo from 'svgs/others/IconLogo';
 
 import styles from './TopBar.module.scss';
 
+function TopBar() {
+  // event: React.MouseEvent<HTMLAnchorElement> | React.MouseEvent<HTMLButtonElement>,
 
-type PropsTopBar = {};
-
-function TopBar({}: PropsTopBar) {
-  
-  // event: React.MouseEvent<HTMLAnchorElement> | React.MouseEvent<HTMLButtonElement>, 
-   
-  const {onClick_LinkInsideApp} = useLink(history);
+  const { onClick_LinkInsideApp } = useLink(history);
 
   return (
-    <div 
-        className={`${styles['root']}`}
-    >
-        <a  
-            className={`${styles['home']}`}
-            href='/' 
-            onClick={onClick_LinkInsideApp}
-        >
-            <div>
-                <IconLogo className={`${styles['icon-logo']}`} />
-            </div>
-            
-            <div> 
-                <FormattedMessage id={`Nav.NameApp`} />
-            </div>
-        </a>
+    <div className={`${styles['root']}`}>
+      <a className={`${styles['home']}`} href="/" onClick={onClick_LinkInsideApp}>
+        <div>
+          <IconLogo className={`${styles['icon-logo']}`} />
+        </div>
+
+        <div>
+          <FormattedMessage id={`Nav.NameApp`} />
+        </div>
+      </a>
     </div>
   );
 }

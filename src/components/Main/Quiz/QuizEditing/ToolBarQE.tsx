@@ -1,6 +1,6 @@
 import React, { useCallback, useEffect, useMemo, useState } from "react";
-import history from 'historyApp';
-import chessFocusing from 'chessApp';
+import history from 'libraries/history';
+import chessFocusing from 'libraries/chess';
 
 import * as clipboardy from 'clipboardy';
 import { FormattedMessage } from 'react-intl';

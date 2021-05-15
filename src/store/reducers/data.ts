@@ -58,7 +58,8 @@ const reducerData = handleActions<State, any>({
       else {
         const listKey: (string | number)[] = action.payload.listKey;
         
-        try { putValueToNestedObject(stateNew, listKey, action.payload.replacement); 
+        try { 
+          putValueToNestedObject(stateNew, listKey, action.payload.replacement); 
           
         }
         catch {

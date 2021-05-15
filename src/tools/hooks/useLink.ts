@@ -17,3 +17,4 @@ const useLink = (history: History) => {
 }
 
 export default useLink;
+

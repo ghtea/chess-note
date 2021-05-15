@@ -2,11 +2,11 @@ interface Object {
   [key: string ]: any;
 }
 
-const putValueToNestedObject = function (obj:Object, listKey: (string | number)[], value:any) {
+const putValueToNestedObject = function (obj:Record<string, unknown>, listKey: (string | number)[], value:any) {
 
 	// Cache the path length and current spot in the object
 	const length:number = listKey.length;
-	let current:Object = obj;
+	let current:Record<string, unknown> = obj;
 
 	// Loop through the path
 	listKey.forEach( (key: (string | number), index:number) => {
@@ -26,7 +26,7 @@ const putValueToNestedObject = function (obj:Object, listKey: (string | number)[
 				current[key] = {};
 			}
 			// Update the current place in the object
-			current = current[key];
+			current = current[key] as Record<string, unknown>;
 
 		} // else
 

@@ -38,7 +38,7 @@ export function* waitForStateChangeToCertainValue<T>( selector: Selector<T>, val
 
 export function* waitForStateChangeToDifferentValue<T>( selector: Selector<T>, value?:T) {
 
-    let valuePrevious: T = yield select(selector);
+    const valuePrevious: T = yield select(selector);
     
     while (true) {
 

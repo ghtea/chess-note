@@ -6,25 +6,17 @@ import {v4 as uuid} from 'uuid';
 //import { useQuery, gql } from '@apollo/client';
 
 import {ChessInstance, Move, Square } from 'chess.js'
-import chessPlaying from 'chessApp';
+import chessPlaying from 'libraries/chess';
 import styles from './QuizPlaying.module.scss';
 
 import { useDispatch, useSelector } from 'react-redux';
 import { StateRoot } from 'store/reducers';
 import * as actions  from 'store/actions';
 import StatusBarQP from './QuizPlaying/StatusBarQP';
-const ChessReq:any = require('chess.js');
-
-
-// https://stackoverflow.com/questions/58598457/not-a-constructor-error-with-library-and-angular
-// const Chess:ChessInstance = new ChessReq();
 
 
 
-
-type PropsQuizPlaying = {}; 
-
-function QuizPlaying({}: PropsQuizPlaying) {
+function QuizPlaying() {
   
   const dispatch = useDispatch();
 

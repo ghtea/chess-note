@@ -1,5 +1,5 @@
 import { call, select, put, getContext } from "redux-saga/effects";
-import { firebaseAuth, firebaseStorage } from "firebaseApp";
+import { firebaseAuth, firebaseStorage } from "libraries/firebase";
 
 import { v4 as uuidv4 } from "uuid";
 
@@ -44,7 +44,7 @@ function* updateProfile(action: actionsRoot.auth.type__UPDATE_PROFILE) {
             // let userFirebase = firebaseAuth.currentUser;
             const {payload: {displayName, urlPhotoLocal}} = action;
                         
-            let update: any = {};
+            const update: any = {};
 
             if (displayName){
                 update['displayName'] = displayName;

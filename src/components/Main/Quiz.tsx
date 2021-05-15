@@ -13,9 +13,8 @@ import QuizHome from './Quiz/QuizHome';
 import QuizPlaying from './Quiz/QuizPlaying';
 
 
-type PropsQuiz = {};
 
-function Quiz({}: PropsQuiz) {
+function Quiz() {
   
   const dispatch = useDispatch();
 
