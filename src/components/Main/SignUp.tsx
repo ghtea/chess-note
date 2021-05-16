@@ -117,10 +117,10 @@ function SignUp({}: PropsSignUp) {
             if (value === 'google'){
                 dispatch(actions.auth.return__LOG_IN_GOOGLE() );
             }
-            else if (value === 'twitter'){
+            else if (value === 'github'){
                 dispatch(actions.auth.return__LOG_IN_GITHUB() );
             }
-            else if (value === 'github'){
+            else if (value === 'twitter'){
                 dispatch(actions.auth.return__LOG_IN_TWITTER() );
             }
             
@@ -209,7 +209,7 @@ function SignUp({}: PropsSignUp) {
                     onClick={onClick_LogInSocial}
                 > 
                     <span className={`${stylesLogIn['icon']}`}><img src={imgGoogle}/></span>
-                    <span className={`${styles['text']}`}> <FormattedMessage id={`Main.LogIn_ContinueWithGoogle`} /> </span>
+                    <span className={`${stylesLogIn['text']}`}> <FormattedMessage id={`Main.LogIn_ContinueWithGoogle`} /> </span>
                 </button>
 
                 <button 
@@ -217,8 +217,8 @@ function SignUp({}: PropsSignUp) {
                     value='twitter'
                     onClick={onClick_LogInSocial}
                 > 
-                    <span className={`${styles['icon']}`}> <IconTwitter className={`icon__twitter`} /></span>
-                    <span className={`${styles['text']}`}> <FormattedMessage id={`Main.LogIn_ContinueWithTwitter`} />  </span>
+                    <span className={`${stylesLogIn['icon']}`}> <IconTwitter className={`icon__twitter`} /></span>
+                    <span className={`${stylesLogIn['text']}`}> <FormattedMessage id={`Main.LogIn_ContinueWithTwitter`} />  </span>
                 </button>
                 
                 <button 
@@ -227,7 +227,7 @@ function SignUp({}: PropsSignUp) {
                     onClick={onClick_LogInSocial}
                 > 
                     <span className={`${stylesLogIn['icon']}`}> <IconGithub className={`icon__github`} /></span>
-                    <span className={`${styles['text']}`}> <FormattedMessage id={`Main.LogIn_ContinueWithGithub`} />  </span>
+                    <span className={`${stylesLogIn['text']}`}> <FormattedMessage id={`Main.LogIn_ContinueWithGithub`} />  </span>
                 </button>
             </div> 
 
