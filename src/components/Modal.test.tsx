@@ -11,22 +11,21 @@ import Modal from './Modal';
 // import { StringLiteral } from 'typescript';
 import {useSelector, useDispatch} from "react-redux";
 import {StateRoot} from 'store/reducers';
-import * as actionsRoot from "store/actions";
+import * as actions from "store/actions";
 import convertCase from 'tools/vanilla/convertCase';
 
 beforeAllDefault();
 
 
-type PropsHeader = {};
 
-function CollectionButtonOpening({}: PropsHeader) {
+function CollectionButtonOpening() {
 
     const dispatch = useDispatch();
     
     const onClick_ShowModal = useCallback(
         (event:React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
         const {value} = event.currentTarget;
-        dispatch(actionsRoot.status.return__REPLACE({ 
+        dispatch(actions.appearance.return__REPLACE({ 
             listKey: ['showing', 'modal', value],
             replacement: true
         }));
@@ -105,23 +104,7 @@ describe('Open and close all modals', () => {
         expect(screen.queryByRole('dialog', {name: translationEn['Modal.MyProfile_Title']})).not.toBeInTheDocument();
     }); 
 
-    it('open/close SortingFootballLeagueStandings', () => {
-        render(<Modal/>);
-        render(<CollectionButtonOpening />);
-
-        fireEvent.click(screen.getByRole('button', {name: 'Open SortingFootballLeagueStandings'}));
-        expect(screen.getByRole('dialog', {name: translationEn['Modal.SortingFootballLeagueStandings_Title']})).toBeInTheDocument();
-        
-        fireEvent.click( screen.getByRole('button', {name: 'Close SortingFootballLeagueStandings'}) );
-        expect(screen.queryByRole('dialog', {name: translationEn['Modal.SortingFootballLeagueStandings_Title']})).not.toBeInTheDocument();
-
-
-        fireEvent.click( screen.getByRole('button', {name: 'Open SortingFootballLeagueStandings'}) );
-        expect(screen.getByRole('dialog', {name: translationEn['Modal.SortingFootballLeagueStandings_Title']})).toBeInTheDocument();
-        
-        fireEvent.click( screen.getByLabelText('Outside SortingFootballLeagueStandings') );
-        expect(screen.queryByRole('dialog', {name: translationEn['Modal.SortingFootballLeagueStandings_Title']})).not.toBeInTheDocument();
-    }); 
+    
 
 });
 

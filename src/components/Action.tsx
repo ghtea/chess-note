@@ -14,9 +14,8 @@ import IconCopy from 'svgs/basic/IconCopy';
 import IconShare from 'svgs/basic/IconShare';
 
 
-type PropsAction = {};
 
-function Action({}: PropsAction) {
+function Action() {
   
   // const showingSetting:boolean = useSelector((state: StateRoot) => state['status']['showing']['Action']['setting']);
   const dispatch = useDispatch();
