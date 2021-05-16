@@ -38,23 +38,30 @@ function* focusQuiz( action: actions.data.quiz.type__FOCUS_QUIZ ) {
     }
     
 
-    const quizFocusing: types.data.quiz.Quiz = quiz || quizDefault;
+    let quizData: types.data.quiz.Quiz = quiz || quizDefault;
+
+    let fenUsing = quizData.fenStart;
+
+    if (situation === 'creating'){
+        chessFocusing.reset();
+        fenUsing = chessFocusing.fen();
+    }
 
 
-    chessFocusing.load(quizFocusing.fenStart);
+    chessFocusing.load(quizData.fenStart);
     
     yield put( actions.data.return__REPLACE({
         listKey:['quiz', 'focusing'],
-        replacement: quizFocusing,
+        replacement: quizData,
     }));
 
     yield put( actions.present.return__REPLACE({
-        listKey:['quiz'],
+        listKey:['quiz', 'focusing'],
         replacement: {
-            idGame: quizFocusing.id,
+            idGame: quizData.id,
             situation: situation, 
-            fen: quizFocusing.fenStart,
-            turn: quizFocusing.turnNext,
+            fen: fenUsing,
+            turn: quizData.turnNext,
             seriesSan: [],
         }
     }));
@@ -64,7 +71,7 @@ function* focusQuiz( action: actions.data.quiz.type__FOCUS_QUIZ ) {
 
     if (situation === 'playing'){
         modeUrl = 'play';
-        history.push(`/quiz/${modeUrl}/${quizFocusing.id}`);
+        history.push(`/quiz/${modeUrl}/${quizData.id}`);
     }
     else if (situation === 'creating'){
         modeUrl = 'create';
@@ -72,7 +79,7 @@ function* focusQuiz( action: actions.data.quiz.type__FOCUS_QUIZ ) {
     }
     else if (situation === 'editing'){
         modeUrl = 'edit';
-        history.push(`/quiz/${modeUrl}/${quizFocusing.id}`);
+        history.push(`/quiz/${modeUrl}/${quizData.id}`);
     }
             
         

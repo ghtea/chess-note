@@ -25,20 +25,25 @@ function QuizEditing({}: PropsQuizEditing) {
   
   const dispatch = useDispatch();
 
-  const statusQuiz = useSelector((state: StateRoot)=>state.present.quiz);
+  const quizPresent = useSelector((state: StateRoot)=>state.present.quiz.focusing);
   const side = useSelector((state: StateRoot)=>state.data.quiz.focusing.turnNext);
   const idQuiz = useSelector((state: StateRoot)=>state.data.quiz.focusing?.id);
   
   const statusUser = useSelector((state: StateRoot) => state.status.auth.user);
   const idUser = useSelector((state: StateRoot) => state.auth.user?.id);
 
+
   useEffect(()=>{
     //const idQuizFromUri = (window.location.pathname.match(/[^\/]*$/) || [])[0];
     const modeFromUrl = window.location.pathname.replace(/\/quiz\/([^/]*).*/, "$1");
     const idQuizFromUri = window.location.pathname.replace(/\/quiz\/edit\/([^/]*).*/, "$1");
     
-    console.log('edit-idQuizFromUri: ', idQuizFromUri)
-
+    //console.log('edit-idQuizFromUri: ', idQuizFromUri)
+    if (modeFromUrl === 'create') {
+      dispatch(actions.data.quiz.return__FOCUS_QUIZ({ 
+        situation: 'creating'
+      }));  
+    }
 
     if (modeFromUrl === 'edit' && idQuizFromUri){
 
@@ -64,7 +69,7 @@ function QuizEditing({}: PropsQuizEditing) {
 
   const listSquare = useMemo(()=>{
     return chessPlaying.board(); 
-  }, [statusQuiz.fen]);
+  }, [quizPresent.fen]);
 
   return (
     <div

@@ -1,6 +1,6 @@
 import * as types from "store/types"; 
-import {NodeMove} from "store/types/data/TreeMove";
-import { KindGetListQuiz } from "store/types/data/quiz";
+import {NodeMove} from "store/types/others/TreeMove";
+import { KindGetFocusListQuiz } from "store/types/data/quiz";
 
 
 
@@ -51,7 +51,7 @@ export type type__BACK_TO_START = ReturnType<typeof return__BACK_TO_START>;
 export const name__FOCUS_QUIZ = 'data/quiz/FOCUS_QUIZ';
 type Payload__FOCUS_QUIZ = {
     quiz?: types.data.quiz.Quiz,
-    situation: types.present.SituationQuiz, 
+    situation: types.present.quiz.Situation, 
 }
 export const return__FOCUS_QUIZ = (payload: Payload__FOCUS_QUIZ) => {
     return {
@@ -63,12 +63,25 @@ export type type__FOCUS_QUIZ = ReturnType<typeof return__FOCUS_QUIZ>;
 
 
 
+export const name__GET_LIST_QUIZ = 'data/quiz/GET_LIST_QUIZ';
+type Payload__GET_LIST_QUIZ = {
+    idUser?: string,
+}
+export const return__GET_LIST_QUIZ = (payload: Payload__GET_LIST_QUIZ) => {
+    return {
+        type: name__GET_LIST_QUIZ,
+        payload: payload
+    }
+};
+export type type__GET_LIST_QUIZ = ReturnType<typeof return__GET_LIST_QUIZ>;
+
+
 
 export const name__GET_QUIZ_BY_ID = 'data/quiz/GET_QUIZ_BY_ID';
 type Payload__GET_QUIZ_BY_ID = {
     idQuiz: string,
     idUserInApp?: string,
-    situation: types.present.SituationQuiz, 
+    situation: types.present.quiz.Situation, 
 }
 export const return__GET_QUIZ_BY_ID = (payload: Payload__GET_QUIZ_BY_ID) => {
     return {
@@ -80,18 +93,32 @@ export type type__GET_QUIZ_BY_ID = ReturnType<typeof return__GET_QUIZ_BY_ID>;
 
 
 
-export const name__GET_LIST_QUIZ = 'data/quiz/GET_LIST_QUIZ';
-type Payload__GET_LIST_QUIZ = {
-    kind: KindGetListQuiz,
+export const name__GET_DICT_LIST_QUIZ = 'data/quiz/GET_DICT_LIST_QUIZ';
+type Payload__GET_DICT_LIST_QUIZ = {
     idUser?: string,
 }
-export const return__GET_LIST_QUIZ = (payload: Payload__GET_LIST_QUIZ) => {
+export const return__GET_DICT_LIST_QUIZ = (payload: Payload__GET_DICT_LIST_QUIZ) => {
     return {
-        type: name__GET_LIST_QUIZ,
+        type: name__GET_DICT_LIST_QUIZ,
         payload: payload
     }
 };
-export type type__GET_LIST_QUIZ = ReturnType<typeof return__GET_LIST_QUIZ>;
+export type type__GET_DICT_LIST_QUIZ = ReturnType<typeof return__GET_DICT_LIST_QUIZ>;
+
+
+
+export const name__GET_FOCUS_LIST_QUIZ = 'data/quiz/GET_FOCUS_LIST_QUIZ';
+type Payload__GET_FOCUS_LIST_QUIZ = {
+    kind: KindGetFocusListQuiz,
+    idUser?: string,
+}
+export const return__GET_FOCUS_LIST_QUIZ = (payload: Payload__GET_FOCUS_LIST_QUIZ) => {
+    return {
+        type: name__GET_FOCUS_LIST_QUIZ,
+        payload: payload
+    }
+};
+export type type__GET_FOCUS_LIST_QUIZ = ReturnType<typeof return__GET_FOCUS_LIST_QUIZ>;
 
 
 

@@ -38,8 +38,8 @@ function ToolBarQE({
 
     const heightToolbar = useSelector((state: StateRoot)=>state.appearance.layout.document.chessBoard.toolBar.height);
     const lengthChessBoard = useSelector((state: StateRoot)=>state.appearance.layout.document.chessBoard.length);
-    const quizPresent = useSelector((state: StateRoot)=>state.present.quiz);
-    const quizFocusing = useSelector((state: StateRoot)=>state.data.quiz.focusing);
+    //const quizPresent = useSelector((state: StateRoot)=>state.present.quiz.focusing);
+    const quizData = useSelector((state: StateRoot)=>state.data.quiz.focusing);
 
     // const [positionStart, setPositionStart] = useState<null | string>(null);
     // const onClick_ControlPaste = useCallback(
@@ -142,9 +142,9 @@ function ToolBarQE({
                     onClick={onClick_Main}
                 >
                     <IconAnswer className={`${styles['icon__answer']}`}
-                        kind={quizFocusing.listSeriesSanCorrect.length === 0 ? 'light' : 'solid'}
+                        kind={quizData.listSeriesSanCorrect.length === 0 ? 'light' : 'solid'}
                     />
-                    <span> {quizFocusing.listSeriesSanCorrect.length} </span>
+                    <span> {quizData.listSeriesSanCorrect.length} </span>
                 </button>
 
                 <button
@@ -154,9 +154,9 @@ function ToolBarQE({
                     onClick={onClick_Main}
                 >
                     <IconMention className={`${styles['icon__mention']}`} 
-                        kind={quizFocusing.listSeriesSanMention.length === 0 ? 'light' : 'solid'}
+                        kind={quizData.listSeriesSanMention.length === 0 ? 'light' : 'solid'}
                     />
-                    <span> {quizFocusing.listSeriesSanMention.length} </span>
+                    <span> {quizData.listSeriesSanMention.length} </span>
                 </button>
             </div>
 

@@ -1,5 +1,5 @@
 import { ChessInstance, Move, Square } from 'chess.js'
-import {TreeMove, } from 'store/types/data/TreeMove';
+import {TreeMove, } from 'store/types/others/TreeMove';
 const ChessReq:any = require('chess.js');
 // https://stackoverflow.com/questions/58598457/not-a-constructor-error-with-library-and-angular
 // const Chess:ChessInstance = new ChessReq();

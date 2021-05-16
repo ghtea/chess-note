@@ -38,7 +38,7 @@ function ToolBarQP({
     const lengthChessBoard = useSelector((state: StateRoot)=>state.appearance.layout.document.chessBoard.length);
     const statusQuiz = useSelector((state: StateRoot)=>state.present.quiz);
 
-    const situation = useSelector((state: StateRoot)=>state.present.quiz.situation);
+    const situation = useSelector((state: StateRoot)=>state.present.quiz.focusing.situation);
 
     // const [positionStart, setPositionStart] = useState<null | string>(null);
     // const onClick_ControlPaste = useCallback(

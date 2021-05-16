@@ -1,0 +1,50 @@
+@import 'styles/every.scss';
+
+.root {
+    //border-top-width: 0;
+
+    &:nth-child(n+2) {
+        @include frame-each-theme(border-top, 1px, solid, basic__2);
+    } 
+    
+}
+
+
+
+// rows
+tr { 
+    display: grid;
+    // grid-template-columns: 30px 1fr 1fr 1fr 1fr;  applies styles in LeagueStanding.module.scss
+    grid-template-rows: 40px;
+}
+
+td {
+    display: inline-flex;
+    flex-flow: row nowrap;
+    justify-content: center;
+    align-items: center;
+
+    height: 40px;
+    
+    :global(.icon) {
+        @include color-each-theme(color, basic__5);
+    }
+
+    &.play {
+        .icon__play {
+            width: 20px;
+            height: 20px;
+        }
+    }
+
+    &.others{
+        .icon__others {
+            width: 32px;
+            height: 32px;
+        }
+    }
+
+
+}
+
+

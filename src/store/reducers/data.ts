@@ -20,6 +20,10 @@ const stateInitial = {
     // },
     quiz: {
 
+      listMyQuiz: [] as types.data.quiz.Quiz[],
+      listPublicQuiz: [] as types.data.quiz.Quiz[],
+
+
       list: [] as types.data.quiz.Quiz[],
       index: null as number | null,
 

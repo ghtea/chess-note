@@ -30,8 +30,8 @@ function QuizEditingOthers({
   
     const dispatch = useDispatch();
 
-    const quizPresent = useSelector((state: StateRoot) => state.present.quiz);
-    const quizFocusing = useSelector((state: StateRoot) => state.data.quiz.focusing);
+    const quizPresent = useSelector((state: StateRoot) => state.present.quiz.focusing);
+    const quizData = useSelector((state: StateRoot) => state.data.quiz.focusing);
     const [indexAnswer, setIndexAnswer] = useState<number>(0);
 
     const refModal = useRef<HTMLDivElement>(null);
@@ -83,7 +83,7 @@ function QuizEditingOthers({
                     }
 
                     dispatch( actions.present.return__REPLACE({
-                        listKey: ['quiz' ],
+                        listKey: ['quiz', 'focusing'],
                         replacement: replacementQuizPresent,
                     }) );
                 }
@@ -106,13 +106,13 @@ function QuizEditingOthers({
                 }));
             } 
         
-    }, [quizPresent.seriesSan, quizFocusing, indexAnswer]);
+    }, [quizPresent.seriesSan, quizData, indexAnswer]);
     
 
     const onClick_ButtonChangeAnswer = useCallback(
         (e:React.MouseEvent<HTMLButtonElement, MouseEvent>)=>{
 
-            const numberAnswer = quizFocusing.listSeriesSanCorrect.length;
+            const numberAnswer = quizData.listSeriesSanCorrect.length;
             //console.log(numberAnswer)
             const value = e.currentTarget.value;
             let indexAnswerNew = indexAnswer;
@@ -126,7 +126,7 @@ function QuizEditingOthers({
             setIndexAnswer( (indexAnswerNew+numberAnswer) % numberAnswer );
             
             
-    }, [quizFocusing.listSeriesSanCorrect.length, indexAnswer]);
+    }, [quizData.listSeriesSanCorrect.length, indexAnswer]);
 
 
   return (
@@ -157,7 +157,7 @@ function QuizEditingOthers({
                     > <FormattedMessage id={`Modal.QuizEditingOthers_UseFen`} /> </button>
                 </div>
 
-                {quizFocusing.listSeriesSanCorrect.length === 0 &&
+                {quizData.listSeriesSanCorrect.length === 0 &&
                     <div className={`${stylesModal['content__section']}`} >
                         <span
                             className={`${stylesQEC['span__basic']}`}
@@ -170,7 +170,7 @@ function QuizEditingOthers({
                 }           
 
 
-                { quizFocusing.listSeriesSanCorrect.length > 0 &&
+                { quizData.listSeriesSanCorrect.length > 0 &&
                     <>
                     <div className={`${stylesModal['content__section']}`} >
                         <button
@@ -181,7 +181,7 @@ function QuizEditingOthers({
                         > 
                             <FormattedMessage 
                                 id={`Modal.QuizEditingOthers_ShowAnswer`} 
-                                values={{index: `${(indexAnswer + 1)} / ${quizFocusing.listSeriesSanCorrect.length}`}}
+                                values={{index: `${(indexAnswer + 1)} / ${quizData.listSeriesSanCorrect.length}`}}
                             /> 
                         </button>
                         <button
@@ -219,7 +219,7 @@ function QuizEditingOthers({
                         > 
                             <FormattedMessage 
                                 id={`Modal.QuizEditingOthers_DeleteAnswer`} 
-                                values={{index: `${(indexAnswer + 1)} / ${quizFocusing.listSeriesSanCorrect.length}`}}
+                                values={{index: `${(indexAnswer + 1)} / ${quizData.listSeriesSanCorrect.length}`}}
                             /> 
                         </button>
                         <button

@@ -23,7 +23,7 @@ function Quiz({}: PropsQuiz) {
   // const idUser = useSelector((state: StateRoot) => state.auth.user?.id);
   // const idQuizFocusing = useSelector((state: StateRoot) => state.data.quiz.focusing.id);
 
-  const situationCurrent = useSelector((state: StateRoot) => state.present.quiz.situation);
+  const situationCurrent = useSelector((state: StateRoot) => state.present.quiz.focusing.situation);
   
 
 
@@ -52,7 +52,7 @@ function Quiz({}: PropsQuiz) {
     }
     if (situationCurrent !== situationNew){
       dispatch(actions.present.return__REPLACE({ 
-        listKey: [ 'quiz', 'situation' ],
+        listKey: [ 'quiz', 'focusing', 'situation' ],
         replacement: situationNew,
       })); 
     }

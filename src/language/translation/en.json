@@ -40,9 +40,9 @@
     "Main.SignUp_SignUp": "Sign Up",
     "Main.SignUp_PasswordAgain": "Password Again",
 
-    "Main.QuizHome_PlayPublicQuiz": "Play Public Quiz",
-    "Main.QuizHome_PlayMyQuiz": "Play My Quiz",
-    "Main.QuizHome_CreateQuiz": "Create Quiz",
+    "Main.QuizHome_ShortCuts_PlayPublicQuiz": "Play Public Quiz",
+    "Main.QuizHome_ShortCuts_PlayMyQuiz": "Play My Quiz",
+    "Main.QuizHome_ShortCuts_CreateQuiz": "Create Quiz",
 
     "Main.QuizPlay_StatusBar_Solved": "Solved!",
     "Main.QuizPlay_StatusBar_Failed": "Failed",
@@ -106,7 +106,7 @@
     "Notification.CreateQuiz_NoAnswer__E": "You should set anwser",
     "Notification.CreateQuiz_NoFenStart__E": "You should set starting position",
     
-    "Notification.GetListQuiz_UnknownError__E": "Failed to get the quizes",
+    "Notification.GetFocusListQuiz_UnknownError__E": "Failed to get the quizes",
     "Notification.GetQuiz_UnknownError__E": "Failed to get the quiz",
     "Notification.GetQuiz_NoQuiz__E": "The quiz doesn't exist",
     "Notification.UpdateQuiz_Succeeded__S": "Successfully updated the quiz!",
