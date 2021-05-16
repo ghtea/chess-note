@@ -1,18 +1,7 @@
 import React, { useCallback, useEffect, useMemo } from 'react';
-import history from 'libraries/history';
-
-import { FormattedMessage } from 'react-intl';
-import axios from 'axios';
-
 import { useSelector, useDispatch } from 'react-redux';
 import { StateRoot } from 'store/reducers';
 import * as actions from 'store/actions';
-
-import Loading from 'components/Global/Loading';
-
-//import actionsRoot from 'store/actions';
-
-//import Portal from './QuizHome/Portal';
 
 import styles from './index.module.scss';
 import { KindGetFocusListQuiz } from 'store/types/data/quiz';
@@ -22,13 +11,13 @@ import DisplayQuiz from './DisplayQuiz';
 
 function QuizHome() {
   const dispatch = useDispatch();
-  const readyUser = useSelector((state: StateRoot) => state.status.auth.user.ready);
-  const idUser = useSelector((state: StateRoot) => state.auth.user?.id);
+  const userReady = useSelector((state: StateRoot) => state.status.auth.user.ready);
+  const userId = useSelector((state: StateRoot) => state.auth.user?.id);
 
   useEffect(() => {
     dispatch(
-      actions.data.quiz.return__GET_DICT_LIST_QUIZ({
-        idUser: idUser,
+      actions.data.quiz.return__GET_QUIZ_LIST_DICT({
+        userId: userId,
       }),
     );
   }, []);
@@ -36,7 +25,6 @@ function QuizHome() {
   return (
     <div className={`${styles['root']}`}>
       <ShortCuts />
-
       <DisplayQuiz />
     </div>
   );

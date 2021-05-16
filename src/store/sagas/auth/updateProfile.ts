@@ -5,8 +5,9 @@ import { v4 as uuidv4 } from 'uuid';
 
 // import * as config from 'config';
 import { StateRoot } from 'store/reducers';
-import * as actionsRoot from 'store/actions';
-import { User } from 'store/reducers/auth';
+import * as actions from 'store/actions';
+import * as types from 'store/types';
+
 import * as actionsPortal from 'store/actions/data';
 //import * as actionsTheme from "../../actions/theme";
 
@@ -23,19 +24,19 @@ const updateProfileFirebase = (update: {
   return firebaseAuth?.currentUser?.updateProfile(update);
 };
 
-function* updateProfile(action: actionsRoot.auth.type__UPDATE_PROFILE) {
-  const readyUser: boolean = yield select((state: StateRoot) => state.status.auth.user.ready);
-  const idUserInApp: undefined | string = yield select((state: StateRoot) => state.auth.user?.id);
+function* updateProfile(action: actions.auth.type__UPDATE_PROFILE) {
+  const userReady: boolean = yield select((state: StateRoot) => state.status.auth.user.ready);
+  const userIdInApp: undefined | string = yield select((state: StateRoot) => state.auth.user?.id);
 
   try {
-    if (!readyUser) {
+    if (!userReady) {
       yield put(
-        actionsRoot.notification.return__ADD_DELETE_BANNER({
+        actions.notification.return__ADD_DELETE_BANNER({
           codeSituation: 'NotLoggedIn__E',
         }),
       );
     } else {
-    /*
+      /*
         else if (action.payload.initials.length > 3) {
             yield put( actionsNotification.return__ADD_DELETE_BANNER({
                 codeSituation: 'Portal_InitialsTooLong__E'
@@ -54,16 +55,20 @@ function* updateProfile(action: actionsRoot.auth.type__UPDATE_PROFILE) {
       }
 
       if (urlPhotoLocal) {
-        const refFirebase = firebaseStorage.ref().child(`${idUserInApp}/${uuidv4()}`);
+        const refFirebase = firebaseStorage.ref().child(`${userIdInApp}/${uuidv4()}`);
 
-        const response: firebase.storage.UploadTask = yield call(uploadPhoto, refFirebase, urlPhotoLocal); // upload photo
+        const response: firebase.storage.UploadTask = yield call(
+          uploadPhoto,
+          refFirebase,
+          urlPhotoLocal,
+        ); // upload photo
         const urlPhotoFirebase: string = yield call(getUrlPhotoFirebase, response);
 
         update['photoURL'] = urlPhotoFirebase;
       }
 
       yield call(updateProfileFirebase, update);
-      yield put(actionsRoot.auth.return__REPLACE_USER());
+      yield put(actions.auth.return__REPLACE_USER());
 
       console.log('updateProfile worked successfully!');
     }
@@ -72,7 +77,7 @@ function* updateProfile(action: actionsRoot.auth.type__UPDATE_PROFILE) {
     console.error('updateProfile has been failed');
 
     yield put(
-      actionsRoot.notification.return__ADD_DELETE_BANNER({
+      actions.notification.return__ADD_DELETE_BANNER({
         codeSituation: 'UnknownError__E',
       }),
     );

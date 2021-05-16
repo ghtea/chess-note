@@ -24,7 +24,7 @@ function NotFound() {
   useEffect(() => {
     dispatch(
       actions.appearance.return__REPLACE({
-        listKey: ['showing', 'header', 'root'],
+        keyList: ['showing', 'header', 'root'],
         replacement: false,
       }),
     );

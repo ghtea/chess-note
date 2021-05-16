@@ -11,7 +11,7 @@ import * as types from 'store/types';
 
 import Loading from 'components/Global/Loading';
 
-//import actionsRoot from 'store/actions';
+//import actions from 'store/actions';
 
 //import Portal from './DisplayQuiz/Portal';
 
@@ -21,15 +21,15 @@ import InputRadio from 'components/Global/Input/InputRadio';
 
 function DisplayQuiz() {
   const dispatch = useDispatch();
-  // const readyUser = useSelector((state: StateRoot) => state.status.auth.user.ready);
+  // const userReady = useSelector((state: StateRoot) => state.status.auth.user.ready);
 
   const statusListMyPublic = useSelector(
-    (state: StateRoot) => state.status.data.quiz.listPublicQuiz,
+    (state: StateRoot) => state.status.data.quiz.publicQuizList,
   );
-  const statusListMyQuiz = useSelector((state: StateRoot) => state.status.data.quiz.listMyQuiz);
+  const statusListMyQuiz = useSelector((state: StateRoot) => state.status.data.quiz.myQuizList);
 
-  const listPublicQuiz = useSelector((state: StateRoot) => state.data.quiz.listPublicQuiz);
-  const listMyQuiz = useSelector((state: StateRoot) => state.data.quiz.listMyQuiz);
+  const publicQuizList = useSelector((state: StateRoot) => state.data.quiz.publicQuizList);
+  const myQuizList = useSelector((state: StateRoot) => state.data.quiz.myQuizList);
 
   // const sorting = useSelector((state: StateRoot)=>state.status.current.football.leagueStandings.sorting);
   const mode = useSelector((state: StateRoot) => state.present.quiz.display.mode);
@@ -47,7 +47,7 @@ function DisplayQuiz() {
     if (name === 'mode') {
       dispatch(
         actions.present.return__REPLACE({
-          listKey: ['quiz', 'display', 'mode'],
+          keyList: ['quiz', 'display', 'mode'],
           replacement: value,
         }),
       );
@@ -56,7 +56,7 @@ function DisplayQuiz() {
 
   type Draft = {
     mode: {
-      value: types.present.quiz.ModeDisplay;
+      value: types.present.quiz.DisplayMode;
       label: string;
     }[];
   };
@@ -146,7 +146,7 @@ function DisplayQuiz() {
           </thead>
 
           <tbody>
-            {(mode === 'my-quiz' ? listMyQuiz : listPublicQuiz).map(
+            {(mode === 'my-quiz' ? myQuizList : publicQuizList).map(
               (quizEach: types.data.quiz.Quiz, index: number) => (
                 <Quiz quiz={quizEach} key={`Quiz-${index}`} />
               ),

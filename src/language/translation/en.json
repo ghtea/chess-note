@@ -97,6 +97,8 @@
     "Notification.SignUp_PasswordsDifferent__E": "The two passwords are different",
     "Notification.SignUp_WeakPassword__E": "Password should be at least 6 characters long",
 
+    "Notification.GetMember_UnknownError__E": "An unknown error has occurred while retrieving member information",
+
     "Notification.PlayQuiz_Correct__S": "Correct!",
     "Notification.PlayQuiz_NotCorrect__W": "That's not the answer",
     "Notification.PlayQuiz_NotAvailableMove__W": "Not Available Move",

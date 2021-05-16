@@ -1,11 +1,11 @@
 import {combineReducers} from 'redux';
 
-import reducerAppearance from './reducers/appearance';
-import reducerAuth from './reducers/auth';
-import reducerData from './reducers/data';
-import reducerNotification from './reducers/notification';
-import reducerPresent from './reducers/present';
-import reducerStatus from './reducers/status';
+import reducerAppearance from './appearance';
+import reducerAuth from './auth';
+import reducerData from './data';
+import reducerNotification from './notification';
+import reducerPresent from './present';
+import reducerStatus from './status';
 
 const reducerRoot = combineReducers({
     appearance: reducerAppearance,

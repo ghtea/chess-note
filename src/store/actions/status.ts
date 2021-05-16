@@ -2,7 +2,7 @@
 
 export const name__REPLACE = `status/REPLACE`;
 interface Payload__REPLACE {
-  listKey: (string | number)[];
+  keyList: (string | number)[];
   replacement: {
     tried: boolean;
     loading: boolean;

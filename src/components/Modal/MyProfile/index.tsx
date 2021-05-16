@@ -30,7 +30,7 @@ function MyProfile() {
       const { value } = event.currentTarget;
       dispatch(
         actions.appearance.return__REPLACE({
-          listKey: ['showing', 'modal', value],
+          keyList: ['showing', 'modal', value],
           replacement: false,
         }),
       );
@@ -44,7 +44,7 @@ function MyProfile() {
       if (!refModal.current?.contains(event.target as Node)) {
         dispatch(
           actions.appearance.return__REPLACE({
-            listKey: ['showing', 'modal', convertCase('MyProfile', 'camel')],
+            keyList: ['showing', 'modal', convertCase('MyProfile', 'camel')],
             replacement: false,
           }),
         );

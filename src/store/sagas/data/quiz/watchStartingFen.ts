@@ -1,39 +1,37 @@
-import { call, select, put } from "redux-saga/effects";
-import { firebaseFirestore } from "libraries/firebase";
+import { call, select, put } from 'redux-saga/effects';
+import { firebaseFirestore } from 'libraries/firebase';
 
-import axios from "axios";
-import apolloClient from 'apollo';
-import { gql, useQuery , FetchResult} from '@apollo/client';
+import axios from 'axios';
+import apolloClient from 'libraries/apollo';
+import { gql, useQuery, FetchResult } from '@apollo/client';
 import { v4 as uuidv4 } from 'uuid';
 
 import chessFocusing from 'libraries/chess';
 // import * as config from 'config';
-import {StateRoot} from 'store/reducers';
-import * as actions from "store/actions";
-import * as types from "store/types";
-import { waitForStateChangeToDifferentValue } from "store/sagas/others/waitForStateChange";
+import { StateRoot } from 'store/reducers';
+import * as actions from 'store/actions';
+import * as types from 'store/types';
+import { waitForStateChangeToDifferentValue } from 'store/sagas/others/waitForStateChange';
 //import NodeMove from "store/types/data/TreeMove";
 
+// <Route path="/quiz" >    Quiz 컴포넌트가 마운트 되자마자, return__WATCH_STARTING_FEN_CHANGE  디스패치 dispatch 한다!
+function* watchFenStartChange(action: actions.data.quiz.type__WATCH_STARTING_FEN_CHANGE) {
+  const newStartingFen: unknown = yield call(
+    waitForStateChangeToDifferentValue,
+    (state) => state.data.quiz.focusing.startingFen,
+  );
 
-// <Route path="/quiz" >    Quiz 컴포넌트가 마운트 되자마자, return__WATCH_FEN_START_CHANGE  디스패치 dispatch 한다!
-function* watchFenStartChange(action: actions.data.quiz.type__WATCH_FEN_START_CHANGE) {
+  console.log('startingFen of Quiz changed: ', newStartingFen);
 
-
-   const fenStartNew: unknown = yield call(waitForStateChangeToDifferentValue, state => state.data.quiz.focusing.fenStart);
-
-   console.log("fenStart of Quiz changed: ", fenStartNew);
-
-   yield put (actions.data.return__REPLACE({
-      listKey: ['quiz', 'focusing', 'turnNext'],
+  yield put(
+    actions.data.return__REPLACE({
+      keyList: ['quiz', 'focusing', 'nextTurn'],
       replacement: chessFocusing.turn() === 'w' ? 'white' : 'black',
-   }))
+    }),
+  );
 }
 
 export default watchFenStartChange;
-
-
-
-
 
 /*
  "data":{
@@ -50,9 +48,7 @@ export default watchFenStartChange;
    }
  */
 
-
-
- /*
+/*
 
 {
 "query":{

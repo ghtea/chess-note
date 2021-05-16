@@ -1,11 +1,6 @@
-//const department: string = 'auth';
-
-// ap-northeast-2_FwCEb6QCh
-//  24ealdh09hfu5npai98cf4eqo2
-
-export const name__REPLACE = `auth/REPLACE`; // 뒤에 as const 를 붙이면 reducer 에서 auth.REPLACE 로 쓸때 오류 뜬다. 아직 이해못
+export const name__REPLACE = 'auth/REPLACE'; // 뒤에 as const 를 붙이면 reducer 에서 auth.REPLACE 로 쓸때 오류 뜬다. 아직 이해못
 interface Payload__REPLACE {
-  listKey: (string | number)[];
+  keyList: (string | number)[];
   replacement: unknown;
 }
 export const return__REPLACE = (payload: Payload__REPLACE) => {
@@ -16,21 +11,13 @@ export const return__REPLACE = (payload: Payload__REPLACE) => {
 };
 export type type__REPLACE = ReturnType<typeof return__REPLACE>; // 리덕스에서의 type, 타입스크립트에서의 type 헷갈림 주의!
 
-export const name__REPLACE_USER = `auth/REPLACE_USER`; // 뒤에 as const 를 붙이면 reducer 에서 auth.REPLACE 로 쓸때 오류 뜬다. 아직 이해못
+export const name__REPLACE_USER = 'auth/REPLACE_USER'; // 뒤에 as const 를 붙이면 reducer 에서 auth.REPLACE 로 쓸때 오류 뜬다. 아직 이해못
 export const return__REPLACE_USER = () => {
   return {
     type: name__REPLACE_USER,
   };
 };
 export type type__REPLACE_USER = ReturnType<typeof return__REPLACE_USER>; // 리덕스에서의 type, 타입스크립트에서의 type 헷갈림 주의!
-
-/*
-type typeAction =
-  | ReturnType<typeof increase>
-  | ReturnType<typeof decrease>
-  | ReturnType<typeof increaseBy>;
-  */
-// typescript 안의 type 과 redux 의 type 구분 주의!
 
 export const name__LOG_IN = 'auth/LOG_IN';
 interface Payload__LOG_IN {
@@ -119,3 +106,24 @@ export const return__UPDATE_PROFILE = (payload: Payload__UPDATE_PROFILE) => {
   };
 };
 export type type__UPDATE_PROFILE = ReturnType<typeof return__UPDATE_PROFILE>;
+
+
+export const name__GET_MEMBER_BY_USER_ID = 'auth/GET_MEMBER_BY_USER_ID';
+type Payload__GET_MEMBER_BY_USER_ID = {
+  userId: string;
+};
+export const return__GET_MEMBER_BY_USER_ID = (payload: Payload__GET_MEMBER_BY_USER_ID) => {
+  return {
+    type: name__GET_MEMBER_BY_USER_ID,
+    payload: payload,
+  };
+};
+export type type__GET_MEMBER_BY_USER_ID = ReturnType<typeof return__GET_MEMBER_BY_USER_ID>;
+
+export const name__WATCH_USER_LOG_IN_OUT = 'auth/WATCH_USER_LOG_IN_OUT';
+export const return__WATCH_USER_LOG_IN_OUT = () => {
+  return {
+    type: name__WATCH_USER_LOG_IN_OUT,
+  };
+};
+export type type__WATCH_USER_LOG_IN_OUT = ReturnType<typeof return__WATCH_USER_LOG_IN_OUT>;

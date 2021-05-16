@@ -65,7 +65,7 @@ function App() {
   useEffect(() => {
     dispatch(
       actions.status.return__REPLACE({
-        listKey: ['auth', 'user'],
+        keyList: ['auth', 'user'],
         replacement: {
           tried: false,
           loading: true,
@@ -87,29 +87,20 @@ function App() {
     }
   }, []);
 
-  // whenever log out, clear user information
-  const readyUser: boolean = useSelector((state: StateRoot) => state.status.auth.user.ready);
   useEffect(() => {
-    if (!readyUser) {
-      dispatch(
-        actions.auth.return__REPLACE({
-          listKey: ['user'],
-          replacement: null,
-        }),
-      );
-    }
-  }, [readyUser]);
+    dispatch(actions.auth.return__WATCH_USER_LOG_IN_OUT());
+  }, []);
 
   useEffect(() => {
     dispatch(
       actions.appearance.return__REPLACE({
-        listKey: ['layout', 'window', 'width'],
+        keyList: ['layout', 'window', 'width'],
         replacement: document.documentElement.clientWidth,
       }),
     );
     dispatch(
       actions.appearance.return__REPLACE({
-        listKey: ['layout', 'window', 'height'],
+        keyList: ['layout', 'window', 'height'],
         replacement: document.documentElement.clientHeight,
       }),
     );
@@ -117,13 +108,13 @@ function App() {
     window.addEventListener('resize', (event) => {
       dispatch(
         actions.appearance.return__REPLACE({
-          listKey: ['layout', 'window', 'width'],
+          keyList: ['layout', 'window', 'width'],
           replacement: document.documentElement.clientWidth,
         }),
       );
       dispatch(
         actions.appearance.return__REPLACE({
-          listKey: ['layout', 'window', 'height'],
+          keyList: ['layout', 'window', 'height'],
           replacement: document.documentElement.clientHeight,
         }),
       );

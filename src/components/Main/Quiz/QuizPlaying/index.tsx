@@ -1,88 +1,70 @@
 import ChessBoard from 'components/Global/ChessBoard';
-import React, { useCallback, useState, useMemo, useEffect} from 'react';
-import { Route, Switch } from "react-router-dom";
+import React, { useCallback, useState, useMemo, useEffect } from 'react';
+import { Route, Switch } from 'react-router-dom';
 import ToolBarQP from './ToolBar';
-import {v4 as uuid} from 'uuid';
+import { v4 as uuid } from 'uuid';
 //import { useQuery, gql } from '@apollo/client';
 
-import {ChessInstance, Move, Square } from 'chess.js'
+import { ChessInstance, Move, Square } from 'chess.js';
 import chessPlaying from 'libraries/chess';
 import styles from './index.module.scss';
 
 import { useDispatch, useSelector } from 'react-redux';
 import { StateRoot } from 'store/reducers';
-import * as actions  from 'store/actions';
+import * as actions from 'store/actions';
 import StatusBarQP from './StatusBar';
 
-
-
 function QuizPlaying() {
-  
   const dispatch = useDispatch();
 
-  const quizPresent = useSelector((state: StateRoot)=>state.present.quiz.focusing);
-  const side = useSelector((state: StateRoot)=>state.data.quiz.focusing.turnNext);
-  const idQuiz = useSelector((state: StateRoot)=>state.data.quiz.focusing?.id);
-  
+  const quizPresent = useSelector((state: StateRoot) => state.present.quiz.focusing);
+  const side = useSelector((state: StateRoot) => state.data.quiz.focusing.nextTurn);
+  const quizId = useSelector((state: StateRoot) => state.data.quiz.focusing?.id);
+
   const statusUser = useSelector((state: StateRoot) => state.status.auth.user);
-  const idUser = useSelector((state: StateRoot) => state.auth.user?.id);
+  const userId = useSelector((state: StateRoot) => state.auth.user?.id);
 
-
-  const listSquare = useMemo(()=>{
-    return chessPlaying.board(); 
+  const listSquare = useMemo(() => {
+    return chessPlaying.board();
   }, [quizPresent.fen]);
 
+  useEffect(() => {
+    //const quizIdFromUri = (window.location.pathname.match(/[^\/]*$/) || [])[0];
+    const modeFromUrl = window.location.pathname.replace(/\/quiz\/([^/]*).*/, '$1');
+    const quizIdFromUri = window.location.pathname.replace(/\/quiz\/play\/([^/]*).*/, '$1');
+    //console.log('play-quizIdFromUri: ', quizIdFromUri)
 
-
-  useEffect(()=>{
-    //const idQuizFromUri = (window.location.pathname.match(/[^\/]*$/) || [])[0];
-    const modeFromUrl = window.location.pathname.replace(/\/quiz\/([^/]*).*/, "$1");
-    const idQuizFromUri = window.location.pathname.replace(/\/quiz\/play\/([^/]*).*/, "$1");
-    //console.log('play-idQuizFromUri: ', idQuizFromUri)
-
-    if (modeFromUrl === 'play' && idQuizFromUri){
-
+    if (modeFromUrl === 'play' && quizIdFromUri) {
       // 로그인하고 아이디 얻었을 때, 로그인 체크 끝나고 로그인 안되어있을 때
-      if ( (statusUser.ready && idUser) || (statusUser.tried && !statusUser.ready) ){
+      if ((statusUser.ready && userId) || (statusUser.tried && !statusUser.ready)) {
         // 현재 로컬에 있는 퀴즈 아이디와 uri에 있는 퀴즈 아이디가 서로 다를 때
-        if ( !idQuiz || idQuizFromUri !== idQuiz){
-          //console.log('here: ', idUser)
-          //console.log('idQuizFromUri: ', idQuizFromUri)
-          dispatch(actions.data.quiz.return__GET_QUIZ_BY_ID({ 
-            idQuiz: idQuizFromUri,
-            idUserInApp: idUser,
-            situation: 'playing',
-          }));  
+        if (!quizId || quizIdFromUri !== quizId) {
+          //console.log('here: ', userId)
+          //console.log('quizIdFromUri: ', quizIdFromUri)
+          dispatch(
+            actions.data.quiz.return__GET_QUIZ_BY_ID({
+              quizId: quizIdFromUri,
+              userIdInApp: userId,
+              situation: 'playing',
+            }),
+          );
         }
       }
-
     }
-    
-  }, [window.location.pathname, statusUser, idQuiz])
+  }, [window.location.pathname, statusUser, quizId]);
 
   return (
-    <div
-      className={`${styles['root']}`}
-    >
-
+    <div className={`${styles['root']}`}>
       <StatusBarQP />
 
-      <ChessBoard
-        listSquare={listSquare}
-        side={side || 'white'}
-        page={'quiz'}
-      />
-      
+      <ChessBoard listSquare={listSquare} side={side || 'white'} page={'quiz'} />
+
       <ToolBarQP />
-        
-      
     </div>
   );
 }
 
 export default QuizPlaying;
-
-
 
 /*
 const onClick_Button = useCallback(

@@ -1,96 +1,80 @@
 import ChessBoard from 'components/Global/ChessBoard';
-import React, { useCallback, useState, useMemo, useEffect} from 'react';
-import { Route, Switch } from "react-router-dom";
+import React, { useCallback, useState, useMemo, useEffect } from 'react';
+import { Route, Switch } from 'react-router-dom';
 
 //import { useQuery, gql } from '@apollo/client';
 
 import { useDispatch, useSelector } from 'react-redux';
 import { StateRoot } from 'store/reducers';
-import * as actions  from 'store/actions';
+import * as actions from 'store/actions';
 
 import QuizEditing from './QuizEditing';
 import QuizHome from './QuizHome';
 import QuizPlaying from './QuizPlaying';
 
-
-
 function Quiz() {
-  
   const dispatch = useDispatch();
 
-  // const readyUser = useSelector((state: StateRoot) => state.status.auth.user.ready);
-  // const idUser = useSelector((state: StateRoot) => state.auth.user?.id);
-  // const idQuizFocusing = useSelector((state: StateRoot) => state.data.quiz.focusing.id);
+  // const userReady = useSelector((state: StateRoot) => state.status.auth.user.ready);
+  // const userId = useSelector((state: StateRoot) => state.auth.user?.id);
+  // const quizIdFocusing = useSelector((state: StateRoot) => state.data.quiz.focusing.id);
 
   const situationCurrent = useSelector((state: StateRoot) => state.present.quiz.focusing.situation);
-  
 
+  useEffect(() => {
+    dispatch(actions.data.quiz.return__WATCH_STARTING_FEN_CHANGE());
+  }, []);
 
-  useEffect(()=>{
-    dispatch(actions.data.quiz.return__WATCH_FEN_START_CHANGE()); 
-  }, [])
-
-
-  useEffect(()=>{
+  useEffect(() => {
     // 중요!, 정규표현식 더 공부...
-    const modeFromUrl = window.location.pathname.replace(/\/quiz\/([^/]*).*/, "$1");
+    const modeFromUrl = window.location.pathname.replace(/\/quiz\/([^/]*).*/, '$1');
     //console.log('modeFromUrl: ', modeFromUrl)
     let situationNew = '';
 
-    if (modeFromUrl === 'create'){
+    if (modeFromUrl === 'create') {
       situationNew = 'creating';
-    }
-    else if (modeFromUrl === 'edit'){
+    } else if (modeFromUrl === 'edit') {
       situationNew = 'editing';
-    }
-    else if (modeFromUrl === 'play'){
+    } else if (modeFromUrl === 'play') {
       situationNew = 'playing';
-    }
-    else if (modeFromUrl === 'solved'){
+    } else if (modeFromUrl === 'solved') {
       situationNew = 'solved';
     }
-    if (situationCurrent !== situationNew){
-      dispatch(actions.present.return__REPLACE({ 
-        listKey: [ 'quiz', 'focusing', 'situation' ],
-        replacement: situationNew,
-      })); 
+    if (situationCurrent !== situationNew) {
+      dispatch(
+        actions.present.return__REPLACE({
+          keyList: ['quiz', 'focusing', 'situation'],
+          replacement: situationNew,
+        }),
+      );
     }
-    
-    // console.log(idQuiz)
+
+    // console.log(quizId)
     //console.log(window.location.pathname)
-  },[window.location.pathname]);
-
-
-  
-
-
-
+  }, [window.location.pathname]);
 
   return (
     <Switch>
-      <Route exact path="/quiz" >
-          <QuizHome />
+      <Route exact path="/quiz">
+        <QuizHome />
       </Route>
 
-      <Route path="/quiz/create" >
-          <QuizEditing />
+      <Route path="/quiz/create">
+        <QuizEditing />
       </Route>
 
-      <Route path="/quiz/edit" >
-          <QuizEditing />
+      <Route path="/quiz/edit">
+        <QuizEditing />
       </Route>
 
-      <Route path="/quiz/play/:idQuiz" >
-          <QuizPlaying />
+      <Route path="/quiz/play/:quizId">
+        <QuizPlaying />
       </Route>
-
     </Switch>
   );
 }
 
 export default Quiz;
-
-
 
 /*
 const onClick_Button = useCallback(

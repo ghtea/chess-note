@@ -9,7 +9,7 @@ import { StateRoot } from 'store/reducers';
 
 import Loading from 'components/Global/Loading';
 
-//import actionsRoot from 'store/actions';
+//import actions from 'store/actions';
 
 //import Portal from './Home/Portal';
 

@@ -9,8 +9,8 @@ import { StateRoot } from 'store/reducers';
 import { v4 as uuidv4 } from 'uuid';
 
 function* addDeleteBanner(action: actions.notification.type__ADD_DELETE_BANNER) {
-  const listBannerPrevious: Banner[] = yield select(
-    (state: StateRoot) => state.notification.listBanner,
+  const bannerListPrevious: Banner[] = yield select(
+    (state: StateRoot) => state.notification.bannerList,
   );
 
   const id = uuidv4();
@@ -52,12 +52,12 @@ function* addDeleteBanner(action: actions.notification.type__ADD_DELETE_BANNER) 
     msTime: msTime,
   };
 
-  const listBannerNew = [bannerAdding, ...listBannerPrevious];
+  const bannerListNew = [bannerAdding, ...bannerListPrevious];
 
   yield put(
     actions.notification.return__REPLACE({
-      listKey: ['listBanner'],
-      replacement: listBannerNew,
+      keyList: ['bannerList'],
+      replacement: bannerListNew,
     }),
   );
 

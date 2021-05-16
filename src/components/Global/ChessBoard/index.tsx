@@ -19,7 +19,6 @@ import ChessSquare from './ChessSquare';
 // import {Chess} from 'chess.js'; // => makes error
 import { ChessInstance, Move, PieceType, Square } from 'chess.js';
 
-
 type PropsChessBoard = {
   //fen: string;
   listSquare: ({
@@ -75,7 +74,7 @@ function ChessBoard({ listSquare, side, page }: PropsChessBoard) {
     }
     dispatch(
       actions.appearance.return__REPLACE({
-        listKey: ['layout', 'document', 'chessBoard', 'length'],
+        keyList: ['layout', 'document', 'chessBoard', 'length'],
         replacement: lengthChessBoardNew,
       }),
     );
@@ -90,7 +89,7 @@ function ChessBoard({ listSquare, side, page }: PropsChessBoard) {
 
     dispatch(
       actions.appearance.return__REPLACE({
-        listKey: ['layout', 'document', 'chessBoard', 'top'],
+        keyList: ['layout', 'document', 'chessBoard', 'top'],
         replacement: chessBoard.getBoundingClientRect().top,
       }),
     );

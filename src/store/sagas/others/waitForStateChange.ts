@@ -1,63 +1,51 @@
-import { call, spawn, put, takeEvery, select, SelectEffect, take, race } from "redux-saga/effects";
+import { call, spawn, put, takeEvery, select, SelectEffect, take, race } from 'redux-saga/effects';
 
-import * as actions from "store/actions";
+import * as actions from 'store/actions';
 
-import {StateRoot} from 'store/reducers';
+import { StateRoot } from 'store/reducers';
 
-type Selector<T> = (state:StateRoot) => T;
-
+type Selector<T> = (state: StateRoot) => T;
 
 // return 할 때까지 while 문에 갇힌다
-export function* waitForStateChangeToCertainValue<T>( selector: Selector<T>, value?:T) {
+export function* waitForStateChangeToCertainValue<T>(selector: Selector<T>, value?: T) {
+  let valueCurrent: T = yield select(selector);
+  if (valueCurrent === value) return;
 
-    let valueCurrent: T = yield select(selector);
-    if (valueCurrent === value) return; 
+  while (true) {
+    yield take([
+      actions.appearance.name__REPLACE,
+      actions.auth.name__REPLACE,
+      actions.data.name__REPLACE,
+      actions.notification.name__REPLACE,
+      actions.status.name__REPLACE,
+      actions.present.name__REPLACE,
+    ]);
 
-    while (true) {
+    valueCurrent = yield select(selector);
 
-        yield take([
-            actions.appearance.name__REPLACE, 
-            actions.auth.name__REPLACE, 
-            actions.data.name__REPLACE, 
-            actions.notification.name__REPLACE, 
-            actions.status.name__REPLACE,
-            actions.present.name__REPLACE,
-        ]);
-        
-        valueCurrent = yield select(selector);
-        
-        if (valueCurrent === value)  {
-            return valueCurrent;
-        }
-
+    if (valueCurrent === value) {
+      return valueCurrent;
     }
+  }
 }
 
+export function* waitForStateChangeToDifferentValue<T>(selector: Selector<T>) {
+  const valuePrevious: T = yield select(selector);
 
+  while (true) {
+    yield take([
+      actions.appearance.name__REPLACE,
+      actions.auth.name__REPLACE,
+      actions.data.name__REPLACE,
+      actions.notification.name__REPLACE,
+      actions.status.name__REPLACE,
+      actions.present.name__REPLACE,
+    ]);
 
+    const valueCurrent: T = yield select(selector);
 
-export function* waitForStateChangeToDifferentValue<T>( selector: Selector<T>, value?:T) {
-
-    const valuePrevious: T = yield select(selector);
-    
-    while (true) {
-
-        yield take([
-            actions.appearance.name__REPLACE, 
-            actions.auth.name__REPLACE, 
-            actions.data.name__REPLACE, 
-            actions.notification.name__REPLACE, 
-            actions.status.name__REPLACE,
-            actions.present.name__REPLACE,
-        ]);
-        
-        const valueCurrent: T = yield select(selector);
-
-        if (valueCurrent !== valuePrevious) {
-            return valueCurrent;
-        }
-
+    if (valueCurrent !== valuePrevious) {
+      return valueCurrent;
     }
+  }
 }
-
-

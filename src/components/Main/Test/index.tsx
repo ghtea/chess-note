@@ -5,7 +5,7 @@ import { FormattedMessage } from 'react-intl';
 
 import { useSelector, useDispatch } from 'react-redux';
 
-import * as actionsRoot from 'store/actions';
+import * as actions from 'store/actions';
 
 import styles from './index.module.scss';
 
@@ -17,7 +17,7 @@ function Test() {
       const { value: codeSituation } = event.currentTarget;
 
       dispatch(
-        actionsRoot.notification.return__ADD_DELETE_BANNER({
+        actions.notification.return__ADD_DELETE_BANNER({
           codeSituation: codeSituation,
         }),
       );

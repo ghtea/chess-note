@@ -5,7 +5,7 @@ import { FormattedMessage } from 'react-intl';
 
 import { useSelector, useDispatch } from 'react-redux';
 import { StateRoot } from 'store/reducers';
-import * as actionsRoot from 'store/actions';
+import * as actions from 'store/actions';
 
 import Category from '../common/Category';
 import LinkSolo from '../common/LinkSolo';

@@ -96,7 +96,8 @@
     "Notification.SignUp_NoPassword__E": "비밀번호를 모두 입력해주세요",
     "Notification.SignUp_PasswordsDifferent__E": "두 비밀번호가 서로 다릅니다",
     "Notification.SignUp_WeakPassword__E": "비밀번호는 6글자 이상이어야 합니다",
-    
+
+    "Notification.GetMember_UnknownError__E": "회원 정보를 가져오는 과정에서 알수 없는 에러가 발생했습니다",
 
     "Notification.PlayQuiz_Correct__S": "정답입니다!",
     "Notification.PlayQuiz_NotCorrect__W": "틀렸습니다",

@@ -1,66 +1,56 @@
-import { call, spawn, put, takeEvery, select } from "redux-saga/effects";
+import { call, spawn, put, takeEvery, select } from 'redux-saga/effects';
 
 import Cookies from 'js-cookie';
 import store from 'tools/vanilla/store';
 
 // import instanceI18n from 'language/i18n';
 
-import * as actions from "store/actions";
-import {StateRoot} from 'store/reducers';
-
+import * as actions from 'store/actions';
+import { StateRoot } from 'store/reducers';
 
 // ISO 639-1
-const returnCodeStandardFromCodeBrowser = (languageBrowser:string):string => {
-
-    if ( ["ko", "ko-kr", "ko-KR"].includes(languageBrowser) ) {
-		return "ko";
-	}
-	
-	else if ( ["ja"].includes(languageBrowser) ) {
-		return "ja";
-	}
-	
-	else {
-		return "en";
-	}
-} 
+const returnCodeStandardFromCodeBrowser = (languageBrowser: string): string => {
+  if (['ko', 'ko-kr', 'ko-KR'].includes(languageBrowser)) {
+    return 'ko';
+  } else if (['ja'].includes(languageBrowser)) {
+    return 'ja';
+  } else {
+    return 'en';
+  }
+};
 
 // action: actionsStatus.type__READ_LANGUAGE
 
 function* detectLanguage() {
-    
-    let replacement = 'en';
+  let replacement = 'en';
 
-    const codeLanguageFromBrowser = (navigator.languages && navigator.languages[0]) || navigator.language || 'en-US';
+  const codeLanguageFromBrowser =
+    (navigator.languages && navigator.languages[0]) || navigator.language || 'en-US';
 
-    //console.log(codeLanguageFromBrowser);
+  //console.log(codeLanguageFromBrowser);
 
-    const codeStandardFromCookie = Cookies.get("codeLanguageStandard");
-    
-    // https://www.metamodpro.com/browser-language-codes
-    // https://gist.github.com/wpsmith/7604842
+  const codeStandardFromCookie = Cookies.get('codeLanguageStandard');
 
-    if (!codeStandardFromCookie && codeLanguageFromBrowser) {
+  // https://www.metamodpro.com/browser-language-codes
+  // https://gist.github.com/wpsmith/7604842
 
-        const codeStandard = returnCodeStandardFromCodeBrowser(codeLanguageFromBrowser);
-        //console.log('codeStandard');
-        //console.log(codeStandard);
-        replacement = codeStandard;
-    }
-    else if (codeStandardFromCookie) {
-        //console.log('codeStandardFromCookie');
-        //console.log(codeStandardFromCookie);
-        replacement = codeStandardFromCookie;
-    }
+  if (!codeStandardFromCookie && codeLanguageFromBrowser) {
+    const codeStandard = returnCodeStandardFromCodeBrowser(codeLanguageFromBrowser);
+    //console.log('codeStandard');
+    //console.log(codeStandard);
+    replacement = codeStandard;
+  } else if (codeStandardFromCookie) {
+    //console.log('codeStandardFromCookie');
+    //console.log(codeStandardFromCookie);
+    replacement = codeStandardFromCookie;
+  }
 
-
-    yield put( actions.present.return__REPLACE({
-        listKey:[ 'language'],
-        replacement: replacement
-    }));
-
+  yield put(
+    actions.present.return__REPLACE({
+      keyList: ['language'],
+      replacement: replacement,
+    }),
+  );
 }
 
 export default detectLanguage;
-
-    

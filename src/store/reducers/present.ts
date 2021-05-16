@@ -1,72 +1,59 @@
-import {produce} from 'immer';
-import {handleActions} from 'redux-actions';
+import { produce } from 'immer';
+import { handleActions } from 'redux-actions';
 
-import * as actions from "store/actions";
-import * as types from "store/types"; 
+import * as actions from 'store/actions';
+import * as types from 'store/types';
 
 import putValueToNestedObject from 'tools/vanilla/putValueToNestedObject';
 
 export type State = typeof stateInitial;
 
-
 const stateInitial = {
-  
-  language: '',   // en, ko, ja    , it should be blank at first check cookie first (call DETECT_LANGUAGE)
-  
+  language: '', // en, ko, ja    , it should be blank at first check cookie first (call DETECT_LANGUAGE)
+
   theme: {
-      option: 'always-light',
-      name: 'light'
+    option: 'always-light',
+    name: 'light',
   },
 
-
-
-  quiz:{
+  quiz: {
     display: {
-      mode: 'public-quiz' as types.present.quiz.ModeDisplay,
+      mode: 'public-quiz' as types.present.quiz.DisplayMode,
     },
 
     listIdPlaying: [],
+    index: null as number | null,
 
     focusing: {
-      idGame: null,
-      situation: 'creating', 
+      id: null,
+      situation: 'creating',
       fen: null,
       turn: 'white',
-      seriesSan: [],
+      sanSeries: [],
     } as types.present.quiz.Quiz,
-  }
-  
-  
+  },
 };
 
-
-
-const reducerPresent = handleActions<State, any>({ // eslint-disable-line @typescript-eslint/no-explicit-any
-  
-  [actions.present.name__REPLACE]: (statePrevious, action: actions.present.type__REPLACE) => {
-    
-    return produce(statePrevious, stateNew => {
-      if (action.payload === undefined) { 
-        return;
-      }
-      else {
-        const listKey: (string | number)[] = action.payload.listKey;
-        
-        try { putValueToNestedObject(stateNew, listKey, action.payload.replacement); 
-          
-        }
-        catch {
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+const reducerPresent = handleActions<State, any>(
+  {
+    [actions.present.name__REPLACE]: (previousState, action: actions.present.type__REPLACE) => {
+      return produce(previousState, (newState) => {
+        if (action.payload === undefined) {
           return;
+        } else {
+          const keyList: (string | number)[] = action.payload.keyList;
+
+          try {
+            putValueToNestedObject(newState, keyList, action.payload.replacement);
+          } catch {
+            return;
+          }
         }
-        
-      }
-      
-    });
-  }
-  
-}, stateInitial);
+      });
+    },
+  },
+  stateInitial,
+);
 
 export default reducerPresent;
-
-
-

@@ -15,6 +15,8 @@ import logCheckSucceeded from 'store/sagas/auth/logCheckSucceeded';
 import logCheckFailed from 'store/sagas/auth/logCheckFailed';
 
 import updateProfile from 'store/sagas/auth/updateProfile';
+import watchUserLogInOut from "./watchUserLogInOut";
+import getMemberByUserId from "./getMemberByUserId";
 
 
 import * as actions from "store/actions";
@@ -35,5 +37,9 @@ export default function* sagaAuth() {
     yield takeLatest( actions.auth.name__LOG_IN_GITHUB, logInGithub ); 
 
     yield takeLatest( actions.auth.name__UPDATE_PROFILE, updateProfile ); 
+
+    yield takeLatest( actions.auth.name__WATCH_USER_LOG_IN_OUT, watchUserLogInOut ); 
+    yield takeLatest( actions.auth.name__GET_MEMBER_BY_USER_ID, getMemberByUserId ); 
+
 }
 

@@ -4,7 +4,7 @@ import { fork, all } from "redux-saga/effects";
 
 import * as actions from "store/actions";
 
-import sagaQuiz from './data/quiz';
+import sagaQuiz from './quiz';
 
 export default function* sagaData() {
     yield all ([

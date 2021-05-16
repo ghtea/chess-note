@@ -28,7 +28,7 @@ function Setting() {
       const { value } = event.currentTarget;
       dispatch(
         actions.appearance.return__REPLACE({
-          listKey: ['showing', 'modal', value],
+          keyList: ['showing', 'modal', value],
           replacement: false,
         }),
       );
@@ -42,7 +42,7 @@ function Setting() {
       if (!refModal.current?.contains(event.target as Node)) {
         dispatch(
           actions.appearance.return__REPLACE({
-            listKey: ['showing', 'modal', convertCase('Setting', 'camel')],
+            keyList: ['showing', 'modal', convertCase('Setting', 'camel')],
             replacement: false,
           }),
         );
@@ -64,7 +64,7 @@ function Setting() {
     if (name === 'optionTheme') {
       dispatch(
         actions.present.return__REPLACE({
-          listKey: ['theme', 'option'],
+          keyList: ['theme', 'option'],
           replacement: value,
         }),
       );
@@ -72,7 +72,7 @@ function Setting() {
     } else if (name === 'language') {
       dispatch(
         actions.present.return__REPLACE({
-          listKey: ['language'],
+          keyList: ['language'],
           replacement: value,
         }),
       );

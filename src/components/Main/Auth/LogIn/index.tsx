@@ -5,7 +5,7 @@ import { FormattedMessage, useIntl } from 'react-intl';
 import { useSelector, useDispatch } from 'react-redux';
 import { StateRoot } from 'store/reducers';
 
-import * as actionsRoot from 'store/actions';
+import * as actions from 'store/actions';
 
 import useInputBasic from 'tools/hooks/useInputBasic';
 import useLink from 'tools/hooks/useLink';
@@ -28,8 +28,8 @@ function LogIn() {
   const statusUser = useSelector((state: StateRoot) => state.status.auth.user);
 
   // when login button is pushed, notification code of reaction is added to  this list, when login button is pushed again this list cleared once
-  const listCodeSituationOthers = useSelector(
-    (state: StateRoot) => state['notification']['listCodeSituationOthers'],
+  const otherSituationCodeList = useSelector(
+    (state: StateRoot) => state['notification']['otherSituationCodeList'],
   );
 
   const { onClick_LinkInsideApp } = useLink(history);
@@ -49,27 +49,27 @@ function LogIn() {
   }, [statusUser.ready]);
 
   useEffect(() => {
-    if (listCodeSituationOthers.includes('LogIn_NoEmail__E')) {
+    if (otherSituationCodeList.includes('LogIn_NoEmail__E')) {
       setCodeSituationEmail('LogIn_NoEmail__E');
       setCodeSituationPassword('');
-    } else if (listCodeSituationOthers.includes('LogIn_InvalidEmail__E')) {
+    } else if (otherSituationCodeList.includes('LogIn_InvalidEmail__E')) {
       setCodeSituationEmail('LogIn_InvalidEmail__E');
       setCodeSituationPassword('');
-    } else if (listCodeSituationOthers.includes('LogIn_NoPassword__E')) {
+    } else if (otherSituationCodeList.includes('LogIn_NoPassword__E')) {
       setCodeSituationEmail('');
       setCodeSituationPassword('LogIn_NoPassword__E');
-    } else if (listCodeSituationOthers.includes('LogIn_WrongPassword__E')) {
+    } else if (otherSituationCodeList.includes('LogIn_WrongPassword__E')) {
       setCodeSituationEmail('');
       setCodeSituationPassword('LogIn_WrongPassword__E');
     } else {
       setCodeSituationEmail('');
       setCodeSituationPassword('');
     }
-  }, [listCodeSituationOthers]);
+  }, [otherSituationCodeList]);
 
   const submitMain = useCallback(() => {
     dispatch(
-      actionsRoot.auth.return__LOG_IN({
+      actions.auth.return__LOG_IN({
         email: draft_Main.email,
         password: draft_Main.password,
       }),
@@ -97,11 +97,11 @@ function LogIn() {
         currentTarget: { value },
       } = event;
       if (value === 'google') {
-        dispatch(actionsRoot.auth.return__LOG_IN_GOOGLE());
+        dispatch(actions.auth.return__LOG_IN_GOOGLE());
       } else if (value === 'twitter') {
-        dispatch(actionsRoot.auth.return__LOG_IN_TWITTER());
+        dispatch(actions.auth.return__LOG_IN_TWITTER());
       } else if (value === 'github') {
-        dispatch(actionsRoot.auth.return__LOG_IN_GITHUB());
+        dispatch(actions.auth.return__LOG_IN_GITHUB());
       }
     },
     [],

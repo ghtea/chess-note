@@ -4,8 +4,8 @@ import history from 'libraries/history';
 import { applyMiddleware, compose, createStore } from 'redux';
 import logger from 'redux-logger';
 
-import reducerRoot from './store/reducers';
-import sagaRoot from './store/sagas';
+import reducerRoot from './reducers';
+import sagaRoot from './sagas';
 
 const sagaMiddleware = createSagaMiddleware({
   context: {

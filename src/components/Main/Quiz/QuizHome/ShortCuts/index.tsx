@@ -10,7 +10,7 @@ import * as actions from 'store/actions';
 
 import Loading from 'components/Global/Loading';
 
-//import actionsRoot from 'store/actions';
+//import actions from 'store/actions';
 
 //import Portal from './ShortCuts/Portal';
 
@@ -22,35 +22,18 @@ import IconShuffle from 'svgs/basic/IconShuffle';
 
 function ShortCuts() {
   const dispatch = useDispatch();
-  const readyUser = useSelector((state: StateRoot) => state.status.auth.user.ready);
-  const idUser = useSelector((state: StateRoot) => state.auth.user?.id);
+  const userReady = useSelector((state: StateRoot) => state.status.auth.user.ready);
+  const userId = useSelector((state: StateRoot) => state.auth.user?.id);
 
   const onClick_MainButton = useCallback(
     (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
       const value = e.currentTarget.value;
       if (value === 'play-public-random-quiz') {
-        if (readyUser && idUser) {
-          dispatch(
-            actions.data.quiz.return__GET_FOCUS_LIST_QUIZ({
-              kind: KindGetFocusListQuiz.publicQuizByRecord,
-              idUser: idUser,
-            }),
-          );
+        if (userReady && userId) {
         } else {
-          dispatch(
-            actions.data.quiz.return__GET_FOCUS_LIST_QUIZ({
-              kind: KindGetFocusListQuiz.publicQuiz,
-            }),
-          );
         }
       } else if (value === 'play-my-random-quiz') {
-        if (readyUser && idUser) {
-          dispatch(
-            actions.data.quiz.return__GET_FOCUS_LIST_QUIZ({
-              kind: KindGetFocusListQuiz.myQuizByRecord,
-              idUser: idUser,
-            }),
-          );
+        if (userReady && userId) {
         }
       } else if (value === 'create') {
         history.push('/quiz/create');
@@ -62,7 +45,7 @@ function ShortCuts() {
         );
       }
     },
-    [history, readyUser, idUser],
+    [history, userReady, userId],
   );
 
   return (
@@ -79,7 +62,7 @@ function ShortCuts() {
         </span>
       </button>
 
-      {readyUser && (
+      {userReady && (
         <>
           <button
             className={`${styles['button__main']}`}

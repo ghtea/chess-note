@@ -2,12 +2,12 @@
 import * as actions  from 'store/actions';
 import * as types from "store/types";
 
-// actions.data.football.StatTeam[], listOptionSortingActive:types.OptionSorting[]
+// actions.data.football.StatTeam[], listSortingOptionActive:types.SortingOption[]
 
 
 const returnListStatTeamSorted = (leagueStandings:types.data.football.LeagueStandings, sorting: types.status.Sorting ) => {
 
-    // console.log(listOptionSortingActive);
+    // console.log(listSortingOptionActive);
     const { dictStatTeam } = leagueStandings;
     const {listOptionActive} = sorting;
 

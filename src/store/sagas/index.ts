@@ -1,11 +1,11 @@
 import { all, fork, takeEvery } from 'redux-saga/effects'
 
-import sagaAppearance from './sagas/appearance';
-import sagaAuth from './sagas/auth';
-import sagaData from './sagas/data';
-import sagaNotification from './sagas/notification';
-import sagaStatus from './sagas/status';
-import sagaPresent from './sagas/present';
+import sagaAppearance from './appearance';
+import sagaAuth from './auth';
+import sagaData from './data';
+import sagaNotification from './notification';
+import sagaStatus from './status';
+import sagaPresent from './present';
 
 import * as actions from 'store/actions';
 

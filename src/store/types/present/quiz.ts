@@ -1,20 +1,17 @@
-
 export type Situation = 'creating' | 'editing' | 'playing' | 'solved' | 'failed';
 
 export type Quiz = {
-  idGame: string | null;
+  id: string | null;
   situation: Situation;
   fen: string | null;
-  turn: "white" | "black";
-  seriesSan: string[];
-}
+  turn: 'white' | 'black';
+  sanSeries: string[];
+};
 
-
-
-export type OptionSorting = {
-  property: string; // 'points' | 'goals_diff' | 'goals_against' | 'goals_scored', 
+export type SortingOption = {
+  property: string; // 'points' | 'goals_diff' | 'goals_against' | 'goals_scored',
   direction: 'ascending' | 'descending';
   isActive: boolean;
 };
 
-export type ModeDisplay = 'public-quiz' | 'my-quiz';
+export type DisplayMode = 'public-quiz' | 'my-quiz';
