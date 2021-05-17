@@ -8,7 +8,7 @@ const convertCase = (nameStarting: string, caseEnding: Case):string => {
 
     let result = nameStarting;
 
-    let list: string[] = 
+    const list: string[] = 
         nameStarting
         .split(/[-_]+/)
         .reduce( 

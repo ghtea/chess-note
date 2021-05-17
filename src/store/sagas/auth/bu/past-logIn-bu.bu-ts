@@ -40,7 +40,7 @@ function* logIn(action: actionsAuth.type__LOG_IN) {
         const history = yield getContext('history');
 
         yield put( actionsNotification.return__REPLACE({
-            listKey: ['listCodeSituationOthers'],
+            keyList: ['otherSituationCodeList'],
             replacement: []
         }) );
 
@@ -65,12 +65,12 @@ function* logIn(action: actionsAuth.type__LOG_IN) {
         else {
             
             yield put( actionsStatus.return__REPLACE({
-                listKey: ['ready', 'user'],
+                keyList: ['ready', 'user'],
                 replacement: false
             }) );
             
             yield put( actionsStatus.return__REPLACE({
-                listKey: ['loading', 'user'],
+                keyList: ['loading', 'user'],
                 replacement: true
             }) );
                 
@@ -95,17 +95,17 @@ function* logIn(action: actionsAuth.type__LOG_IN) {
                     Cookies.set('logged_in', 'yes', { expires: 7, path: '/' });  
                     
                     yield put( actionsStatus.return__REPLACE({
-                        listKey: ['loading', 'user'],
+                        keyList: ['loading', 'user'],
                         replacement: false
                     }) );
                     
                     yield put( actionsStatus.return__REPLACE({
-                        listKey: ['ready', 'user'],
+                        keyList: ['ready', 'user'],
                         replacement: true
                     }) );
 
                     yield put( actionsAuth.return__REPLACE({
-                        listKey: ['user'],
+                        keyList: ['user'],
                         replacement: {
                             _id: response.data.payload._id,
                             email: response.data.payload.email,
@@ -139,12 +139,12 @@ function* logIn(action: actionsAuth.type__LOG_IN) {
                 
                 
                 yield put( actionsStatus.return__REPLACE({
-                    listKey: ['loading', 'user'],
+                    keyList: ['loading', 'user'],
                     replacement: false
                 }) );
                 
                 yield put( actionsStatus.return__REPLACE({
-                    listKey: ['ready', 'user'],
+                    keyList: ['ready', 'user'],
                     replacement: false
                 }) );
                 
@@ -170,12 +170,12 @@ function* logIn(action: actionsAuth.type__LOG_IN) {
         
         
         yield put( actionsStatus.return__REPLACE({
-            listKey: ['loading', 'user'],
+            keyList: ['loading', 'user'],
             replacement: false
         }) );
         
         yield put( actionsStatus.return__REPLACE({
-            listKey: ['ready', 'user'],
+            keyList: ['ready', 'user'],
             replacement: false
         }) );
         // clear inputs

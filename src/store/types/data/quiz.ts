@@ -1,6 +1,4 @@
-import {NodeMove} from "../others/TreeMove";
-
-
+import { ChessMoveNode } from '../others/ChessMoveTree';
 
 export enum KindGetFocusListQuiz {
   publicQuiz = 'public-quiz',
@@ -8,32 +6,30 @@ export enum KindGetFocusListQuiz {
   myQuizByRecord = 'my-quiz-by-record',
 }
 
-
 export type Quiz = {
   id: string | null;
   name: string;
-  turnNext: 'white' | 'black';
-  fenStart: string;
-  listSeriesSanCorrect: string[][];
-  listSeriesSanMention: string[][];
-  idUser: string;
+  nextTurn: 'white' | 'black';
+  startingFen: string;
+  correctSanSeriesList: string[][];
+  markedSanSeriesList: string[][];
+  userId: string;
   isPublic: boolean;
-  dateCreated?: number;
-  dateUpdated?: number;
-}
+  createdDate?: number;
+  updatedDate?: number;
+};
 
 export type ModeQuiz = 'playing' | 'solved' | 'creating' | 'editing';
 
-
-export const stringGqlQuiz = `{
+export const gqlQuizString = `{
   id
   name
-  turnNext
-  fenStart
-  listSeriesSanCorrect
-  listSeriesSanMention
-  idUser
+  nextTurn
+  startingFen
+  correctSanSeriesList
+  markedSanSeriesList
+  userId
   isPublic
-  dateCreated
-  dateUpdated
+  createdDate
+  updatedDate
 }`;

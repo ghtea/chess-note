@@ -8,84 +8,83 @@
  */
 
 button {
-    display:inline-flex;
-    flex-flow: row nowrap;
-    justify-content: center;
-    align-items: center;
+  display: inline-flex;
+  flex-flow: row nowrap;
+  justify-content: center;
+  align-items: center;
 
-    background-color: transparent;
-    @include color-each-theme(color, basic__8, $is-module: false);
-    &:focus {
-        outline-style: none;
-        box-shadow:none;
-        //@include shadow-each-theme(box-shadow, 0, 0, 0, 2px, basic__6, $is-module: false);
-    }
-    
-    width: auto;
-    height: 40px;
+  background-color: transparent;
+  @include color-each-theme(color, basic__8, $is-module: false);
+  &:focus {
+    outline-style: none;
+    box-shadow: none;
+    @include shadow-each-theme(box-shadow, 0, 0, 0, 2px, main__4, $is-module: false);
+  }
 
-    border-style: none;
-    border-radius: 4px;
-    box-sizing: border-box;
+  width: auto;
+  height: 40px;
 
-    font-size: 1rem;
-    font-family: inherit; // Change the font styles in all browsers 
-    // font-family: 'Noto Sans KR', sans-serif;
+  border-style: none;
+  border-radius: 4px;
+  box-sizing: border-box;
 
-    text-transform: none;  /* 4 */
+  font-size: 1rem;
+  font-family: inherit; // Change the font styles in all browsers
+  // font-family: 'Noto Sans KR', sans-serif;
 
-    position: static;
-    overflow: visible; //  Show the overflow in Edge/IE. 
+  text-transform: none; /* 4 */
 
-    cursor: pointer;
+  position: static;
+  overflow: visible; //  Show the overflow in Edge/IE.
 
-    margin: 0px 0px 0px 0px;   // * 2 
-    padding: 0 10px; 
-    
+  cursor: pointer;
+
+  margin: 0px 0px 0px 0px; // * 2
+  padding: 0 10px;
 }
 
+.button__main--light,
+.button__main--solid {
+  display: inline-flex;
+  flex-flow: row nowrap;
+  justify-content: center;
+  align-items: center;
 
-.button__main--light, .button__main--solid {
+  &:focus {
+    outline-style: none;
+    @include shadow-each-theme(box-shadow, 0, 0, 0, 2px, main__4, $is-module: false);
+  }
 
-    display:inline-flex;
-    flex-flow: row nowrap;
-    justify-content: center;
-    align-items: center;
+  width: auto;
+  height: 40px;
 
+  border-style: none;
+  border-radius: 4px;
+  box-sizing: border-box;
 
-    &:focus {
-        outline-style: none;
-        @include shadow-each-theme(box-shadow, 0, 0, 0, 2px, basic__9, $is-module: false);
-    }
-    
-    width: auto;
-    height: 40px;
+  font-size: 1rem;
+  font-family: inherit; // Change the font styles in all browsers
+  // font-family: 'Noto Sans KR', sans-serif;
 
-    border-style: none;
-    border-radius: 4px;
-    box-sizing: border-box;
+  text-transform: none; /* 4 */
 
-    font-size: 1rem;
-    font-family: inherit; // Change the font styles in all browsers 
-    // font-family: 'Noto Sans KR', sans-serif;
+  position: static;
+  overflow: visible; //  Show the overflow in Edge/IE.
 
-    text-transform: none;  /* 4 */
+  cursor: pointer;
 
-    position: static;
-    overflow: visible; //  Show the overflow in Edge/IE. 
-
-    cursor: pointer;
-
-    margin: 0px 0px 0px 0px;   // * 2 
-    padding: 0 10px; 
+  margin: 0px 0px 0px 0px; // * 2
+  padding: 0 10px;
 }
 
-.button__main--solid {     //  can be used on anchor elements
-    @include color-each-theme(background-color, main__5, $is-module: false);
-    @include color-each-theme(color, basic__0, $is-module: false);
+.button__main--solid {
+  //  can be used on anchor elements
+  @include color-each-theme(background-color, main__5, $is-module: false);
+  @include color-each-theme(color, basic__0, $is-module: false);
 }
-.button__main--light {     //  can be used on anchor elements
-    background-color: transparent;
-    @include frame-each-theme(border, 2px, solid, main__5, $is-module: false);
-    @include color-each-theme(color, main__5, $is-module: false);
+.button__main--light {
+  //  can be used on anchor elements
+  background-color: transparent;
+  @include frame-each-theme(border, 2px, solid, main__5, $is-module: false);
+  @include color-each-theme(color, main__5, $is-module: false);
 }

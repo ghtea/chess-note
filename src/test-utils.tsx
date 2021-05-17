@@ -5,11 +5,9 @@ import { render as renderRtl, RenderOptions } from '@testing-library/react';
 import { IntlProvider } from 'react-intl';
 import translationEn from 'language/translation/en.json';
 
-// action 하나로 합쳐볼까?!!!
-// import * as actionsRoot from 'store/actions'; 
 
 import { Router} from "react-router-dom";  // BrowserRouter
-import history from 'historyApp';
+import history from 'libraries/history';
 
 import {Provider, useSelector, useDispatch} from 'react-redux' 
 import store from './store';
@@ -31,13 +29,14 @@ export const beforeAllDefault = () => {
 
 
 // wrote automatically from IDE tooltip
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
 type Ui = React.ReactElement<any, string | ((props: any) => React.ReactElement<any, string | any | (new (props: any) => React.Component<any, any, any>)> | null) | (new (props: any) => React.Component<any, any, any>)>;
 
 type Option = Pick<RenderOptions<typeof import("@testing-library/dom/types/queries")>, "container" | "baseElement" | "hydrate" | "wrapper"> | undefined;
 
 export const render = (ui: Ui, option: Option = undefined) =>{
 
-    const wrapper:React.FunctionComponent<{}> = ({ children }) => {
+    const wrapper:React.FunctionComponent<Record<string, unknown>> = ({ children }) => {
 
         return (
             <Router history={history}>
@@ -56,14 +55,3 @@ export const render = (ui: Ui, option: Option = undefined) =>{
 }
 
 
-
-/*
-
-import { 
-    render, beforeAllDefault, 
-    screen, fireEvent, waitFor
-} from 'test-utils'; 
-import '@testing-library/jest-dom/extend-expect';
-
-
-*/

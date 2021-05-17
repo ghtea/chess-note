@@ -1,0 +1,47 @@
+@import 'styles/every.scss';
+
+.root {
+    display: flex;
+    flex-flow: row nowrap;
+    justify-content: center;
+    align-items: stretch;
+
+    article {
+        
+        width: 40%;
+        min-width: 100px;
+        max-width: 500px;
+
+        height: auto;
+
+        padding: 20px;
+
+        border-radius: 5px;
+        @include frame-each-theme(border, 1px, solid, basic__1);
+
+        @include color-each-theme(background-color, basic__0);
+        h2 {
+            @include color-each-theme(color, basic__6);
+        }
+        p {
+            @include color-each-theme(color, basic__5);
+        }
+
+
+        &:nth-child(n+2){
+            margin-left: 20px;
+        }
+
+        &:hover {
+            @include frame-each-theme(border, 1px, solid, main__4);
+            
+            h2 {
+                @include color-each-theme(color, main__6);
+            }
+            p {
+                @include color-each-theme(color, main__5);
+            }
+        }
+
+    }
+}
