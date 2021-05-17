@@ -12,7 +12,7 @@ import * as actions from 'store/actions';
 import * as types from 'store/types';
 import { queryAllByAltText } from '@testing-library/dom';
 // import { KindGetListQuiz } from "store/types/data/quiz";
-import chessFocusing from 'libraries/chess';
+import focusingChess from 'libraries/chess';
 
 // GraphQL query 문법에 이상 있으면 할당하는 시점에서 에러 발생시키기 때문에 에러 처리한 곳에서 해야 한다
 
@@ -38,11 +38,11 @@ function* focusQuiz(action: actions.data.quiz.type__FOCUS_QUIZ) {
   let fenUsing = quizData.startingFen;
 
   if (situation === 'creating') {
-    chessFocusing.reset();
-    fenUsing = chessFocusing.fen();
+    focusingChess.reset();
+    fenUsing = focusingChess.fen();
   }
 
-  chessFocusing.load(quizData.startingFen);
+  focusingChess.load(quizData.startingFen);
 
   yield put(
     actions.data.return__REPLACE({

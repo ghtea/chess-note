@@ -1,35 +1,31 @@
 @import 'styles/every.scss';
 
 span {
-    display: inline-flex;
-    width: auto;
-    height: auto;
+  display: inline-flex;
+  width: auto;
+  height: auto;
 }
 
-p { 
+p {
+  display: block; // setting this for block   not works by browser
+  width: auto;
+  height: auto;
 
-    display: block;    // setting this for block   not works by browser
-    width: auto;
-    height: auto;
+  padding: 4px;
 
-    padding: 4px;
-    
-    margin: 1rem 0 1rem 0;
+  margin: 1rem 0 1rem 0;
 }
-
 
 a {
-    cursor: pointer;
-    text-decoration: none;
-    color: inherit;
+  cursor: pointer;
+  text-decoration: none;
+  color: inherit;
 
-    &:focus {
-        outline-style: none;
-        @include shadow-each-theme(box-shadow, 0, 0, 0, 2px, basic__6, $is-module: false); 
-    }
+  &:focus {
+    outline-style: none;
+    @include shadow-each-theme(box-shadow, 0, 0, 0, 2px, main__4, $is-module: false);
+  }
 }
-
-
 
 img {
   border-style: none;
@@ -53,14 +49,12 @@ sup {
   top: -0.5em;
 }
 
-
 /*
  * Add the correct display in all browsers.
  */
 summary {
   display: list-item;
 }
-
 
 /**
  * Add the correct font weight in Chrome, Edge, and Safari.

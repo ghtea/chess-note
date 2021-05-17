@@ -6,7 +6,7 @@ import apolloClient from 'libraries/apollo';
 import { gql, useQuery, FetchResult } from '@apollo/client';
 import { v4 as uuidv4 } from 'uuid';
 
-import chessFocusing from 'libraries/chess';
+import focusingChess from 'libraries/chess';
 // import * as config from 'config';
 import { StateRoot } from 'store/reducers';
 import * as actions from 'store/actions';
@@ -17,15 +17,14 @@ export default function* watchUserLogInOut(
 ) {
   const situation: 'logIn' | 'logOut' = yield call(waitForLogInOut);
 
-  if (situation === 'logIn'){
+  if (situation === 'logIn') {
     const userId: string = yield select((state: StateRoot) => state.auth.user?.id) || '';
     yield put(
       actions.auth.return__GET_MEMBER_BY_USER_ID({
-        userId: userId
+        userId: userId,
       }),
     );
-  }
-  else {
+  } else {
     yield put(
       actions.auth.return__REPLACE({
         keyList: ['user'],
@@ -39,7 +38,6 @@ export default function* watchUserLogInOut(
       }),
     );
   }
-  
 }
 
 function* waitForLogInOut<T>() {

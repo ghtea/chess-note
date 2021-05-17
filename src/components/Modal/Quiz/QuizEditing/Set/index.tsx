@@ -18,7 +18,10 @@ import styles from './index.module.scss';
 import stylesQC from '../../common/index.module.scss';
 import stylesModal from 'components/Modal/index.module.scss';
 
-import { treeMove } from 'libraries/chess';
+import {
+  correctChessMoveTree,
+  markedChessMoveTree,
+} from 'components/Main/Quiz/QuizEditing/chessMoveTree';
 
 type PropsQuizEditingSet = {
   top: number;
@@ -75,11 +78,19 @@ function QuizEditingSet({ top }: PropsQuizEditingSet) {
           }),
         );
       } else if (value === 'answer') {
-        treeMove.putSeriesSan(quizPresent.sanSeries);
+        correctChessMoveTree.putSeriesSan(quizPresent.sanSeries);
         dispatch(
           actions.data.return__REPLACE({
             keyList: ['quiz', 'focusing', 'correctSanSeriesList'],
-            replacement: treeMove.returnListSeriesSan(),
+            replacement: correctChessMoveTree.returnListSeriesSan(),
+          }),
+        );
+      } else if (value === 'mark') {
+        markedChessMoveTree.putSeriesSan(quizPresent.sanSeries);
+        dispatch(
+          actions.data.return__REPLACE({
+            keyList: ['quiz', 'focusing', 'markedSanSeriesList'],
+            replacement: markedChessMoveTree.returnListSeriesSan(),
           }),
         );
       }
@@ -87,13 +98,22 @@ function QuizEditingSet({ top }: PropsQuizEditingSet) {
     [quizPresent.sanSeries, quizData.correctSanSeriesList],
   );
 
-  const showingOtherOptions = useMemo(() => {
+  const isShowingSetAsAnswer = useMemo(() => {
+    if (quizData.startingFen && quizPresent.sanSeries.length > 0 && (quizPresent.turn !== quizData.nextTurn)) {
+      return true;
+    } else {
+      return false;
+    }
+  }, [quizData.startingFen, quizPresent.sanSeries]);
+
+  const isShowingSetAsMark = useMemo(() => {
     if (quizData.startingFen && quizPresent.sanSeries.length > 0) {
       return true;
     } else {
       return false;
     }
   }, [quizData.startingFen, quizPresent.sanSeries]);
+  
 
   return (
     <div className={`${styles['root']} ${stylesQC['root']} ${stylesModal['root']}`}>
@@ -119,32 +139,29 @@ function QuizEditingSet({ top }: PropsQuizEditingSet) {
             </button>
           </div>
 
-          {showingOtherOptions && (
-            <>
-              <div className={`${stylesModal['content__section']}`}>
-                <button
-                  type="button"
-                  value="answer"
-                  className={`${styles['button__answer']}`}
-                  onClick={onClick_AnyMainButton}
-                >
-                  {' '}
-                  <FormattedMessage id={`Modal.QuizEditingSet_SetAsAnswer`} />{' '}
-                </button>
-              </div>
-
-              <div className={`${stylesModal['content__section']}`}>
-                <button
-                  type="button"
-                  value="memo"
-                  className={`${styles['button__memo']}`}
-                  onClick={onClick_AnyMainButton}
-                >
-                  {' '}
-                  <FormattedMessage id={`Modal.QuizEditingSet_SetAsMention`} />{' '}
-                </button>
-              </div>
-            </>
+          {isShowingSetAsAnswer && (
+            <div className={`${stylesModal['content__section']}`}>
+              <button
+                type="button"
+                value="answer"
+                className={`${styles['button__answer']}`}
+                onClick={onClick_AnyMainButton}
+              >
+                <FormattedMessage id={`Modal.QuizEditingSet_SetAsAnswer`} />
+              </button>
+            </div>
+          )}
+          {isShowingSetAsMark && (
+            <div className={`${stylesModal['content__section']}`}>
+              <button
+                type="button"
+                value="mark"
+                className={`${styles['button__mark']}`}
+                onClick={onClick_AnyMainButton}
+              >
+                <FormattedMessage id={`Modal.QuizEditingSet_SetAsMark`} />
+              </button>
+            </div>
           )}
         </div>
       </div>

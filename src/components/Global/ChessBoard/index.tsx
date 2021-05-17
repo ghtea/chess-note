@@ -115,7 +115,7 @@ function ChessBoard({ listSquare, side, page }: PropsChessBoard) {
         if (page === 'quiz') {
           if (situation === 'creating' || situation === 'editing') {
             dispatch(
-              actions.data.quiz.return__MOVE_IN_QUIZ_EDITING({
+              actions.data.quiz.return__MOVE_WHILE_EDITING_QUIZ({
                 from: positionStart,
                 to: position,
               }),

@@ -2,7 +2,7 @@ import React, { useCallback, useEffect, useMemo, useState } from 'react';
 import history from 'libraries/history';
 import * as clipboardy from 'clipboardy';
 import { FormattedMessage } from 'react-intl';
-import chessFocusing from 'libraries/chess';
+import focusingChess from 'libraries/chess';
 
 import { useSelector, useDispatch } from 'react-redux';
 import { StateRoot } from 'store/reducers';
@@ -24,7 +24,6 @@ import IconBackOneMove from 'svgs/basic/IconAngle';
 import IconBookSpell from 'svgs/basic/IconBookSpell';
 import IconArrowInSquare from 'svgs/basic/IconArrowInSquare';
 // import {Chess} from 'chess.js'; // => makes error
-
 
 export default function ToolBarQP() {
   const dispatch = useDispatch();
@@ -56,7 +55,11 @@ export default function ToolBarQP() {
     const value = e.currentTarget.value;
     if (value === 'back-to-start') {
       dispatch(actions.data.quiz.return__BACK_TO_START());
-    } else if (value === 'save') {
+    } 
+    else if (value === 'back-to-previous') {
+      dispatch(actions.data.quiz.return__BACK_TO_PREVIOUS());
+    }
+    else if (value === 'save') {
       dispatch(
         actions.appearance.return__REPLACE({
           keyList: ['showing', 'modal', 'quizEditingSave'],
@@ -97,12 +100,12 @@ export default function ToolBarQP() {
 
         <button
           type="button"
-          value="back-one-move"
-          aria-label="Back One Move"
+          value="back-to-previous"
+          aria-label="Back to Previous"
           onClick={onClick_Main}
         >
           <IconBackOneMove
-            className={`${styles['icon__back-one-move']}`}
+            className={`${styles['icon__back-to-previous']}`}
             kind="regular"
             direction="left"
           />

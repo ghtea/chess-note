@@ -1,4 +1,4 @@
-import { NodeMove } from '../others/TreeMove';
+import { ChessMoveNode } from '../others/ChessMoveTree';
 
 export enum KindGetFocusListQuiz {
   publicQuiz = 'public-quiz',

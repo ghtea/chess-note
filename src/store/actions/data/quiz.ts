@@ -1,20 +1,20 @@
 import * as types from 'store/types';
-import { NodeMove } from 'store/types/others/TreeMove';
+import { ChessMoveNode } from 'store/types/others/ChessMoveTree';
 import { KindGetFocusListQuiz } from 'store/types/data/quiz';
 
-export const name__MOVE_IN_QUIZ_EDITING = 'data/quiz/MOVE_IN_QUIZ_EDITING';
-type Payload__MOVE_IN_QUIZ_EDITING = {
+export const name__MOVE_WHILE_EDITING_QUIZ = 'data/quiz/MOVE_WHILE_EDITING_QUIZ';
+type Payload__MOVE_WHILE_EDITING_QUIZ = {
   from?: string;
   to?: string;
   san?: string;
 };
-export const return__MOVE_IN_QUIZ_EDITING = (payload: Payload__MOVE_IN_QUIZ_EDITING) => {
+export const return__MOVE_WHILE_EDITING_QUIZ = (payload: Payload__MOVE_WHILE_EDITING_QUIZ) => {
   return {
-    type: name__MOVE_IN_QUIZ_EDITING,
+    type: name__MOVE_WHILE_EDITING_QUIZ,
     payload: payload,
   };
 };
-export type type__MOVE_IN_QUIZ_EDITING = ReturnType<typeof return__MOVE_IN_QUIZ_EDITING>;
+export type type__MOVE_WHILE_EDITING_QUIZ = ReturnType<typeof return__MOVE_WHILE_EDITING_QUIZ>;
 
 export const name__MOVE_IN_QUIZ_PLAYING = 'data/quiz/MOVE_IN_QUIZ_PLAYING';
 type Payload__MOVE_IN_QUIZ_PLAYING = {
@@ -37,6 +37,14 @@ export const return__BACK_TO_START = () => {
   };
 };
 export type type__BACK_TO_START = ReturnType<typeof return__BACK_TO_START>;
+
+export const name__BACK_TO_PREVIOUS = 'data/quiz/BACK_TO_PREVIOUS';
+export const return__BACK_TO_PREVIOUS = () => {
+  return {
+    type: name__BACK_TO_PREVIOUS,
+  };
+};
+export type type__BACK_TO_PREVIOUS = ReturnType<typeof return__BACK_TO_PREVIOUS>;
 
 export const name__FOCUS_QUIZ = 'data/quiz/FOCUS_QUIZ';
 type Payload__FOCUS_QUIZ = {

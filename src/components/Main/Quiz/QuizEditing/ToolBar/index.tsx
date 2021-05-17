@@ -1,6 +1,6 @@
 import React, { useCallback, useEffect, useMemo, useState } from 'react';
 import history from 'libraries/history';
-import chessFocusing from 'libraries/chess';
+import focusingChess from 'libraries/chess';
 
 import { FormattedMessage } from 'react-intl';
 
@@ -22,7 +22,7 @@ import IconAnswer from 'svgs/basic/IconCheckCircle';
 import IconMention from 'svgs/basic/IconExclamationCircle';
 
 import IconBackToStart from 'svgs/basic/IconAngleDouble';
-import IconBackOneMove from 'svgs/basic/IconAngle';
+import IconBackToPrevious from 'svgs/basic/IconAngle';
 // import {Chess} from 'chess.js'; // => makes error
 
 function ToolBarQE() {
@@ -61,7 +61,8 @@ function ToolBarQE() {
       );
     } else if (value === 'back-to-start') {
       dispatch(actions.data.quiz.return__BACK_TO_START());
-    } else if (value === 'forward') {
+    } else if (value === 'back-to-previous') {
+      dispatch(actions.data.quiz.return__BACK_TO_PREVIOUS());
     } else if (value === 'set') {
       dispatch(
         actions.appearance.return__REPLACE({
@@ -103,12 +104,12 @@ function ToolBarQE() {
 
         <button
           type="button"
-          value="back-one-move"
-          aria-label="Back One Move"
+          value="back-to-previous"
+          aria-label="Back to Previous"
           onClick={onClick_Main}
         >
-          <IconBackOneMove
-            className={`${styles['icon__back-one-move']}`}
+          <IconBackToPrevious
+            className={`${styles['icon__back-to-previous']}`}
             kind="regular"
             direction="left"
           />

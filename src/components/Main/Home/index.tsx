@@ -31,31 +31,27 @@ function Home() {
 
   return (
     <div className={`${styles['root']}`}>
-      <div>
+      <article>
         <a href={'/opening'} onClick={onClick_Link}>
           <h2>
-            {' '}
-            <FormattedMessage id={'Global.Opening'} />{' '}
+            <FormattedMessage id={'Global.Opening'} />
           </h2>
           <p>
-            {' '}
-            <FormattedMessage id={'Main.Home_Opening_Introduction'} />{' '}
+            <FormattedMessage id={'Main.Home_Opening_Introduction'} />
           </p>
         </a>
-      </div>
+      </article>
 
-      <div>
+      <article>
         <a href={'/quiz'} onClick={onClick_Link}>
           <h2>
-            {' '}
-            <FormattedMessage id={'Global.Quiz'} />{' '}
+            <FormattedMessage id={'Global.Quiz'} />
           </h2>
           <p>
-            {' '}
-            <FormattedMessage id={'Main.Home_Quiz_Introduction'} />{' '}
+            <FormattedMessage id={'Main.Home_Quiz_Introduction'} />
           </p>
         </a>
-      </div>
+      </article>
     </div>
   );
 }

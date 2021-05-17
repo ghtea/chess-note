@@ -2,7 +2,9 @@ import React, { useCallback, useEffect, useRef, useMemo, useState } from 'react'
 import { firebaseAuth } from 'libraries/firebase';
 
 import history from 'libraries/history';
-import chessFocusing, { treeMove } from 'libraries/chess';
+import focusingChess from 'libraries/chess';
+import {correctChessMoveTree, markedChessMoveTree} from 'components/Main/Quiz/QuizEditing/chessMoveTree';
+
 import { useLocation } from 'react-router-dom';
 import { FormattedMessage } from 'react-intl';
 import * as clipboardy from 'clipboardy';
@@ -56,16 +58,16 @@ function QuizEditingOthers({ top }: PropsQuizEditingOthers) {
 
       if (value === 'use-fen') {
         const valueFromClipboard = await clipboardy.read();
-        const { valid } = chessFocusing.validate_fen(valueFromClipboard);
+        const { valid } = focusingChess.validate_fen(valueFromClipboard);
 
         if (valid) {
-          chessFocusing.load(valueFromClipboard);
-          const turn = chessFocusing.turn() === 'w' ? 'white' : 'black';
+          focusingChess.load(valueFromClipboard);
+          const turn = focusingChess.turn() === 'w' ? 'white' : 'black';
 
           dispatch(
             actions.data.return__REPLACE({
               keyList: ['quiz', 'focusing', 'startingFen'],
-              replacement: chessFocusing.fen(),
+              replacement: focusingChess.fen(),
             }),
           );
 
@@ -78,7 +80,7 @@ function QuizEditingOthers({ top }: PropsQuizEditingOthers) {
 
           const replacementQuizPresent = {
             ...quizPresent,
-            fen: chessFocusing.fen(),
+            fen: focusingChess.fen(),
             turn: turn,
             sanSeries: [],
           };
@@ -100,11 +102,11 @@ function QuizEditingOthers({ top }: PropsQuizEditingOthers) {
         console.log('show answer');
       } else if (value === 'delete-answer') {
         console.log('delete answer');
-        treeMove.deleteNthSeriesSan(indexAnswer);
+        correctChessMoveTree.deleteNthSeriesSan(indexAnswer);
         dispatch(
           actions.data.return__REPLACE({
             keyList: ['quiz', 'focusing', 'correctSanSeriesList'],
-            replacement: treeMove.returnListSeriesSan(),
+            replacement: correctChessMoveTree.returnListSeriesSan(),
           }),
         );
       }

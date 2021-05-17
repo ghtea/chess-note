@@ -29,7 +29,6 @@ function* getMemberByUserId(action: actions.auth.type__GET_MEMBER_BY_USER_ID) {
     const argument = {
       userId: userId,
     };
-    console.log('here trying ')
     type GetMemberByUserIdData = Record<string, types.auth.Member>;
     const response: ApolloQueryResult<GetMemberByUserIdData> = yield call(
       requestGetMemberByUserId,
