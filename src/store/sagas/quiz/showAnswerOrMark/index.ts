@@ -10,6 +10,7 @@ import { StateRoot } from 'store/reducers';
 import * as actions from 'store/actions';
 import * as types from 'store/types';
 import applySucceededMoveToQuizState from '../moveWhilePlayingQuiz/applySucceededMoveToQuizState';
+import backToStart from '../backToStart';
 
 export default function* showAnswerOrMark(action: actions.quiz.type__SHOW_ANSWER_OR_MARK) {
   const { index, kind } = action.payload;
@@ -20,6 +21,8 @@ export default function* showAnswerOrMark(action: actions.quiz.type__SHOW_ANSWER
         replacement: false,
       }),
     );
+
+    yield put(actions.quiz.return__BACK_TO_START());
 
     const chessMoveTree = kind === 'answer' ? correctChessMoveTree : markedChessMoveTree;
 
