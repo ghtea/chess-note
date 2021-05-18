@@ -8,27 +8,16 @@ import Cookies from 'js-cookie';
 // import * as config from 'config';
 
 import * as actions from 'store/actions';
+import applyLoggedOutUser from './applyLoggedOutUser';
 
 //import * as actionsTheme from "../../actions/theme";
 
 function* logOut(action: actions.auth.type__LOG_OUT) {
-  firebaseAuth.signOut();
+  yield call(() => firebaseAuth.signOut());
 
-  yield put(
-    actions.status.return__REPLACE({
-      keyList: ['auth', 'user'],
-      replacement: {
-        tried: true,
-        loading: false,
-        ready: false,
-      },
-    }),
-  );
-
-  yield put(actions.auth.return__REPLACE_USER());
+  yield applyLoggedOutUser();
 
   window.location.reload();
-  //window.location.href = window.location.href;
 }
 
 export default logOut;

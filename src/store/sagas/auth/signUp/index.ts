@@ -12,6 +12,8 @@ import { v4 as uuidv4 } from 'uuid';
 // import * as config from 'config';
 
 import * as actions from 'store/actions';
+import applyLoggedInUser from '../logIn/applyLoggedInUser';
+import applyLoggedOutUser from '../logOut/applyLoggedOutUser';
 
 //import * as actionsTheme from "../../actions/theme";
 
@@ -86,107 +88,59 @@ function* signUp(action: actions.auth.type__SIGN_UP) {
       const password: string = action.payload.password1;
 
       try {
-        // unknown 임시방편
-        const user: unknown = yield call(requestSignUp, email, password);
-        //console.log(user);
-
-        yield put(
-          actions.status.return__REPLACE({
-            keyList: ['auth', 'user'],
-            replacement: {
-              tried: true,
-              loading: false,
-              ready: false,
-            },
-          }),
-        );
-
-        yield put(actions.auth.return__REPLACE_USER());
+        yield call(requestSignUp, email, password);
+        yield applyLoggedInUser();
 
         yield put(
           actions.notification.return__ADD_DELETE_BANNER({
             codeSituation: 'SignUp_Succeeded__S',
           }),
         );
-
-        history.push('/');
       } catch (error) {
-        yield put(
-          actions.status.return__REPLACE({
-            keyList: ['auth', 'user'],
-            replacement: {
-              tried: true,
-              loading: false,
-              ready: false,
-            },
-          }),
-        );
-
-        yield put(actions.auth.return__REPLACE_USER());
-
-        console.error(error);
-        if (error.code === 'auth/email-already-in-use') {
-          console.error(error.message);
-          yield put(
-            actions.notification.return__ADD_CODE_SITUATION_OTHERS({
-              codeSituation: 'SignUp_DuplicateEmail__E',
-            }),
-          );
-        } else if (error.code === 'auth/invalid-email') {
-          console.error(error.message);
-          yield put(
-            actions.notification.return__ADD_CODE_SITUATION_OTHERS({
-              codeSituation: 'SignUp_InvalidEmail__E',
-            }),
-          );
-        } else if (error.code === 'auth/weak-password') {
-          console.error(error.message);
-          yield put(
-            actions.notification.return__ADD_CODE_SITUATION_OTHERS({
-              codeSituation: 'SignUp_WeakPassword__E',
-            }),
-          );
-        } else if (error.code === 'auth/operation-not-allowed') {
-          console.error(error.message);
-          yield put(
-            actions.notification.return__ADD_DELETE_BANNER({
-              codeSituation: 'SignUp_UnknownError__E',
-            }),
-          );
-        } else {
-          console.error(error);
-          yield put(
-            actions.notification.return__ADD_DELETE_BANNER({
-              codeSituation: 'SignUp_UnknownError__E',
-            }),
-          );
-        }
+        throw error;
       }
     } // higher else
-
-    // go to home
   } catch (error) {
-    yield put(
-      actions.status.return__REPLACE({
-        keyList: ['auth', 'user'],
-        replacement: {
-          tried: true,
-          loading: false,
-          ready: false,
-        },
-      }),
-    );
+    yield applyLoggedOutUser();
 
-    yield put(actions.auth.return__REPLACE_USER());
+    if (error.code === 'auth/email-already-in-use') {
+      console.error(error.message);
+      yield put(
+        actions.notification.return__ADD_CODE_SITUATION_OTHERS({
+          codeSituation: 'SignUp_DuplicateEmail__E',
+        }),
+      );
+    } else if (error.code === 'auth/invalid-email') {
+      console.error(error.message);
+      yield put(
+        actions.notification.return__ADD_CODE_SITUATION_OTHERS({
+          codeSituation: 'SignUp_InvalidEmail__E',
+        }),
+      );
+    } else if (error.code === 'auth/weak-password') {
+      console.error(error.message);
+      yield put(
+        actions.notification.return__ADD_CODE_SITUATION_OTHERS({
+          codeSituation: 'SignUp_WeakPassword__E',
+        }),
+      );
+    } else if (error.code === 'auth/operation-not-allowed') {
+      console.error(error.message);
+      yield put(
+        actions.notification.return__ADD_DELETE_BANNER({
+          codeSituation: 'SignUp_UnknownError__E',
+        }),
+      );
+    } else {
+      console.error(error);
+      yield put(
+        actions.notification.return__ADD_DELETE_BANNER({
+          codeSituation: 'SignUp_UnknownError__E',
+        }),
+      );
+    }
 
-    console.error(error);
     console.error('signUp has been failed');
-
-    yield put(
-      actions.notification.return__ADD_CODE_SITUATION_OTHERS({
-        codeSituation: 'SignUp_UnknownError',
-      }),
-    );
   }
 }
 

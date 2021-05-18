@@ -10,6 +10,7 @@ import { v4 as uuidv4 } from 'uuid';
 
 // import * as config from 'config';
 import * as actions from 'store/actions';
+import applyLoggedInUser from '../logIn/applyLoggedInUser';
 
 //import * as actionsTheme from "../../actions/theme";
 
@@ -17,7 +18,7 @@ const requestLogInGithub = (provider: firebase.auth.AuthProvider) => {
   return firebaseAuth.signInWithPopup(provider);
 };
 
-function* logInGithub(action: actions.auth.type__LOG_IN_GITHUB) {
+function* logInGithub(action: actions.auth.type__CONTINUE_WITH_GITHUB) {
   try {
     const provider = new firebase.auth.GithubAuthProvider();
 
@@ -40,23 +41,8 @@ function* logInGithub(action: actions.auth.type__LOG_IN_GITHUB) {
     );
 
     try {
-      const { user } = yield call(requestLogInGithub, provider);
-      //console.log(data.user);
-
-      yield put(
-        actions.status.return__REPLACE({
-          keyList: ['auth', 'user'],
-          replacement: {
-            tried: true,
-            loading: false,
-            ready: true,
-          },
-        }),
-      );
-
-      yield put(actions.auth.return__REPLACE_USER());
-
-      history.push('/');
+      yield call(requestLogInGithub, provider);
+      yield applyLoggedInUser();
     } catch (error) {
       yield put(
         actions.status.return__REPLACE({

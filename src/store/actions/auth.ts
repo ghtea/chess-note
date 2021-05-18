@@ -32,29 +32,29 @@ export const return__LOG_IN = (payload: Payload__LOG_IN) => {
 };
 export type type__LOG_IN = ReturnType<typeof return__LOG_IN>;
 
-export const name__LOG_IN_GOOGLE = 'auth/LOG_IN_GOOGLE';
-export const return__LOG_IN_GOOGLE = () => {
+export const name__CONTINUE_WITH_GOOGLE = 'auth/CONTINUE_WITH_GOOGLE';
+export const return__CONTINUE_WITH_GOOGLE = () => {
   return {
-    type: name__LOG_IN_GOOGLE,
+    type: name__CONTINUE_WITH_GOOGLE,
   };
 };
-export type type__LOG_IN_GOOGLE = ReturnType<typeof return__LOG_IN_GOOGLE>;
+export type type__CONTINUE_WITH_GOOGLE = ReturnType<typeof return__CONTINUE_WITH_GOOGLE>;
 
-export const name__LOG_IN_TWITTER = 'auth/LOG_IN_TWITTER';
-export const return__LOG_IN_TWITTER = () => {
+export const name__CONTINUE_WITH_TWITTER = 'auth/CONTINUE_WITH_TWITTER';
+export const return__CONTINUE_WITH_TWITTER = () => {
   return {
-    type: name__LOG_IN_TWITTER,
+    type: name__CONTINUE_WITH_TWITTER,
   };
 };
-export type type__LOG_IN_TWITTER = ReturnType<typeof return__LOG_IN_TWITTER>;
+export type type__CONTINUE_WITH_TWITTER = ReturnType<typeof return__CONTINUE_WITH_TWITTER>;
 
-export const name__LOG_IN_GITHUB = 'auth/LOG_IN_GITHUB';
-export const return__LOG_IN_GITHUB = () => {
+export const name__CONTINUE_WITH_GITHUB = 'auth/CONTINUE_WITH_GITHUB';
+export const return__CONTINUE_WITH_GITHUB = () => {
   return {
-    type: name__LOG_IN_GITHUB,
+    type: name__CONTINUE_WITH_GITHUB,
   };
 };
-export type type__LOG_IN_GITHUB = ReturnType<typeof return__LOG_IN_GITHUB>;
+export type type__CONTINUE_WITH_GITHUB = ReturnType<typeof return__CONTINUE_WITH_GITHUB>;
 
 export const name__LOG_OUT = 'auth/LOG_OUT';
 export const return__LOG_OUT = () => {
@@ -106,7 +106,6 @@ export const return__UPDATE_PROFILE = (payload: Payload__UPDATE_PROFILE) => {
   };
 };
 export type type__UPDATE_PROFILE = ReturnType<typeof return__UPDATE_PROFILE>;
-
 
 export const name__GET_MEMBER_BY_USER_ID = 'auth/GET_MEMBER_BY_USER_ID';
 type Payload__GET_MEMBER_BY_USER_ID = {

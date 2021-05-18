@@ -16,8 +16,6 @@ function QuizHome() {
 
   useEffect(() => {
     if (userStatus.ready || (userStatus.tried && !userStatus.ready)) {
-      console.log(userStatus)
-      // 현재 로컬에 있는 퀴즈 아이디와 uri에 있는 퀴즈 아이디가 서로 다를 때
       dispatch(
         actions.data.quiz.return__GET_QUIZ_LIST_DICT({
           userId: userId,

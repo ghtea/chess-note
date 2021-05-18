@@ -11,17 +11,17 @@ import { v4 as uuidv4 } from 'uuid';
 // import * as config from 'config';
 
 import * as actions from 'store/actions';
+import applyLoggedInUser from '../logIn/applyLoggedInUser';
 
 //import * as actionsTheme from "../../actions/theme";
 
-const requestLogInTwitter = (provider: firebase.auth.AuthProvider) => {
+const requestLogInGoogle = (provider: firebase.auth.AuthProvider) => {
   return firebaseAuth.signInWithPopup(provider);
 };
 
-function* logInTwitter(action: actions.auth.type__LOG_IN_TWITTER) {
+function* logInGoogle(action: actions.auth.type__CONTINUE_WITH_GOOGLE) {
   try {
-    const provider = new firebase.auth.TwitterAuthProvider();
-    //provider = new firebaseApp.auth.GithubAuthProvider();
+    const provider = new firebase.auth.GoogleAuthProvider();
 
     yield put(
       actions.notification.return__REPLACE({
@@ -42,23 +42,8 @@ function* logInTwitter(action: actions.auth.type__LOG_IN_TWITTER) {
     );
 
     try {
-      const { user } = yield call(requestLogInTwitter, provider);
-      //console.log(data.user);
-
-      yield put(
-        actions.status.return__REPLACE({
-          keyList: ['auth', 'user'],
-          replacement: {
-            tried: true,
-            loading: false,
-            ready: true,
-          },
-        }),
-      );
-
-      yield put(actions.auth.return__REPLACE_USER());
-
-      history.push('/');
+      yield call(requestLogInGoogle, provider);
+      yield applyLoggedInUser();
     } catch (error) {
       yield put(
         actions.status.return__REPLACE({
@@ -107,7 +92,7 @@ function* logInTwitter(action: actions.auth.type__LOG_IN_TWITTER) {
     yield put(actions.auth.return__REPLACE_USER());
 
     console.error(error);
-    console.error('logInTwitter has been failed');
+    console.error('logInGoogle has been failed');
 
     yield put(
       actions.notification.return__ADD_CODE_SITUATION_OTHERS({
@@ -117,4 +102,4 @@ function* logInTwitter(action: actions.auth.type__LOG_IN_TWITTER) {
   }
 }
 
-export default logInTwitter;
+export default logInGoogle;

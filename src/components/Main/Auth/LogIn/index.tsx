@@ -97,11 +97,11 @@ function LogIn() {
         currentTarget: { value },
       } = event;
       if (value === 'google') {
-        dispatch(actions.auth.return__LOG_IN_GOOGLE());
+        dispatch(actions.auth.return__CONTINUE_WITH_GOOGLE());
       } else if (value === 'twitter') {
-        dispatch(actions.auth.return__LOG_IN_TWITTER());
+        dispatch(actions.auth.return__CONTINUE_WITH_TWITTER());
       } else if (value === 'github') {
-        dispatch(actions.auth.return__LOG_IN_GITHUB());
+        dispatch(actions.auth.return__CONTINUE_WITH_GITHUB());
       }
     },
     [],
