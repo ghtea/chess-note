@@ -37,6 +37,13 @@ td {
         }
     }
 
+    &.created {
+        font-size: 0.9rem;
+        display: flex;
+        flex-flow: row wrap;
+        justify-content: space-evenly;
+    }
+
     &.others{
         .icon__others {
             width: 32px;

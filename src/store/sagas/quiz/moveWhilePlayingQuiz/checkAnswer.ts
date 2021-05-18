@@ -2,7 +2,7 @@ import { call, select, put, delay } from 'redux-saga/effects';
 import { StateRoot } from 'store/reducers';
 import * as actions from 'store/actions';
 import * as types from 'store/types';
-import getCorrectSanSeriesWhichIncludePresentSanSeries from './getCorrectSanSeriesWhichIncludePresentSanSeries';
+import getCorrectSanSeriesWhichIncludeCurrentSanSeries from './getCorrectSanSeriesWhichIncludeCurrentSanSeries';
 
 export type GradingResult = 'wrong' | 'complete-answer' | 'partial-answer';
 
@@ -10,10 +10,12 @@ export default function* checkAnswer() {
   const focusingQuizState: types.quiz.QuizState = yield select(
     (state: StateRoot) => state.quiz.state.focusing,
   );
-  const focusingQuizData: types.quiz.Quiz = yield select((state: StateRoot) => state.quiz.data.focusing);
+  const focusingQuizData: types.quiz.Quiz = yield select(
+    (state: StateRoot) => state.quiz.data.focusing,
+  );
 
   const remainingCorrectSanSeries: string[] | undefined =
-    yield getCorrectSanSeriesWhichIncludePresentSanSeries();
+    yield getCorrectSanSeriesWhichIncludeCurrentSanSeries();
 
   let gradingResult: GradingResult = 'wrong';
 

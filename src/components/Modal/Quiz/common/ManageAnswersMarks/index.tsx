@@ -3,10 +3,7 @@ import { firebaseAuth } from 'libraries/firebase';
 
 import history from 'libraries/history';
 import focusingChess from 'libraries/chess';
-import {
-  correctChessMoveTree,
-  markedChessMoveTree,
-} from 'components/Main/Quiz/QuizEditing/chessMoveTree';
+import { correctChessMoveTree, markedChessMoveTree } from 'components/Main/Quiz/chessMoveTree';
 
 import { useLocation } from 'react-router-dom';
 import { FormattedMessage } from 'react-intl';
@@ -32,6 +29,7 @@ type PropsManageAnswer = {
 export default function ManageAnswer({ top, kind }: PropsManageAnswer) {
   const dispatch = useDispatch();
 
+  const situation = useSelector((state: StateRoot) => state.quiz.state.situation);
   const focusingQuizState = useSelector((state: StateRoot) => state.quiz.state.focusing);
   const focusingQuizData = useSelector((state: StateRoot) => state.quiz.data.focusing);
   const [itemIndex, setItemIndex] = useState<number>(0);
@@ -63,17 +61,32 @@ export default function ManageAnswer({ top, kind }: PropsManageAnswer) {
   const onClick_AnyMainButton = useCallback(
     async (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
       const value = e.currentTarget.value;
-      if (value === 'show-answer') {
-        console.log('show answer');
-      } else if (value === 'delete-answer') {
-        console.log('delete answer');
-        correctChessMoveTree.deleteNthSeriesSan(itemIndex);
+      if (value === 'show-item') {
         dispatch(
-          actions.quiz.return__REPLACE({
-            keyList: ['data', 'focusing', 'correctSanSeriesList'],
-            replacement: correctChessMoveTree.returnListSeriesSan(),
+          actions.quiz.return__SHOW_ANSWER_OR_MARK({
+            index: itemIndex,
+            kind: kind,
           }),
         );
+      } else if (value === 'delete-item') {
+        if (kind === 'answer') {
+          correctChessMoveTree.deleteNthSeriesSan(itemIndex);
+          dispatch(
+            actions.quiz.return__REPLACE({
+              keyList: ['data', 'focusing', 'correctSanSeriesList'],
+              replacement: correctChessMoveTree.returnSanSeriesList(),
+            }),
+          );
+        } else {
+          // if (kind === 'mark') {
+          markedChessMoveTree.deleteNthSeriesSan(itemIndex);
+          dispatch(
+            actions.quiz.return__REPLACE({
+              keyList: ['data', 'focusing', 'markedSanSeriesList'],
+              replacement: markedChessMoveTree.returnSanSeriesList(),
+            }),
+          );
+        }
       }
     },
     [focusingQuizState.sanSeries, focusingQuizData, itemIndex],
@@ -134,8 +147,8 @@ export default function ManageAnswer({ top, kind }: PropsManageAnswer) {
               <div className={`${stylesModal['content__section']}`}>
                 <button
                   type="button"
-                  value="show-answer"
-                  className={`${styles['button__show-answer']} ${stylesQC['button__basic']}`}
+                  value="show-item"
+                  className={`${styles['button__show-item']} ${stylesQC['button__basic']}`}
                   onClick={onClick_AnyMainButton}
                 >
                   <FormattedMessage
@@ -171,48 +184,49 @@ export default function ManageAnswer({ top, kind }: PropsManageAnswer) {
                   />
                 </button>
               </div>
-
-              <div className={`${stylesModal['content__section']}`}>
-                <button
-                  type="button"
-                  value="delete-item"
-                  className={`${styles['button__delete-item']} ${stylesQC['button__basic']}`}
-                  onClick={onClick_AnyMainButton}
-                >
-                  <FormattedMessage
-                    id={`Modal.QuizManageAnswersMarks_Delete${
-                      kind === 'answer' ? 'Answer' : 'Mark'
-                    }`}
-                    values={{
-                      index: `${itemIndex + 1} / ${itemAllNumber}`,
-                    }}
-                  />
-                </button>
-                <button
-                  type="button"
-                  value="previous-item"
-                  onClick={onClick_ButtonChangeItem}
-                  className={`${stylesQC['button__previous-item']}`}
-                >
-                  <IconAngle
-                    className={`${stylesQC['icon__previous-item']}`}
-                    direction="left"
-                    kind="regular"
-                  />
-                </button>
-                <button
-                  type="button"
-                  value="next-item"
-                  onClick={onClick_ButtonChangeItem}
-                  className={`${stylesQC['button__next-item']}`}
-                >
-                  <IconAngle
-                    className={`${stylesQC['icon__next-item']}`}
-                    direction="right"
-                    kind="regular"
-                  />
-                </button>
-              </div>
+              {(situation === 'editing' || situation === 'creating') && (
+                <div className={`${stylesModal['content__section']}`}>
+                  <button
+                    type="button"
+                    value="delete-item"
+                    className={`${styles['button__delete-item']} ${stylesQC['button__basic']}`}
+                    onClick={onClick_AnyMainButton}
+                  >
+                    <FormattedMessage
+                      id={`Modal.QuizManageAnswersMarks_Delete${
+                        kind === 'answer' ? 'Answer' : 'Mark'
+                      }`}
+                      values={{
+                        index: `${itemIndex + 1} / ${itemAllNumber}`,
+                      }}
+                    />
+                  </button>
+                  <button
+                    type="button"
+                    value="previous-item"
+                    onClick={onClick_ButtonChangeItem}
+                    className={`${stylesQC['button__previous-item']}`}
+                  >
+                    <IconAngle
+                      className={`${stylesQC['icon__previous-item']}`}
+                      direction="left"
+                      kind="regular"
+                    />
+                  </button>
+                  <button
+                    type="button"
+                    value="next-item"
+                    onClick={onClick_ButtonChangeItem}
+                    className={`${stylesQC['button__next-item']}`}
+                  >
+                    <IconAngle
+                      className={`${stylesQC['icon__next-item']}`}
+                      direction="right"
+                      kind="regular"
+                    />
+                  </button>
+                </div>
+              )}
             </>
           )}
         </div>

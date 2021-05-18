@@ -9,7 +9,7 @@ import { StateRoot } from 'store/reducers';
 import * as actions from 'store/actions';
 import * as types from 'store/types';
 import pcTryMove from './pcTryMove';
-import applySucceededMoveToQuizPresent from './applySucceededMoveToQuizPresent';
+import applySucceededMoveToQuizState from './applySucceededMoveToQuizState';
 import checkAnswer, { GradingResult } from './checkAnswer';
 
 export default function* moveWhilePlayingQuiz(action: actions.quiz.type__MOVE_IN_QUIZ_PLAYING) {
@@ -22,7 +22,7 @@ export default function* moveWhilePlayingQuiz(action: actions.quiz.type__MOVE_IN
     if (playerTriedMoveResult === null) {
       console.log("player's move was not valid");
     } else {
-      yield applySucceededMoveToQuizPresent(playerTriedMoveResult);
+      yield applySucceededMoveToQuizState(playerTriedMoveResult);
 
       yield delay(1000);
 

@@ -15,7 +15,7 @@ import { waitForStateChangeToDifferentValue } from 'store/sagas/others/waitForSt
 import {
   correctChessMoveTree,
   markedChessMoveTree,
-} from 'components/Main/Quiz/QuizEditing/chessMoveTree';
+} from 'components/Main/Quiz/chessMoveTree';
 
 // <Route path="/quiz" >    Quiz 컴포넌트가 마운트 되자마자, return__WATCH_STARTING_FEN_CHANGE  디스패치 dispatch 한다!
 function* watchFenStartChange(action: actions.quiz.type__WATCH_STARTING_FEN_CHANGE) {
@@ -24,10 +24,20 @@ function* watchFenStartChange(action: actions.quiz.type__WATCH_STARTING_FEN_CHAN
     (state) => state.quiz.data.focusing.startingFen,
   );
 
-  //console.log('startingFen of Quiz changed: ', newStartingFen);
+  const focusingQuizData: types.quiz.Quiz = yield select(
+    (state: StateRoot) => state.quiz.data.focusing,
+  );
 
   correctChessMoveTree.restart(newStartingFen);
+  focusingQuizData.correctSanSeriesList.forEach(e=>{
+    correctChessMoveTree.putSeriesSan(e);
+  });
+
   markedChessMoveTree.restart(newStartingFen);
+  focusingQuizData.markedSanSeriesList.forEach(e=>{
+    markedChessMoveTree.putSeriesSan(e);
+  });
+
   yield put(
     actions.quiz.return__REPLACE({
       keyList: ['data', 'focusing', 'nextTurn'],

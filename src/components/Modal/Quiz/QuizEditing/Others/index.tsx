@@ -6,7 +6,7 @@ import focusingChess from 'libraries/chess';
 import {
   correctChessMoveTree,
   markedChessMoveTree,
-} from 'components/Main/Quiz/QuizEditing/chessMoveTree';
+} from 'components/Main/Quiz/chessMoveTree';
 
 import { useLocation } from 'react-router-dom';
 import { FormattedMessage } from 'react-intl';

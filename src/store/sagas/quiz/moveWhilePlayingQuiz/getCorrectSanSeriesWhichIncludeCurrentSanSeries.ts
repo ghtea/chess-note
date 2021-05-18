@@ -3,11 +3,13 @@ import { StateRoot } from 'store/reducers';
 import * as actions from 'store/actions';
 import * as types from 'store/types';
 
-export default function* getCorrectSanSeriesWhichIncludePresentSanSeries() {
+export default function* getCorrectSanSeriesWhichIncludeCurrentSanSeries() {
   const focusingQuizState: types.quiz.QuizState = yield select(
     (state: StateRoot) => state.quiz.state.focusing,
   );
-  const focusingQuizData: types.quiz.Quiz = yield select((state: StateRoot) => state.quiz.data.focusing);
+  const focusingQuizData: types.quiz.Quiz = yield select(
+    (state: StateRoot) => state.quiz.data.focusing,
+  );
 
   const correctSanSeriesList = focusingQuizData.correctSanSeriesList;
   const presentSanSeries = focusingQuizState.sanSeries;

@@ -115,6 +115,8 @@
 
   "Notification.EditQuiz_NotAuthor__E": "You are not author of this quiz",
 
+  "Notification.ShowAnswerOrMark_NotValid__E": "There is a nonvalid move",
+
   "Notification.GetFocusListQuiz_UnknownError__E": "Failed to get the quizes",
   "Notification.GetQuiz_UnknownError__E": "Failed to get the quiz",
   "Notification.GetQuiz_NoQuiz__E": "The quiz doesn't exist",

@@ -114,6 +114,9 @@
 
   "Notification.EditQuiz_NotAuthor__E": "이 퀴즈의 작성자가 아닙니다",
 
+  "Notification.ShowAnswerOrMark_NotValid__E": "올바르지 않은 수가 있습니다",
+
+
   "Notification.GetFocusListQuiz_UnknownError__E": "퀴즈들을 불러오지 못했습니다",
   "Notification.GetQuiz_UnknownError__E": "퀴즈를 불러오지 못했습니다",
   "Notification.GetQuiz_NoQuiz__E": "해당 퀴즈가 존재하지 않습니다",

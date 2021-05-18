@@ -18,10 +18,7 @@ import styles from './index.module.scss';
 import stylesQC from '../../common/index.module.scss';
 import stylesModal from 'components/Modal/index.module.scss';
 
-import {
-  correctChessMoveTree,
-  markedChessMoveTree,
-} from 'components/Main/Quiz/QuizEditing/chessMoveTree';
+import { correctChessMoveTree, markedChessMoveTree } from 'components/Main/Quiz/chessMoveTree';
 
 type PropsQuizEditingSet = {
   top: number;
@@ -82,7 +79,7 @@ function QuizEditingSet({ top }: PropsQuizEditingSet) {
         dispatch(
           actions.quiz.return__REPLACE({
             keyList: ['data', 'focusing', 'correctSanSeriesList'],
-            replacement: correctChessMoveTree.returnListSeriesSan(),
+            replacement: correctChessMoveTree.returnSanSeriesList(),
           }),
         );
       } else if (value === 'mark') {
@@ -90,7 +87,7 @@ function QuizEditingSet({ top }: PropsQuizEditingSet) {
         dispatch(
           actions.quiz.return__REPLACE({
             keyList: ['data', 'focusing', 'markedSanSeriesList'],
-            replacement: markedChessMoveTree.returnListSeriesSan(),
+            replacement: markedChessMoveTree.returnSanSeriesList(),
           }),
         );
       }
@@ -137,8 +134,7 @@ function QuizEditingSet({ top }: PropsQuizEditingSet) {
               className={`${styles['button__start']}`}
               onClick={onClick_AnyMainButton}
             >
-              {' '}
-              <FormattedMessage id={`Modal.QuizEditingSet_SetAsStart`} />{' '}
+              <FormattedMessage id={`Modal.QuizEditingSet_SetAsStart`} />
             </button>
           </div>
 

@@ -5,7 +5,7 @@ import * as types from 'store/types';
 import focusingChess from 'libraries/chess';
 import { Move } from 'chess.js';
 
-export default function* applySucceededMoveToQuizPresent(succeededMove: Move) {
+export default function* applySucceededMoveToQuizState(succeededMove: Move) {
   const focusingQuizState: types.quiz.QuizState = yield select(
     (state: StateRoot) => state.quiz.state.focusing,
   );

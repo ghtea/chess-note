@@ -27,40 +27,42 @@ function Quiz({ quiz }: PropsQuiz) {
 
   // const situation = useSelector((state: StateRoot)=> state.quiz.state.situation);
 
-  const onClick_Button = useCallback((event: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
-    if (event.currentTarget.value === 'play-this-quiz') {
-      dispatch(
-        actions.quiz.return__FOCUS_QUIZ({
-          quiz: quiz,
-          situation: 'playing-trying',
-        }),
-      );
+  const onClick_Button = useCallback(
+    (event: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
+      if (event.currentTarget.value === 'play-this-quiz') {
+        dispatch(
+          actions.quiz.return__FOCUS_QUIZ({
+            quiz: quiz,
+            situation: 'playing-trying',
+          }),
+        );
 
-      // 단 하나만 플레이 리스트로서 대체
-      dispatch(
-        actions.quiz.return__REPLACE({
-          keyList: ['state', 'playingIdList'],
-          replacement: [quiz.id],
-        }),
-      );
-    }
-    else if (event.currentTarget.value === 'others') {
-      dispatch(
-        actions.quiz.return__REPLACE({
-          keyList: ['state', 'display', 'clickedQuizId'],
-          replacement: quiz.id,
-        }),
-      );
-      dispatch(
-        actions.appearance.return__REPLACE({
-          keyList: ['showing', 'modal', 'quizHomeOthers'],
-          replacement: true,
-        }),
-      );
-    }
-  }, [quiz]);
+        // 단 하나만 플레이 리스트로서 대체
+        dispatch(
+          actions.quiz.return__REPLACE({
+            keyList: ['state', 'playingIdList'],
+            replacement: [quiz.id],
+          }),
+        );
+      } else if (event.currentTarget.value === 'others') {
+        dispatch(
+          actions.quiz.return__REPLACE({
+            keyList: ['state', 'display', 'clickedQuizId'],
+            replacement: quiz.id,
+          }),
+        );
+        dispatch(
+          actions.appearance.return__REPLACE({
+            keyList: ['showing', 'modal', 'quizHomeOthers'],
+            replacement: true,
+          }),
+        );
+      }
+    },
+    [quiz],
+  );
 
-  const textData = useMemo(() => {
+  const dateTextPair = useMemo(() => {
     const yearCurrent = new Date().getFullYear();
 
     if (quiz.createdDate) {
@@ -73,9 +75,9 @@ function Quiz({ quiz }: PropsQuiz) {
       const min = dateQC.getMinutes().toString().padStart(2, '0');
 
       if (yearCurrent === dateQC.getFullYear()) {
-        return `${month}/${date} ${hour}:${min}`;
+        return [`${month}/${date}`, `${hour}:${min}`];
       } else {
-        return `${year}.${month}`;
+        return [`${year}`, `${month}`];
       }
     } else {
       return '';
@@ -93,7 +95,10 @@ function Quiz({ quiz }: PropsQuiz) {
 
       <td className={`${styles['author']}`}>{`${quiz.userId.slice(0, 6)}...`}</td>
 
-      <td className={`${styles['created']}`}>{textData}</td>
+      <td className={`${styles['created']}`}>
+        <span>{dateTextPair[0]}</span>
+        <span>{dateTextPair[1]}</span>
+      </td>
 
       <td className={`${styles['play']}`}>
         <button
@@ -107,13 +112,8 @@ function Quiz({ quiz }: PropsQuiz) {
       </td>
 
       <td className={`${styles['others']}`}>
-      <button
-          type="button"
-          onClick={onClick_Button}
-          value="others"
-          aria-label="Others"
-        >
-        <IconThreeDots className={styles['icon__others']} kind="regular" />
+        <button type="button" onClick={onClick_Button} value="others" aria-label="Others">
+          <IconThreeDots className={styles['icon__others']} kind="regular" />
         </button>
       </td>
     </tr>

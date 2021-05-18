@@ -14,8 +14,6 @@ export const return__REPLACE = (payload: Payload__REPLACE) => {
 };
 export type type__REPLACE = ReturnType<typeof return__REPLACE>; // 리덕스에서의 type, 타입스크립트에서의 type 헷갈림 주의!
 
-
-
 export const name__MOVE_WHILE_EDITING_QUIZ = 'quiz/MOVE_WHILE_EDITING_QUIZ';
 type Payload__MOVE_WHILE_EDITING_QUIZ = {
   from?: string;
@@ -155,11 +153,12 @@ export const return__WATCH_STARTING_FEN_CHANGE = () => {
 };
 export type type__WATCH_STARTING_FEN_CHANGE = ReturnType<typeof return__WATCH_STARTING_FEN_CHANGE>;
 
+// play
 export const name__PLAY_RANDOM_QUIZ = 'quiz/PLAY_RANDOM_QUIZ';
 type Payload__PLAY_RANDOM_QUIZ = {
   kind: 'my-quiz' | 'public-quiz';
 };
-export const return__PLAY_RANDOM_QUIZ= (payload: Payload__PLAY_RANDOM_QUIZ) => {
+export const return__PLAY_RANDOM_QUIZ = (payload: Payload__PLAY_RANDOM_QUIZ) => {
   return {
     type: name__PLAY_RANDOM_QUIZ,
     payload: payload,
@@ -168,9 +167,24 @@ export const return__PLAY_RANDOM_QUIZ= (payload: Payload__PLAY_RANDOM_QUIZ) => {
 export type type__PLAY_RANDOM_QUIZ = ReturnType<typeof return__PLAY_RANDOM_QUIZ>;
 
 export const name__PLAY_NEXT_QUIZ = 'quiz/PLAY_NEXT_QUIZ';
-export const return__PLAY_NEXT_QUIZ= ( ) => {
+export const return__PLAY_NEXT_QUIZ = () => {
   return {
     type: name__PLAY_NEXT_QUIZ,
   };
 };
 export type type__PLAY_NEXT_QUIZ = ReturnType<typeof return__PLAY_NEXT_QUIZ>;
+
+// manage answers, marks
+export const name__SHOW_ANSWER_OR_MARK = 'quiz/SHOW_ANSWER_OR_MARK';
+type Payload__SHOW_ANSWER_OR_MARK = {
+  index: number;
+  kind: 'answer' | 'mark';
+};
+export const return__SHOW_ANSWER_OR_MARK = (payload: Payload__SHOW_ANSWER_OR_MARK) => {
+  return {
+    type: name__SHOW_ANSWER_OR_MARK,
+    payload: payload,
+  };
+};
+export type type__SHOW_ANSWER_OR_MARK = ReturnType<typeof return__SHOW_ANSWER_OR_MARK>;
+
