@@ -12,13 +12,16 @@ import { StateRoot } from 'store/reducers';
 import * as actions from 'store/actions';
 import * as types from 'store/types';
 import { waitForStateChangeToDifferentValue } from 'store/sagas/others/waitForStateChange';
-import {correctChessMoveTree, markedChessMoveTree} from 'components/Main/Quiz/QuizEditing/chessMoveTree';
+import {
+  correctChessMoveTree,
+  markedChessMoveTree,
+} from 'components/Main/Quiz/QuizEditing/chessMoveTree';
 
 // <Route path="/quiz" >    Quiz 컴포넌트가 마운트 되자마자, return__WATCH_STARTING_FEN_CHANGE  디스패치 dispatch 한다!
-function* watchFenStartChange(action: actions.data.quiz.type__WATCH_STARTING_FEN_CHANGE) {
+function* watchFenStartChange(action: actions.quiz.type__WATCH_STARTING_FEN_CHANGE) {
   const newStartingFen: string = yield call(
     waitForStateChangeToDifferentValue,
-    (state) => state.data.quiz.focusing.startingFen,
+    (state) => state.quiz.data.focusing.startingFen,
   );
 
   //console.log('startingFen of Quiz changed: ', newStartingFen);
@@ -26,8 +29,8 @@ function* watchFenStartChange(action: actions.data.quiz.type__WATCH_STARTING_FEN
   correctChessMoveTree.restart(newStartingFen);
   markedChessMoveTree.restart(newStartingFen);
   yield put(
-    actions.data.return__REPLACE({
-      keyList: ['quiz', 'focusing', 'nextTurn'],
+    actions.quiz.return__REPLACE({
+      keyList: ['data', 'focusing', 'nextTurn'],
       replacement: focusingChess.turn() === 'w' ? 'white' : 'black',
     }),
   );

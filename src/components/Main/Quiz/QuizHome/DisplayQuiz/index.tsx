@@ -23,16 +23,14 @@ function DisplayQuiz() {
   const dispatch = useDispatch();
   // const userReady = useSelector((state: StateRoot) => state.status.auth.user.ready);
 
-  const statusListMyPublic = useSelector(
-    (state: StateRoot) => state.status.data.quiz.publicQuizList,
-  );
+  const statusListMyPublic = useSelector((state: StateRoot) => state.status.data.quiz.publicQuizList);
   const statusListMyQuiz = useSelector((state: StateRoot) => state.status.data.quiz.myQuizList);
 
-  const publicQuizList = useSelector((state: StateRoot) => state.data.quiz.publicQuizList);
-  const myQuizList = useSelector((state: StateRoot) => state.data.quiz.myQuizList);
+  const publicQuizList = useSelector((state: StateRoot) => state.quiz.data.publicQuizList);
+  const myQuizList = useSelector((state: StateRoot) => state.quiz.data.myQuizList);
 
   // const sorting = useSelector((state: StateRoot)=>state.status.current.football.leagueStandings.sorting);
-  const mode = useSelector((state: StateRoot) => state.present.quiz.display.mode);
+  const mode = useSelector((state: StateRoot) => state.quiz.state.display.mode);
 
   const onClick_Option = useCallback((event: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
     const { value } = event.currentTarget;
@@ -46,8 +44,8 @@ function DisplayQuiz() {
 
     if (name === 'mode') {
       dispatch(
-        actions.present.return__REPLACE({
-          keyList: ['quiz', 'display', 'mode'],
+        actions.quiz.return__REPLACE({
+          keyList: ['state', 'display', 'mode'],
           replacement: value,
         }),
       );
@@ -56,7 +54,7 @@ function DisplayQuiz() {
 
   type Draft = {
     mode: {
-      value: types.present.quiz.DisplayMode;
+      value: types.quiz.DisplayMode;
       label: string;
     }[];
   };
@@ -147,7 +145,7 @@ function DisplayQuiz() {
 
           <tbody>
             {(mode === 'my-quiz' ? myQuizList : publicQuizList).map(
-              (quizEach: types.data.quiz.Quiz, index: number) => (
+              (quizEach: types.quiz.Quiz, index: number) => (
                 <Quiz quiz={quizEach} key={`Quiz-${index}`} />
               ),
             )}

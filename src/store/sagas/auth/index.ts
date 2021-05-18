@@ -20,7 +20,7 @@ import getMemberByUserId from './getMemerByUserId/getMemberByUserId';
 
 import * as actions from 'store/actions';
 
-export default function* sagaAuth() {
+export default function* authSaga() {
   yield takeLatest(actions.auth.name__REPLACE_USER, replaceUser);
 
   yield takeLatest(actions.auth.name__LOG_CHECK_SUCCEEDED, logCheckSucceeded);

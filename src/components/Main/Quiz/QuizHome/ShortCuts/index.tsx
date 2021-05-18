@@ -15,7 +15,6 @@ import Loading from 'components/Global/Loading';
 //import Portal from './ShortCuts/Portal';
 
 import styles from './index.module.scss';
-import { KindGetFocusListQuiz } from 'store/types/data/quiz';
 import IconPlus from 'svgs/basic/IconPlus';
 import IconShuffle from 'svgs/basic/IconShuffle';
 // import IconSort from 'svgs/basic/IconSort';
@@ -38,7 +37,7 @@ function ShortCuts() {
       } else if (value === 'create') {
         history.push('/quiz/create');
         dispatch(
-          actions.data.quiz.return__FOCUS_QUIZ({
+          actions.quiz.return__FOCUS_QUIZ({
             quiz: undefined,
             situation: 'creating',
           }),

@@ -19,19 +19,19 @@ import IconPlay from 'svgs/basic/IconPlay';
 
 // import IconSort from 'svgs/basic/IconSort';
 type PropsQuiz = {
-  quiz: types.data.quiz.Quiz;
+  quiz: types.quiz.Quiz;
 };
 
 function Quiz({ quiz }: PropsQuiz) {
   const dispatch = useDispatch();
 
-  // const situation = useSelector((state: StateRoot)=> state.present.quiz.focusing.situation);
+  // const situation = useSelector((state: StateRoot)=> state.quiz.state.focusing.situation);
 
   const onClick_Button = useCallback((event: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
     if (event.currentTarget.value === 'play-this-quiz') {
       console.log('play!');
       dispatch(
-        actions.data.quiz.return__FOCUS_QUIZ({
+        actions.quiz.return__FOCUS_QUIZ({
           quiz: quiz,
           situation: 'playing',
         }),
@@ -39,8 +39,8 @@ function Quiz({ quiz }: PropsQuiz) {
 
       // 단 하나만 플레이 리스트로서 대체
       dispatch(
-        actions.present.return__REPLACE({
-          keyList: ['quiz', 'listIdPlaying'],
+        actions.quiz.return__REPLACE({
+          keyList: ['state', 'playingIdList'],
           replacement: [quiz.id],
         }),
       );

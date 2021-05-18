@@ -34,9 +34,8 @@ export default function ToolBarQP() {
   const lengthChessBoard = useSelector(
     (state: StateRoot) => state.appearance.layout.document.chessBoard.length,
   );
-  const statusQuiz = useSelector((state: StateRoot) => state.present.quiz);
 
-  const situation = useSelector((state: StateRoot) => state.present.quiz.focusing.situation);
+  const situation = useSelector((state: StateRoot) => state.quiz.state.focusing.situation);
 
   // const [positionStart, setPositionStart] = useState<null | string>(null);
   // const onClick_ControlPaste = useCallback(
@@ -54,12 +53,10 @@ export default function ToolBarQP() {
   const onClick_Main = useCallback((e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
     const value = e.currentTarget.value;
     if (value === 'back-to-start') {
-      dispatch(actions.data.quiz.return__BACK_TO_START());
-    } 
-    else if (value === 'back-to-previous') {
-      dispatch(actions.data.quiz.return__BACK_TO_PREVIOUS());
-    }
-    else if (value === 'save') {
+      dispatch(actions.quiz.return__BACK_TO_START());
+    } else if (value === 'back-to-previous') {
+      dispatch(actions.quiz.return__BACK_TO_PREVIOUS());
+    } else if (value === 'save') {
       dispatch(
         actions.appearance.return__REPLACE({
           keyList: ['showing', 'modal', 'quizEditingSave'],

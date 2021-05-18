@@ -8,7 +8,7 @@ import detectLanguage from './detectLanguage';
 import readOptionTheme from './readOptionTheme';
 import decideTheme from './decideTheme';
 
-export default function* sagaStatus() {
+export default function* statusSaga() {
   yield takeEvery(actions.status.name__DETECT_LANGUAGE, detectLanguage);
 
   yield takeEvery(actions.status.name__READ_OPTION_THEME, readOptionTheme);

@@ -9,16 +9,15 @@ import { StateRoot } from 'store/reducers';
 import * as actions from 'store/actions';
 import * as types from 'store/types';
 
-export default function* backToPrevious(action: actions.data.quiz.type__BACK_TO_PREVIOUS) {
-
+export default function* backToPrevious(action: actions.quiz.type__BACK_TO_PREVIOUS) {
   yield backOneMove();
 
   // 멈춘 위치가, 컴퓨터가 두어야하는 턴이면 한번 더 뒤로가기
   const nextTurn: 'white' | 'black' = yield select(
-    (state: StateRoot) => state.data.quiz.focusing.nextTurn
+    (state: StateRoot) => state.quiz.data.focusing.nextTurn,
   );
-  const situation: types.present.quiz.Situation = yield select(
-    (state: StateRoot) => state.present.quiz.focusing.situation
+  const situation: types.quiz.Situation = yield select(
+    (state: StateRoot) => state.quiz.state.focusing.situation,
   );
   if (situation === 'playing' || situation === 'failed' || situation === 'solved') {
     if (nextTurn[0] !== focusingChess.turn()) {
@@ -29,26 +28,24 @@ export default function* backToPrevious(action: actions.data.quiz.type__BACK_TO_
 }
 
 function* backOneMove() {
-  const quizData: types.data.quiz.Quiz = yield select(
-    (state: StateRoot) => state.data.quiz.focusing,
-  );
-  const quizPresent: types.present.quiz.Quiz = yield select(
-    (state: StateRoot) => state.present.quiz.focusing,
+  const focusingQuizData: types.quiz.Quiz = yield select((state: StateRoot) => state.quiz.data.focusing);
+  const focusingQuizState: types.quiz.QuizState = yield select(
+    (state: StateRoot) => state.quiz.state.focusing,
   );
 
   focusingChess.undo();
-  const newSanSeries = [...quizPresent.sanSeries];
+  const newSanSeries = [...focusingQuizState.sanSeries];
   newSanSeries.pop();
 
   const replacement = {
-    ...quizPresent,
+    ...focusingQuizState,
     fen: focusingChess.fen(),
     turn: focusingChess.turn() === 'w' ? 'white' : 'black',
     sanSeries: newSanSeries,
   };
   yield put(
-    actions.present.return__REPLACE({
-      keyList: ['quiz', 'focusing'],
+    actions.quiz.return__REPLACE({
+      keyList: ['state', 'focusing'],
       replacement: replacement,
     }),
   );

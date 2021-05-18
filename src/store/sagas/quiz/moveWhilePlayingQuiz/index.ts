@@ -12,10 +12,7 @@ import pcTryMove from './pcTryMove';
 import applySucceededMoveToQuizPresent from './applySucceededMoveToQuizPresent';
 import checkAnswer, { GradingResult } from './checkAnswer';
 
-
-export default function* moveWhilePlayingQuiz(
-  action: actions.data.quiz.type__MOVE_IN_QUIZ_PLAYING,
-) {
+export default function* moveWhilePlayingQuiz(action: actions.quiz.type__MOVE_IN_QUIZ_PLAYING) {
   const { from, to, san } = action.payload;
 
   try {
@@ -30,7 +27,7 @@ export default function* moveWhilePlayingQuiz(
       yield delay(1000);
 
       const gradingResult: GradingResult = yield checkAnswer();
-    
+
       if (gradingResult === 'wrong') {
         yield put(
           actions.notification.return__ADD_DELETE_BANNER({
@@ -38,26 +35,25 @@ export default function* moveWhilePlayingQuiz(
           }),
         );
         yield put(
-          actions.present.return__REPLACE({
-            keyList: ['quiz', 'focusing', 'situation'],
+          actions.quiz.return__REPLACE({
+            keyList: ['state', 'focusing', 'situation'],
             replacement: 'failed',
           }),
         );
-      }
-      else if (gradingResult === 'complete-answer') {
+      } else if (gradingResult === 'complete-answer') {
         yield put(
           actions.notification.return__ADD_DELETE_BANNER({
             codeSituation: 'PlayQuiz_Correct__S',
           }),
         );
         yield put(
-          actions.present.return__REPLACE({
-            keyList: ['quiz', 'focusing', 'situation'],
+          actions.quiz.return__REPLACE({
+            keyList: ['state', 'focusing', 'situation'],
             replacement: 'solved',
           }),
         );
-      }
-      else { //    gradingResult === 'partial-answer'
+      } else {
+        //    gradingResult === 'partial-answer'
         yield pcTryMove();
       }
     }
@@ -65,6 +61,3 @@ export default function* moveWhilePlayingQuiz(
     console.error(error);
   }
 }
-
-
-

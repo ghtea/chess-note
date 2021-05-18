@@ -19,7 +19,6 @@ import IconAngle from 'svgs/basic/IconAngle';
 import IconOthers from 'svgs/basic/IconThreeDots';
 // import {Chess} from 'chess.js'; // => makes error
 
-
 export default function StatusBarQP() {
   const dispatch = useDispatch();
 
@@ -30,8 +29,8 @@ export default function StatusBarQP() {
     (state: StateRoot) => state.appearance.layout.document.chessBoard.length,
   );
 
-  const turn = useSelector((state: StateRoot) => state.present.quiz.focusing.turn);
-  const situation = useSelector((state: StateRoot) => state.present.quiz.focusing.situation);
+  const turn = useSelector((state: StateRoot) => state.quiz.state.focusing.turn);
+  const situation = useSelector((state: StateRoot) => state.quiz.state.focusing.situation);
 
   const onClick_Main = useCallback((e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
     const value = e.currentTarget.value;

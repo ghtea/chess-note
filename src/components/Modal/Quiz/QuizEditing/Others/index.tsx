@@ -3,7 +3,10 @@ import { firebaseAuth } from 'libraries/firebase';
 
 import history from 'libraries/history';
 import focusingChess from 'libraries/chess';
-import {correctChessMoveTree, markedChessMoveTree} from 'components/Main/Quiz/QuizEditing/chessMoveTree';
+import {
+  correctChessMoveTree,
+  markedChessMoveTree,
+} from 'components/Main/Quiz/QuizEditing/chessMoveTree';
 
 import { useLocation } from 'react-router-dom';
 import { FormattedMessage } from 'react-intl';
@@ -28,8 +31,8 @@ type PropsQuizEditingOthers = {
 function QuizEditingOthers({ top }: PropsQuizEditingOthers) {
   const dispatch = useDispatch();
 
-  const quizPresent = useSelector((state: StateRoot) => state.present.quiz.focusing);
-  const quizData = useSelector((state: StateRoot) => state.data.quiz.focusing);
+  const focusingQuizState = useSelector((state: StateRoot) => state.quiz.state.focusing);
+  const focusingQuizData = useSelector((state: StateRoot) => state.quiz.data.focusing);
   const [indexAnswer, setIndexAnswer] = useState<number>(0);
 
   const refModal = useRef<HTMLDivElement>(null);
@@ -65,29 +68,29 @@ function QuizEditingOthers({ top }: PropsQuizEditingOthers) {
           const turn = focusingChess.turn() === 'w' ? 'white' : 'black';
 
           dispatch(
-            actions.data.return__REPLACE({
-              keyList: ['quiz', 'focusing', 'startingFen'],
+            actions.quiz.return__REPLACE({
+              keyList: ['data', 'focusing', 'startingFen'],
               replacement: focusingChess.fen(),
             }),
           );
 
           dispatch(
-            actions.data.return__REPLACE({
-              keyList: ['quiz', 'focusing', 'side'],
+            actions.quiz.return__REPLACE({
+              keyList: ['data', 'focusing', 'side'],
               replacement: turn,
             }),
           );
 
           const replacementQuizPresent = {
-            ...quizPresent,
+            ...focusingQuizState,
             fen: focusingChess.fen(),
             turn: turn,
             sanSeries: [],
           };
 
           dispatch(
-            actions.present.return__REPLACE({
-              keyList: ['quiz', 'focusing'],
+            actions.quiz.return__REPLACE({
+              keyList: ['state', 'focusing'],
               replacement: replacementQuizPresent,
             }),
           );
@@ -104,19 +107,19 @@ function QuizEditingOthers({ top }: PropsQuizEditingOthers) {
         console.log('delete answer');
         correctChessMoveTree.deleteNthSeriesSan(indexAnswer);
         dispatch(
-          actions.data.return__REPLACE({
-            keyList: ['quiz', 'focusing', 'correctSanSeriesList'],
+          actions.quiz.return__REPLACE({
+            keyList: ['data', 'focusing', 'correctSanSeriesList'],
             replacement: correctChessMoveTree.returnListSeriesSan(),
           }),
         );
       }
     },
-    [quizPresent.sanSeries, quizData, indexAnswer],
+    [focusingQuizState.sanSeries, focusingQuizData, indexAnswer],
   );
 
   const onClick_ButtonChangeAnswer = useCallback(
     (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
-      const numberAnswer = quizData.correctSanSeriesList.length;
+      const numberAnswer = focusingQuizData.correctSanSeriesList.length;
       //console.log(numberAnswer)
       const value = e.currentTarget.value;
       let indexAnswerNew = indexAnswer;
@@ -128,7 +131,7 @@ function QuizEditingOthers({ top }: PropsQuizEditingOthers) {
 
       setIndexAnswer((indexAnswerNew + numberAnswer) % numberAnswer);
     },
-    [quizData.correctSanSeriesList.length, indexAnswer],
+    [focusingQuizData.correctSanSeriesList.length, indexAnswer],
   );
 
   return (
@@ -155,7 +158,7 @@ function QuizEditingOthers({ top }: PropsQuizEditingOthers) {
             </button>
           </div>
 
-          {quizData.correctSanSeriesList.length === 0 && (
+          {focusingQuizData.correctSanSeriesList.length === 0 && (
             <div className={`${stylesModal['content__section']}`}>
               <span className={`${stylesQC['span__basic']}`}>
                 <span>
@@ -165,7 +168,7 @@ function QuizEditingOthers({ top }: PropsQuizEditingOthers) {
             </div>
           )}
 
-          {quizData.correctSanSeriesList.length > 0 && (
+          {focusingQuizData.correctSanSeriesList.length > 0 && (
             <>
               <div className={`${stylesModal['content__section']}`}>
                 <button
@@ -177,7 +180,7 @@ function QuizEditingOthers({ top }: PropsQuizEditingOthers) {
                   <FormattedMessage
                     id={`Modal.QuizEditingOthers_ShowAnswer`}
                     values={{
-                      index: `${indexAnswer + 1} / ${quizData.correctSanSeriesList.length}`,
+                      index: `${indexAnswer + 1} / ${focusingQuizData.correctSanSeriesList.length}`,
                     }}
                   />
                 </button>
@@ -218,7 +221,7 @@ function QuizEditingOthers({ top }: PropsQuizEditingOthers) {
                   <FormattedMessage
                     id={`Modal.QuizEditingOthers_DeleteAnswer`}
                     values={{
-                      index: `${indexAnswer + 1} / ${quizData.correctSanSeriesList.length}`,
+                      index: `${indexAnswer + 1} / ${focusingQuizData.correctSanSeriesList.length}`,
                     }}
                   />
                 </button>

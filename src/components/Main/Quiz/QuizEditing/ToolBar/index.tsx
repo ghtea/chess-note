@@ -34,8 +34,8 @@ function ToolBarQE() {
   const lengthChessBoard = useSelector(
     (state: StateRoot) => state.appearance.layout.document.chessBoard.length,
   );
-  //const quizPresent = useSelector((state: StateRoot)=>state.present.quiz.focusing);
-  const quizData = useSelector((state: StateRoot) => state.data.quiz.focusing);
+  //const focusingQuizState = useSelector((state: StateRoot)=>state.quiz.state.focusing);
+  const focusingQuizData = useSelector((state: StateRoot) => state.quiz.data.focusing);
 
   // const [positionStart, setPositionStart] = useState<null | string>(null);
   // const onClick_ControlPaste = useCallback(
@@ -60,9 +60,9 @@ function ToolBarQE() {
         }),
       );
     } else if (value === 'back-to-start') {
-      dispatch(actions.data.quiz.return__BACK_TO_START());
+      dispatch(actions.quiz.return__BACK_TO_START());
     } else if (value === 'back-to-previous') {
-      dispatch(actions.data.quiz.return__BACK_TO_PREVIOUS());
+      dispatch(actions.quiz.return__BACK_TO_PREVIOUS());
     } else if (value === 'set') {
       dispatch(
         actions.appearance.return__REPLACE({
@@ -126,9 +126,9 @@ function ToolBarQE() {
         <button type="button" value="show-answers" aria-label="Show Answers" onClick={onClick_Main}>
           <IconAnswer
             className={`${styles['icon__answer']}`}
-            kind={quizData.correctSanSeriesList.length === 0 ? 'light' : 'solid'}
+            kind={focusingQuizData.correctSanSeriesList.length === 0 ? 'light' : 'solid'}
           />
-          <span> {quizData.correctSanSeriesList.length} </span>
+          <span> {focusingQuizData.correctSanSeriesList.length} </span>
         </button>
 
         <button
@@ -139,9 +139,9 @@ function ToolBarQE() {
         >
           <IconMention
             className={`${styles['icon__mention']}`}
-            kind={quizData.markedSanSeriesList.length === 0 ? 'light' : 'solid'}
+            kind={focusingQuizData.markedSanSeriesList.length === 0 ? 'light' : 'solid'}
           />
-          <span> {quizData.markedSanSeriesList.length} </span>
+          <span> {focusingQuizData.markedSanSeriesList.length} </span>
         </button>
       </div>
 

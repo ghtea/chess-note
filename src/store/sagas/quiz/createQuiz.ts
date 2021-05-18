@@ -16,7 +16,7 @@ import * as types from 'store/types';
 const CREATE_QUIZ = gql`
     mutation CreateQuiz($argument: CreateQuizInputType!){
         createQuiz(createQuizInputType: $argument) 
-            ${types.data.quiz.gqlQuizString}
+            ${types.quiz.gqlQuizString}
     }
 `;
 
@@ -25,7 +25,7 @@ const requestCreateQuiz = (argument: Record<string, unknown>) => {
 };
 
 // directly access to sportdataAPI -> update firebase (get document on return)
-function* createQuiz(action: actions.data.quiz.type__CREATE_QUIZ) {
+function* createQuiz(action: actions.quiz.type__CREATE_QUIZ) {
   const {
     name,
     nextTurn,
@@ -71,7 +71,7 @@ function* createQuiz(action: actions.data.quiz.type__CREATE_QUIZ) {
 
       // console.log(res)
 
-      const quizFromRes = res.data?.createQuiz as types.data.quiz.Quiz | undefined;
+      const quizFromRes = res.data?.createQuiz as types.quiz.Quiz | undefined;
       if (quizFromRes?.id) {
         history.push(`/quiz/edit/${quizFromRes.id}`);
       }

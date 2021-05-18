@@ -7,12 +7,10 @@ import getCorrectSanSeriesWhichIncludePresentSanSeries from './getCorrectSanSeri
 export type GradingResult = 'wrong' | 'complete-answer' | 'partial-answer';
 
 export default function* checkAnswer() {
-  const quizPresent: types.present.quiz.Quiz = yield select(
-    (state: StateRoot) => state.present.quiz.focusing,
+  const focusingQuizState: types.quiz.QuizState = yield select(
+    (state: StateRoot) => state.quiz.state.focusing,
   );
-  const quizData: types.data.quiz.Quiz = yield select(
-    (state: StateRoot) => state.data.quiz.focusing,
-  );
+  const focusingQuizData: types.quiz.Quiz = yield select((state: StateRoot) => state.quiz.data.focusing);
 
   const remainingCorrectSanSeries: string[] | undefined =
     yield getCorrectSanSeriesWhichIncludePresentSanSeries();
@@ -21,9 +19,9 @@ export default function* checkAnswer() {
 
   if (!remainingCorrectSanSeries) {
     gradingResult = 'wrong';
-  } else if (remainingCorrectSanSeries.length === quizPresent.sanSeries.length) {
+  } else if (remainingCorrectSanSeries.length === focusingQuizState.sanSeries.length) {
     gradingResult = 'complete-answer';
-  } else if (remainingCorrectSanSeries.length > quizPresent.sanSeries.length) {
+  } else if (remainingCorrectSanSeries.length > focusingQuizState.sanSeries.length) {
     gradingResult = 'partial-answer';
   } else {
     // 그외 알수없는 틀림

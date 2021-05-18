@@ -4,18 +4,16 @@ import * as actions from 'store/actions';
 import * as types from 'store/types';
 
 export default function* getCorrectSanSeriesWhichIncludePresentSanSeries() {
-  const quizPresent: types.present.quiz.Quiz = yield select(
-    (state: StateRoot) => state.present.quiz.focusing,
+  const focusingQuizState: types.quiz.QuizState = yield select(
+    (state: StateRoot) => state.quiz.state.focusing,
   );
-  const quizData: types.data.quiz.Quiz = yield select(
-    (state: StateRoot) => state.data.quiz.focusing,
-  );
+  const focusingQuizData: types.quiz.Quiz = yield select((state: StateRoot) => state.quiz.data.focusing);
 
-  const correctSanSeriesList = quizData.correctSanSeriesList;
-  const presentSanSeries = quizPresent.sanSeries;
-  // 이전까지의 listSanMove (quizPresent) 에 현재 움직임을 포함한 배열을
+  const correctSanSeriesList = focusingQuizData.correctSanSeriesList;
+  const presentSanSeries = focusingQuizState.sanSeries;
+  // 이전까지의 listSanMove (focusingQuizState) 에 현재 움직임을 포함한 배열을
   // 처음부터 포함하는 정답 움직임이 있어야 한다
-  //const sanSeriesUntilThis = [...quizPresent.sanSeries, result?.san];
+  //const sanSeriesUntilThis = [...focusingQuizState.sanSeries, result?.san];
 
   // 정답 움직임 모음집 에서 여태까지의 움직임과 일치하는 모음집 부분집합 구하기
   const remainingCorrectSanSeriesList = correctSanSeriesList.filter((sanSeriesCorrectEach) => {

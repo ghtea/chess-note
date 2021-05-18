@@ -9,25 +9,25 @@ import { StateRoot } from 'store/reducers';
 import * as actions from 'store/actions';
 import * as types from 'store/types';
 
-function* backToStart(action: actions.data.quiz.type__BACK_TO_START) {
-  const quizData: types.data.quiz.Quiz = yield select(
-    (state: StateRoot) => state.data.quiz.focusing,
+function* backToStart(action: actions.quiz.type__BACK_TO_START) {
+  const focusingQuizData: types.quiz.Quiz = yield select(
+    (state: StateRoot) => state.quiz.data.focusing,
   );
-  const quizPresent: types.present.quiz.Quiz = yield select(
-    (state: StateRoot) => state.present.quiz.focusing,
+  const focusingQuizState: types.quiz.QuizState = yield select(
+    (state: StateRoot) => state.quiz.state.focusing,
   );
 
-  focusingChess.load(quizData.startingFen);
+  focusingChess.load(focusingQuizData.startingFen);
 
   const replacement = {
-    ...quizPresent,
-    fen: quizData.startingFen,
+    ...focusingQuizState,
+    fen: focusingQuizData.startingFen,
     turn: focusingChess.turn() === 'w' ? 'white' : 'black',
     sanSeries: [],
   };
   yield put(
-    actions.present.return__REPLACE({
-      keyList: ['quiz', 'focusing'],
+    actions.quiz.return__REPLACE({
+      keyList: ['state', 'focusing'],
       replacement: replacement,
     }),
   );

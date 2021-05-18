@@ -9,7 +9,7 @@ import deleteCodeSituationOthers from 'store/sagas/notification/deleteCodeSituat
 
 import * as actions from 'store/actions';
 
-export default function* sagaNotification() {
+export default function* notificationSaga() {
   yield takeEvery(actions.notification.name__ADD_DELETE_BANNER, addDeleteBanner);
   yield takeEvery(actions.notification.name__DELETE_BANNER, deleteBanner);
   yield takeEvery(actions.notification.name__ADD_CODE_SITUATION_OTHERS, addCodeSituationOthers);

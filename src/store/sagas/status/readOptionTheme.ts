@@ -12,7 +12,7 @@ function* readOptionTheme(action: actions.status.type__READ_OPTION_THEME) {
 
   if (typeof optionThemeCookie === 'string') {
     yield put(
-      actions.present.return__REPLACE({
+      actions.appearance.return__REPLACE({
         keyList: ['theme', 'option'],
         replacement: optionThemeCookie,
       }),

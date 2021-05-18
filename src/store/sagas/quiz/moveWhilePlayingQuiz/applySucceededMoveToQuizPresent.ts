@@ -6,20 +6,20 @@ import focusingChess from 'libraries/chess';
 import { Move } from 'chess.js';
 
 export default function* applySucceededMoveToQuizPresent(succeededMove: Move) {
-  const quizPresent: types.present.quiz.Quiz = yield select(
-    (state: StateRoot) => state.present.quiz.focusing,
+  const focusingQuizState: types.quiz.QuizState = yield select(
+    (state: StateRoot) => state.quiz.state.focusing,
   );
 
   const replacement = {
-    ...quizPresent,
+    ...focusingQuizState,
     fen: focusingChess.fen(),
     turn: focusingChess.turn() === 'w' ? 'white' : 'black',
-    sanSeries: [...quizPresent.sanSeries, succeededMove.san],
+    sanSeries: [...focusingQuizState.sanSeries, succeededMove.san],
   };
 
   yield put(
-    actions.present.return__REPLACE({
-      keyList: ['quiz', 'focusing'],
+    actions.quiz.return__REPLACE({
+      keyList: ['state', 'focusing'],
       replacement,
     }),
   );

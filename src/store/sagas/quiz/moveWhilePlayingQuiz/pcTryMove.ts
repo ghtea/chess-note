@@ -10,17 +10,17 @@ import getCorrectSanSeriesWhichIncludePresentSanSeries from './getCorrectSanSeri
 import applySucceededMoveToQuizPresent from './applySucceededMoveToQuizPresent';
 
 export default function* pcTryMove() {
-  const quizPresent: types.present.quiz.Quiz = yield select(
-    (state: StateRoot) => state.present.quiz.focusing,
+  const focusingQuizState: types.quiz.QuizState = yield select(
+    (state: StateRoot) => state.quiz.state.focusing,
   );
-  const quizData: types.data.quiz.Quiz = yield select(
-    (state: StateRoot) => state.data.quiz.focusing,
+  const focusingQuizData: types.quiz.Quiz = yield select(
+    (state: StateRoot) => state.quiz.data.focusing,
   );
 
   const remainingCorrectSanSeries: string[] =
     yield getCorrectSanSeriesWhichIncludePresentSanSeries();
 
-  const nextSan = remainingCorrectSanSeries[quizPresent.sanSeries.length - 1 + 1];
+  const nextSan = remainingCorrectSanSeries[focusingQuizState.sanSeries.length - 1 + 1];
   const pcTriedMoveResult = focusingChess.move(nextSan);
 
   if (!pcTriedMoveResult) {

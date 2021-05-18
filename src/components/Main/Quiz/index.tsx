@@ -17,12 +17,12 @@ function Quiz() {
 
   // const userReady = useSelector((state: StateRoot) => state.status.auth.user.ready);
   // const userId = useSelector((state: StateRoot) => state.auth.user?.id);
-  // const quizIdFocusing = useSelector((state: StateRoot) => state.data.quiz.focusing.id);
+  // const quizIdFocusing = useSelector((state: StateRoot) => state.quiz.data.focusing.id);
 
-  const situationCurrent = useSelector((state: StateRoot) => state.present.quiz.focusing.situation);
+  const situationCurrent = useSelector((state: StateRoot) => state.quiz.state.focusing.situation);
 
   useEffect(() => {
-    dispatch(actions.data.quiz.return__WATCH_STARTING_FEN_CHANGE());
+    dispatch(actions.quiz.return__WATCH_STARTING_FEN_CHANGE());
   }, []);
 
   useEffect(() => {
@@ -42,8 +42,8 @@ function Quiz() {
     }
     if (situationCurrent !== situationNew) {
       dispatch(
-        actions.present.return__REPLACE({
-          keyList: ['quiz', 'focusing', 'situation'],
+        actions.quiz.return__REPLACE({
+          keyList: ['state', 'focusing', 'situation'],
           replacement: situationNew,
         }),
       );

@@ -16,7 +16,7 @@ const stateInitial = {
 };
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
-const reducerAuth = handleActions<State, any>(
+const authReducer = handleActions<State, any>(
   {
     [actions.auth.name__REPLACE]: (previousState, action: actions.auth.type__REPLACE) => {
       return produce(previousState, (newState) => {
@@ -41,7 +41,7 @@ const reducerAuth = handleActions<State, any>(
 // https://medium.com/better-programming/4-ways-to-safely-access-nested-objects-in-vanilla-javascript-8671d09348a8
 
 /*
-const reducerAuth = (previousState: typeState = stateInitial, action: any): typeState => {
+const authReducer = (previousState: typeState = stateInitial, action: any): typeState => {
   switch (action.type) {
     
     case auth.REPLACE:
@@ -73,7 +73,7 @@ const reducerAuth = (previousState: typeState = stateInitial, action: any): type
 
 */
 
-export default reducerAuth;
+export default authReducer;
 
 /*
 const authReducer = handleActions({

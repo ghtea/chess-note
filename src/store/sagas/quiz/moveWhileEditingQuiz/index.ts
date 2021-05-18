@@ -10,13 +10,11 @@ import * as actions from 'store/actions';
 import * as types from 'store/types';
 import applySucceededMoveToQuizPresent from '../moveWhilePlayingQuiz/applySucceededMoveToQuizPresent';
 
-export default function* moveWhileEditingQuiz(
-  action: actions.data.quiz.type__MOVE_WHILE_EDITING_QUIZ,
-) {
+export default function* moveWhileEditingQuiz(action: actions.quiz.type__MOVE_WHILE_EDITING_QUIZ) {
   const { from, to, san } = action.payload;
 
-  const quizPresent: types.present.quiz.Quiz = yield select(
-    (state: StateRoot) => state.present.quiz.focusing,
+  const focusingQuizState: types.quiz.QuizState = yield select(
+    (state: StateRoot) => state.quiz.state.focusing,
   );
 
   try {

@@ -12,9 +12,7 @@ import { StateRoot } from 'store/reducers';
 import * as actions from 'store/actions';
 import * as types from 'store/types';
 
-export default function* watchUserLogInOut(
-  action: actions.data.quiz.type__WATCH_STARTING_FEN_CHANGE,
-) {
+export default function* watchUserLogInOut(action: actions.quiz.type__WATCH_STARTING_FEN_CHANGE) {
   const situation: 'logIn' | 'logOut' = yield call(waitForLogInOut);
 
   if (situation === 'logIn') {

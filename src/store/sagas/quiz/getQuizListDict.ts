@@ -21,7 +21,7 @@ const requestGetQuizListDict = (query: DocumentNode, argument: Record<string, un
 };
 
 // userId 있으면 개인 퀴즈들, 없으면 공개 퀴즈들
-function* getQuizListDict(action: actions.data.quiz.type__GET_QUIZ_LIST_DICT) {
+function* getQuizListDict(action: actions.quiz.type__GET_QUIZ_LIST_DICT) {
   yield put(
     actions.status.return__REPLACE({
       keyList: ['data', 'quiz', 'publicQuizList'],
@@ -48,8 +48,8 @@ function* getQuizListDict(action: actions.data.quiz.type__GET_QUIZ_LIST_DICT) {
     const GET_QUIZ_LIST_DICT = gql`
             query GetQuizListDict($argument: GetQuizListDictInputType!){
                 getQuizListDict(getQuizListDictInputType: $argument) {
-                    publicQuizList ${types.data.quiz.gqlQuizString}
-                    myQuizList ${types.data.quiz.gqlQuizString}
+                    publicQuizList ${types.quiz.gqlQuizString}
+                    myQuizList ${types.quiz.gqlQuizString}
                 }
             }
         `;
@@ -58,7 +58,7 @@ function* getQuizListDict(action: actions.data.quiz.type__GET_QUIZ_LIST_DICT) {
       userId,
     };
 
-    type GetQuizListDictData = Record<string, Record<string, types.data.quiz.Quiz[]>>;
+    type GetQuizListDictData = Record<string, Record<string, types.quiz.Quiz[]>>;
     const response: ApolloQueryResult<GetQuizListDictData> = yield call(
       requestGetQuizListDict,
       GET_QUIZ_LIST_DICT,
@@ -68,18 +68,18 @@ function* getQuizListDict(action: actions.data.quiz.type__GET_QUIZ_LIST_DICT) {
     // console.log(response);
 
     const publicQuizList = (response.data?.getQuizListDict.publicQuizList ||
-      []) as types.data.quiz.Quiz[];
-    const myQuizList = (response.data?.getQuizListDict.myQuizList || []) as types.data.quiz.Quiz[];
+      []) as types.quiz.Quiz[];
+    const myQuizList = (response.data?.getQuizListDict.myQuizList || []) as types.quiz.Quiz[];
 
     yield put(
-      actions.data.return__REPLACE({
-        keyList: ['quiz', 'publicQuizList'],
+      actions.quiz.return__REPLACE({
+        keyList: ['data', 'publicQuizList'],
         replacement: publicQuizList,
       }),
     );
     yield put(
-      actions.data.return__REPLACE({
-        keyList: ['quiz', 'myQuizList'],
+      actions.quiz.return__REPLACE({
+        keyList: ['data', 'myQuizList'],
         replacement: myQuizList,
       }),
     );

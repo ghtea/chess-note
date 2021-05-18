@@ -4,7 +4,6 @@ import { StateRoot } from 'store/reducers';
 import * as actions from 'store/actions';
 
 import styles from './index.module.scss';
-import { KindGetFocusListQuiz } from 'store/types/data/quiz';
 import ShortCuts from './ShortCuts';
 import DisplayQuiz from './DisplayQuiz';
 // import IconSort from 'svgs/basic/IconSort';
@@ -17,7 +16,7 @@ function QuizHome() {
   useEffect(() => {
     if (userStatus.ready || (userStatus.tried && !userStatus.ready)) {
       dispatch(
-        actions.data.quiz.return__GET_QUIZ_LIST_DICT({
+        actions.quiz.return__GET_QUIZ_LIST_DICT({
           userId: userId,
         }),
       );

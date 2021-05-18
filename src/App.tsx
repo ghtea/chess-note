@@ -29,7 +29,7 @@ function App() {
   //console.log('REACT_APP_NODE_ENV', process.env.NODE_ENV)
 
   // Language
-  const codeLanguageCurrent: string = useSelector((state: StateRoot) => state.present.language);
+  const codeLanguageCurrent: string = useSelector((state: StateRoot) => state.appearance.language);
   const translationLanguageCurrent = useMemo(() => {
     if (codeLanguageCurrent === 'ko') {
       return translationKo;
@@ -46,8 +46,10 @@ function App() {
   }, [codeLanguageCurrent]);
 
   // theme
-  const optionThemeCurrent: string = useSelector((state: StateRoot) => state.present.theme.option);
-  const nameThemeCurrent: string = useSelector((state: StateRoot) => state.present.theme.name);
+  const optionThemeCurrent: string = useSelector(
+    (state: StateRoot) => state.appearance.theme.option,
+  );
+  const nameThemeCurrent: string = useSelector((state: StateRoot) => state.appearance.theme.name);
   useEffect(() => {
     dispatch(actions.status.return__READ_OPTION_THEME());
   }, [optionThemeCurrent]);

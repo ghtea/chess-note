@@ -31,8 +31,8 @@ function QuizEditingUpload({ top }: PropsQuizEditingUpload) {
   const userReady = useSelector((state: StateRoot) => state.status.auth.user.ready);
   const userId = useSelector((state: StateRoot) => state.auth.user?.id);
 
-  const situation = useSelector((state: StateRoot) => state.present.quiz.focusing.situation);
-  const quizData = useSelector((state: StateRoot) => state.data.quiz.focusing);
+  const situation = useSelector((state: StateRoot) => state.quiz.state.focusing.situation);
+  const focusingQuizData = useSelector((state: StateRoot) => state.quiz.data.focusing);
 
   const { draft: draft_Main, onChange: onChange_Main } = useInputQuizEditingUpload({
     name: '',
@@ -67,17 +67,17 @@ function QuizEditingUpload({ top }: PropsQuizEditingUpload) {
             codeSituation: 'NotLoggedIn__E',
           }),
         );
-      } else if (quizData && userId) {
+      } else if (focusingQuizData && userId) {
         if (situation === 'creating') {
           dispatch(
-            actions.data.quiz.return__CREATE_QUIZ({
-              name: quizData.name,
-              nextTurn: quizData.nextTurn,
-              startingFen: quizData.startingFen,
-              correctSanSeriesList: quizData.correctSanSeriesList,
-              markedSanSeriesList: quizData.markedSanSeriesList,
+            actions.quiz.return__CREATE_QUIZ({
+              name: focusingQuizData.name,
+              nextTurn: focusingQuizData.nextTurn,
+              startingFen: focusingQuizData.startingFen,
+              correctSanSeriesList: focusingQuizData.correctSanSeriesList,
+              markedSanSeriesList: focusingQuizData.markedSanSeriesList,
               userId: userId,
-              isPublic: quizData.isPublic,
+              isPublic: focusingQuizData.isPublic,
             }),
           );
           dispatch(
@@ -91,7 +91,7 @@ function QuizEditingUpload({ top }: PropsQuizEditingUpload) {
         }
       }
     },
-    [quizData, userId, userReady],
+    [focusingQuizData, userId, userReady],
   );
 
   return (
@@ -109,7 +109,7 @@ function QuizEditingUpload({ top }: PropsQuizEditingUpload) {
           <div className={`${stylesModal['content__section']} ${styles['input-name']}`}>
             <InputText
               name="name"
-              value={quizData?.name}
+              value={focusingQuizData?.name}
               label={intl.formatMessage({ id: 'Global.Name' })}
               placeholder={intl.formatMessage({ id: 'Global.Name' })}
               required={false}

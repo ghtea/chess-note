@@ -30,8 +30,8 @@ type PropsQuizEditingSet = {
 function QuizEditingSet({ top }: PropsQuizEditingSet) {
   const dispatch = useDispatch();
 
-  const quizPresent = useSelector((state: StateRoot) => state.present.quiz.focusing);
-  const quizData = useSelector((state: StateRoot) => state.data.quiz.focusing);
+  const focusingQuizState = useSelector((state: StateRoot) => state.quiz.state.focusing);
+  const focusingQuizData = useSelector((state: StateRoot) => state.quiz.data.focusing);
   const [indexAnswer, setIndexAnswer] = useState<number>(0);
 
   const refModal = useRef<HTMLDivElement>(null);
@@ -66,54 +66,57 @@ function QuizEditingSet({ top }: PropsQuizEditingSet) {
 
       if (value === 'start') {
         dispatch(
-          actions.data.return__REPLACE({
-            keyList: ['quiz', 'focusing', 'startingFen'],
-            replacement: quizPresent.fen,
+          actions.quiz.return__REPLACE({
+            keyList: ['data', 'focusing', 'startingFen'],
+            replacement: focusingQuizState.fen,
           }),
         );
         dispatch(
-          actions.present.return__REPLACE({
-            keyList: ['quiz', 'focusing', 'sanSeries'],
+          actions.quiz.return__REPLACE({
+            keyList: ['state', 'focusing', 'sanSeries'],
             replacement: [],
           }),
         );
       } else if (value === 'answer') {
-        correctChessMoveTree.putSeriesSan(quizPresent.sanSeries);
+        correctChessMoveTree.putSeriesSan(focusingQuizState.sanSeries);
         dispatch(
-          actions.data.return__REPLACE({
-            keyList: ['quiz', 'focusing', 'correctSanSeriesList'],
+          actions.quiz.return__REPLACE({
+            keyList: ['data', 'focusing', 'correctSanSeriesList'],
             replacement: correctChessMoveTree.returnListSeriesSan(),
           }),
         );
       } else if (value === 'mark') {
-        markedChessMoveTree.putSeriesSan(quizPresent.sanSeries);
+        markedChessMoveTree.putSeriesSan(focusingQuizState.sanSeries);
         dispatch(
-          actions.data.return__REPLACE({
-            keyList: ['quiz', 'focusing', 'markedSanSeriesList'],
+          actions.quiz.return__REPLACE({
+            keyList: ['data', 'focusing', 'markedSanSeriesList'],
             replacement: markedChessMoveTree.returnListSeriesSan(),
           }),
         );
       }
     },
-    [quizPresent.sanSeries, quizData.correctSanSeriesList],
+    [focusingQuizState.sanSeries, focusingQuizData.correctSanSeriesList],
   );
 
   const isShowingSetAsAnswer = useMemo(() => {
-    if (quizData.startingFen && quizPresent.sanSeries.length > 0 && (quizPresent.turn !== quizData.nextTurn)) {
+    if (
+      focusingQuizData.startingFen &&
+      focusingQuizState.sanSeries.length > 0 &&
+      focusingQuizState.turn !== focusingQuizData.nextTurn
+    ) {
       return true;
     } else {
       return false;
     }
-  }, [quizData.startingFen, quizPresent.sanSeries]);
+  }, [focusingQuizData.startingFen, focusingQuizState.sanSeries]);
 
   const isShowingSetAsMark = useMemo(() => {
-    if (quizData.startingFen && quizPresent.sanSeries.length > 0) {
+    if (focusingQuizData.startingFen && focusingQuizState.sanSeries.length > 0) {
       return true;
     } else {
       return false;
     }
-  }, [quizData.startingFen, quizPresent.sanSeries]);
-  
+  }, [focusingQuizData.startingFen, focusingQuizState.sanSeries]);
 
   return (
     <div className={`${styles['root']} ${stylesQC['root']} ${stylesModal['root']}`}>

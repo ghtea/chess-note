@@ -37,7 +37,7 @@ const stateInitial = {
 };
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
-const reducerNotification = handleActions<State, any>(
+const notificationReducer = handleActions<State, any>(
   {
     [actions.notification.name__REPLACE]: (
       previousState,
@@ -65,7 +65,7 @@ const reducerNotification = handleActions<State, any>(
 // https://medium.com/better-programming/4-ways-to-safely-access-nested-objects-in-vanilla-javascript-8671d09348a8
 
 /*
-const reducerNotification = (previousState: typeState = stateInitial, action: any): typeState => {
+const notificationReducer = (previousState: typeState = stateInitial, action: any): typeState => {
   switch (action.type) {
     
     case notification.REPLACE:
@@ -97,7 +97,7 @@ const reducerNotification = (previousState: typeState = stateInitial, action: an
 
 */
 
-export default reducerNotification;
+export default notificationReducer;
 
 /*
 const notificationReducer = handleActions({

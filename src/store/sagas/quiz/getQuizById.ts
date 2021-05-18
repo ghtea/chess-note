@@ -21,7 +21,7 @@ const requestGetQuizById = (query: DocumentNode, argument: Record<string, unknow
 };
 
 // userId 있으면 개인 퀴즈들, 없으면 공개 퀴즈들
-function* getQuizById(action: actions.data.quiz.type__GET_QUIZ_BY_ID) {
+function* getQuizById(action: actions.quiz.type__GET_QUIZ_BY_ID) {
   yield put(
     actions.status.return__REPLACE({
       keyList: ['data', 'quiz', 'one'],
@@ -39,7 +39,7 @@ function* getQuizById(action: actions.data.quiz.type__GET_QUIZ_BY_ID) {
     const GET_QUIZ_BY_ID = gql`
             query GetQuizById($argument: GetQuizByIdInputType!){
                 getQuizById(getQuizByIdInputType: $argument)
-                    ${types.data.quiz.gqlQuizString}
+                    ${types.quiz.gqlQuizString}
             }
         `;
 
@@ -48,7 +48,7 @@ function* getQuizById(action: actions.data.quiz.type__GET_QUIZ_BY_ID) {
       userId: userIdInApp,
     };
 
-    type GetQuizByIdData = Record<string, types.data.quiz.Quiz>;
+    type GetQuizByIdData = Record<string, types.quiz.Quiz>;
     const response: ApolloQueryResult<GetQuizByIdData> = yield call(
       requestGetQuizById,
       GET_QUIZ_BY_ID,
@@ -59,7 +59,7 @@ function* getQuizById(action: actions.data.quiz.type__GET_QUIZ_BY_ID) {
 
     if (quizFromRes) {
       yield put(
-        actions.data.quiz.return__FOCUS_QUIZ({
+        actions.quiz.return__FOCUS_QUIZ({
           quiz: quizFromRes,
           situation: situation,
         }),

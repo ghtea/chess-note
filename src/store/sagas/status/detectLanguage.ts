@@ -46,7 +46,7 @@ function* detectLanguage() {
   }
 
   yield put(
-    actions.present.return__REPLACE({
+    actions.appearance.return__REPLACE({
       keyList: ['language'],
       replacement: replacement,
     }),

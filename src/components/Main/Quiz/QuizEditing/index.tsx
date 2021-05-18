@@ -16,9 +16,9 @@ import StatusBarQE from './StatusBar';
 function QuizEditing() {
   const dispatch = useDispatch();
 
-  const quizPresent = useSelector((state: StateRoot) => state.present.quiz.focusing);
-  const side = useSelector((state: StateRoot) => state.data.quiz.focusing.nextTurn);
-  const quizId = useSelector((state: StateRoot) => state.data.quiz.focusing?.id);
+  const focusingQuizState = useSelector((state: StateRoot) => state.quiz.state.focusing);
+  const side = useSelector((state: StateRoot) => state.quiz.data.focusing.nextTurn);
+  const quizId = useSelector((state: StateRoot) => state.quiz.data.focusing?.id);
 
   const statusUser = useSelector((state: StateRoot) => state.status.auth.user);
   const userId = useSelector((state: StateRoot) => state.auth.user?.id);
@@ -31,7 +31,7 @@ function QuizEditing() {
     //console.log('edit-quizIdFromUri: ', quizIdFromUri)
     if (modeFromUrl === 'create') {
       dispatch(
-        actions.data.quiz.return__FOCUS_QUIZ({
+        actions.quiz.return__FOCUS_QUIZ({
           situation: 'creating',
         }),
       );
@@ -45,7 +45,7 @@ function QuizEditing() {
           //console.log('here: ', userId)
           //console.log('quizIdFromUri: ', quizIdFromUri)
           dispatch(
-            actions.data.quiz.return__GET_QUIZ_BY_ID({
+            actions.quiz.return__GET_QUIZ_BY_ID({
               quizId: quizIdFromUri,
               userIdInApp: userId,
               situation: 'editing',
@@ -58,7 +58,7 @@ function QuizEditing() {
 
   const listSquare = useMemo(() => {
     return chessPlaying.board();
-  }, [quizPresent.fen]);
+  }, [focusingQuizState.fen]);
 
   return (
     <div className={`${styles['root']}`}>

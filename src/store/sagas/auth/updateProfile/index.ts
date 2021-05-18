@@ -8,7 +8,7 @@ import { StateRoot } from 'store/reducers';
 import * as actions from 'store/actions';
 import * as types from 'store/types';
 
-import * as actionsPortal from 'store/actions/data';
+import * as actionsPortal from 'store/actions/quiz';
 //import * as actionsTheme from "../../actions/theme";
 
 const uploadPhoto = (refFirebase: firebase.storage.Reference, urlPhotoLocal: string) => {

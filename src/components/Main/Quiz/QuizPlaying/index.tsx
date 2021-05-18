@@ -17,16 +17,16 @@ import StatusBarQP from './StatusBar';
 function QuizPlaying() {
   const dispatch = useDispatch();
 
-  const quizPresent = useSelector((state: StateRoot) => state.present.quiz.focusing);
-  const side = useSelector((state: StateRoot) => state.data.quiz.focusing.nextTurn);
-  const quizId = useSelector((state: StateRoot) => state.data.quiz.focusing?.id);
+  const focusingQuizState = useSelector((state: StateRoot) => state.quiz.state.focusing);
+  const side = useSelector((state: StateRoot) => state.quiz.data.focusing.nextTurn);
+  const quizId = useSelector((state: StateRoot) => state.quiz.data.focusing?.id);
 
   const statusUser = useSelector((state: StateRoot) => state.status.auth.user);
   const userId = useSelector((state: StateRoot) => state.auth.user?.id);
 
   const listSquare = useMemo(() => {
     return chessPlaying.board();
-  }, [quizPresent.fen]);
+  }, [focusingQuizState.fen]);
 
   useEffect(() => {
     const modeFromUrl = window.location.pathname.replace(/\/quiz\/([^/]*).*/, '$1');
@@ -38,7 +38,7 @@ function QuizPlaying() {
         // 현재 로컬에 있는 퀴즈 아이디와 uri에 있는 퀴즈 아이디가 서로 다를 때
         if (!quizId || quizIdFromUri !== quizId) {
           dispatch(
-            actions.data.quiz.return__GET_QUIZ_BY_ID({
+            actions.quiz.return__GET_QUIZ_BY_ID({
               quizId: quizIdFromUri,
               userIdInApp: userId,
               situation: 'playing',

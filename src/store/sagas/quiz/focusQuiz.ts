@@ -17,10 +17,10 @@ import focusingChess from 'libraries/chess';
 // GraphQL query 문법에 이상 있으면 할당하는 시점에서 에러 발생시키기 때문에 에러 처리한 곳에서 해야 한다
 
 // userId 있으면 개인 퀴즈들, 없으면 공개 퀴즈들
-function* focusQuiz(action: actions.data.quiz.type__FOCUS_QUIZ) {
+function* focusQuiz(action: actions.quiz.type__FOCUS_QUIZ) {
   const { quiz, situation } = action.payload;
 
-  const quizDefault: types.data.quiz.Quiz = {
+  const quizDefault: types.quiz.Quiz = {
     id: null,
     name: '',
 
@@ -33,32 +33,32 @@ function* focusQuiz(action: actions.data.quiz.type__FOCUS_QUIZ) {
     isPublic: true,
   };
 
-  const quizData: types.data.quiz.Quiz = quiz || quizDefault;
+  const focusingQuizData: types.quiz.Quiz = quiz || quizDefault;
 
-  let fenUsing = quizData.startingFen;
+  let fenUsing = focusingQuizData.startingFen;
 
   if (situation === 'creating') {
     focusingChess.reset();
     fenUsing = focusingChess.fen();
   }
 
-  focusingChess.load(quizData.startingFen);
+  focusingChess.load(focusingQuizData.startingFen);
 
   yield put(
-    actions.data.return__REPLACE({
-      keyList: ['quiz', 'focusing'],
-      replacement: quizData,
+    actions.quiz.return__REPLACE({
+      keyList: ['data', 'focusing'],
+      replacement: focusingQuizData,
     }),
   );
 
   yield put(
-    actions.present.return__REPLACE({
-      keyList: ['quiz', 'focusing'],
+    actions.quiz.return__REPLACE({
+      keyList: ['state', 'focusing'],
       replacement: {
-        idGame: quizData.id,
+        idGame: focusingQuizData.id,
         situation: situation,
         fen: fenUsing,
-        turn: quizData.nextTurn,
+        turn: focusingQuizData.nextTurn,
         sanSeries: [],
       },
     }),
@@ -68,13 +68,13 @@ function* focusQuiz(action: actions.data.quiz.type__FOCUS_QUIZ) {
 
   if (situation === 'playing') {
     modeUrl = 'play';
-    history.push(`/quiz/${modeUrl}/${quizData.id}`);
+    history.push(`/quiz/${modeUrl}/${focusingQuizData.id}`);
   } else if (situation === 'creating') {
     modeUrl = 'create';
     history.push(`/quiz/${modeUrl}`);
   } else if (situation === 'editing') {
     modeUrl = 'edit';
-    history.push(`/quiz/${modeUrl}/${quizData.id}`);
+    history.push(`/quiz/${modeUrl}/${focusingQuizData.id}`);
   }
 }
 
