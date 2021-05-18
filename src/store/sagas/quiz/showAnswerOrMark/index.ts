@@ -23,7 +23,7 @@ export default function* showAnswerOrMark(action: actions.quiz.type__SHOW_ANSWER
     );
 
     yield put(actions.quiz.return__BACK_TO_START());
-
+    yield delay(1000);
     const chessMoveTree = kind === 'answer' ? correctChessMoveTree : markedChessMoveTree;
 
     const list = chessMoveTree.returnSanSeriesList();

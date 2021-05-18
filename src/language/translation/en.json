@@ -44,6 +44,7 @@
 
   "Main.QuizPlay_StatusBar_Solved": "Solved!",
   "Main.QuizPlay_StatusBar_Failed": "Failed",
+  "Main.QuizPlay_ToolBar_GiveUp": "Give Up",
 
   "Modal.Setting_Title": "Setting",
   "Modal.Setting_Theme": "Theme",

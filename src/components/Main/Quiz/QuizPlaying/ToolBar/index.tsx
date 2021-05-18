@@ -126,34 +126,41 @@ export default function ToolBarQP() {
       </div>
 
       <div className={`${styles['give-up']}`}>
-        {/* {situation === 'playing-trying' && (
-          <button type="button" value="give-up" aria-label="Give up" onClick={onClick_Main}>
-            <IconQuestionSquare className={`${styles['icon__give-up']}`} kind="regular" />
-          </button>
-        )} */}
+        <button type="button" value="give-up" aria-label="Give Up" onClick={onClick_Main}>
+          <FormattedMessage id={'Main.QuizPlay_ToolBar_GiveUp'} />
+        </button>
       </div>
 
       <div className={`${styles['answers-marks']}`}>
-        <button
-          type="button"
-          value="manage-answers"
-          aria-label="Manage Answers"
-          onClick={onClick_Main}
-        >
-          <IconAnswer
-            className={`${styles['icon__answer']}`}
-            kind={focusingQuizData.correctSanSeriesList.length === 0 ? 'light' : 'solid'}
-          />
-          <span> {focusingQuizData.correctSanSeriesList.length} </span>
-        </button>
+        {(situation === 'playing-solved' || situation === 'playing-failed') && (
+          <>
+            <button
+              type="button"
+              value="manage-answers"
+              aria-label="Manage Answers"
+              onClick={onClick_Main}
+            >
+              <IconAnswer
+                className={`${styles['icon__answer']}`}
+                kind={focusingQuizData.correctSanSeriesList.length === 0 ? 'light' : 'solid'}
+              />
+              <span> {focusingQuizData.correctSanSeriesList.length} </span>
+            </button>
 
-        <button type="button" value="manage-marks" aria-label="Manage Marks" onClick={onClick_Main}>
-          <IconMark
-            className={`${styles['icon__mark']}`}
-            kind={focusingQuizData.markedSanSeriesList.length === 0 ? 'light' : 'solid'}
-          />
-          <span> {focusingQuizData.markedSanSeriesList.length} </span>
-        </button>
+            <button
+              type="button"
+              value="manage-marks"
+              aria-label="Manage Marks"
+              onClick={onClick_Main}
+            >
+              <IconMark
+                className={`${styles['icon__mark']}`}
+                kind={focusingQuizData.markedSanSeriesList.length === 0 ? 'light' : 'solid'}
+              />
+              <span> {focusingQuizData.markedSanSeriesList.length} </span>
+            </button>
+          </>
+        )}
       </div>
 
       <div className={`${styles['...']}`}></div>

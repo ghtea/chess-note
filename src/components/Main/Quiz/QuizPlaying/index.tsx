@@ -17,6 +17,7 @@ import StatusBarQP from './StatusBar';
 function QuizPlaying() {
   const dispatch = useDispatch();
 
+  const focusingQuizStatus = useSelector((state: StateRoot) => state.status.data.quiz.focusing);
   const focusingQuizState = useSelector((state: StateRoot) => state.quiz.state.focusing);
   const side = useSelector((state: StateRoot) => state.quiz.data.focusing.nextTurn);
   const quizId = useSelector((state: StateRoot) => state.quiz.data.focusing?.id);
@@ -33,10 +34,11 @@ function QuizPlaying() {
     const quizIdFromUri = window.location.pathname.replace(/\/quiz\/play\/([^/]*).*/, '$1');
 
     if (modeFromUrl === 'play' && quizIdFromUri) {
-      // 로그인하고 아이디 얻었을 때 || 로그인 체크 끝나고 로그인 안되어있을 때
-      if (statusUser.ready || (statusUser.tried && !statusUser.ready)) {
+      if (statusUser.tried) {
         // 현재 로컬에 있는 퀴즈 아이디와 uri에 있는 퀴즈 아이디가 서로 다를 때
         if (!quizId || quizIdFromUri !== quizId) {
+
+          console.log('quizId: ', quizId)
           dispatch(
             actions.quiz.return__GET_QUIZ_BY_ID({
               quizId: quizIdFromUri,
@@ -47,7 +49,7 @@ function QuizPlaying() {
         }
       }
     }
-  }, [window.location.pathname, statusUser, quizId, userId]);
+  }, [window.location.pathname, statusUser.tried, quizId, userId]);
 
   return (
     <div className={`${styles['root']}`}>

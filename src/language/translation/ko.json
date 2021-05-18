@@ -37,6 +37,8 @@
 
   "Main.QuizPlay_StatusBar_Solved": "정답입니다!",
   "Main.QuizPlay_StatusBar_Failed": "틀렸습니다",
+  "Main.QuizPlay_ToolBar_GiveUp": "포기하기",
+
 
   "Modal.Setting_Title": "설정",
   "Modal.Setting_Theme": "테마",

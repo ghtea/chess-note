@@ -3,6 +3,9 @@ import history from 'libraries/history';
 import * as actions from 'store/actions';
 
 export default function* applyLoggedOutUser() {
+  
+  yield put(actions.auth.return__REPLACE_USER());
+  
   yield put(
     actions.status.return__REPLACE({
       keyList: ['auth', 'user'],
@@ -13,7 +16,4 @@ export default function* applyLoggedOutUser() {
       },
     }),
   );
-
-  yield put(actions.auth.return__REPLACE_USER());
-  
 }

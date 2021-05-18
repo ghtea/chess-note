@@ -5,7 +5,7 @@ import * as actions from 'store/actions';
 
 import styles from './index.module.scss';
 import ShortCuts from './ShortCuts';
-import DisplayQuiz from './DisplayQuiz';
+import QuizDisplay from './QuizDisplay';
 // import IconSort from 'svgs/basic/IconSort';
 
 function QuizHome() {
@@ -26,7 +26,7 @@ function QuizHome() {
   return (
     <div className={`${styles['root']}`}>
       <ShortCuts />
-      <DisplayQuiz />
+      <QuizDisplay />
     </div>
   );
 }

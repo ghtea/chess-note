@@ -13,17 +13,21 @@ import Loading from 'components/Global/Loading';
 
 //import actions from 'store/actions';
 
-//import Portal from './DisplayQuiz/Portal';
+//import Portal from './QuizDisplay/Portal';
 
 import styles from './index.module.scss';
 import Quiz from './Quiz';
 import InputRadio from 'components/Global/Input/InputRadio';
 
-function DisplayQuiz() {
+function QuizDisplay() {
   const dispatch = useDispatch();
   // const userReady = useSelector((state: StateRoot) => state.status.auth.user.ready);
 
-  const statusListMyPublic = useSelector((state: StateRoot) => state.status.data.quiz.publicQuizList);
+  const userReady = useSelector((state: StateRoot) => state.status.auth.user.ready);
+
+  const statusListMyPublic = useSelector(
+    (state: StateRoot) => state.status.data.quiz.publicQuizList,
+  );
   const statusListMyQuiz = useSelector((state: StateRoot) => state.status.data.quiz.myQuizList);
 
   const publicQuizList = useSelector((state: StateRoot) => state.quiz.data.publicQuizList);
@@ -33,23 +37,23 @@ function DisplayQuiz() {
   const mode = useSelector((state: StateRoot) => state.quiz.state.display.mode);
 
   // 이전에 QuizDisplay 화면에서 클릭했던 게 있으면 지우기
-  useEffect(()=>{
-    return (()=>{
+  useEffect(() => {
+    return () => {
       dispatch(
         actions.quiz.return__REPLACE({
           keyList: ['state', 'display', 'clickedQuizId'],
           replacement: '',
         }),
       );
-    })
-  },[])
-  
+    };
+  }, []);
+
   const onClick_Option = useCallback((event: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
     const { value } = event.currentTarget;
     console.log(value);
   }, []);
 
-  const onChange_InputNormal = useCallback((event: React.ChangeEvent<HTMLInputElement>) => {
+  const onChange_OptionInput = useCallback((event: React.ChangeEvent<HTMLInputElement>) => {
     const {
       currentTarget: { name, value },
     } = event;
@@ -79,25 +83,26 @@ function DisplayQuiz() {
       { value: 'public-quiz', label: 'Public Quiz' },
       { value: 'my-quiz', label: 'My Quiz' },
     ];
-
     return result;
   }, []);
 
   return (
     <section className={`${styles['root']}`}>
       <div className={`${styles['options']}`}>
-        <div className={'container__input-radio'}>
-          {draft['mode'].map((element, index: number) => (
-            <InputRadio
-              valueCurrent={mode}
-              name="mode"
-              value={element.value}
-              label={element.label}
-              onChange={onChange_InputNormal}
-              key={`InputRadio__mode----${element.value}`}
-            />
-          ))}
-        </div>
+        {userReady && (
+          <div className={'container__input-radio'}>
+            {draft.mode.map((e) => (
+              <InputRadio
+                valueCurrent={mode}
+                name="mode"
+                value={e.value}
+                label={e.label}
+                onChange={onChange_OptionInput}
+                key={`InputRadio__mode----${e.value}`}
+              />
+            ))}
+          </div>
+        )}
 
         {/* <button
                 className={`${styles['sorting']}`}
@@ -168,6 +173,6 @@ function DisplayQuiz() {
   );
 }
 
-DisplayQuiz.defaultProps = {};
+QuizDisplay.defaultProps = {};
 
-export default DisplayQuiz;
+export default QuizDisplay;
