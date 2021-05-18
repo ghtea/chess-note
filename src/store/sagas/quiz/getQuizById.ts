@@ -24,7 +24,7 @@ const requestGetQuizById = (query: DocumentNode, argument: Record<string, unknow
 function* getQuizById(action: actions.quiz.type__GET_QUIZ_BY_ID) {
   yield put(
     actions.status.return__REPLACE({
-      keyList: ['data', 'quiz', 'one'],
+      keyList: ['data', 'quiz', 'focusing'],
       replacement: {
         tried: false,
         loading: true,
@@ -67,7 +67,7 @@ function* getQuizById(action: actions.quiz.type__GET_QUIZ_BY_ID) {
 
       yield put(
         actions.status.return__REPLACE({
-          keyList: ['data', 'quiz', 'one'],
+          keyList: ['data', 'quiz', 'focusing'],
           replacement: {
             tried: true,
             loading: false,
@@ -91,7 +91,7 @@ function* getQuizById(action: actions.quiz.type__GET_QUIZ_BY_ID) {
 
       yield put(
         actions.status.return__REPLACE({
-          keyList: ['data', 'quiz', 'one'],
+          keyList: ['data', 'quiz', 'focusing'],
           replacement: {
             tried: true,
             loading: false,
@@ -112,7 +112,7 @@ function* getQuizById(action: actions.quiz.type__GET_QUIZ_BY_ID) {
 
     yield put(
       actions.status.return__REPLACE({
-        keyList: ['data', 'quiz', 'one'],
+        keyList: ['data', 'quiz', 'focusing'],
         replacement: {
           tried: true,
           loading: false,

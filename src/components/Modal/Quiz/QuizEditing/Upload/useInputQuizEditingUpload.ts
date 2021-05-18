@@ -19,7 +19,7 @@ const useInputQuizEditingUpload = <T>(draftInitial: T) => {
         dispatch(
           actions.quiz.return__REPLACE({
             keyList: ['data', 'focusing', 'isPublic'],
-            replacement: event.currentTarget.value === 'isPublic',
+            replacement: event.currentTarget.value === 'true',
           }),
         );
       } else {
@@ -27,8 +27,8 @@ const useInputQuizEditingUpload = <T>(draftInitial: T) => {
           ...draft,
           [event.currentTarget.name]: event.currentTarget.value,
         };
+
         setDraft(draftReplacement);
-        // console.log(draftReplacement);
       }
     },
     [draft],

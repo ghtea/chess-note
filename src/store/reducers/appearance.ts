@@ -27,9 +27,14 @@ const stateInitial = {
       setting: false,
       myProfile: false,
 
+      quizHomeOthers: false,
+      
       quizEditingSet: false,
       quizEditingUpload: false,
       quizEditingOthers: false,
+      
+      quizManageAnswers: false,
+      quizManageMarks: false,
 
       quizTryingOthers: false,
     },

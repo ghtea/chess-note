@@ -17,7 +17,7 @@
     }
     .content {
   
-        padding: 15px 0px 15px 0px;
+        //padding: 15px 0px 15px 0px;
         margin-bottom: 0px;
     
         
@@ -51,23 +51,23 @@
     // margin-top: 12px;
 }
 
-.button__previous-answer, .button__next-answer{
+.button__previous-item, .button__next-item{
     width: 36px;
     height: 100%;
 
     position: absolute;
 }
 
-.button__previous-answer {
+.button__previous-item {
     left: 0px;
     
 }
 
-.button__next-answer {
+.button__next-item {
     right: 0px;
 }
 
-.icon__previous-answer, .icon__next-answer {
+.icon__previous-item, .icon__next-item {
     width: 85%;
     height: 85%;
     @include color-each-theme(color, basic__5);

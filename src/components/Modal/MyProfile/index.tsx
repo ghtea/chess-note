@@ -179,11 +179,10 @@ function MyProfile() {
             <button
               type="button"
               value="log-out"
-              className={`${styles['button-log-out']}`}
+              className={`${styles['button__log-out']}`}
               onClick={() => onClick_LogOut()}
             >
-              {' '}
-              <FormattedMessage id={`Modal.Setting_LogOut`} />{' '}
+              <FormattedMessage id={`Modal.Setting_LogOut`} />
             </button>
           </div>
         </form>

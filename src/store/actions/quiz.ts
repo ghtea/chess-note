@@ -166,3 +166,11 @@ export const return__PLAY_RANDOM_QUIZ= (payload: Payload__PLAY_RANDOM_QUIZ) => {
   };
 };
 export type type__PLAY_RANDOM_QUIZ = ReturnType<typeof return__PLAY_RANDOM_QUIZ>;
+
+export const name__PLAY_NEXT_QUIZ = 'quiz/PLAY_NEXT_QUIZ';
+export const return__PLAY_NEXT_QUIZ= ( ) => {
+  return {
+    type: name__PLAY_NEXT_QUIZ,
+  };
+};
+export type type__PLAY_NEXT_QUIZ = ReturnType<typeof return__PLAY_NEXT_QUIZ>;

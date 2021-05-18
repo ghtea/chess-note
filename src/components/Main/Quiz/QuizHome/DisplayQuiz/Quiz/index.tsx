@@ -29,7 +29,6 @@ function Quiz({ quiz }: PropsQuiz) {
 
   const onClick_Button = useCallback((event: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
     if (event.currentTarget.value === 'play-this-quiz') {
-      console.log('play!');
       dispatch(
         actions.quiz.return__FOCUS_QUIZ({
           quiz: quiz,
@@ -45,7 +44,21 @@ function Quiz({ quiz }: PropsQuiz) {
         }),
       );
     }
-  }, []);
+    else if (event.currentTarget.value === 'others') {
+      dispatch(
+        actions.quiz.return__REPLACE({
+          keyList: ['state', 'display', 'clickedQuizId'],
+          replacement: quiz.id,
+        }),
+      );
+      dispatch(
+        actions.appearance.return__REPLACE({
+          keyList: ['showing', 'modal', 'quizHomeOthers'],
+          replacement: true,
+        }),
+      );
+    }
+  }, [quiz]);
 
   const textData = useMemo(() => {
     const yearCurrent = new Date().getFullYear();
@@ -94,7 +107,14 @@ function Quiz({ quiz }: PropsQuiz) {
       </td>
 
       <td className={`${styles['others']}`}>
+      <button
+          type="button"
+          onClick={onClick_Button}
+          value="others"
+          aria-label="Others"
+        >
         <IconThreeDots className={styles['icon__others']} kind="regular" />
+        </button>
       </td>
     </tr>
   );

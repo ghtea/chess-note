@@ -16,5 +16,5 @@ export default function* applyLoggedInUser() {
 
   yield put(actions.auth.return__REPLACE_USER());
 
-  history.push('/');
+  // history.push('/');
 }

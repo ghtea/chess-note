@@ -32,6 +32,18 @@ function DisplayQuiz() {
   // const sorting = useSelector((state: StateRoot)=>state.status.current.football.leagueStandings.sorting);
   const mode = useSelector((state: StateRoot) => state.quiz.state.display.mode);
 
+  // 이전에 QuizDisplay 화면에서 클릭했던 게 있으면 지우기
+  useEffect(()=>{
+    return (()=>{
+      dispatch(
+        actions.quiz.return__REPLACE({
+          keyList: ['state', 'display', 'clickedQuizId'],
+          replacement: '',
+        }),
+      );
+    })
+  },[])
+  
   const onClick_Option = useCallback((event: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
     const { value } = event.currentTarget;
     console.log(value);

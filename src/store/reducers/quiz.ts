@@ -35,12 +35,12 @@ const stateInitial = {
 
     display: {
       mode: 'public-quiz' as types.quiz.DisplayMode,
+      clickedQuizId: '',
     },
 
     playingIdList: [],
 
     focusing: {
-      id: null,
       fen: null,
       turn: 'white',
       sanSeries: [],

@@ -32,8 +32,6 @@ function QuizEditingOthers({ top }: PropsQuizEditingOthers) {
   const dispatch = useDispatch();
 
   const focusingQuizState = useSelector((state: StateRoot) => state.quiz.state.focusing);
-  const focusingQuizData = useSelector((state: StateRoot) => state.quiz.data.focusing);
-  const [indexAnswer, setIndexAnswer] = useState<number>(0);
 
   const refModal = useRef<HTMLDivElement>(null);
   const onClick_Window = useCallback(
@@ -81,7 +79,7 @@ function QuizEditingOthers({ top }: PropsQuizEditingOthers) {
             }),
           );
 
-          const replacementQuizPresent = {
+          const newQuizState = {
             ...focusingQuizState,
             fen: focusingChess.fen(),
             turn: turn,
@@ -91,7 +89,7 @@ function QuizEditingOthers({ top }: PropsQuizEditingOthers) {
           dispatch(
             actions.quiz.return__REPLACE({
               keyList: ['state', 'focusing'],
-              replacement: replacementQuizPresent,
+              replacement: newQuizState,
             }),
           );
         } else {
@@ -101,37 +99,9 @@ function QuizEditingOthers({ top }: PropsQuizEditingOthers) {
             }),
           );
         }
-      } else if (value === 'show-answer') {
-        console.log('show answer');
-      } else if (value === 'delete-answer') {
-        console.log('delete answer');
-        correctChessMoveTree.deleteNthSeriesSan(indexAnswer);
-        dispatch(
-          actions.quiz.return__REPLACE({
-            keyList: ['data', 'focusing', 'correctSanSeriesList'],
-            replacement: correctChessMoveTree.returnListSeriesSan(),
-          }),
-        );
-      }
+      } 
     },
-    [focusingQuizState.sanSeries, focusingQuizData, indexAnswer],
-  );
-
-  const onClick_ButtonChangeAnswer = useCallback(
-    (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
-      const numberAnswer = focusingQuizData.correctSanSeriesList.length;
-      //console.log(numberAnswer)
-      const value = e.currentTarget.value;
-      let indexAnswerNew = indexAnswer;
-      if (value === 'previous-answer') {
-        indexAnswerNew--;
-      } else {
-        indexAnswerNew++;
-      }
-
-      setIndexAnswer((indexAnswerNew + numberAnswer) % numberAnswer);
-    },
-    [focusingQuizData.correctSanSeriesList.length, indexAnswer],
+    [focusingQuizState, focusingChess],
   );
 
   return (
@@ -158,100 +128,6 @@ function QuizEditingOthers({ top }: PropsQuizEditingOthers) {
             </button>
           </div>
 
-          {focusingQuizData.correctSanSeriesList.length === 0 && (
-            <div className={`${stylesModal['content__section']}`}>
-              <span className={`${stylesQC['span__basic']}`}>
-                <span>
-                  <FormattedMessage id={`Modal.QuizEditingOthers_NoAnswer`} />
-                </span>
-              </span>
-            </div>
-          )}
-
-          {focusingQuizData.correctSanSeriesList.length > 0 && (
-            <>
-              <div className={`${stylesModal['content__section']}`}>
-                <button
-                  type="button"
-                  value="show-answer"
-                  className={`${styles['button__show-answer']} ${stylesQC['button__basic']}`}
-                  onClick={onClick_AnyMainButton}
-                >
-                  <FormattedMessage
-                    id={`Modal.QuizEditingOthers_ShowAnswer`}
-                    values={{
-                      index: `${indexAnswer + 1} / ${focusingQuizData.correctSanSeriesList.length}`,
-                    }}
-                  />
-                </button>
-                <button
-                  type="button"
-                  value="previous-answer"
-                  onClick={onClick_ButtonChangeAnswer}
-                  className={`${stylesQC['button__previous-answer']}`}
-                >
-                  <IconAngle
-                    className={`${stylesQC['icon__previous-answer']}`}
-                    direction="left"
-                    kind="regular"
-                  />
-                </button>
-                <button
-                  type="button"
-                  value="next-answer"
-                  aria-label="next answer"
-                  onClick={onClick_ButtonChangeAnswer}
-                  className={`${stylesQC['button__next-answer']}`}
-                >
-                  <IconAngle
-                    className={`${stylesQC['icon__next-answer']}`}
-                    direction="right"
-                    kind="regular"
-                  />
-                </button>
-              </div>
-
-              <div className={`${stylesModal['content__section']}`}>
-                <button
-                  type="button"
-                  value="delete-answer"
-                  className={`${styles['button__delete-answer']} ${stylesQC['button__basic']}`}
-                  onClick={onClick_AnyMainButton}
-                >
-                  <FormattedMessage
-                    id={`Modal.QuizEditingOthers_DeleteAnswer`}
-                    values={{
-                      index: `${indexAnswer + 1} / ${focusingQuizData.correctSanSeriesList.length}`,
-                    }}
-                  />
-                </button>
-                <button
-                  type="button"
-                  value="previous-answer"
-                  onClick={onClick_ButtonChangeAnswer}
-                  className={`${stylesQC['button__previous-answer']}`}
-                >
-                  <IconAngle
-                    className={`${stylesQC['icon__previous-answer']}`}
-                    direction="left"
-                    kind="regular"
-                  />
-                </button>
-                <button
-                  type="button"
-                  value="next-answer"
-                  onClick={onClick_ButtonChangeAnswer}
-                  className={`${stylesQC['button__next-answer']}`}
-                >
-                  <IconAngle
-                    className={`${stylesQC['icon__next-answer']}`}
-                    direction="right"
-                    kind="regular"
-                  />
-                </button>
-              </div>
-            </>
-          )}
         </div>
       </div>
     </div>

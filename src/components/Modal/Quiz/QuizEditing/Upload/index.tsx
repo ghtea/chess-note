@@ -34,10 +34,7 @@ function QuizEditingUpload({ top }: PropsQuizEditingUpload) {
   const situation = useSelector((state: StateRoot) => state.quiz.state.situation);
   const focusingQuizData = useSelector((state: StateRoot) => state.quiz.data.focusing);
 
-  const { draft: draft_Main, onChange: onChange_Main } = useInputQuizEditingUpload({
-    name: '',
-    isPublic: 'isPublic',
-  });
+  const { draft: draft_Main, onChange: onChange_Main } = useInputQuizEditingUpload({});
 
   const refModal = useRef<HTMLDivElement>(null);
   const onClick_Window = useCallback(
@@ -125,16 +122,16 @@ function QuizEditingUpload({ top }: PropsQuizEditingUpload) {
 
             <div className={'container__input-radio'}>
               <InputRadio
-                valueCurrent={draft_Main.isPublic}
+                valueCurrent={focusingQuizData.isPublic.toString()}
                 name="isPublic"
-                value="isPublic"
+                value="true"
                 label={intl.formatMessage({ id: 'Modal.QuizEditingUpload_Public' })}
                 onChange={onChange_Main}
               />
               <InputRadio
-                valueCurrent={draft_Main.isPublic}
+                valueCurrent={focusingQuizData.isPublic.toString()}
                 name="isPublic"
-                value="isNotPublic"
+                value="false"
                 label={intl.formatMessage({ id: 'Modal.QuizEditingUpload_Private' })}
                 onChange={onChange_Main}
               />

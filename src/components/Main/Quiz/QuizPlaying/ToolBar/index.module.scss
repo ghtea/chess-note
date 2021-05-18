@@ -6,16 +6,6 @@
   @include frame-each-theme(border-top, 0px, none, basic__1);
 
   
-  // width: 80vw;
-  // height: 80vw;
-  // min-width: $device-xs__min-width;
-  // max-width: 700px;
-  // //max-width: $device-m__min-width;
-  // min-height: $device-xs__min-width;
-  // max-height: 700px;
-  // //max-height: $device-m__min-width;
-
-  // margin-bottom: 40px;
 
   display: flex;
   flex-wrap: nowrap;
@@ -49,17 +39,35 @@
     }
   }
 
-  .show-answer {
-    .icon__show-answer {
-      width: 26px;
-      height: 26px;
+  .give-up {
+    .icon__give-up {
+      width: 32px;
+      height: 32px;
     }
   }
 
+  .answers-marks {
 
+    button {
+      & > *:nth-child(n+2){
+        margin-left: 5px;
+      }
+    }
 
-  .another-quiz {
-    .icon__another-quiz {
+    .icon__answer {
+      width: 24px;
+      height: 24px;
+    }
+
+    .icon__mark {
+      width: 24px;
+      height: 24px;
+    }
+
+  }
+
+  .exit {
+    .icon__next-quiz {
       width: 28px;
       height: 28px;
     }

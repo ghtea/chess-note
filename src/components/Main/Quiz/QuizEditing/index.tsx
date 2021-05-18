@@ -2,7 +2,7 @@ import ChessBoard from 'components/Global/ChessBoard';
 import React, { useCallback, useState, useMemo, useEffect } from 'react';
 import { Route, Switch } from 'react-router-dom';
 //import { useQuery, gql } from '@apollo/client';
-
+import history from 'libraries/history';
 import { ChessInstance, Move, Square } from 'chess.js';
 import chessPlaying from 'libraries/chess';
 import styles from './index.module.scss';
@@ -17,7 +17,10 @@ function QuizEditing() {
   const dispatch = useDispatch();
 
   const focusingQuizState = useSelector((state: StateRoot) => state.quiz.state.focusing);
+
+  const focusingQuizStatus = useSelector((state: StateRoot) => state.status.data.quiz.focusing);
   const side = useSelector((state: StateRoot) => state.quiz.data.focusing.nextTurn);
+  const authorId = useSelector((state: StateRoot) => state.quiz.data.focusing.userId);
   const quizId = useSelector((state: StateRoot) => state.quiz.data.focusing?.id);
 
   const statusUser = useSelector((state: StateRoot) => state.status.auth.user);
@@ -28,7 +31,6 @@ function QuizEditing() {
     const modeFromUrl = window.location.pathname.replace(/\/quiz\/([^/]*).*/, '$1');
     const quizIdFromUri = window.location.pathname.replace(/\/quiz\/edit\/([^/]*).*/, '$1');
 
-    //console.log('edit-quizIdFromUri: ', quizIdFromUri)
     if (modeFromUrl === 'create') {
       dispatch(
         actions.quiz.return__FOCUS_QUIZ({
@@ -54,7 +56,25 @@ function QuizEditing() {
         }
       }
     }
-  }, [window.location.pathname, statusUser, quizId]);
+  }, [window.location.pathname, statusUser, quizId, userId]);
+
+  // http://localhost:3000/quiz/edit/647bf5aa-05a5-4565-bf62-85a9b45bda55
+  // 난제: 왜 위 주소로 바로 들어갔을 때 경고가 두번 뜨는지 아직도 모르겠다
+  useEffect(() => {
+    // console.log('triggered!!!')
+    // console.log(statusUser, userId, authorId, focusingQuizStatus)
+    if ( statusUser.tried && focusingQuizStatus.ready) {
+      if ( authorId && (userId !== authorId)) {
+        //console.log('values: ', statusUser.tried, focusingQuizStatus.ready, authorId, userId)
+        dispatch(
+          actions.notification.return__ADD_DELETE_BANNER({
+            codeSituation: 'EditQuiz_NotAuthor__E',
+          }),
+        );
+        history.push('/quiz');
+      }
+    }
+  }, [statusUser.tried, userId, authorId, focusingQuizStatus.ready]);
 
   const listSquare = useMemo(() => {
     return chessPlaying.board();

@@ -14,7 +14,8 @@ import backToStart from './backToStart';
 import backToPrevious from './backToPrevious';
 
 import watchStartingFen from './watchStartingFen';
-import playRandomQuiz from './playRandomQuiz/playRandomQuiz';
+import playRandomQuiz from './playRandomQuiz';
+import playNextQuiz from './playNextQuiz';
 
 export default function* quizSaga() {
   yield takeEvery(actions.quiz.name__FOCUS_QUIZ, focusQuiz);
@@ -33,5 +34,6 @@ export default function* quizSaga() {
   yield takeLatest(actions.quiz.name__WATCH_STARTING_FEN_CHANGE, watchStartingFen);
 
   yield takeEvery(actions.quiz.name__PLAY_RANDOM_QUIZ, playRandomQuiz);
+  yield takeEvery(actions.quiz.name__PLAY_NEXT_QUIZ, playNextQuiz);
 
 }

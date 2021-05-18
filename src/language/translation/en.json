@@ -7,6 +7,7 @@
   "Global.Save": "Save",
   "Global.Set": "Set",
   "Global.Delete": "Delete",
+  "Global.Edit": "Edit",
   "Global.Update": "Update",
   "Global.Search": "Search",
 
@@ -66,9 +67,15 @@
   "Modal.QuizEditingOthers_UseFen": "Use FEN from Clipboard",
   "Modal.QuizEditingOthers_NotValidFen": "This is not valid FEN",
   "Modal.QuizEditingOthers_ChangeSide": "Change Side",
-  "Modal.QuizEditingOthers_ShowAnswer": "Show Answer {index}",
-  "Modal.QuizEditingOthers_DeleteAnswer": "Delete Answer {index}",
-  "Modal.QuizEditingOthers_NoAnswer": "No Answer Yet",
+
+  "Modal.QuizManageAnswersMarks_ShowAnswer": "Show Answer {index}",
+  "Modal.QuizManageAnswersMarks_DeleteAnswer": "Delete Answer {index}",
+  "Modal.QuizManageAnswersMarks_NoAnswer": "No Answer",
+
+  "Modal.QuizManageAnswersMarks_ShowMark": "Show Mark {index}",
+  "Modal.QuizManageAnswersMarks_DeleteMark": "Delete Mark {index}",
+  "Modal.QuizManageAnswersMarks_NoMark": "No Mark",
+
 
   "Notification.Test1__S": "Succuessfully tested 1 !",
   "Notification.Test2__H": "Succuessfully tested 2 !",
@@ -101,11 +108,12 @@
   "Notification.PlayQuiz_NoPublicQuiz__E": "There is no public quiz",
   "Notification.PlayQuiz_NoMyQuiz__E": "That's no my quiz",
 
-
   "Notification.CreateQuiz_Succeeded__S": "Successfully created the quiz!",
   "Notification.CreateQuiz_UnknownError__E": "Failed to create the quiz",
   "Notification.CreateQuiz_NoAnswer__E": "You should set anwser",
   "Notification.CreateQuiz_NoFenStart__E": "You should set starting position",
+
+  "Notification.EditQuiz_NotAuthor__E": "You are not author of this quiz",
 
   "Notification.GetFocusListQuiz_UnknownError__E": "Failed to get the quizes",
   "Notification.GetQuiz_UnknownError__E": "Failed to get the quiz",
