@@ -31,7 +31,7 @@ function QuizEditingUpload({ top }: PropsQuizEditingUpload) {
   const userReady = useSelector((state: StateRoot) => state.status.auth.user.ready);
   const userId = useSelector((state: StateRoot) => state.auth.user?.id);
 
-  const situation = useSelector((state: StateRoot) => state.quiz.state.focusing.situation);
+  const situation = useSelector((state: StateRoot) => state.quiz.state.situation);
   const focusingQuizData = useSelector((state: StateRoot) => state.quiz.data.focusing);
 
   const { draft: draft_Main, onChange: onChange_Main } = useInputQuizEditingUpload({

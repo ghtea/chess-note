@@ -98,6 +98,8 @@
 
   "Notification.PlayQuiz_Correct__S": "정답입니다!",
   "Notification.PlayQuiz_Wrong__W": "틀렸습니다",
+  "Notification.PlayQuiz_NoPublicQuiz__E": "공개 퀴즈가 없습니다",
+  "Notification.PlayQuiz_NoMyQuiz__E": "내 퀴즈가 없습니다",
 
   "Notification.CreateQuiz_Succeeded__S": "성공적으로 퀴즈를 만들었습니다!",
   "Notification.CreateQuiz_UnknownError__E": "퀴즈를 만들지 못했습니다",

@@ -30,7 +30,7 @@ export default function StatusBarQP() {
   );
 
   const turn = useSelector((state: StateRoot) => state.quiz.state.focusing.turn);
-  const situation = useSelector((state: StateRoot) => state.quiz.state.focusing.situation);
+  const situation = useSelector((state: StateRoot) => state.quiz.state.situation);
 
   const onClick_Main = useCallback((e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
     const value = e.currentTarget.value;
@@ -58,13 +58,13 @@ export default function StatusBarQP() {
         )}
       </div>
 
-      {situation === 'solved' && (
+      {situation === 'playing-solved' && (
         <div className={`${styles['solved']}`}>
           <FormattedMessage id="Main.QuizPlay_StatusBar_Solved" />
         </div>
       )}
 
-      {situation === 'failed' && (
+      {situation === 'playing-failed' && (
         <div className={`${styles['failed']}`}>
           <FormattedMessage id="Main.QuizPlay_StatusBar_Failed" />
         </div>

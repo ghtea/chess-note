@@ -34,7 +34,7 @@ type PropsChessBoard = {
 function ChessBoard({ listSquare, side, page }: PropsChessBoard) {
   const dispatch = useDispatch();
 
-  const situationQuiz = useSelector((state: StateRoot) => state.quiz.state.focusing.situation);
+  const situationQuiz = useSelector((state: StateRoot) => state.quiz.state.situation);
 
   const situation = useMemo(() => {
     // console.log('modeQuiz: ', situationQuiz)
@@ -120,7 +120,11 @@ function ChessBoard({ listSquare, side, page }: PropsChessBoard) {
                 to: position,
               }),
             );
-          } else if (situation === 'playing' || situation === 'failed' || situation === 'solved') {
+          } else if (
+            situation === 'playing-trying' ||
+            situation === 'playing-failed' ||
+            situation === 'playing-solved'
+          ) {
             dispatch(
               actions.quiz.return__MOVE_IN_QUIZ_PLAYING({
                 from: positionStart,

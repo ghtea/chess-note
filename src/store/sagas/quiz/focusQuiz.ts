@@ -1,24 +1,14 @@
 import { call, select, put } from 'redux-saga/effects';
-import { firebaseFirestore } from 'libraries/firebase';
 
-import axios from 'axios';
-import apolloClient from 'libraries/apollo';
-import { gql, useQuery, FetchResult, DocumentNode, ApolloQueryResult } from '@apollo/client';
-import { v4 as uuidv4 } from 'uuid';
 import history from 'libraries/history';
 // import * as config from 'config';
 import { StateRoot } from 'store/reducers';
 import * as actions from 'store/actions';
 import * as types from 'store/types';
-import { queryAllByAltText } from '@testing-library/dom';
-// import { KindGetListQuiz } from "store/types/data/quiz";
 import focusingChess from 'libraries/chess';
 
-// GraphQL query 문법에 이상 있으면 할당하는 시점에서 에러 발생시키기 때문에 에러 처리한 곳에서 해야 한다
-
-// userId 있으면 개인 퀴즈들, 없으면 공개 퀴즈들
 function* focusQuiz(action: actions.quiz.type__FOCUS_QUIZ) {
-  const { quiz, situation } = action.payload;
+  const { quiz, situation: newSituation } = action.payload;
 
   const quizDefault: types.quiz.Quiz = {
     id: null,
@@ -37,7 +27,7 @@ function* focusQuiz(action: actions.quiz.type__FOCUS_QUIZ) {
 
   let fenUsing = focusingQuizData.startingFen;
 
-  if (situation === 'creating') {
+  if (newSituation === 'creating') {
     focusingChess.reset();
     fenUsing = focusingChess.fen();
   }
@@ -56,7 +46,7 @@ function* focusQuiz(action: actions.quiz.type__FOCUS_QUIZ) {
       keyList: ['state', 'focusing'],
       replacement: {
         idGame: focusingQuizData.id,
-        situation: situation,
+        situation: newSituation,
         fen: fenUsing,
         turn: focusingQuizData.nextTurn,
         sanSeries: [],
@@ -66,13 +56,13 @@ function* focusQuiz(action: actions.quiz.type__FOCUS_QUIZ) {
 
   let modeUrl = 'play';
 
-  if (situation === 'playing') {
+  if (newSituation === 'playing-trying') {
     modeUrl = 'play';
     history.push(`/quiz/${modeUrl}/${focusingQuizData.id}`);
-  } else if (situation === 'creating') {
+  } else if (newSituation === 'creating') {
     modeUrl = 'create';
     history.push(`/quiz/${modeUrl}`);
-  } else if (situation === 'editing') {
+  } else if (newSituation === 'editing') {
     modeUrl = 'edit';
     history.push(`/quiz/${modeUrl}/${focusingQuizData.id}`);
   }

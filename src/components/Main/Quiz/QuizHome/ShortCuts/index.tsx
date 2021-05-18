@@ -28,11 +28,18 @@ function ShortCuts() {
     (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
       const value = e.currentTarget.value;
       if (value === 'play-public-random-quiz') {
-        if (userReady && userId) {
-        } else {
-        }
+        dispatch(
+          actions.quiz.return__PLAY_RANDOM_QUIZ({
+            kind: 'public-quiz',
+          }),
+        );
       } else if (value === 'play-my-random-quiz') {
         if (userReady && userId) {
+          dispatch(
+            actions.quiz.return__PLAY_RANDOM_QUIZ({
+              kind: 'my-quiz',
+            }),
+          );
         }
       } else if (value === 'create') {
         history.push('/quiz/create');

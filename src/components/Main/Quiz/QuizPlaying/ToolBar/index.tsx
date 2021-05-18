@@ -35,7 +35,7 @@ export default function ToolBarQP() {
     (state: StateRoot) => state.appearance.layout.document.chessBoard.length,
   );
 
-  const situation = useSelector((state: StateRoot) => state.quiz.state.focusing.situation);
+  const situation = useSelector((state: StateRoot) => state.quiz.state.situation);
 
   // const [positionStart, setPositionStart] = useState<null | string>(null);
   // const onClick_ControlPaste = useCallback(
@@ -120,7 +120,7 @@ export default function ToolBarQP() {
       <div className={`${styles['...']}`}></div>
 
       <div className={`${styles['another-quiz']}`}>
-        {(situation === 'solved' || situation === 'failed') && (
+        {(situation === 'playing-solved' || situation === 'playing-failed') && (
           <button
             type="button"
             value="another-quiz"

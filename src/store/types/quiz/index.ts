@@ -32,11 +32,10 @@ export const gqlQuizString = `{
 
 
 
-export type Situation = 'creating' | 'editing' | 'playing' | 'solved' | 'failed';
+export type Situation = null | 'creating' | 'editing' | 'playing-trying' | 'playing-solved' | 'playing-failed';
 
 export type QuizState = {
   id: string | null;
-  situation: Situation;
   fen: string | null;
   turn: 'white' | 'black';
   sanSeries: string[];

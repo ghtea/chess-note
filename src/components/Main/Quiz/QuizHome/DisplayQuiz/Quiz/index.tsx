@@ -25,7 +25,7 @@ type PropsQuiz = {
 function Quiz({ quiz }: PropsQuiz) {
   const dispatch = useDispatch();
 
-  // const situation = useSelector((state: StateRoot)=> state.quiz.state.focusing.situation);
+  // const situation = useSelector((state: StateRoot)=> state.quiz.state.situation);
 
   const onClick_Button = useCallback((event: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
     if (event.currentTarget.value === 'play-this-quiz') {
@@ -33,7 +33,7 @@ function Quiz({ quiz }: PropsQuiz) {
       dispatch(
         actions.quiz.return__FOCUS_QUIZ({
           quiz: quiz,
-          situation: 'playing',
+          situation: 'playing-trying',
         }),
       );
 
@@ -46,33 +46,6 @@ function Quiz({ quiz }: PropsQuiz) {
       );
     }
   }, []);
-  // const team = useSelector((state: StateRoot)=> state.data.football.listQuiz).find(team => team.id === quizId);
-  // const mode = useSelector((state: StateRoot)=> state.status.current.football.leagueStandings.mode);
-
-  // const reward = useMemo(()=>{
-  //     if (statQuiz.result === 'Champions League'){
-  //         return 'champions';
-  //     }
-  //     else if (statQuiz.result === 'Europa League'){
-  //         return 'europa';
-  //     }
-  //     else if (statQuiz.result === 'Relegation'){
-  //         return 'relegation';
-  //     }
-  //     else {
-  //         return '';
-  //     }
-  // },[statQuiz]);
-
-  // const dictStyleResult = useMemo(()=>{
-  //     let dictStyle: any = {};
-  //     for (const result of ['won', 'draw', 'lost'] ){
-  //         dictStyle[result]= {
-  //             width: `${statQuiz.overall[result as 'won'|'draw'|'lost'] / numberResultMax * 100}%`
-  //         };
-  //     }
-  //     return dictStyle;
-  // },[statQuiz, numberResultMax]);
 
   const textData = useMemo(() => {
     const yearCurrent = new Date().getFullYear();

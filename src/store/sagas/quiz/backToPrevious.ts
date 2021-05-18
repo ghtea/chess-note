@@ -17,9 +17,13 @@ export default function* backToPrevious(action: actions.quiz.type__BACK_TO_PREVI
     (state: StateRoot) => state.quiz.data.focusing.nextTurn,
   );
   const situation: types.quiz.Situation = yield select(
-    (state: StateRoot) => state.quiz.state.focusing.situation,
+    (state: StateRoot) => state.quiz.state.situation,
   );
-  if (situation === 'playing' || situation === 'failed' || situation === 'solved') {
+  if (
+    situation === 'playing-trying' ||
+    situation === 'playing-failed' ||
+    situation === 'playing-solved'
+  ) {
     if (nextTurn[0] !== focusingChess.turn()) {
       yield delay(500);
       yield backOneMove();
@@ -28,7 +32,9 @@ export default function* backToPrevious(action: actions.quiz.type__BACK_TO_PREVI
 }
 
 function* backOneMove() {
-  const focusingQuizData: types.quiz.Quiz = yield select((state: StateRoot) => state.quiz.data.focusing);
+  const focusingQuizData: types.quiz.Quiz = yield select(
+    (state: StateRoot) => state.quiz.data.focusing,
+  );
   const focusingQuizState: types.quiz.QuizState = yield select(
     (state: StateRoot) => state.quiz.state.focusing,
   );

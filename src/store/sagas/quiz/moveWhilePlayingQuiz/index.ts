@@ -36,8 +36,8 @@ export default function* moveWhilePlayingQuiz(action: actions.quiz.type__MOVE_IN
         );
         yield put(
           actions.quiz.return__REPLACE({
-            keyList: ['state', 'focusing', 'situation'],
-            replacement: 'failed',
+            keyList: ['state', 'situation'],
+            replacement: 'playing-failed',
           }),
         );
       } else if (gradingResult === 'complete-answer') {
@@ -48,8 +48,8 @@ export default function* moveWhilePlayingQuiz(action: actions.quiz.type__MOVE_IN
         );
         yield put(
           actions.quiz.return__REPLACE({
-            keyList: ['state', 'focusing', 'situation'],
-            replacement: 'solved',
+            keyList: ['state', 'situation'],
+            replacement: 'playing-solved',
           }),
         );
       } else {

@@ -154,3 +154,15 @@ export const return__WATCH_STARTING_FEN_CHANGE = () => {
   };
 };
 export type type__WATCH_STARTING_FEN_CHANGE = ReturnType<typeof return__WATCH_STARTING_FEN_CHANGE>;
+
+export const name__PLAY_RANDOM_QUIZ = 'quiz/PLAY_RANDOM_QUIZ';
+type Payload__PLAY_RANDOM_QUIZ = {
+  kind: 'my-quiz' | 'public-quiz';
+};
+export const return__PLAY_RANDOM_QUIZ= (payload: Payload__PLAY_RANDOM_QUIZ) => {
+  return {
+    type: name__PLAY_RANDOM_QUIZ,
+    payload: payload,
+  };
+};
+export type type__PLAY_RANDOM_QUIZ = ReturnType<typeof return__PLAY_RANDOM_QUIZ>;

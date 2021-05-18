@@ -98,6 +98,9 @@
 
   "Notification.PlayQuiz_Correct__S": "Correct!",
   "Notification.PlayQuiz_Wrong__W": "That's not the answer",
+  "Notification.PlayQuiz_NoPublicQuiz__E": "There is no public quiz",
+  "Notification.PlayQuiz_NoMyQuiz__E": "That's no my quiz",
+
 
   "Notification.CreateQuiz_Succeeded__S": "Successfully created the quiz!",
   "Notification.CreateQuiz_UnknownError__E": "Failed to create the quiz",

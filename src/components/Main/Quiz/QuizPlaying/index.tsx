@@ -41,7 +41,7 @@ function QuizPlaying() {
             actions.quiz.return__GET_QUIZ_BY_ID({
               quizId: quizIdFromUri,
               userIdInApp: userId,
-              situation: 'playing',
+              situation: 'playing-trying',
             }),
           );
         }

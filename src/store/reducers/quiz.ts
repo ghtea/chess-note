@@ -30,16 +30,17 @@ const stateInitial = {
   },
 
   state: {
+
+    situation: null as types.quiz.Situation,
+
     display: {
       mode: 'public-quiz' as types.quiz.DisplayMode,
     },
 
     playingIdList: [],
-    index: null as number | null,
 
     focusing: {
       id: null,
-      situation: 'creating',
       fen: null,
       turn: 'white',
       sanSeries: [],

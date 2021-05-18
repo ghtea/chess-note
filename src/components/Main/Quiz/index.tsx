@@ -19,7 +19,7 @@ function Quiz() {
   // const userId = useSelector((state: StateRoot) => state.auth.user?.id);
   // const quizIdFocusing = useSelector((state: StateRoot) => state.quiz.data.focusing.id);
 
-  const situationCurrent = useSelector((state: StateRoot) => state.quiz.state.focusing.situation);
+  const situationCurrent = useSelector((state: StateRoot) => state.quiz.state.situation);
 
   useEffect(() => {
     dispatch(actions.quiz.return__WATCH_STARTING_FEN_CHANGE());
@@ -36,14 +36,14 @@ function Quiz() {
     } else if (modeFromUrl === 'edit') {
       situationNew = 'editing';
     } else if (modeFromUrl === 'play') {
-      situationNew = 'playing';
+      situationNew = 'playing-trying';
     } else if (modeFromUrl === 'solved') {
       situationNew = 'solved';
     }
     if (situationCurrent !== situationNew) {
       dispatch(
         actions.quiz.return__REPLACE({
-          keyList: ['state', 'focusing', 'situation'],
+          keyList: ['state', 'situation'],
           replacement: situationNew,
         }),
       );
