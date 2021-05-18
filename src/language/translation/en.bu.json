@@ -1,0 +1,99 @@
+{
+    "Blank": "",
+
+
+    "Global.Name": "Name",
+    "Global.Add": "Add",
+    "Global.Create": "Create",
+    "Global.Save": "Save",
+    "Global.Delete": "Delete",
+    "Global.Update": "Update",
+    "Global.Search": "Search",
+
+    "Global.WhiteToMove": "White to move",
+    "Global.BlackToMove": "Black to move",
+
+    
+    "Header.Setting": "Setting",
+
+
+    "Nav.NameApp": "Chess Note",
+    "Nav.Home": "Home",
+    "Nav.LogIn": "Log In",
+    "Nav.SignUp": "Sign Up",
+    "Nav.Opening": "Opening",  
+    "Nav.Quiz": "Quiz",  
+
+    "Main.LogIn_LogIn": "Log In",
+    "Main.LogIn_EmailAddress": "Email Address",
+    "Main.LogIn_Password": "Password",
+    "Main.LogIn_ContinueWithGoogle": "Continue With Google",
+    "Main.LogIn_ContinueWithTwitter": "Continue With Twitter",
+    "Main.LogIn_ContinueWithGithub": "Continue With Github",
+
+    "Main.SignUp_SignUp": "Sign Up",
+    "Main.SignUp_PasswordAgain": "Password Again",
+
+
+    "Modal.Setting_Title": "Setting",
+    "Modal.Setting_Theme": "Theme",
+    "Modal.Setting_Language": "Language",
+    "Modal.Setting_LogOut": "Log Out",
+    
+    "Modal.MyProfile_Title": "My Profile",
+    "Modal.MyProfile_EmailAddress": "Email Address",
+    "Modal.MyProfile_Name": "Name",
+    "Modal.MyProfile_Photo": "Photo",
+    "Modal.MyProfile_Update": "Update",
+
+    "Modal.QuizEditingSave_SaveAsStart": "Save as Start",
+    "Modal.QuizEditingSave_SaveAsNewAnswer": "Save as New Answer",
+    "Modal.QuizEditingSave_SaveAsExistingAnswer": "Save as Answer {index}",
+
+    "Modal.QuizEditingOthers_UseFen": "Use FEN from Clipboard",    
+    "Modal.QuizEditingOthers_ChangeSide": "Change Side",
+    "Modal.QuizEditingOthers_ShowAnswer": "Show Answer {index}",
+    "Modal.QuizEditingOthers_DeleteAnswer": "Delete Answer {index}",
+    "Modal.QuizEditingOthers_NoAnswer": "No Answer Yet",
+
+    "Notification.Test1__S": "Succuessfully tested 1 !",
+    "Notification.Test2__H": "Succuessfully tested 2 !",
+    "Notification.NotLoggedIn__E": "You should log in first",
+    "Notification.UnknownError__E": "An unknown error has occurred",
+
+    "Notification.LogIn_UnknownError__E": "An unknown error has occurred",
+    "Notification.LogIn_UserNotFound__E": "No user was found from this email address",
+    "Notification.LogIn_UserDisabled__E": "This user has been disabled",
+
+    "Notification.LogIn_NoEmail__E": "Please enter email address",
+    "Notification.LogIn_InvalidEmail__E": "The email address is not valid",
+    "Notification.LogIn_NoPassword__E": "Please enter password",
+    "Notification.LogIn_WrongPassword__E": "Password is wrong, or you should use the social service you have already registered",
+
+    "Notification.SignUp_UnknownError__E": "An unknown error has occurred",
+    "Notification.SignUp_Succeeded__S": "Successfully signed up!",
+
+    "Notification.SignUp_NoEmail__E": "Please enter email address",
+    "Notification.SignUp_InvalidEmail__E": "The email address is not valid",
+    "Notification.SignUp_DuplicateEmail__E": "That email is already existing",
+    "Notification.SignUp_NoPassword__E": "Please enter both passwords",
+    "Notification.SignUp_PasswordsDifferent__E": "The two passwords are different",
+    "Notification.SignUp_WeakPassword__E": "Password should be at least 6 characters long",
+
+    "Notification.Football_GetLeagueStandings_UnknownError__E": "Failed to get league standings",
+    "Notification.Football_UpdateLeagueStandings_UnknownError__E": "Failed to update league standings",
+    "Notification.Football_CheckListTeam_UnknownError__E": "Failed to check information of teams",
+    "Notification.Football_GetListTeam_UnknownError__E": "Failed to get information of teams",
+    "Notification.Football_AddTeam_UnknownError__E": "Failed to find information of the team",
+
+    "Notification.CreatePortal_Succeeded__S": "Successfully created portal!",
+    "Notification.CreatePortal_UnknownError__E": "Failed to create the portal",
+    "Notification.GetListPortal_UnknownError__E": "Failed to get portals",
+    "Notification.VisitPortal_UnknownError__E": "Failed to update the portal which you visited",
+    "Notification.UpdatePortal_Succeeded__S": "Successfully updated portal!",
+    "Notification.UpdatePortal_UnknownError__E": "Failed to update the portal",
+    "Notification.DeletePortal_Succeeded__S": "Successfully deleted portal!",
+    "Notification.DeletePortal_UnknownError__E": "Failed to delete the portal"
+}
+
+

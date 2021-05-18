@@ -47,7 +47,7 @@ function QuizPlaying() {
         }
       }
     }
-  }, [window.location.pathname, statusUser, quizId]);
+  }, [window.location.pathname, statusUser, quizId, userId]);
 
   return (
     <div className={`${styles['root']}`}>

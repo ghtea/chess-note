@@ -11,16 +11,20 @@ import DisplayQuiz from './DisplayQuiz';
 
 function QuizHome() {
   const dispatch = useDispatch();
-  const userReady = useSelector((state: StateRoot) => state.status.auth.user.ready);
+  const userStatus = useSelector((state: StateRoot) => state.status.auth.user);
   const userId = useSelector((state: StateRoot) => state.auth.user?.id);
 
   useEffect(() => {
-    dispatch(
-      actions.data.quiz.return__GET_QUIZ_LIST_DICT({
-        userId: userId,
-      }),
-    );
-  }, []);
+    if (userStatus.ready || (userStatus.tried && !userStatus.ready)) {
+      console.log(userStatus)
+      // 현재 로컬에 있는 퀴즈 아이디와 uri에 있는 퀴즈 아이디가 서로 다를 때
+      dispatch(
+        actions.data.quiz.return__GET_QUIZ_LIST_DICT({
+          userId: userId,
+        }),
+      );
+    }
+  }, [userStatus, userId]);
 
   return (
     <div className={`${styles['root']}`}>

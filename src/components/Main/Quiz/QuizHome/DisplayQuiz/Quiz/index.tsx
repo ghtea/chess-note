@@ -82,7 +82,7 @@ function Quiz({ quiz }: PropsQuiz) {
 
       const year = dateQC.getFullYear();
       const month = dateQC.getMonth() + 1;
-      const date = dateQC.getDate() + 1;
+      const date = dateQC.getDate();
       const hour = dateQC.getHours().toString().padStart(2, '0');
       const min = dateQC.getMinutes().toString().padStart(2, '0');
 
