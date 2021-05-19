@@ -7,7 +7,7 @@ import { FormattedMessage } from 'react-intl';
 import Cookies from 'js-cookie';
 
 import { useSelector, useDispatch } from 'react-redux';
-import { StateRoot } from 'store/reducers';
+import { RootState } from 'store/reducers';
 import * as actions from 'store/actions';
 
 import InputRadio from 'components/Global/Input/InputRadio';
@@ -18,10 +18,7 @@ import styles from './index.module.scss';
 import stylesQC from '../../common/index.module.scss';
 import stylesModal from 'components/Modal/index.module.scss';
 
-import {
-  correctChessMoveTree,
-  markedChessMoveTree,
-} from 'components/Main/Quiz/QuizEditing/chessMoveTree';
+import { correctChessMoveTree, markedChessMoveTree } from 'components/Main/Quiz/chessMoveTree';
 
 type PropsQuizEditingSet = {
   top: number;
@@ -30,8 +27,8 @@ type PropsQuizEditingSet = {
 function QuizEditingSet({ top }: PropsQuizEditingSet) {
   const dispatch = useDispatch();
 
-  const quizPresent = useSelector((state: StateRoot) => state.present.quiz.focusing);
-  const quizData = useSelector((state: StateRoot) => state.data.quiz.focusing);
+  const focusingQuizState = useSelector((state: RootState) => state.quiz.state.focusing);
+  const focusingQuizData = useSelector((state: RootState) => state.quiz.data.focusing);
   const [indexAnswer, setIndexAnswer] = useState<number>(0);
 
   const refModal = useRef<HTMLDivElement>(null);
@@ -66,54 +63,57 @@ function QuizEditingSet({ top }: PropsQuizEditingSet) {
 
       if (value === 'start') {
         dispatch(
-          actions.data.return__REPLACE({
-            keyList: ['quiz', 'focusing', 'startingFen'],
-            replacement: quizPresent.fen,
+          actions.quiz.return__REPLACE({
+            keyList: ['data', 'focusing', 'startingFen'],
+            replacement: focusingQuizState.fen,
           }),
         );
         dispatch(
-          actions.present.return__REPLACE({
-            keyList: ['quiz', 'focusing', 'sanSeries'],
+          actions.quiz.return__REPLACE({
+            keyList: ['state', 'focusing', 'sanSeries'],
             replacement: [],
           }),
         );
       } else if (value === 'answer') {
-        correctChessMoveTree.putSeriesSan(quizPresent.sanSeries);
+        correctChessMoveTree.putSeriesSan(focusingQuizState.sanSeries);
         dispatch(
-          actions.data.return__REPLACE({
-            keyList: ['quiz', 'focusing', 'correctSanSeriesList'],
-            replacement: correctChessMoveTree.returnListSeriesSan(),
+          actions.quiz.return__REPLACE({
+            keyList: ['data', 'focusing', 'correctSanSeriesList'],
+            replacement: correctChessMoveTree.returnSanSeriesList(),
           }),
         );
       } else if (value === 'mark') {
-        markedChessMoveTree.putSeriesSan(quizPresent.sanSeries);
+        markedChessMoveTree.putSeriesSan(focusingQuizState.sanSeries);
         dispatch(
-          actions.data.return__REPLACE({
-            keyList: ['quiz', 'focusing', 'markedSanSeriesList'],
-            replacement: markedChessMoveTree.returnListSeriesSan(),
+          actions.quiz.return__REPLACE({
+            keyList: ['data', 'focusing', 'markedSanSeriesList'],
+            replacement: markedChessMoveTree.returnSanSeriesList(),
           }),
         );
       }
     },
-    [quizPresent.sanSeries, quizData.correctSanSeriesList],
+    [focusingQuizState.sanSeries, focusingQuizData.correctSanSeriesList],
   );
 
   const isShowingSetAsAnswer = useMemo(() => {
-    if (quizData.startingFen && quizPresent.sanSeries.length > 0 && (quizPresent.turn !== quizData.nextTurn)) {
+    if (
+      focusingQuizData.startingFen &&
+      focusingQuizState.sanSeries.length > 0 &&
+      focusingQuizState.turn !== focusingQuizData.nextTurn
+    ) {
       return true;
     } else {
       return false;
     }
-  }, [quizData.startingFen, quizPresent.sanSeries]);
+  }, [focusingQuizData.startingFen, focusingQuizState.sanSeries]);
 
   const isShowingSetAsMark = useMemo(() => {
-    if (quizData.startingFen && quizPresent.sanSeries.length > 0) {
+    if (focusingQuizData.startingFen && focusingQuizState.sanSeries.length > 0) {
       return true;
     } else {
       return false;
     }
-  }, [quizData.startingFen, quizPresent.sanSeries]);
-  
+  }, [focusingQuizData.startingFen, focusingQuizState.sanSeries]);
 
   return (
     <div className={`${styles['root']} ${stylesQC['root']} ${stylesModal['root']}`}>
@@ -134,8 +134,7 @@ function QuizEditingSet({ top }: PropsQuizEditingSet) {
               className={`${styles['button__start']}`}
               onClick={onClick_AnyMainButton}
             >
-              {' '}
-              <FormattedMessage id={`Modal.QuizEditingSet_SetAsStart`} />{' '}
+              <FormattedMessage id={`Modal.QuizEditingSet_SetAsStart`} />
             </button>
           </div>
 

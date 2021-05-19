@@ -5,7 +5,7 @@ import { Route, Switch } from 'react-router-dom';
 //import { useQuery, gql } from '@apollo/client';
 
 import { useDispatch, useSelector } from 'react-redux';
-import { StateRoot } from 'store/reducers';
+import { RootState } from 'store/reducers';
 import * as actions from 'store/actions';
 
 import QuizEditing from './QuizEditing';
@@ -15,14 +15,15 @@ import QuizPlaying from './QuizPlaying';
 function Quiz() {
   const dispatch = useDispatch();
 
-  // const userReady = useSelector((state: StateRoot) => state.status.auth.user.ready);
-  // const userId = useSelector((state: StateRoot) => state.auth.user?.id);
-  // const quizIdFocusing = useSelector((state: StateRoot) => state.data.quiz.focusing.id);
+  // const userReady = useSelector((state: RootState) => state.status.auth.user.ready);
+  // const userId = useSelector((state: RootState) => state.auth.user?.id);
+  // const quizIdFocusing = useSelector((state: RootState) => state.quiz.data.focusing.id);
 
-  const situationCurrent = useSelector((state: StateRoot) => state.present.quiz.focusing.situation);
+  const situationCurrent = useSelector((state: RootState) => state.quiz.state.situation);
 
   useEffect(() => {
-    dispatch(actions.data.quiz.return__WATCH_STARTING_FEN_CHANGE());
+    dispatch(actions.quiz.return__WATCH_STARTING_FEN_CHANGE());
+    dispatch(actions.quiz.return__WATCH_SITUATION_CHANGE());
   }, []);
 
   useEffect(() => {
@@ -36,14 +37,14 @@ function Quiz() {
     } else if (modeFromUrl === 'edit') {
       situationNew = 'editing';
     } else if (modeFromUrl === 'play') {
-      situationNew = 'playing';
+      situationNew = 'playing-trying';
     } else if (modeFromUrl === 'solved') {
       situationNew = 'solved';
     }
     if (situationCurrent !== situationNew) {
       dispatch(
-        actions.present.return__REPLACE({
-          keyList: ['quiz', 'focusing', 'situation'],
+        actions.quiz.return__REPLACE({
+          keyList: ['state', 'situation'],
           replacement: situationNew,
         }),
       );

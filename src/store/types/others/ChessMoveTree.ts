@@ -126,7 +126,7 @@ export class ChessMoveTree {
     return chessMoveNodeNext; // 방금 만든 자식 노드를, 참조 유지한채로 반환한다(자동으로), 즉 여기다 다시 자식 노드 추가하면, 전체 루트 노드의 손자로서 추가!!
   }
 
-  returnListSeriesSan(): string[][] {
+  returnSanSeriesList(): string[][] {
     const listSeriesSan: string[][] = [];
 
     for (const chessMoveNodeFirst of this.listChessMoveNodeNext) {

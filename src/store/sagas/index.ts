@@ -1,23 +1,21 @@
-import { all, fork, takeEvery } from 'redux-saga/effects'
+import { all, fork, takeEvery } from 'redux-saga/effects';
 
-import sagaAppearance from './appearance';
-import sagaAuth from './auth';
-import sagaData from './data';
-import sagaNotification from './notification';
-import sagaStatus from './status';
-import sagaPresent from './present';
+import appearanceSaga from './appearance';
+import authSaga from './auth';
+import quizSaga from './quiz';
+import notificationSaga from './notification';
+import statusSaga from './status';
 
 import * as actions from 'store/actions';
 
-export default function* sagaRoot() {
-  yield all ([
-    fork(sagaAppearance),
-    fork(sagaAuth),
-    fork(sagaData),
-    fork(sagaNotification),
-    fork(sagaStatus),
-    fork(sagaPresent),
-])
+export default function* rootSaga() {
+  yield all([
+    fork(appearanceSaga),
+    fork(authSaga),
+    fork(quizSaga),
+    fork(notificationSaga),
+    fork(statusSaga),
+  ]);
   // code after fork-effect
 }
 

@@ -8,6 +8,7 @@
   "Global.Set": "지정",
   "Global.Delete": "삭제",
   "Global.Update": "업데이트",
+  "Global.Edit": "수정",
   "Global.Search": "검색",
 
   "Global.Opening": "오프닝",
@@ -34,8 +35,16 @@
   "Main.QuizHome_ShortCuts_PlayMyQuiz": "내 퀴즈 풀기",
   "Main.QuizHome_ShortCuts_CreateQuiz": "퀴즈 만들기",
 
+  "Main.QuizHome_QuizDisplay_MonthsAgo": "개월 전",
+  "Main.QuizHome_QuizDisplay_DaysAgo": "일 전",
+  "Main.QuizHome_QuizDisplay_HoursAgo": "시간 전",
+  "Main.QuizHome_QuizDisplay_MinsAgo": "분 전",
+  "Main.QuizHome_QuizDisplay_JustBefore": "방금 전",
+
   "Main.QuizPlay_StatusBar_Solved": "정답입니다!",
   "Main.QuizPlay_StatusBar_Failed": "틀렸습니다",
+  "Main.QuizPlay_ToolBar_GiveUp": "포기하기",
+
 
   "Modal.Setting_Title": "설정",
   "Modal.Setting_Theme": "테마",
@@ -54,14 +63,19 @@
 
   "Modal.QuizEditingSet_SetAsStart": "시작 지점으로 지정",
   "Modal.QuizEditingSet_SetAsAnswer": "해답으로 지정",
-  "Modal.QuizEditingSet_SetAsMark": "참고하라고 지정",
+  "Modal.QuizEditingSet_SetAsMark": "참고표시로 지정",
 
   "Modal.QuizEditingOthers_UseFen": "클립보드의 FEN 이용",
   "Modal.QuizEditingOthers_NotValidFen": "올바른 FEN가 아닙니다",
   "Modal.QuizEditingOthers_ChangeSide": "흑백 바꾸기",
-  "Modal.QuizEditingOthers_ShowAnswer": "해답 {index} 보기",
-  "Modal.QuizEditingOthers_DeleteAnswer": "해답 {index} 삭제하기",
-  "Modal.QuizEditingOthers_NoAnswer": "현재 해답 없음",
+
+  "Modal.QuizManageAnswersMarks_ShowAnswer": "해답 {index} 보기",
+  "Modal.QuizManageAnswersMarks_DeleteAnswer": "해답 {index} 삭제하기",
+  "Modal.QuizManageAnswersMarks_NoAnswer": "현재 해답 없음",
+
+  "Modal.QuizManageAnswersMarks_ShowMark": "참고표시 {index} 보기",
+  "Modal.QuizManageAnswersMarks_DeleteMark": "참고표시 {index} 삭제하기",
+  "Modal.QuizManageAnswersMarks_NoMark": "현재 참고표시 없음",
 
   "Nav.NameApp": "체스 노트",
   "Nav.Home": "홈",
@@ -74,6 +88,7 @@
   "Notification.Test2__H": "테스트에 성공하였습니다 2 !",
   "Notification.NotLoggedIn__E": "먼저 로그인해야 합니다",
   "Notification.UnknownError__E": "알수 없는 에러가 발생했습니다",
+  "Notification.NotAuthorized__E": "권한이 없습니다",
 
   "Notification.LogIn_UnknownError__E": "알수 없는 에러가 발생했습니다",
   "Notification.LogIn_UserNotFound__E": "해당 이메일 주소로부터 유저를 찾지 못했습니다",
@@ -95,14 +110,22 @@
   "Notification.SignUp_WeakPassword__E": "비밀번호는 6글자 이상이어야 합니다",
 
   "Notification.GetMember_UnknownError__E": "회원 정보를 가져오는 과정에서 알수 없는 에러가 발생했습니다",
+  "Notification.UpdateMember_UnknownError__E": "회원 정보를 업데이트하는 과정에서 알수 없는 에러가 발생했습니다",
 
   "Notification.PlayQuiz_Correct__S": "정답입니다!",
   "Notification.PlayQuiz_Wrong__W": "틀렸습니다",
+  "Notification.PlayQuiz_NoPublicQuiz__E": "공개 퀴즈가 없습니다",
+  "Notification.PlayQuiz_NoMyQuiz__E": "내 퀴즈가 없습니다",
 
   "Notification.CreateQuiz_Succeeded__S": "성공적으로 퀴즈를 만들었습니다!",
   "Notification.CreateQuiz_UnknownError__E": "퀴즈를 만들지 못했습니다",
   "Notification.CreateQuiz_NoAnswer__E": "해답을 지정해야 합니다",
   "Notification.CreateQuiz_NoFenStart__E": "시작지점을 지정해야 합니다",
+
+  "Notification.EditQuiz_NotAuthor__E": "이 퀴즈의 작성자가 아닙니다",
+
+  "Notification.ShowAnswerOrMark_NotValid__E": "올바르지 않은 수가 있습니다",
+
 
   "Notification.GetFocusListQuiz_UnknownError__E": "퀴즈들을 불러오지 못했습니다",
   "Notification.GetQuiz_UnknownError__E": "퀴즈를 불러오지 못했습니다",

@@ -4,7 +4,7 @@ import history from 'libraries/history';
 import { FormattedMessage } from 'react-intl';
 
 import { useSelector, useDispatch } from 'react-redux';
-import { StateRoot } from 'store/reducers';
+import { RootState } from 'store/reducers';
 
 // https://github.com/STRML/react-draggable
 
@@ -34,7 +34,7 @@ type PropsChessBoard = {
 function ChessBoard({ listSquare, side, page }: PropsChessBoard) {
   const dispatch = useDispatch();
 
-  const situationQuiz = useSelector((state: StateRoot) => state.present.quiz.focusing.situation);
+  const situationQuiz = useSelector((state: RootState) => state.quiz.state.situation);
 
   const situation = useMemo(() => {
     // console.log('modeQuiz: ', situationQuiz)
@@ -46,21 +46,21 @@ function ChessBoard({ listSquare, side, page }: PropsChessBoard) {
   }, [page, situationQuiz]);
 
   const { width: widthWindow, height: heightWindow } = useSelector(
-    (state: StateRoot) => state.appearance.layout.window,
+    (state: RootState) => state.appearance.layout.window,
   );
 
   const heightHeader = useSelector(
-    (state: StateRoot) => state.appearance.layout.document.header.height,
+    (state: RootState) => state.appearance.layout.document.header.height,
   );
   const heightStatusBar = useSelector(
-    (state: StateRoot) => state.appearance.layout.document.chessBoard.statusBar.height,
+    (state: RootState) => state.appearance.layout.document.chessBoard.statusBar.height,
   );
   const heightToolBar = useSelector(
-    (state: StateRoot) => state.appearance.layout.document.chessBoard.toolBar.height,
+    (state: RootState) => state.appearance.layout.document.chessBoard.toolBar.height,
   );
 
   const lengthChessBoard = useSelector(
-    (state: StateRoot) => state.appearance.layout.document.chessBoard.length,
+    (state: RootState) => state.appearance.layout.document.chessBoard.length,
   );
 
   useEffect(() => {
@@ -115,14 +115,18 @@ function ChessBoard({ listSquare, side, page }: PropsChessBoard) {
         if (page === 'quiz') {
           if (situation === 'creating' || situation === 'editing') {
             dispatch(
-              actions.data.quiz.return__MOVE_WHILE_EDITING_QUIZ({
+              actions.quiz.return__MOVE_WHILE_EDITING_QUIZ({
                 from: positionStart,
                 to: position,
               }),
             );
-          } else if (situation === 'playing' || situation === 'failed' || situation === 'solved') {
+          } else if (
+            situation === 'playing-trying' ||
+            situation === 'playing-failed' ||
+            situation === 'playing-solved'
+          ) {
             dispatch(
-              actions.data.quiz.return__MOVE_IN_QUIZ_PLAYING({
+              actions.quiz.return__MOVE_IN_QUIZ_PLAYING({
                 from: positionStart,
                 to: position,
               }),

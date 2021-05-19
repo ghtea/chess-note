@@ -18,14 +18,13 @@ const stateInitial = {
       publicQuizList: { tried: false, loading: false, ready: false },
       myQuizList: { tried: false, loading: false, ready: false },
 
-      list: { tried: false, loading: false, ready: false },
-      one: { tried: false, loading: false, ready: false },
+      focusing: { tried: false, loading: false, ready: false },
     },
   },
 };
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
-const reducerStatus = handleActions<State, any>(
+const statusReducer = handleActions<State, any>(
   {
     [actions.status.name__REPLACE]: (previousState, action: actions.status.type__REPLACE) => {
       return produce(previousState, (newState) => {
@@ -46,4 +45,4 @@ const reducerStatus = handleActions<State, any>(
   stateInitial,
 );
 
-export default reducerStatus;
+export default statusReducer;

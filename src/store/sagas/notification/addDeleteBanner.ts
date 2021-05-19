@@ -4,13 +4,13 @@ import * as actions from 'store/actions';
 import * as types from 'store/types';
 
 import { Banner } from 'store/reducers/notification';
-import { StateRoot } from 'store/reducers';
+import { RootState } from 'store/reducers';
 
 import { v4 as uuidv4 } from 'uuid';
 
 function* addDeleteBanner(action: actions.notification.type__ADD_DELETE_BANNER) {
   const bannerListPrevious: Banner[] = yield select(
-    (state: StateRoot) => state.notification.bannerList,
+    (state: RootState) => state.notification.bannerList,
   );
 
   const id = uuidv4();

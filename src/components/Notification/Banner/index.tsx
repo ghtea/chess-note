@@ -4,7 +4,7 @@ import { useHistory, useLocation } from 'react-router-dom';
 import { FormattedMessage } from 'react-intl';
 
 import { useSelector, useDispatch } from 'react-redux';
-import { StateRoot } from 'store/reducers';
+import { RootState } from 'store/reducers';
 import * as actions from 'store/actions';
 
 import { Banner as TypeBanner } from 'store/reducers/notification';

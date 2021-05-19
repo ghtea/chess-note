@@ -6,7 +6,7 @@ import store from 'tools/vanilla/store';
 // import instanceI18n from 'language/i18n';
 
 import * as actions from 'store/actions';
-import { StateRoot } from 'store/reducers';
+import { RootState } from 'store/reducers';
 
 // ISO 639-1
 const returnCodeStandardFromCodeBrowser = (languageBrowser: string): string => {
@@ -46,7 +46,7 @@ function* detectLanguage() {
   }
 
   yield put(
-    actions.present.return__REPLACE({
+    actions.appearance.return__REPLACE({
       keyList: ['language'],
       replacement: replacement,
     }),

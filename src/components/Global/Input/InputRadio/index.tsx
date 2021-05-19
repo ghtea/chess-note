@@ -29,7 +29,7 @@ function InputRadio({
         value={value}
         id={idInput}
         aria-labelledby={idLabel}
-        defaultChecked={valueCurrent === value}
+        checked={valueCurrent === value}
         onChange={onChange}
       />
 

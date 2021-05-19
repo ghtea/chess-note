@@ -109,8 +109,8 @@
   ```javascript
       function Modal({}: PropsModal) {
 
-          const showingSetting = useSelector((state: StateRoot) => state.status.showing.modal.setting);
-          const showingMyProfile = useSelector((state: StateRoot) => state.status.showing.modal.myProfile);
+          const showingSetting = useSelector((state: RootState) => state.status.showing.modal.setting);
+          const showingMyProfile = useSelector((state: RootState) => state.status.showing.modal.myProfile);
 
           return (
               <>
@@ -195,13 +195,13 @@
   ```
 - divided reducers
   ```typescript
-    const reducerRoot = combineReducers({
-      appearance: reducerAppearance,   // ex. showing each modal or not
-      auth: reducerAuth,  // data of logged user
+    const rootReducer = combineReducers({
+      appearance: appearanceReducer,   // ex. showing each modal or not
+      auth: authReducer,  // data of logged user
       data: reducerData,  // data from database
-      notification: reducerNotification,  // for notification
+      notification: notificationReducer,  // for notification
       present: reducerPresent,   // for state for present like 'white player's turn to move'
-      status: reducerStatus,  // for information lik 'user data is ready', 'quiz data is loading'
+      status: statusReducer,  // for information lik 'user data is ready', 'quiz data is loading'
   });
       ...
   ```

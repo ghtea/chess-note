@@ -9,6 +9,13 @@ import putValueToNestedObject from 'tools/vanilla/putValueToNestedObject';
 export type State = typeof stateInitial;
 
 const stateInitial = {
+  language: '', // en, ko, ja    , it should be blank at first check cookie first (call DETECT_LANGUAGE)
+
+  theme: {
+    option: 'always-light',
+    name: 'light',
+  },
+
   showing: {
     header: {
       root: false,
@@ -20,9 +27,14 @@ const stateInitial = {
       setting: false,
       myProfile: false,
 
+      quizHomeOthers: false,
+      
       quizEditingSet: false,
       quizEditingUpload: false,
       quizEditingOthers: false,
+      
+      quizManageAnswers: false,
+      quizManageMarks: false,
 
       quizTryingOthers: false,
     },
@@ -52,7 +64,7 @@ const stateInitial = {
 };
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
-const reducerAppearance = handleActions<State, any>(
+const appearanceReducer = handleActions<State, any>(
   {
     [actions.appearance.name__REPLACE]: (
       previousState,
@@ -76,4 +88,4 @@ const reducerAppearance = handleActions<State, any>(
   stateInitial,
 );
 
-export default reducerAppearance;
+export default appearanceReducer;

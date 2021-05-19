@@ -9,7 +9,7 @@ import translationKo from 'language/translation/ko.json';
 import Cookies from 'js-cookie';
 
 import { useSelector, useDispatch } from 'react-redux';
-import { StateRoot } from 'store/reducers';
+import { RootState } from 'store/reducers';
 import * as actions from 'store/actions';
 import 'styles/once.scss';
 
@@ -29,7 +29,7 @@ function App() {
   //console.log('REACT_APP_NODE_ENV', process.env.NODE_ENV)
 
   // Language
-  const codeLanguageCurrent: string = useSelector((state: StateRoot) => state.present.language);
+  const codeLanguageCurrent: string = useSelector((state: RootState) => state.appearance.language);
   const translationLanguageCurrent = useMemo(() => {
     if (codeLanguageCurrent === 'ko') {
       return translationKo;
@@ -46,8 +46,10 @@ function App() {
   }, [codeLanguageCurrent]);
 
   // theme
-  const optionThemeCurrent: string = useSelector((state: StateRoot) => state.present.theme.option);
-  const nameThemeCurrent: string = useSelector((state: StateRoot) => state.present.theme.name);
+  const optionThemeCurrent: string = useSelector(
+    (state: RootState) => state.appearance.theme.option,
+  );
+  const nameThemeCurrent: string = useSelector((state: RootState) => state.appearance.theme.name);
   useEffect(() => {
     dispatch(actions.status.return__READ_OPTION_THEME());
   }, [optionThemeCurrent]);
@@ -89,6 +91,7 @@ function App() {
 
   useEffect(() => {
     dispatch(actions.auth.return__WATCH_USER_LOG_IN_OUT());
+    dispatch(actions.auth.return__WATCH_MEMBER_CHANGE());
   }, []);
 
   useEffect(() => {

@@ -10,16 +10,16 @@ const useInputQuizEditingUpload = <T>(draftInitial: T) => {
     (event: React.ChangeEvent<HTMLInputElement>) => {
       if (event.currentTarget.name === 'name') {
         dispatch(
-          actions.data.return__REPLACE({
-            keyList: ['quiz', 'focusing', 'name'],
+          actions.quiz.return__REPLACE({
+            keyList: ['data', 'focusing', 'name'],
             replacement: event.currentTarget.value,
           }),
         );
       } else if (event.currentTarget.name === 'isPublic') {
         dispatch(
-          actions.data.return__REPLACE({
-            keyList: ['quiz', 'focusing', 'isPublic'],
-            replacement: event.currentTarget.value === 'isPublic',
+          actions.quiz.return__REPLACE({
+            keyList: ['data', 'focusing', 'isPublic'],
+            replacement: event.currentTarget.value === 'true',
           }),
         );
       } else {
@@ -27,8 +27,8 @@ const useInputQuizEditingUpload = <T>(draftInitial: T) => {
           ...draft,
           [event.currentTarget.name]: event.currentTarget.value,
         };
+
         setDraft(draftReplacement);
-        // console.log(draftReplacement);
       }
     },
     [draft],

@@ -5,7 +5,7 @@ import focusingChess from 'libraries/chess';
 import { FormattedMessage } from 'react-intl';
 
 import { useSelector, useDispatch } from 'react-redux';
-import { StateRoot } from 'store/reducers';
+import { RootState } from 'store/reducers';
 
 // https://github.com/STRML/react-draggable
 
@@ -19,7 +19,7 @@ import IconPaste from 'svgs/basic/IconSignIn';
 import IconOthers from 'svgs/basic/IconThreeDots';
 
 import IconAnswer from 'svgs/basic/IconCheckCircle';
-import IconMention from 'svgs/basic/IconExclamationCircle';
+import IconMark from 'svgs/basic/IconInfoCircle';
 
 import IconBackToStart from 'svgs/basic/IconAngleDouble';
 import IconBackToPrevious from 'svgs/basic/IconAngle';
@@ -28,14 +28,16 @@ import IconBackToPrevious from 'svgs/basic/IconAngle';
 function ToolBarQE() {
   const dispatch = useDispatch();
 
+  const situation = useSelector((state: RootState) => state.quiz.state.situation);
+
   const heightToolbar = useSelector(
-    (state: StateRoot) => state.appearance.layout.document.chessBoard.toolBar.height,
+    (state: RootState) => state.appearance.layout.document.chessBoard.toolBar.height,
   );
   const lengthChessBoard = useSelector(
-    (state: StateRoot) => state.appearance.layout.document.chessBoard.length,
+    (state: RootState) => state.appearance.layout.document.chessBoard.length,
   );
-  //const quizPresent = useSelector((state: StateRoot)=>state.present.quiz.focusing);
-  const quizData = useSelector((state: StateRoot) => state.data.quiz.focusing);
+  //const focusingQuizState = useSelector((state: RootState)=>state.quiz.state.focusing);
+  const focusingQuizData = useSelector((state: RootState) => state.quiz.data.focusing);
 
   // const [positionStart, setPositionStart] = useState<null | string>(null);
   // const onClick_ControlPaste = useCallback(
@@ -60,13 +62,27 @@ function ToolBarQE() {
         }),
       );
     } else if (value === 'back-to-start') {
-      dispatch(actions.data.quiz.return__BACK_TO_START());
+      dispatch(actions.quiz.return__BACK_TO_START());
     } else if (value === 'back-to-previous') {
-      dispatch(actions.data.quiz.return__BACK_TO_PREVIOUS());
+      dispatch(actions.quiz.return__BACK_TO_PREVIOUS());
     } else if (value === 'set') {
       dispatch(
         actions.appearance.return__REPLACE({
           keyList: ['showing', 'modal', 'quizEditingSet'],
+          replacement: true,
+        }),
+      );
+    } else if (value === 'manage-answers') {
+      dispatch(
+        actions.appearance.return__REPLACE({
+          keyList: ['showing', 'modal', 'quizManageAnswers'],
+          replacement: true,
+        }),
+      );
+    } else if (value === 'manage-marks') {
+      dispatch(
+        actions.appearance.return__REPLACE({
+          keyList: ['showing', 'modal', 'quizManageMarks'],
           replacement: true,
         }),
       );
@@ -118,30 +134,30 @@ function ToolBarQE() {
 
       <div className={`${styles['mode']}`}>
         <button value="create" type="button" onClick={onClick_Main}>
-          <FormattedMessage id={'Global.Create'} />
+          <FormattedMessage id={situation === 'creating' ? 'Global.Create' : 'Global.Update'} />
         </button>
       </div>
 
-      <div className={`${styles['count']}`}>
-        <button type="button" value="show-answers" aria-label="Show Answers" onClick={onClick_Main}>
-          <IconAnswer
-            className={`${styles['icon__answer']}`}
-            kind={quizData.correctSanSeriesList.length === 0 ? 'light' : 'solid'}
-          />
-          <span> {quizData.correctSanSeriesList.length} </span>
-        </button>
-
+      <div className={`${styles['answers-marks']}`}>
         <button
           type="button"
-          value="show-mentions"
-          aria-label="Show Mentions"
+          value="manage-answers"
+          aria-label="Manage Answers"
           onClick={onClick_Main}
         >
-          <IconMention
-            className={`${styles['icon__mention']}`}
-            kind={quizData.markedSanSeriesList.length === 0 ? 'light' : 'solid'}
+          <IconAnswer
+            className={`${styles['icon__answer']}`}
+            kind={focusingQuizData.correctSanSeriesList.length === 0 ? 'light' : 'solid'}
           />
-          <span> {quizData.markedSanSeriesList.length} </span>
+          <span> {focusingQuizData.correctSanSeriesList.length} </span>
+        </button>
+
+        <button type="button" value="manage-marks" aria-label="Manage Marks" onClick={onClick_Main}>
+          <IconMark
+            className={`${styles['icon__mark']}`}
+            kind={focusingQuizData.markedSanSeriesList.length === 0 ? 'light' : 'solid'}
+          />
+          <span> {focusingQuizData.markedSanSeriesList.length} </span>
         </button>
       </div>
 

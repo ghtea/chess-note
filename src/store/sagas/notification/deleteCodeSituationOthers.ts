@@ -1,13 +1,13 @@
 import { delay, put, takeEvery, select } from 'redux-saga/effects';
 
 import * as actions from 'store/actions';
-import { StateRoot } from 'store/reducers';
+import { RootState } from 'store/reducers';
 
 function* deleteCodeSituationOthers(
   action: actions.notification.type__DELETE_CODE_SITUATION_OTHERS,
 ) {
   const otherSituationCodeListPrevious: string[] = yield select(
-    (state: StateRoot) => state.notification.otherSituationCodeList,
+    (state: RootState) => state.notification.otherSituationCodeList,
   );
 
   let otherSituationCodeListNew: string[] = otherSituationCodeListPrevious;

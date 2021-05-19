@@ -3,7 +3,7 @@ import history from 'libraries/history';
 import { FormattedMessage } from 'react-intl';
 
 import { useSelector, useDispatch } from 'react-redux';
-import { StateRoot } from 'store/reducers';
+import { RootState } from 'store/reducers';
 
 // https://github.com/STRML/react-draggable
 
@@ -19,19 +19,18 @@ import IconAngle from 'svgs/basic/IconAngle';
 import IconOthers from 'svgs/basic/IconThreeDots';
 // import {Chess} from 'chess.js'; // => makes error
 
-
 export default function StatusBarQP() {
   const dispatch = useDispatch();
 
   const heightStatusBar = useSelector(
-    (state: StateRoot) => state.appearance.layout.document.chessBoard.statusBar.height,
+    (state: RootState) => state.appearance.layout.document.chessBoard.statusBar.height,
   );
   const lengthChessBoard = useSelector(
-    (state: StateRoot) => state.appearance.layout.document.chessBoard.length,
+    (state: RootState) => state.appearance.layout.document.chessBoard.length,
   );
 
-  const turn = useSelector((state: StateRoot) => state.present.quiz.focusing.turn);
-  const situation = useSelector((state: StateRoot) => state.present.quiz.focusing.situation);
+  const turn = useSelector((state: RootState) => state.quiz.state.focusing.turn);
+  const situation = useSelector((state: RootState) => state.quiz.state.situation);
 
   const onClick_Main = useCallback((e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
     const value = e.currentTarget.value;
@@ -59,13 +58,13 @@ export default function StatusBarQP() {
         )}
       </div>
 
-      {situation === 'solved' && (
+      {situation === 'playing-solved' && (
         <div className={`${styles['solved']}`}>
           <FormattedMessage id="Main.QuizPlay_StatusBar_Solved" />
         </div>
       )}
 
-      {situation === 'failed' && (
+      {situation === 'playing-failed' && (
         <div className={`${styles['failed']}`}>
           <FormattedMessage id="Main.QuizPlay_StatusBar_Failed" />
         </div>

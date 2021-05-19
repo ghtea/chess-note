@@ -4,8 +4,8 @@ import history from 'libraries/history';
 import { applyMiddleware, compose, createStore } from 'redux';
 import logger from 'redux-logger';
 
-import reducerRoot from './reducers';
-import sagaRoot from './sagas';
+import rootReducer from './reducers';
+import rootSaga from './sagas';
 
 const sagaMiddleware = createSagaMiddleware({
   context: {
@@ -13,7 +13,7 @@ const sagaMiddleware = createSagaMiddleware({
   },
 });
 
-// type State = ReturnType<typeof reducerRoot>;
+// type State = ReturnType<typeof rootReducer>;
 
 // example: dont show logger when testing
 let listMiddleware = [];
@@ -23,9 +23,9 @@ if (process.env.NODE_ENV === 'production') {
   listMiddleware = [sagaMiddleware, logger];
 }
 
-const store = createStore(reducerRoot, applyMiddleware(...listMiddleware));
+const store = createStore(rootReducer, applyMiddleware(...listMiddleware));
 
-sagaMiddleware.run(sagaRoot);
+sagaMiddleware.run(rootSaga);
 
 export default store;
 

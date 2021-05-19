@@ -7,7 +7,7 @@ import { FormattedMessage, useIntl } from 'react-intl';
 import Cookies from 'js-cookie';
 
 import { useSelector, useDispatch } from 'react-redux';
-import { StateRoot } from 'store/reducers';
+import { RootState } from 'store/reducers';
 import * as actions from 'store/actions';
 
 import useInputQuizEditingUpload from './useInputQuizEditingUpload';
@@ -28,16 +28,13 @@ type PropsQuizEditingUpload = {
 function QuizEditingUpload({ top }: PropsQuizEditingUpload) {
   const dispatch = useDispatch();
   const intl = useIntl();
-  const userReady = useSelector((state: StateRoot) => state.status.auth.user.ready);
-  const userId = useSelector((state: StateRoot) => state.auth.user?.id);
+  const userReady = useSelector((state: RootState) => state.status.auth.user.ready);
+  const userId = useSelector((state: RootState) => state.auth.user?.id);
 
-  const situation = useSelector((state: StateRoot) => state.present.quiz.focusing.situation);
-  const quizData = useSelector((state: StateRoot) => state.data.quiz.focusing);
+  const situation = useSelector((state: RootState) => state.quiz.state.situation);
+  const focusingQuizData = useSelector((state: RootState) => state.quiz.data.focusing);
 
-  const { draft: draft_Main, onChange: onChange_Main } = useInputQuizEditingUpload({
-    name: '',
-    isPublic: 'isPublic',
-  });
+  const { draft: draft_Main, onChange: onChange_Main } = useInputQuizEditingUpload({});
 
   const refModal = useRef<HTMLDivElement>(null);
   const onClick_Window = useCallback(
@@ -67,31 +64,43 @@ function QuizEditingUpload({ top }: PropsQuizEditingUpload) {
             codeSituation: 'NotLoggedIn__E',
           }),
         );
-      } else if (quizData && userId) {
+      } else if (focusingQuizData && userId) {
         if (situation === 'creating') {
           dispatch(
-            actions.data.quiz.return__CREATE_QUIZ({
-              name: quizData.name,
-              nextTurn: quizData.nextTurn,
-              startingFen: quizData.startingFen,
-              correctSanSeriesList: quizData.correctSanSeriesList,
-              markedSanSeriesList: quizData.markedSanSeriesList,
-              userId: userId,
-              isPublic: quizData.isPublic,
+            actions.quiz.return__CREATE_QUIZ({
+              name: focusingQuizData.name,
+              nextTurn: focusingQuizData.nextTurn,
+              startingFen: focusingQuizData.startingFen,
+              correctSanSeriesList: focusingQuizData.correctSanSeriesList,
+              markedSanSeriesList: focusingQuizData.markedSanSeriesList,
+              authorId: userId,
+              isPublic: focusingQuizData.isPublic,
             }),
           );
-          dispatch(
-            actions.appearance.return__REPLACE({
-              keyList: ['showing', 'modal', convertCase('QuizEditingUpload', 'camel')],
-              replacement: false,
-            }),
-          );
+          
         } else {
-          // update
+          dispatch(
+            actions.quiz.return__UPDATE_QUIZ({
+              id: focusingQuizData.id as string,
+              name: focusingQuizData.name,
+              nextTurn: focusingQuizData.nextTurn,
+              startingFen: focusingQuizData.startingFen,
+              correctSanSeriesList: focusingQuizData.correctSanSeriesList,
+              markedSanSeriesList: focusingQuizData.markedSanSeriesList,
+              authorId: userId,
+              isPublic: focusingQuizData.isPublic,
+            }),
+          );
         }
+        dispatch(
+          actions.appearance.return__REPLACE({
+            keyList: ['showing', 'modal', convertCase('QuizEditingUpload', 'camel')],
+            replacement: false,
+          }),
+        );
       }
     },
-    [quizData, userId, userReady],
+    [focusingQuizData, userId, userReady],
   );
 
   return (
@@ -109,7 +118,7 @@ function QuizEditingUpload({ top }: PropsQuizEditingUpload) {
           <div className={`${stylesModal['content__section']} ${styles['input-name']}`}>
             <InputText
               name="name"
-              value={quizData?.name}
+              value={focusingQuizData?.name}
               label={intl.formatMessage({ id: 'Global.Name' })}
               placeholder={intl.formatMessage({ id: 'Global.Name' })}
               required={false}
@@ -125,16 +134,16 @@ function QuizEditingUpload({ top }: PropsQuizEditingUpload) {
 
             <div className={'container__input-radio'}>
               <InputRadio
-                valueCurrent={draft_Main.isPublic}
+                valueCurrent={focusingQuizData.isPublic.toString()}
                 name="isPublic"
-                value="isPublic"
+                value="true"
                 label={intl.formatMessage({ id: 'Modal.QuizEditingUpload_Public' })}
                 onChange={onChange_Main}
               />
               <InputRadio
-                valueCurrent={draft_Main.isPublic}
+                valueCurrent={focusingQuizData.isPublic.toString()}
                 name="isPublic"
-                value="isNotPublic"
+                value="false"
                 label={intl.formatMessage({ id: 'Modal.QuizEditingUpload_Private' })}
                 onChange={onChange_Main}
               />

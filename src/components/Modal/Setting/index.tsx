@@ -7,7 +7,7 @@ import { FormattedMessage } from 'react-intl';
 import Cookies from 'js-cookie';
 
 import { useSelector, useDispatch } from 'react-redux';
-import { StateRoot } from 'store/reducers';
+import { RootState } from 'store/reducers';
 import * as actions from 'store/actions';
 
 import InputRadio from '../../Global/Input/InputRadio';
@@ -20,8 +20,10 @@ import stylesModal from 'components/Modal/index.module.scss';
 function Setting() {
   const dispatch = useDispatch();
 
-  const languageCurrent: string = useSelector((state: StateRoot) => state.present.language);
-  const optionThemeCurrent: string = useSelector((state: StateRoot) => state.present.theme.option);
+  const languageCurrent: string = useSelector((state: RootState) => state.appearance.language);
+  const optionThemeCurrent: string = useSelector(
+    (state: RootState) => state.appearance.theme.option,
+  );
 
   const onClick_CloseModal = useCallback(
     (event: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
@@ -63,7 +65,7 @@ function Setting() {
     } = event;
     if (name === 'optionTheme') {
       dispatch(
-        actions.present.return__REPLACE({
+        actions.appearance.return__REPLACE({
           keyList: ['theme', 'option'],
           replacement: value,
         }),
@@ -71,7 +73,7 @@ function Setting() {
       Cookies.set('optionTheme', value, { expires: 14 });
     } else if (name === 'language') {
       dispatch(
-        actions.present.return__REPLACE({
+        actions.appearance.return__REPLACE({
           keyList: ['language'],
           replacement: value,
         }),

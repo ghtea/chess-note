@@ -2,13 +2,13 @@ import ChessBoard from 'components/Global/ChessBoard';
 import React, { useCallback, useState, useMemo, useEffect } from 'react';
 import { Route, Switch } from 'react-router-dom';
 //import { useQuery, gql } from '@apollo/client';
-
+import history from 'libraries/history';
 import { ChessInstance, Move, Square } from 'chess.js';
 import chessPlaying from 'libraries/chess';
 import styles from './index.module.scss';
 
 import { useDispatch, useSelector } from 'react-redux';
-import { StateRoot } from 'store/reducers';
+import { RootState } from 'store/reducers';
 import * as actions from 'store/actions';
 import ToolBarQE from './ToolBar';
 import StatusBarQE from './StatusBar';
@@ -16,22 +16,24 @@ import StatusBarQE from './StatusBar';
 function QuizEditing() {
   const dispatch = useDispatch();
 
-  const quizPresent = useSelector((state: StateRoot) => state.present.quiz.focusing);
-  const side = useSelector((state: StateRoot) => state.data.quiz.focusing.nextTurn);
-  const quizId = useSelector((state: StateRoot) => state.data.quiz.focusing?.id);
+  const focusingQuizState = useSelector((state: RootState) => state.quiz.state.focusing);
 
-  const statusUser = useSelector((state: StateRoot) => state.status.auth.user);
-  const userId = useSelector((state: StateRoot) => state.auth.user?.id);
+  const focusingQuizStatus = useSelector((state: RootState) => state.status.data.quiz.focusing);
+  const side = useSelector((state: RootState) => state.quiz.data.focusing.nextTurn);
+  const authorId = useSelector((state: RootState) => state.quiz.data.focusing.authorId);
+  const quizId = useSelector((state: RootState) => state.quiz.data.focusing?.id);
+
+  const statusUser = useSelector((state: RootState) => state.status.auth.user);
+  const userId = useSelector((state: RootState) => state.auth.user?.id);
 
   useEffect(() => {
     //const quizIdFromUri = (window.location.pathname.match(/[^\/]*$/) || [])[0];
     const modeFromUrl = window.location.pathname.replace(/\/quiz\/([^/]*).*/, '$1');
     const quizIdFromUri = window.location.pathname.replace(/\/quiz\/edit\/([^/]*).*/, '$1');
 
-    //console.log('edit-quizIdFromUri: ', quizIdFromUri)
     if (modeFromUrl === 'create') {
       dispatch(
-        actions.data.quiz.return__FOCUS_QUIZ({
+        actions.quiz.return__FOCUS_QUIZ({
           situation: 'creating',
         }),
       );
@@ -45,7 +47,7 @@ function QuizEditing() {
           //console.log('here: ', userId)
           //console.log('quizIdFromUri: ', quizIdFromUri)
           dispatch(
-            actions.data.quiz.return__GET_QUIZ_BY_ID({
+            actions.quiz.return__GET_QUIZ_BY_ID({
               quizId: quizIdFromUri,
               userIdInApp: userId,
               situation: 'editing',
@@ -54,11 +56,29 @@ function QuizEditing() {
         }
       }
     }
-  }, [window.location.pathname, statusUser, quizId]);
+  }, [window.location.pathname, statusUser, quizId, userId]);
+
+  // http://localhost:3000/quiz/edit/647bf5aa-05a5-4565-bf62-85a9b45bda55
+  // 난제: 왜 위 주소로 바로 들어갔을 때 경고가 두번 뜨는지 아직도 모르겠다
+  useEffect(() => {
+    // console.log('triggered!!!')
+    // console.log(statusUser, userId, authorId, focusingQuizStatus)
+    if (statusUser.tried && focusingQuizStatus.ready) {
+      if (authorId && userId !== authorId) {
+        //console.log('values: ', statusUser.tried, focusingQuizStatus.ready, authorId, userId)
+        dispatch(
+          actions.notification.return__ADD_DELETE_BANNER({
+            codeSituation: 'EditQuiz_NotAuthor__E',
+          }),
+        );
+        history.push('/quiz');
+      }
+    }
+  }, [statusUser.tried, userId, authorId, focusingQuizStatus.ready]);
 
   const listSquare = useMemo(() => {
     return chessPlaying.board();
-  }, [quizPresent.fen]);
+  }, [focusingQuizState.fen]);
 
   return (
     <div className={`${styles['root']}`}>

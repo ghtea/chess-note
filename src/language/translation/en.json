@@ -7,6 +7,7 @@
   "Global.Save": "Save",
   "Global.Set": "Set",
   "Global.Delete": "Delete",
+  "Global.Edit": "Edit",
   "Global.Update": "Update",
   "Global.Search": "Search",
 
@@ -41,8 +42,16 @@
   "Main.QuizHome_ShortCuts_PlayMyQuiz": "Play My Quiz",
   "Main.QuizHome_ShortCuts_CreateQuiz": "Create Quiz",
 
+  "Main.QuizHome_QuizDisplay_MonthsAgo": "month(s) ago",
+  "Main.QuizHome_QuizDisplay_DaysAgo": "day(s) ago",
+  "Main.QuizHome_QuizDisplay_HoursAgo": "hour(s) ago",
+  "Main.QuizHome_QuizDisplay_MinsAgo": "min(s) ago",
+  "Main.QuizHome_QuizDisplay_JustBefore": "just before",
+
+
   "Main.QuizPlay_StatusBar_Solved": "Solved!",
   "Main.QuizPlay_StatusBar_Failed": "Failed",
+  "Main.QuizPlay_ToolBar_GiveUp": "Give Up",
 
   "Modal.Setting_Title": "Setting",
   "Modal.Setting_Theme": "Theme",
@@ -66,14 +75,21 @@
   "Modal.QuizEditingOthers_UseFen": "Use FEN from Clipboard",
   "Modal.QuizEditingOthers_NotValidFen": "This is not valid FEN",
   "Modal.QuizEditingOthers_ChangeSide": "Change Side",
-  "Modal.QuizEditingOthers_ShowAnswer": "Show Answer {index}",
-  "Modal.QuizEditingOthers_DeleteAnswer": "Delete Answer {index}",
-  "Modal.QuizEditingOthers_NoAnswer": "No Answer Yet",
+
+  "Modal.QuizManageAnswersMarks_ShowAnswer": "Show Answer {index}",
+  "Modal.QuizManageAnswersMarks_DeleteAnswer": "Delete Answer {index}",
+  "Modal.QuizManageAnswersMarks_NoAnswer": "No Answer",
+
+  "Modal.QuizManageAnswersMarks_ShowMark": "Show Mark {index}",
+  "Modal.QuizManageAnswersMarks_DeleteMark": "Delete Mark {index}",
+  "Modal.QuizManageAnswersMarks_NoMark": "No Mark",
+
 
   "Notification.Test1__S": "Succuessfully tested 1 !",
   "Notification.Test2__H": "Succuessfully tested 2 !",
   "Notification.NotLoggedIn__E": "You should log in first",
   "Notification.UnknownError__E": "An unknown error has occurred",
+  "Notification.NotAuthorized__E": "You are not authorized",
 
   "Notification.LogIn_UnknownError__E": "An unknown error has occurred",
   "Notification.LogIn_UserNotFound__E": "No user was found from this email address",
@@ -95,14 +111,21 @@
   "Notification.SignUp_WeakPassword__E": "Password should be at least 6 characters long",
 
   "Notification.GetMember_UnknownError__E": "An unknown error has occurred while retrieving member information",
-
+  "Notification.UpdateMember_UnknownError__E": "An unknown error has occurred while updating member information",
+  
   "Notification.PlayQuiz_Correct__S": "Correct!",
   "Notification.PlayQuiz_Wrong__W": "That's not the answer",
+  "Notification.PlayQuiz_NoPublicQuiz__E": "There is no public quiz",
+  "Notification.PlayQuiz_NoMyQuiz__E": "That's no my quiz",
 
   "Notification.CreateQuiz_Succeeded__S": "Successfully created the quiz!",
   "Notification.CreateQuiz_UnknownError__E": "Failed to create the quiz",
   "Notification.CreateQuiz_NoAnswer__E": "You should set anwser",
   "Notification.CreateQuiz_NoFenStart__E": "You should set starting position",
+
+  "Notification.EditQuiz_NotAuthor__E": "You are not author of this quiz",
+
+  "Notification.ShowAnswerOrMark_NotValid__E": "There is a nonvalid move",
 
   "Notification.GetFocusListQuiz_UnknownError__E": "Failed to get the quizes",
   "Notification.GetQuiz_UnknownError__E": "Failed to get the quiz",

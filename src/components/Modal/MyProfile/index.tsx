@@ -5,7 +5,7 @@ import { useLocation } from 'react-router-dom';
 import { FormattedMessage, useIntl } from 'react-intl';
 
 import { useSelector, useDispatch } from 'react-redux';
-import { StateRoot } from 'store/reducers';
+import { RootState } from 'store/reducers';
 import * as actions from 'store/actions';
 
 import convertCase from 'tools/vanilla/convertCase';
@@ -20,10 +20,10 @@ function MyProfile() {
   const dispatch = useDispatch();
   const intl = useIntl();
 
-  const user = useSelector((state: StateRoot) => state.auth.user);
+  const user = useSelector((state: RootState) => state.auth.user);
 
   const [urlPhotoLocal, setUrlPhotoLocal] = useState('');
-  const [displayNameEditing, setTisplayNameEditing] = useState(user?.displayName);
+  const [nameEditing, setNameEditing] = useState(user?.name);
 
   const onClick_CloseModal = useCallback(
     (event: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
@@ -90,11 +90,11 @@ function MyProfile() {
       dispatch(
         actions.auth.return__UPDATE_PROFILE({
           urlPhotoLocal: urlPhotoLocal,
-          displayName: displayNameEditing,
+          displayName: nameEditing,
         }),
       );
     },
-    [urlPhotoLocal, displayNameEditing],
+    [urlPhotoLocal, nameEditing],
   );
 
   const onClick_LogOut = useCallback(() => {
@@ -147,7 +147,7 @@ function MyProfile() {
               {' '}
               <FormattedMessage id={`Modal.MyProfile_Name`} />
             </h3>
-            <span className={`${styles['displayName']}`}> {user?.displayName} </span>
+            <span className={`${styles['name']}`}> {user?.name} </span>
           </div>
 
           <div className={`${stylesModal['content__section']}`}>
@@ -169,7 +169,7 @@ function MyProfile() {
             </div>
           </div>
 
-          {(urlPhotoLocal || displayNameEditing !== user?.displayName) && (
+          {(urlPhotoLocal || nameEditing !== user?.name) && (
             <div className={`${stylesModal['content__section']}`}>
               <input type="submit" value={intl.formatMessage({ id: 'Modal.MyProfile_Update' })} />
             </div>
@@ -179,11 +179,10 @@ function MyProfile() {
             <button
               type="button"
               value="log-out"
-              className={`${styles['button-log-out']}`}
+              className={`${styles['button__log-out']}`}
               onClick={() => onClick_LogOut()}
             >
-              {' '}
-              <FormattedMessage id={`Modal.Setting_LogOut`} />{' '}
+              <FormattedMessage id={`Modal.Setting_LogOut`} />
             </button>
           </div>
         </form>

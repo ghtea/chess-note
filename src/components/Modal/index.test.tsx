@@ -7,7 +7,7 @@ import Modal from '.';
 
 // import { StringLiteral } from 'typescript';
 import { useSelector, useDispatch } from 'react-redux';
-import { StateRoot } from 'store/reducers';
+import { RootState } from 'store/reducers';
 import * as actions from 'store/actions';
 import convertCase from 'tools/vanilla/convertCase';
 

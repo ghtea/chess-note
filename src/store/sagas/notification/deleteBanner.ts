@@ -1,7 +1,7 @@
 import { call, spawn, put, takeEvery, select } from 'redux-saga/effects';
 
 import { Banner } from 'store/reducers/notification';
-import { StateRoot } from 'store/reducers';
+import { RootState } from 'store/reducers';
 
 import { v4 as uuidv4 } from 'uuid';
 import * as actions from 'store/actions';
@@ -10,7 +10,7 @@ import * as actions from 'store/actions';
 
 function* deleteBanner(action: actions.notification.type__DELETE_BANNER) {
   const bannerListPrevious: Banner[] = yield select(
-    (state: StateRoot) => state.notification.bannerList,
+    (state: RootState) => state.notification.bannerList,
   );
 
   const id: string = action.payload.id;

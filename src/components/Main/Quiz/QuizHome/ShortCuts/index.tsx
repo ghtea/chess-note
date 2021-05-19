@@ -5,7 +5,7 @@ import { FormattedMessage } from 'react-intl';
 import axios from 'axios';
 
 import { useSelector, useDispatch } from 'react-redux';
-import { StateRoot } from 'store/reducers';
+import { RootState } from 'store/reducers';
 import * as actions from 'store/actions';
 
 import Loading from 'components/Global/Loading';
@@ -15,30 +15,36 @@ import Loading from 'components/Global/Loading';
 //import Portal from './ShortCuts/Portal';
 
 import styles from './index.module.scss';
-import { KindGetFocusListQuiz } from 'store/types/data/quiz';
 import IconPlus from 'svgs/basic/IconPlus';
 import IconShuffle from 'svgs/basic/IconShuffle';
 // import IconSort from 'svgs/basic/IconSort';
 
 function ShortCuts() {
   const dispatch = useDispatch();
-  const userReady = useSelector((state: StateRoot) => state.status.auth.user.ready);
-  const userId = useSelector((state: StateRoot) => state.auth.user?.id);
+  const userReady = useSelector((state: RootState) => state.status.auth.user.ready);
+  const userId = useSelector((state: RootState) => state.auth.user?.id);
 
   const onClick_MainButton = useCallback(
     (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
       const value = e.currentTarget.value;
       if (value === 'play-public-random-quiz') {
-        if (userReady && userId) {
-        } else {
-        }
+        dispatch(
+          actions.quiz.return__PLAY_RANDOM_QUIZ({
+            kind: 'public-quiz',
+          }),
+        );
       } else if (value === 'play-my-random-quiz') {
         if (userReady && userId) {
+          dispatch(
+            actions.quiz.return__PLAY_RANDOM_QUIZ({
+              kind: 'my-quiz',
+            }),
+          );
         }
       } else if (value === 'create') {
         history.push('/quiz/create');
         dispatch(
-          actions.data.quiz.return__FOCUS_QUIZ({
+          actions.quiz.return__FOCUS_QUIZ({
             quiz: undefined,
             situation: 'creating',
           }),
