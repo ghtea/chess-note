@@ -31,7 +31,7 @@ function* waitForMemberChangeWhileKeepingUserId() {
 
     yield take([actions.auth.name__REPLACE]);
     const newMember: types.auth.Member = yield select((state) => state.auth.member);
-    console.warn(previousMember, newMember)
+    //console.warn(previousMember, newMember)
     if (previousMember?.userId && newMember?.userId && newMember !== previousMember) {
       return newMember;
     }

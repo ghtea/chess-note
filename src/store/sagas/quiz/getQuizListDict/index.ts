@@ -109,7 +109,7 @@ function* getQuizListDict(action: actions.quiz.type__GET_QUIZ_LIST_DICT) {
 
     yield put(
       actions.notification.return__ADD_DELETE_BANNER({
-        codeSituation: 'GetListQuiz_UnknownError__E',
+        codeSituation: 'GetListQuizDict_UnknownError__E',
       }),
     );
 

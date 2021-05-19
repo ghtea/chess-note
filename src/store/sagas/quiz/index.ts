@@ -2,7 +2,7 @@ import { call, spawn, put, takeEvery, takeLatest } from 'redux-saga/effects';
 
 import * as actions from 'store/actions';
 
-import createQuiz from './createQuiz';
+import createQuiz from './manipulateQuiz/createQuiz';
 import focusQuiz from './focusQuiz';
 import getQuizById from './getQuizById';
 import getQuizListDict from './getQuizListDict';
@@ -18,11 +18,13 @@ import playRandomQuiz from './playRandomQuiz';
 import playNextQuiz from './playNextQuiz';
 import showAnswerOrMark from './showAnswerOrMark';
 import watchSituationChange from './watchSituationChange';
+import updateQuiz from './manipulateQuiz/updateQuiz';
 
 export default function* quizSaga() {
   yield takeEvery(actions.quiz.name__FOCUS_QUIZ, focusQuiz);
 
   yield takeEvery(actions.quiz.name__CREATE_QUIZ, createQuiz);
+  yield takeEvery(actions.quiz.name__UPDATE_QUIZ, updateQuiz);
 
   yield takeEvery(actions.quiz.name__GET_QUIZ_BY_ID, getQuizById);
   yield takeEvery(actions.quiz.name__GET_QUIZ_LIST_DICT, getQuizListDict);

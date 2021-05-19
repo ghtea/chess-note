@@ -118,17 +118,18 @@ export const return__WATCH_USER_LOG_IN_OUT = () => {
 export type type__WATCH_USER_LOG_IN_OUT = ReturnType<typeof return__WATCH_USER_LOG_IN_OUT>;
 
 // Member
-export const name__GET_MEMBER_BY_USER_ID = 'auth/GET_MEMBER_BY_USER_ID';
-type Payload__GET_MEMBER_BY_USER_ID = {
+export const name__GET_MEMBER_BY_USER = 'auth/GET_MEMBER_BY_USER';
+type Payload__GET_MEMBER_BY_USER = {
   userId: string;
+  userName: string;
 };
-export const return__GET_MEMBER_BY_USER_ID = (payload: Payload__GET_MEMBER_BY_USER_ID) => {
+export const return__GET_MEMBER_BY_USER = (payload: Payload__GET_MEMBER_BY_USER) => {
   return {
-    type: name__GET_MEMBER_BY_USER_ID,
+    type: name__GET_MEMBER_BY_USER,
     payload: payload,
   };
 };
-export type type__GET_MEMBER_BY_USER_ID = ReturnType<typeof return__GET_MEMBER_BY_USER_ID>;
+export type type__GET_MEMBER_BY_USER = ReturnType<typeof return__GET_MEMBER_BY_USER>;
 
 export const name__WATCH_MEMBER_CHANGE = 'auth/WATCH_MEMBER_CHANGE';
 export const return__WATCH_MEMBER_CHANGE = () => {

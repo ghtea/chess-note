@@ -32,7 +32,7 @@ function* createQuiz(action: actions.quiz.type__CREATE_QUIZ) {
     startingFen,
     correctSanSeriesList,
     markedSanSeriesList,
-    userId,
+    authorId,
     isPublic,
   } = action.payload;
 
@@ -56,7 +56,7 @@ function* createQuiz(action: actions.quiz.type__CREATE_QUIZ) {
         startingFen,
         correctSanSeriesList,
         markedSanSeriesList,
-        userId,
+        authorId,
         isPublic,
       };
 

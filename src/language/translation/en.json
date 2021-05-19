@@ -42,6 +42,13 @@
   "Main.QuizHome_ShortCuts_PlayMyQuiz": "Play My Quiz",
   "Main.QuizHome_ShortCuts_CreateQuiz": "Create Quiz",
 
+  "Main.QuizHome_QuizDisplay_MonthsAgo": "month(s) ago",
+  "Main.QuizHome_QuizDisplay_DaysAgo": "day(s) ago",
+  "Main.QuizHome_QuizDisplay_HoursAgo": "hour(s) ago",
+  "Main.QuizHome_QuizDisplay_MinsAgo": "min(s) ago",
+  "Main.QuizHome_QuizDisplay_JustBefore": "just before",
+
+
   "Main.QuizPlay_StatusBar_Solved": "Solved!",
   "Main.QuizPlay_StatusBar_Failed": "Failed",
   "Main.QuizPlay_ToolBar_GiveUp": "Give Up",

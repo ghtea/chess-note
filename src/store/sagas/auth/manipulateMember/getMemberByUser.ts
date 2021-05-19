@@ -11,37 +11,43 @@ import * as types from 'store/types';
 
 // GraphQL query 문법에 이상 있으면 할당하는 시점에서 에러 발생시키기 때문에 에러 처리한 곳에서 해야 한다
 
-const requestGetMemberByUserId = (query: DocumentNode, argument: Record<string, unknown>) => {
+const requestGetMemberByUser = (query: DocumentNode, argument: Record<string, unknown>) => {
   return apolloClient.query({ query, variables: { argument } });
 };
 
-function* getMemberByUserId(action: actions.auth.type__GET_MEMBER_BY_USER_ID) {
-  const { userId } = action.payload;
+function* getMemberByUser(action: actions.auth.type__GET_MEMBER_BY_USER) {
+  const { userId, userName } = action.payload;
 
   try {
-    const gqlLiteral__GET_MEMBER_BY_USER_ID = gql`
-        query GetMemberByUserId($argument: GetMemberByUserIdInputType!){
-            getMemberByUserId(getMemberByUserIdInputType: $argument)
+    const gqlLiteral__GET_MEMBER_BY_USER = gql`
+        query GetMemberByUser($argument: GetMemberByUserInputType!){
+            getMemberByUser(getMemberByUserInputType: $argument)
               ${types.auth.gqlMemberString}
         }
     `;
 
     const argument = {
       userId: userId,
+      userName: userName,
     };
-    type GetMemberByUserIdData = Record<'getMemberByUserId', types.auth.Member>;
-    const response: ApolloQueryResult<GetMemberByUserIdData> = yield call(
-      requestGetMemberByUserId,
-      gqlLiteral__GET_MEMBER_BY_USER_ID,
+    type GetMemberByUserData = Record<'getMemberByUser', types.auth.Member>;
+    const response: ApolloQueryResult<GetMemberByUserData> = yield call(
+      requestGetMemberByUser,
+      gqlLiteral__GET_MEMBER_BY_USER,
       argument,
     );
 
-    const member = response.data?.getMemberByUserId;
+    const member = response.data?.getMemberByUser;
 
     if (member) {
-      const memberReplacement = {
+      const memberReplacement: types.auth.Member = {
         userId: member.userId,
-        quizRecordList: member.quizRecordList,
+        userName: member.userName,
+        quizRecordList: member.quizRecordList.map((e) => ({
+          quizId: e.quizId,
+          date: e.date,
+          result: e.result,
+        })),
       };
       yield put(
         actions.auth.return__REPLACE({
@@ -63,4 +69,4 @@ function* getMemberByUserId(action: actions.auth.type__GET_MEMBER_BY_USER_ID) {
   }
 }
 
-export default getMemberByUserId;
+export default getMemberByUser;

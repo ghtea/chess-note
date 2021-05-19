@@ -27,7 +27,7 @@ function* replaceUser(action: actions.auth.type__REPLACE_USER) {
             email: user.email,
 
             photoURL: user.photoURL,
-            displayName: user.displayName,
+            name: user.displayName,
 
             joined: user.metadata.creationTime,
             accessed: user.metadata.lastSignInTime,

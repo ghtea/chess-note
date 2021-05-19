@@ -81,7 +81,7 @@ export default function QuizHomeOthers() {
     const clickedQuiz = (displayState.mode === 'public-quiz' ? publicQuizList : myQuizList).find(
       (e) => e.id === displayState.clickedQuizId,
     );
-    if (userId === clickedQuiz?.userId) {
+    if (userId === clickedQuiz?.authorId) {
       return true;
     } else {
       return false;

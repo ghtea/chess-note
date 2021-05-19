@@ -27,13 +27,14 @@ const requestUpdateMember = (argument: Record<string, unknown>) => {
 
 // directly access to sportdataAPI -> update firebase (get document on return)
 export default function* updateMember(action: actions.auth.type__UPDATE_MEMBER) {
-  const { userId, quizRecordList } = action.payload;
+  const { userId, userName, quizRecordList } = action.payload;
 
   if (!checkIfAuthorizedUserIsLoggedInUser(userId)) return;
 
   try {
     const argument = {
       userId,
+      userName,
       quizRecordList,
     };
     type UpdateQuizData = Record<'updateMember', types.auth.Member>;

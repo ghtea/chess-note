@@ -8,7 +8,8 @@ export type Quiz = {
   startingFen: string;
   correctSanSeriesList: string[][];
   markedSanSeriesList: string[][];
-  userId: string;
+  authorId: string;
+  authorName: string;
   isPublic: boolean;
   createdDate?: number;
   updatedDate?: number;
@@ -23,7 +24,8 @@ export const gqlQuizString = `{
   startingFen
   correctSanSeriesList
   markedSanSeriesList
-  userId
+  authorId
+  authorName
   isPublic
   createdDate
   updatedDate

@@ -73,19 +73,31 @@ function QuizEditingUpload({ top }: PropsQuizEditingUpload) {
               startingFen: focusingQuizData.startingFen,
               correctSanSeriesList: focusingQuizData.correctSanSeriesList,
               markedSanSeriesList: focusingQuizData.markedSanSeriesList,
-              userId: userId,
+              authorId: userId,
               isPublic: focusingQuizData.isPublic,
             }),
           );
+          
+        } else {
           dispatch(
-            actions.appearance.return__REPLACE({
-              keyList: ['showing', 'modal', convertCase('QuizEditingUpload', 'camel')],
-              replacement: false,
+            actions.quiz.return__UPDATE_QUIZ({
+              id: focusingQuizData.id as string,
+              name: focusingQuizData.name,
+              nextTurn: focusingQuizData.nextTurn,
+              startingFen: focusingQuizData.startingFen,
+              correctSanSeriesList: focusingQuizData.correctSanSeriesList,
+              markedSanSeriesList: focusingQuizData.markedSanSeriesList,
+              authorId: userId,
+              isPublic: focusingQuizData.isPublic,
             }),
           );
-        } else {
-          // update
         }
+        dispatch(
+          actions.appearance.return__REPLACE({
+            keyList: ['showing', 'modal', convertCase('QuizEditingUpload', 'camel')],
+            replacement: false,
+          }),
+        );
       }
     },
     [focusingQuizData, userId, userReady],

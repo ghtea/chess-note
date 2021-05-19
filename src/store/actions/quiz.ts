@@ -116,7 +116,7 @@ type Payload__CREATE_QUIZ = {
   startingFen: string;
   correctSanSeriesList: string[][];
   markedSanSeriesList: string[][];
-  userId: string;
+  authorId: string;
   isPublic: boolean;
 };
 export const return__CREATE_QUIZ = (payload: Payload__CREATE_QUIZ) => {
@@ -129,12 +129,13 @@ export type type__CREATE_QUIZ = ReturnType<typeof return__CREATE_QUIZ>;
 
 export const name__UPDATE_QUIZ = 'quiz/UPDATE_QUIZ';
 type Payload__UPDATE_QUIZ = {
+  id: string;
   name?: string;
   nextTurn: 'white' | 'black';
   startingFen: string;
   correctSanSeriesList: string[][];
   markedSanSeriesList: string[][];
-  userId: string;
+  authorId: string;
   isPublic: boolean;
 };
 export const return__UPDATE_QUIZ = (payload: Payload__UPDATE_QUIZ) => {

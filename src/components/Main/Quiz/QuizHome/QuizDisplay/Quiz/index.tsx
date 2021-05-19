@@ -1,7 +1,7 @@
 import React, { useCallback, useEffect, useMemo } from 'react';
 import history from 'libraries/history';
 
-import { FormattedMessage } from 'react-intl';
+import { FormattedMessage, useIntl } from 'react-intl';
 import axios from 'axios';
 
 import { useSelector, useDispatch } from 'react-redux';
@@ -16,6 +16,8 @@ import styles from './index.module.scss';
 import stylesDisplay from '../index.module.scss';
 import IconThreeDots from 'svgs/basic/IconThreeDots';
 import IconPlay from 'svgs/basic/IconPlay';
+import IconCheckCircle from 'svgs/basic/IconCheckCircle';
+import IconXCircle from 'svgs/basic/IconXCircle';
 
 // import IconSort from 'svgs/basic/IconSort';
 type PropsQuiz = {
@@ -24,8 +26,8 @@ type PropsQuiz = {
 
 function Quiz({ quiz }: PropsQuiz) {
   const dispatch = useDispatch();
-
-  // const situation = useSelector((state: RootState)=> state.quiz.state.situation);
+  const intl = useIntl();
+  const quizRecordList = useSelector((state: RootState) => state.auth.member?.quizRecordList);
 
   const onClick_Button = useCallback(
     (event: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
@@ -62,6 +64,47 @@ function Quiz({ quiz }: PropsQuiz) {
     [quiz],
   );
 
+  const refinedRecord = useMemo(() => {
+    const thisQuizRecord = (quizRecordList || []).find((e) => e.quizId === quiz.id);
+    if (thisQuizRecord) {
+      const result = thisQuizRecord.result;
+      const dateDiff = Date.now() - thisQuizRecord.date;
+      let dateText = '';
+      if (dateDiff >= 1000 * 60 * 60 * 24 * 30) {
+        // 한달 이상이면
+        dateText = `${Math.floor(dateDiff / (1000 * 60 * 60 * 24 * 30))} ${intl.formatMessage({
+          id: 'Main.QuizHome_QuizDisplay_MonthsAgo',
+        })}`;
+      } else if (dateDiff >= 1000 * 60 * 60 * 24) {
+        // 1일 이상이면
+        dateText = `${Math.floor(dateDiff / (1000 * 60 * 60 * 24))} ${intl.formatMessage({
+          id: 'Main.QuizHome_QuizDisplay_DaysAgo',
+        })}`;
+      } else if (dateDiff >= 1000 * 60 * 60) {
+        // 1시간 이상이면
+        dateText = `${Math.floor(dateDiff / (1000 * 60 * 60))} ${intl.formatMessage({
+          id: 'Main.QuizHome_QuizDisplay_HoursAgo',
+        })}`;
+      } else if (dateDiff >= 1000 * 60) {
+        // 1분 이상이면
+        dateText = `${Math.floor(dateDiff / (1000 * 60))} ${intl.formatMessage({
+          id: 'Main.QuizHome_QuizDisplay_MinsAgo',
+        })}`;
+      } else {
+        dateText = `${intl.formatMessage({
+          id: 'Main.QuizHome_QuizDisplay_JustBefore',
+        })}`;
+      }
+
+      return {
+        result: result,
+        dateText: dateText,
+      };
+    } else {
+      return null;
+    }
+  }, [quizRecordList, quiz.id]);
+
   const dateTextPair = useMemo(() => {
     const yearCurrent = new Date().getFullYear();
 
@@ -91,9 +134,22 @@ function Quiz({ quiz }: PropsQuiz) {
     >
       <td className={`${styles['id']}`}>{`${quiz.id?.toString().slice(0, 16)}...`}</td>
 
-      <td className={`${styles['my-result']}`}></td>
+      <td className={`${styles['my-result']}`}>
+        {refinedRecord && (
+          <>
+            <span>
+              {refinedRecord.result ? (
+                <IconCheckCircle className={styles['icon__solved']} kind="solid" />
+              ) : (
+                <IconXCircle className={styles['icon__failed']} kind="solid" />
+              )}
+            </span>
+            <span>{refinedRecord.dateText}</span>
+          </>
+        )}
+      </td>
 
-      <td className={`${styles['author']}`}>{`${quiz.userId.slice(0, 6)}...`}</td>
+      <td className={`${styles['author']}`}>{quiz.authorName}</td>
 
       <td className={`${styles['created']}`}>
         <span>{dateTextPair[0]}</span>

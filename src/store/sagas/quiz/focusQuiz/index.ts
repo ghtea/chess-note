@@ -19,7 +19,8 @@ function* focusQuiz(action: actions.quiz.type__FOCUS_QUIZ) {
     correctSanSeriesList: [],
     markedSanSeriesList: [],
 
-    userId: '',
+    authorId: '',
+    authorName: '',
     isPublic: true,
   };
 

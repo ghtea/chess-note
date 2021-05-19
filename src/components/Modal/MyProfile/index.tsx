@@ -23,7 +23,7 @@ function MyProfile() {
   const user = useSelector((state: RootState) => state.auth.user);
 
   const [urlPhotoLocal, setUrlPhotoLocal] = useState('');
-  const [displayNameEditing, setTisplayNameEditing] = useState(user?.displayName);
+  const [nameEditing, setNameEditing] = useState(user?.name);
 
   const onClick_CloseModal = useCallback(
     (event: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
@@ -90,11 +90,11 @@ function MyProfile() {
       dispatch(
         actions.auth.return__UPDATE_PROFILE({
           urlPhotoLocal: urlPhotoLocal,
-          displayName: displayNameEditing,
+          displayName: nameEditing,
         }),
       );
     },
-    [urlPhotoLocal, displayNameEditing],
+    [urlPhotoLocal, nameEditing],
   );
 
   const onClick_LogOut = useCallback(() => {
@@ -147,7 +147,7 @@ function MyProfile() {
               {' '}
               <FormattedMessage id={`Modal.MyProfile_Name`} />
             </h3>
-            <span className={`${styles['displayName']}`}> {user?.displayName} </span>
+            <span className={`${styles['name']}`}> {user?.name} </span>
           </div>
 
           <div className={`${stylesModal['content__section']}`}>
@@ -169,7 +169,7 @@ function MyProfile() {
             </div>
           </div>
 
-          {(urlPhotoLocal || displayNameEditing !== user?.displayName) && (
+          {(urlPhotoLocal || nameEditing !== user?.name) && (
             <div className={`${stylesModal['content__section']}`}>
               <input type="submit" value={intl.formatMessage({ id: 'Modal.MyProfile_Update' })} />
             </div>

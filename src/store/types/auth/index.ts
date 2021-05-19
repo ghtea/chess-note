@@ -4,7 +4,7 @@ export type User = {
   email: string;
 
   photoURL: string;
-  displayName: string;
+  name: string; 
 
   joined: Date;
   accessed: Date;
@@ -14,6 +14,7 @@ export type QuizRecord = { date: number; quizId: string; result: boolean };
 
 export type Member = {
   userId: string;
+  userName: string;
   quizRecordList: QuizRecord[];
 };
 
@@ -21,6 +22,7 @@ export type Member = {
 export const gqlMemberString = `{
   id
   userId
+  userName
   quizRecordList {
     date
     quizId

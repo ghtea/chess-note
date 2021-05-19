@@ -24,7 +24,9 @@ const stateInitial = {
       correctSanSeriesList: [],
       markedSanSeriesList: [],
 
-      userId: '',
+      authorId: '',
+      authorName: '',
+
       isPublic: true,
     } as types.quiz.Quiz,
   },

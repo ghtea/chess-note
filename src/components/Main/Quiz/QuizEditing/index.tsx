@@ -20,7 +20,7 @@ function QuizEditing() {
 
   const focusingQuizStatus = useSelector((state: RootState) => state.status.data.quiz.focusing);
   const side = useSelector((state: RootState) => state.quiz.data.focusing.nextTurn);
-  const authorId = useSelector((state: RootState) => state.quiz.data.focusing.userId);
+  const authorId = useSelector((state: RootState) => state.quiz.data.focusing.authorId);
   const quizId = useSelector((state: RootState) => state.quiz.data.focusing?.id);
 
   const statusUser = useSelector((state: RootState) => state.status.auth.user);

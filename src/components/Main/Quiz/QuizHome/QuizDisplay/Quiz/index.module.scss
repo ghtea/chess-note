@@ -1,57 +1,90 @@
 @import 'styles/every.scss';
 
 .root {
-    //border-top-width: 0;
+  //border-top-width: 0;
 
-    &:nth-child(n+2) {
-        @include frame-each-theme(border-top, 1px, solid, basic__2);
-    } 
-    
+  &:nth-child(n + 2) {
+    @include frame-each-theme(border-top, 1px, solid, basic__2);
+  }
 }
 
-
-
 // rows
-tr { 
-    display: grid;
-    // grid-template-columns: 30px 1fr 1fr 1fr 1fr;  applies styles in LeagueStanding.module.scss
-    grid-template-rows: 40px;
+tr {
+  display: grid;
+  // grid-template-columns: 30px 1fr 1fr 1fr 1fr;  applies styles in LeagueStanding.module.scss
+  grid-template-rows: 40px;
 }
 
 td {
-    display: inline-flex;
-    flex-flow: row nowrap;
-    justify-content: center;
-    align-items: center;
+  display: inline-flex;
+  flex-flow: row nowrap;
+  justify-content: center;
+  align-items: center;
 
-    height: 40px;
-    
-    :global(.icon) {
-        @include color-each-theme(color, basic__5);
+  height: 40px;
+
+  :global(.icon) {
+    @include color-each-theme(color, basic__5);
+  }
+
+  &.my-result {
+    font-size: 0.9rem;
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: space-evenly;
+
+    .icon__solved {
+      width: 20px;
+      height: 20px;
+      @include color-each-theme(color, success__4);
+    }
+    .icon__failed {
+      width: 20px;
+      height: 20px;
+      @include color-each-theme(color, error__4);
     }
 
-    &.play {
-        .icon__play {
-            width: 20px;
-            height: 20px;
+    & > *:nth-child(2){
+        display: none;
+    }
+    @media (min-width: $device-m__min-width){
+        & > *:nth-child(2){
+            display: inline-flex;
         }
     }
+  }
 
-    &.created {
-        font-size: 0.9rem;
-        display: flex;
-        flex-flow: row wrap;
-        justify-content: space-evenly;
+  &.author {
+    overflow: auto;
+  }
+
+  &.play {
+    .icon__play {
+      width: 20px;
+      height: 20px;
     }
+  }
 
-    &.others{
-        .icon__others {
-            width: 32px;
-            height: 32px;
+  &.created {
+    font-size: 1rem;
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: space-evenly;
+
+    & > *:nth-child(2){
+        display: none;
+    }
+    @media (min-width: $device-m__min-width){
+        & > *:nth-child(2){
+            display: inline-flex;
         }
     }
+  }
 
-
+  &.others {
+    .icon__others {
+      width: 32px;
+      height: 32px;
+    }
+  }
 }
-
-

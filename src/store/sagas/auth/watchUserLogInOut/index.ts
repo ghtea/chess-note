@@ -17,10 +17,11 @@ export default function* watchUserLogInOut(action: actions.quiz.type__WATCH_STAR
     const situation: 'logIn' | 'logOut' = yield call(waitForLogInOut);
 
     if (situation === 'logIn') {
-      const userId: string = yield select((state: RootState) => state.auth.user?.id) || '';
+      const user: types.auth.User = yield select((state: RootState) => state.auth.user);
       yield put(
-        actions.auth.return__GET_MEMBER_BY_USER_ID({
-          userId: userId,
+        actions.auth.return__GET_MEMBER_BY_USER({
+          userId: user.id,
+          userName: user.name
         }),
       );
     } else {
