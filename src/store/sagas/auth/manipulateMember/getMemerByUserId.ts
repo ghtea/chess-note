@@ -5,7 +5,7 @@ import axios from 'axios';
 import apolloClient from 'libraries/apollo';
 import { gql, useQuery, FetchResult, DocumentNode, ApolloQueryResult } from '@apollo/client';
 import history from 'libraries/history';
-import { StateRoot } from 'store/reducers';
+import { RootState } from 'store/reducers';
 import * as actions from 'store/actions';
 import * as types from 'store/types';
 
@@ -29,18 +29,20 @@ function* getMemberByUserId(action: actions.auth.type__GET_MEMBER_BY_USER_ID) {
     const argument = {
       userId: userId,
     };
-    type GetMemberByUserIdData = Record<string, types.auth.Member>;
+    type GetMemberByUserIdData = Record<'getMemberByUserId', types.auth.Member>;
     const response: ApolloQueryResult<GetMemberByUserIdData> = yield call(
       requestGetMemberByUserId,
       gqlLiteral__GET_MEMBER_BY_USER_ID,
       argument,
-    ); 
+    );
+
     const member = response.data?.getMemberByUserId;
-    const memberReplacement = {
-      userId: member.userId,
-      quizRecordList: member.quizRecordList,
-    }
+
     if (member) {
+      const memberReplacement = {
+        userId: member.userId,
+        quizRecordList: member.quizRecordList,
+      };
       yield put(
         actions.auth.return__REPLACE({
           keyList: ['member'],
@@ -48,10 +50,9 @@ function* getMemberByUserId(action: actions.auth.type__GET_MEMBER_BY_USER_ID) {
         }),
       );
     } else {
-      throw new Error ('failed in GET_MEMBER_BY_USER_ID');
+      throw new Error();
     }
   } catch (error) {
-    //console.log('hello2')
     console.error(error);
 
     yield put(
@@ -59,7 +60,6 @@ function* getMemberByUserId(action: actions.auth.type__GET_MEMBER_BY_USER_ID) {
         codeSituation: 'GetMember_UnknownError__E',
       }),
     );
-
   }
 }
 

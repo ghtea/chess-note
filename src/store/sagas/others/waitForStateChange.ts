@@ -2,9 +2,9 @@ import { call, spawn, put, takeEvery, select, SelectEffect, take, race } from 'r
 
 import * as actions from 'store/actions';
 
-import { StateRoot } from 'store/reducers';
+import { RootState } from 'store/reducers';
 
-type Selector<T> = (state: StateRoot) => T;
+type Selector<T> = (state: RootState) => T;
 
 // return 할 때까지 while 문에 갇힌다
 export function* waitForStateChangeToCertainValue<T>(selector: Selector<T>, value?: T) {
@@ -41,7 +41,7 @@ export function* waitForStateChangeToDifferentValue<T>(selector: Selector<T>) {
     ]);
 
     const valueCurrent: T = yield select(selector);
-
+    //console.warn(valuePrevious, '->', valueCurrent)
     if (valueCurrent !== valuePrevious) {
       return valueCurrent;
     }

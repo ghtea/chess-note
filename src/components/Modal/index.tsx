@@ -1,7 +1,7 @@
 import React, { useCallback, useMemo } from 'react';
 
 import { useSelector, useDispatch } from 'react-redux';
-import { StateRoot } from 'store/reducers';
+import { RootState } from 'store/reducers';
 
 import Setting from './Setting';
 import MyProfile from './MyProfile';
@@ -15,13 +15,13 @@ import QuizEditingOthers from './Quiz/QuizEditing/Others';
 // import styles from './Modal.module.scss';
 
 function Modal() {
-  const showing = useSelector((state: StateRoot) => state.appearance.showing.modal);
+  const showing = useSelector((state: RootState) => state.appearance.showing.modal);
 
   const topChessBoard = useSelector(
-    (state: StateRoot) => state.appearance.layout.document.chessBoard.top,
+    (state: RootState) => state.appearance.layout.document.chessBoard.top,
   );
   const lengthChessBoard = useSelector(
-    (state: StateRoot) => state.appearance.layout.document.chessBoard.length,
+    (state: RootState) => state.appearance.layout.document.chessBoard.length,
   );
 
   const topModalQuiz = useMemo(() => {
@@ -40,9 +40,10 @@ function Modal() {
       {showing.quizEditingSet && <QuizEditingSet top={topModalQuiz} />}
       {showing.quizEditingOthers && <QuizEditingOthers top={topModalQuiz} />}
 
-      {showing.quizManageAnswers && <QuizEditingManageAnswersMarks top={topModalQuiz} kind='answer'/>}
-      {showing.quizManageMarks && <QuizEditingManageAnswersMarks top={topModalQuiz} kind='mark'/>}
-
+      {showing.quizManageAnswers && (
+        <QuizEditingManageAnswersMarks top={topModalQuiz} kind="answer" />
+      )}
+      {showing.quizManageMarks && <QuizEditingManageAnswersMarks top={topModalQuiz} kind="mark" />}
 
       {showing.quizTryingOthers && <QuizEditingSet top={topModalQuiz} />}
     </>

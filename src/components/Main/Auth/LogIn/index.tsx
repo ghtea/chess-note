@@ -3,7 +3,7 @@ import history from 'libraries/history';
 import { FormattedMessage, useIntl } from 'react-intl';
 
 import { useSelector, useDispatch } from 'react-redux';
-import { StateRoot } from 'store/reducers';
+import { RootState } from 'store/reducers';
 
 import * as actions from 'store/actions';
 
@@ -25,11 +25,11 @@ function LogIn() {
   const dispatch = useDispatch();
   const intl = useIntl();
 
-  const statusUser = useSelector((state: StateRoot) => state.status.auth.user);
+  const statusUser = useSelector((state: RootState) => state.status.auth.user);
 
   // when login button is pushed, notification code of reaction is added to  this list, when login button is pushed again this list cleared once
   const otherSituationCodeList = useSelector(
-    (state: StateRoot) => state['notification']['otherSituationCodeList'],
+    (state: RootState) => state['notification']['otherSituationCodeList'],
   );
 
   const { onClick_LinkInsideApp } = useLink(history);

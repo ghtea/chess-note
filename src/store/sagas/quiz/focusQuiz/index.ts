@@ -2,7 +2,7 @@ import { call, select, put } from 'redux-saga/effects';
 
 import history from 'libraries/history';
 // import * as config from 'config';
-import { StateRoot } from 'store/reducers';
+import { RootState } from 'store/reducers';
 import * as actions from 'store/actions';
 import * as types from 'store/types';
 import focusingChess from 'libraries/chess';

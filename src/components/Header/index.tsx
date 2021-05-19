@@ -4,7 +4,7 @@ import { useLocation } from 'react-router-dom';
 import { FormattedMessage } from 'react-intl';
 
 import { useSelector, useDispatch } from 'react-redux';
-import { StateRoot } from 'store/reducers';
+import { RootState } from 'store/reducers';
 import * as actions from 'store/actions';
 
 import NavBar from './NavBar';
@@ -27,10 +27,10 @@ function Header() {
   const dispatch = useDispatch();
   const location = useLocation();
 
-  const showingHeader = useSelector((state: StateRoot) => state.appearance.showing.header);
+  const showingHeader = useSelector((state: RootState) => state.appearance.showing.header);
 
-  const statusUser = useSelector((state: StateRoot) => state.status.auth.user);
-  const user = useSelector((state: StateRoot) => state.auth.user);
+  const statusUser = useSelector((state: RootState) => state.status.auth.user);
+  const user = useSelector((state: RootState) => state.auth.user);
   // useEffect(()=>console.log(user),[user])
 
   const { onClick_LinkInsideApp } = useLink(history);
@@ -54,7 +54,7 @@ function Header() {
     }
   }, [location]);
 
-  const showingBoard = useSelector((state: StateRoot) => state.appearance.showing.header.board);
+  const showingBoard = useSelector((state: RootState) => state.appearance.showing.header.board);
   const onClick_OpenBoard = useCallback(
     (event: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
       dispatch(

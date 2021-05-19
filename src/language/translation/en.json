@@ -82,6 +82,7 @@
   "Notification.Test2__H": "Succuessfully tested 2 !",
   "Notification.NotLoggedIn__E": "You should log in first",
   "Notification.UnknownError__E": "An unknown error has occurred",
+  "Notification.NotAuthorized__E": "You are not authorized",
 
   "Notification.LogIn_UnknownError__E": "An unknown error has occurred",
   "Notification.LogIn_UserNotFound__E": "No user was found from this email address",
@@ -103,7 +104,8 @@
   "Notification.SignUp_WeakPassword__E": "Password should be at least 6 characters long",
 
   "Notification.GetMember_UnknownError__E": "An unknown error has occurred while retrieving member information",
-
+  "Notification.UpdateMember_UnknownError__E": "An unknown error has occurred while updating member information",
+  
   "Notification.PlayQuiz_Correct__S": "Correct!",
   "Notification.PlayQuiz_Wrong__W": "That's not the answer",
   "Notification.PlayQuiz_NoPublicQuiz__E": "There is no public quiz",

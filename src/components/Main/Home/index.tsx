@@ -5,7 +5,7 @@ import { FormattedMessage } from 'react-intl';
 import axios from 'axios';
 
 import { useSelector, useDispatch } from 'react-redux';
-import { StateRoot } from 'store/reducers';
+import { RootState } from 'store/reducers';
 
 import Loading from 'components/Global/Loading';
 
@@ -17,7 +17,7 @@ import styles from './index.module.scss';
 
 function Home() {
   const dispatch = useDispatch();
-  //const statusUser = useSelector((state: StateRoot) => state.status.auth.user);
+  //const statusUser = useSelector((state: RootState) => state.status.auth.user);
 
   const onClick_Link = useCallback((event: React.MouseEvent<HTMLAnchorElement>) => {
     event.preventDefault();

@@ -1,4 +1,3 @@
-import { rootCertificates } from "node:tls";
 import React, {useMemo} from "react";
 
 type PropsIcon = {

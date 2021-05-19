@@ -5,7 +5,7 @@ import { useLocation } from 'react-router-dom';
 import { FormattedMessage, useIntl } from 'react-intl';
 
 import { useSelector, useDispatch } from 'react-redux';
-import { StateRoot } from 'store/reducers';
+import { RootState } from 'store/reducers';
 import * as actions from 'store/actions';
 
 import useInputBasic from 'tools/hooks/useInputBasic';
@@ -28,10 +28,10 @@ function SignUp() {
   const dispatch = useDispatch();
   const intl = useIntl();
 
-  const statusUser = useSelector((state: StateRoot) => state.status.auth.user);
+  const statusUser = useSelector((state: RootState) => state.status.auth.user);
 
   const otherSituationCodeList: string[] = useSelector(
-    (state: StateRoot) => state['notification']['otherSituationCodeList'],
+    (state: RootState) => state['notification']['otherSituationCodeList'],
   );
 
   const { onClick_LinkInsideApp } = useLink(history);

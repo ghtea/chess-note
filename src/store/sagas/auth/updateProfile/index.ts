@@ -4,7 +4,7 @@ import firebase, { firebaseAuth, firebaseStorage } from 'libraries/firebase';
 import { v4 as uuidv4 } from 'uuid';
 
 // import * as config from 'config';
-import { StateRoot } from 'store/reducers';
+import { RootState } from 'store/reducers';
 import * as actions from 'store/actions';
 import * as types from 'store/types';
 
@@ -25,8 +25,8 @@ const updateProfileFirebase = (update: {
 };
 
 function* updateProfile(action: actions.auth.type__UPDATE_PROFILE) {
-  const userReady: boolean = yield select((state: StateRoot) => state.status.auth.user.ready);
-  const userIdInApp: undefined | string = yield select((state: StateRoot) => state.auth.user?.id);
+  const userReady: boolean = yield select((state: RootState) => state.status.auth.user.ready);
+  const userIdInApp: undefined | string = yield select((state: RootState) => state.auth.user?.id);
 
   try {
     if (!userReady) {

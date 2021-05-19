@@ -4,7 +4,7 @@ import history from 'libraries/history';
 import { FormattedMessage } from 'react-intl';
 
 import { useSelector, useDispatch } from 'react-redux';
-import { StateRoot } from 'store/reducers';
+import { RootState } from 'store/reducers';
 import { Chess, PieceType } from 'chess.js';
 
 // https://github.com/STRML/react-draggable
@@ -27,7 +27,7 @@ import srcImgBlackKing from 'others/images/chess/king-b.png';
 import * as actions from 'store/actions';
 import * as types from 'store/types';
 
-import styles from './index.module.scss'; 
+import styles from './index.module.scss';
 // import IconSort from 'svgs/basic/IconSort';
 
 type PropsChessSquare = {

@@ -1,7 +1,7 @@
 import React, { useCallback, useState } from 'react';
 
 import { useSelector, useDispatch } from 'react-redux';
-// import {StateRoot} from 'store/reducers';
+// import {RootState} from 'store/reducers';
 import * as actions from 'store/actions';
 
 // import Setting from "./Action/Setting";
@@ -14,7 +14,7 @@ import IconCopy from 'svgs/basic/IconCopy';
 import IconShare from 'svgs/basic/IconShare';
 
 function Action() {
-  // const showingSetting:boolean = useSelector((state: StateRoot) => state['status']['showing']['Action']['setting']);
+  // const showingSetting:boolean = useSelector((state: RootState) => state['status']['showing']['Action']['setting']);
   const dispatch = useDispatch();
 
   const [isOpenAction, setIsOpenAction] = useState(false);

@@ -5,7 +5,7 @@ import { FormattedMessage } from 'react-intl';
 import axios from 'axios';
 
 import { useSelector, useDispatch } from 'react-redux';
-import { StateRoot } from 'store/reducers';
+import { RootState } from 'store/reducers';
 import * as actions from 'store/actions';
 import * as types from 'store/types';
 
@@ -21,20 +21,20 @@ import InputRadio from 'components/Global/Input/InputRadio';
 
 function QuizDisplay() {
   const dispatch = useDispatch();
-  // const userReady = useSelector((state: StateRoot) => state.status.auth.user.ready);
+  // const userReady = useSelector((state: RootState) => state.status.auth.user.ready);
 
-  const userReady = useSelector((state: StateRoot) => state.status.auth.user.ready);
+  const userReady = useSelector((state: RootState) => state.status.auth.user.ready);
 
   const statusListMyPublic = useSelector(
-    (state: StateRoot) => state.status.data.quiz.publicQuizList,
+    (state: RootState) => state.status.data.quiz.publicQuizList,
   );
-  const statusListMyQuiz = useSelector((state: StateRoot) => state.status.data.quiz.myQuizList);
+  const statusListMyQuiz = useSelector((state: RootState) => state.status.data.quiz.myQuizList);
 
-  const publicQuizList = useSelector((state: StateRoot) => state.quiz.data.publicQuizList);
-  const myQuizList = useSelector((state: StateRoot) => state.quiz.data.myQuizList);
+  const publicQuizList = useSelector((state: RootState) => state.quiz.data.publicQuizList);
+  const myQuizList = useSelector((state: RootState) => state.quiz.data.myQuizList);
 
-  // const sorting = useSelector((state: StateRoot)=>state.status.current.football.leagueStandings.sorting);
-  const mode = useSelector((state: StateRoot) => state.quiz.state.display.mode);
+  // const sorting = useSelector((state: RootState)=>state.status.current.football.leagueStandings.sorting);
+  const mode = useSelector((state: RootState) => state.quiz.state.display.mode);
 
   // 이전에 QuizDisplay 화면에서 클릭했던 게 있으면 지우기
   useEffect(() => {

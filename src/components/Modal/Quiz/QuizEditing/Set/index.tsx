@@ -7,7 +7,7 @@ import { FormattedMessage } from 'react-intl';
 import Cookies from 'js-cookie';
 
 import { useSelector, useDispatch } from 'react-redux';
-import { StateRoot } from 'store/reducers';
+import { RootState } from 'store/reducers';
 import * as actions from 'store/actions';
 
 import InputRadio from 'components/Global/Input/InputRadio';
@@ -27,8 +27,8 @@ type PropsQuizEditingSet = {
 function QuizEditingSet({ top }: PropsQuizEditingSet) {
   const dispatch = useDispatch();
 
-  const focusingQuizState = useSelector((state: StateRoot) => state.quiz.state.focusing);
-  const focusingQuizData = useSelector((state: StateRoot) => state.quiz.data.focusing);
+  const focusingQuizState = useSelector((state: RootState) => state.quiz.state.focusing);
+  const focusingQuizData = useSelector((state: RootState) => state.quiz.data.focusing);
   const [indexAnswer, setIndexAnswer] = useState<number>(0);
 
   const refModal = useRef<HTMLDivElement>(null);

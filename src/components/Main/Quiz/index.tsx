@@ -5,7 +5,7 @@ import { Route, Switch } from 'react-router-dom';
 //import { useQuery, gql } from '@apollo/client';
 
 import { useDispatch, useSelector } from 'react-redux';
-import { StateRoot } from 'store/reducers';
+import { RootState } from 'store/reducers';
 import * as actions from 'store/actions';
 
 import QuizEditing from './QuizEditing';
@@ -15,14 +15,15 @@ import QuizPlaying from './QuizPlaying';
 function Quiz() {
   const dispatch = useDispatch();
 
-  // const userReady = useSelector((state: StateRoot) => state.status.auth.user.ready);
-  // const userId = useSelector((state: StateRoot) => state.auth.user?.id);
-  // const quizIdFocusing = useSelector((state: StateRoot) => state.quiz.data.focusing.id);
+  // const userReady = useSelector((state: RootState) => state.status.auth.user.ready);
+  // const userId = useSelector((state: RootState) => state.auth.user?.id);
+  // const quizIdFocusing = useSelector((state: RootState) => state.quiz.data.focusing.id);
 
-  const situationCurrent = useSelector((state: StateRoot) => state.quiz.state.situation);
+  const situationCurrent = useSelector((state: RootState) => state.quiz.state.situation);
 
   useEffect(() => {
     dispatch(actions.quiz.return__WATCH_STARTING_FEN_CHANGE());
+    dispatch(actions.quiz.return__WATCH_SITUATION_CHANGE());
   }, []);
 
   useEffect(() => {

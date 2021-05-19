@@ -5,7 +5,7 @@ import { FormattedMessage } from 'react-intl';
 import axios from 'axios';
 
 import { useSelector, useDispatch } from 'react-redux';
-import { StateRoot } from 'store/reducers';
+import { RootState } from 'store/reducers';
 import * as actions from 'store/actions';
 
 import Loading from 'components/Global/Loading';
@@ -21,8 +21,8 @@ import IconShuffle from 'svgs/basic/IconShuffle';
 
 function ShortCuts() {
   const dispatch = useDispatch();
-  const userReady = useSelector((state: StateRoot) => state.status.auth.user.ready);
-  const userId = useSelector((state: StateRoot) => state.auth.user?.id);
+  const userReady = useSelector((state: RootState) => state.status.auth.user.ready);
+  const userId = useSelector((state: RootState) => state.auth.user?.id);
 
   const onClick_MainButton = useCallback(
     (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {

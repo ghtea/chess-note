@@ -1,7 +1,7 @@
 import React, { useCallback } from 'react';
 
 import { useSelector, useDispatch } from 'react-redux';
-import { StateRoot } from 'store/reducers';
+import { RootState } from 'store/reducers';
 
 import { Banner as TypeBanner } from 'store/reducers/notification';
 
@@ -12,7 +12,7 @@ import styles from './index.module.scss';
 function Notification() {
   // const dispatch = useDispatch();
 
-  const bannerList: TypeBanner[] = useSelector((state: StateRoot) => state.notification.bannerList);
+  const bannerList: TypeBanner[] = useSelector((state: RootState) => state.notification.bannerList);
 
   return (
     <div className={`${styles['root']}`}>

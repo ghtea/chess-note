@@ -7,7 +7,7 @@ import { FormattedMessage, useIntl } from 'react-intl';
 import Cookies from 'js-cookie';
 
 import { useSelector, useDispatch } from 'react-redux';
-import { StateRoot } from 'store/reducers';
+import { RootState } from 'store/reducers';
 import * as actions from 'store/actions';
 
 import useInputQuizEditingUpload from './useInputQuizEditingUpload';
@@ -28,11 +28,11 @@ type PropsQuizEditingUpload = {
 function QuizEditingUpload({ top }: PropsQuizEditingUpload) {
   const dispatch = useDispatch();
   const intl = useIntl();
-  const userReady = useSelector((state: StateRoot) => state.status.auth.user.ready);
-  const userId = useSelector((state: StateRoot) => state.auth.user?.id);
+  const userReady = useSelector((state: RootState) => state.status.auth.user.ready);
+  const userId = useSelector((state: RootState) => state.auth.user?.id);
 
-  const situation = useSelector((state: StateRoot) => state.quiz.state.situation);
-  const focusingQuizData = useSelector((state: StateRoot) => state.quiz.data.focusing);
+  const situation = useSelector((state: RootState) => state.quiz.state.situation);
+  const focusingQuizData = useSelector((state: RootState) => state.quiz.data.focusing);
 
   const { draft: draft_Main, onChange: onChange_Main } = useInputQuizEditingUpload({});
 

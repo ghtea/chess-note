@@ -5,7 +5,7 @@ import focusingChess from 'libraries/chess';
 import { FormattedMessage } from 'react-intl';
 
 import { useSelector, useDispatch } from 'react-redux';
-import { StateRoot } from 'store/reducers';
+import { RootState } from 'store/reducers';
 
 // https://github.com/STRML/react-draggable
 
@@ -28,16 +28,16 @@ import IconBackToPrevious from 'svgs/basic/IconAngle';
 function ToolBarQE() {
   const dispatch = useDispatch();
 
-  const situation = useSelector((state: StateRoot) => state.quiz.state.situation);
+  const situation = useSelector((state: RootState) => state.quiz.state.situation);
 
   const heightToolbar = useSelector(
-    (state: StateRoot) => state.appearance.layout.document.chessBoard.toolBar.height,
+    (state: RootState) => state.appearance.layout.document.chessBoard.toolBar.height,
   );
   const lengthChessBoard = useSelector(
-    (state: StateRoot) => state.appearance.layout.document.chessBoard.length,
+    (state: RootState) => state.appearance.layout.document.chessBoard.length,
   );
-  //const focusingQuizState = useSelector((state: StateRoot)=>state.quiz.state.focusing);
-  const focusingQuizData = useSelector((state: StateRoot) => state.quiz.data.focusing);
+  //const focusingQuizState = useSelector((state: RootState)=>state.quiz.state.focusing);
+  const focusingQuizData = useSelector((state: RootState) => state.quiz.data.focusing);
 
   // const [positionStart, setPositionStart] = useState<null | string>(null);
   // const onClick_ControlPaste = useCallback(

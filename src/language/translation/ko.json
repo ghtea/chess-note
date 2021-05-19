@@ -82,6 +82,7 @@
   "Notification.Test2__H": "테스트에 성공하였습니다 2 !",
   "Notification.NotLoggedIn__E": "먼저 로그인해야 합니다",
   "Notification.UnknownError__E": "알수 없는 에러가 발생했습니다",
+  "Notification.NotAuthorized__E": "권한이 없습니다",
 
   "Notification.LogIn_UnknownError__E": "알수 없는 에러가 발생했습니다",
   "Notification.LogIn_UserNotFound__E": "해당 이메일 주소로부터 유저를 찾지 못했습니다",
@@ -103,6 +104,7 @@
   "Notification.SignUp_WeakPassword__E": "비밀번호는 6글자 이상이어야 합니다",
 
   "Notification.GetMember_UnknownError__E": "회원 정보를 가져오는 과정에서 알수 없는 에러가 발생했습니다",
+  "Notification.UpdateMember_UnknownError__E": "회원 정보를 업데이트하는 과정에서 알수 없는 에러가 발생했습니다",
 
   "Notification.PlayQuiz_Correct__S": "정답입니다!",
   "Notification.PlayQuiz_Wrong__W": "틀렸습니다",

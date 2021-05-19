@@ -5,7 +5,7 @@ import { useLocation } from 'react-router-dom';
 import { FormattedMessage, useIntl } from 'react-intl';
 
 import { useSelector, useDispatch } from 'react-redux';
-import { StateRoot } from 'store/reducers';
+import { RootState } from 'store/reducers';
 import * as actions from 'store/actions';
 
 import convertCase from 'tools/vanilla/convertCase';
@@ -20,7 +20,7 @@ function MyProfile() {
   const dispatch = useDispatch();
   const intl = useIntl();
 
-  const user = useSelector((state: StateRoot) => state.auth.user);
+  const user = useSelector((state: RootState) => state.auth.user);
 
   const [urlPhotoLocal, setUrlPhotoLocal] = useState('');
   const [displayNameEditing, setTisplayNameEditing] = useState(user?.displayName);

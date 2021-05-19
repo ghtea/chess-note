@@ -13,10 +13,11 @@ import moveWhilePlayingQuiz from './moveWhilePlayingQuiz';
 import backToStart from './backToStart';
 import backToPrevious from './backToPrevious';
 
-import watchStartingFen from './watchStartingFen';
+import watchStartingFen from './watchStartingFenChange';
 import playRandomQuiz from './playRandomQuiz';
 import playNextQuiz from './playNextQuiz';
 import showAnswerOrMark from './showAnswerOrMark';
+import watchSituationChange from './watchSituationChange';
 
 export default function* quizSaga() {
   yield takeEvery(actions.quiz.name__FOCUS_QUIZ, focusQuiz);
@@ -32,11 +33,11 @@ export default function* quizSaga() {
   yield takeEvery(actions.quiz.name__BACK_TO_START, backToStart);
   yield takeEvery(actions.quiz.name__BACK_TO_PREVIOUS, backToPrevious);
 
-  yield takeLatest(actions.quiz.name__WATCH_STARTING_FEN_CHANGE, watchStartingFen);
+  yield takeEvery(actions.quiz.name__WATCH_STARTING_FEN_CHANGE, watchStartingFen);
 
   yield takeEvery(actions.quiz.name__PLAY_RANDOM_QUIZ, playRandomQuiz);
   yield takeEvery(actions.quiz.name__PLAY_NEXT_QUIZ, playNextQuiz);
 
   yield takeEvery(actions.quiz.name__SHOW_ANSWER_OR_MARK, showAnswerOrMark);
-
+  yield takeEvery(actions.quiz.name__WATCH_SITUATION_CHANGE, watchSituationChange);
 }

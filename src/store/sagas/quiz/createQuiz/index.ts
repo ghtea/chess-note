@@ -9,7 +9,7 @@ import { gql, useQuery, FetchResult, ApolloQueryResult } from '@apollo/client';
 import { v4 as uuidv4 } from 'uuid';
 
 // import * as config from 'config';
-import { StateRoot } from 'store/reducers';
+import { RootState } from 'store/reducers';
 import * as actions from 'store/actions';
 import * as types from 'store/types';
 

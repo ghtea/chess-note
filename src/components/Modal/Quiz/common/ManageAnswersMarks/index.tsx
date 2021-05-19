@@ -10,7 +10,7 @@ import { FormattedMessage } from 'react-intl';
 import * as clipboardy from 'clipboardy';
 
 import { useSelector, useDispatch } from 'react-redux';
-import { StateRoot } from 'store/reducers';
+import { RootState } from 'store/reducers';
 import * as actions from 'store/actions';
 
 import InputRadio from 'components/Global/Input/InputRadio';
@@ -29,9 +29,9 @@ type PropsManageAnswer = {
 export default function ManageAnswer({ top, kind }: PropsManageAnswer) {
   const dispatch = useDispatch();
 
-  const situation = useSelector((state: StateRoot) => state.quiz.state.situation);
-  const focusingQuizState = useSelector((state: StateRoot) => state.quiz.state.focusing);
-  const focusingQuizData = useSelector((state: StateRoot) => state.quiz.data.focusing);
+  const situation = useSelector((state: RootState) => state.quiz.state.situation);
+  const focusingQuizState = useSelector((state: RootState) => state.quiz.state.focusing);
+  const focusingQuizData = useSelector((state: RootState) => state.quiz.data.focusing);
   const [itemIndex, setItemIndex] = useState<number>(0);
 
   const refModal = useRef<HTMLDivElement>(null);

@@ -3,7 +3,7 @@ import history from 'libraries/history';
 import { FormattedMessage } from 'react-intl';
 
 import { useSelector, useDispatch } from 'react-redux';
-import { StateRoot } from 'store/reducers';
+import { RootState } from 'store/reducers';
 
 // https://github.com/STRML/react-draggable
 
@@ -23,14 +23,14 @@ export default function StatusBarQP() {
   const dispatch = useDispatch();
 
   const heightStatusBar = useSelector(
-    (state: StateRoot) => state.appearance.layout.document.chessBoard.statusBar.height,
+    (state: RootState) => state.appearance.layout.document.chessBoard.statusBar.height,
   );
   const lengthChessBoard = useSelector(
-    (state: StateRoot) => state.appearance.layout.document.chessBoard.length,
+    (state: RootState) => state.appearance.layout.document.chessBoard.length,
   );
 
-  const turn = useSelector((state: StateRoot) => state.quiz.state.focusing.turn);
-  const situation = useSelector((state: StateRoot) => state.quiz.state.situation);
+  const turn = useSelector((state: RootState) => state.quiz.state.focusing.turn);
+  const situation = useSelector((state: RootState) => state.quiz.state.situation);
 
   const onClick_Main = useCallback((e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
     const value = e.currentTarget.value;

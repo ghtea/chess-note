@@ -145,13 +145,6 @@ export const return__UPDATE_QUIZ = (payload: Payload__UPDATE_QUIZ) => {
 };
 export type type__UPDATE_QUIZ = ReturnType<typeof return__UPDATE_QUIZ>;
 
-export const name__WATCH_STARTING_FEN_CHANGE = 'quiz/WATCH_STARTING_FEN_CHANGE';
-export const return__WATCH_STARTING_FEN_CHANGE = () => {
-  return {
-    type: name__WATCH_STARTING_FEN_CHANGE,
-  };
-};
-export type type__WATCH_STARTING_FEN_CHANGE = ReturnType<typeof return__WATCH_STARTING_FEN_CHANGE>;
 
 // play
 export const name__PLAY_RANDOM_QUIZ = 'quiz/PLAY_RANDOM_QUIZ';
@@ -188,3 +181,21 @@ export const return__SHOW_ANSWER_OR_MARK = (payload: Payload__SHOW_ANSWER_OR_MAR
 };
 export type type__SHOW_ANSWER_OR_MARK = ReturnType<typeof return__SHOW_ANSWER_OR_MARK>;
 
+
+// watch state change
+export const name__WATCH_STARTING_FEN_CHANGE = 'quiz/WATCH_STARTING_FEN_CHANGE';
+export const return__WATCH_STARTING_FEN_CHANGE = () => {
+  return {
+    type: name__WATCH_STARTING_FEN_CHANGE,
+  };
+};
+export type type__WATCH_STARTING_FEN_CHANGE = ReturnType<typeof return__WATCH_STARTING_FEN_CHANGE>;
+
+
+export const name__WATCH_SITUATION_CHANGE = 'quiz/WATCH_SITUATION_CHANGE';
+export const return__WATCH_SITUATION_CHANGE = () => {
+  return {
+    type: name__WATCH_SITUATION_CHANGE,
+  };
+};
+export type type__WATCH_SITUATION_CHANGE = ReturnType<typeof return__WATCH_SITUATION_CHANGE>;

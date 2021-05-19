@@ -5,7 +5,7 @@ import { useLocation } from 'react-router-dom';
 import { FormattedMessage, useIntl } from 'react-intl';
 
 import { useSelector, useDispatch } from 'react-redux';
-import { StateRoot } from 'store/reducers';
+import { RootState } from 'store/reducers';
 
 import useInput from 'tools/hooks/useInput';
 import * as actions from 'store/actions';

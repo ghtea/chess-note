@@ -4,7 +4,7 @@ import history from 'libraries/history';
 import { FormattedMessage, useIntl } from 'react-intl';
 
 import { useSelector, useDispatch } from 'react-redux';
-import { StateRoot } from 'store/reducers';
+import { RootState } from 'store/reducers';
 
 import * as actions from 'store/actions';
 
@@ -16,7 +16,7 @@ function Loading() {
   const dispatch = useDispatch();
   const intl = useIntl();
 
-  //const statusUser = useSelector((state: StateRoot) => state.status.auth.user);
+  //const statusUser = useSelector((state: RootState) => state.status.auth.user);
 
   return (
     <div className={`${styles['root']}`}>

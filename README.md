@@ -109,8 +109,8 @@
   ```javascript
       function Modal({}: PropsModal) {
 
-          const showingSetting = useSelector((state: StateRoot) => state.status.showing.modal.setting);
-          const showingMyProfile = useSelector((state: StateRoot) => state.status.showing.modal.myProfile);
+          const showingSetting = useSelector((state: RootState) => state.status.showing.modal.setting);
+          const showingMyProfile = useSelector((state: RootState) => state.status.showing.modal.myProfile);
 
           return (
               <>

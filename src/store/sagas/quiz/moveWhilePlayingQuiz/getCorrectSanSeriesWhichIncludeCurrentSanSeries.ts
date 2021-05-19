@@ -1,14 +1,14 @@
 import { call, select, put, delay } from 'redux-saga/effects';
-import { StateRoot } from 'store/reducers';
+import { RootState } from 'store/reducers';
 import * as actions from 'store/actions';
 import * as types from 'store/types';
 
 export default function* getCorrectSanSeriesWhichIncludeCurrentSanSeries() {
   const focusingQuizState: types.quiz.QuizState = yield select(
-    (state: StateRoot) => state.quiz.state.focusing,
+    (state: RootState) => state.quiz.state.focusing,
   );
   const focusingQuizData: types.quiz.Quiz = yield select(
-    (state: StateRoot) => state.quiz.data.focusing,
+    (state: RootState) => state.quiz.data.focusing,
   );
 
   const correctSanSeriesList = focusingQuizData.correctSanSeriesList;

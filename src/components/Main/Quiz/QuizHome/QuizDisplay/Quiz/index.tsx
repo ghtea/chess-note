@@ -5,7 +5,7 @@ import { FormattedMessage } from 'react-intl';
 import axios from 'axios';
 
 import { useSelector, useDispatch } from 'react-redux';
-import { StateRoot } from 'store/reducers';
+import { RootState } from 'store/reducers';
 
 import * as actions from 'store/actions';
 import * as types from 'store/types';
@@ -25,7 +25,7 @@ type PropsQuiz = {
 function Quiz({ quiz }: PropsQuiz) {
   const dispatch = useDispatch();
 
-  // const situation = useSelector((state: StateRoot)=> state.quiz.state.situation);
+  // const situation = useSelector((state: RootState)=> state.quiz.state.situation);
 
   const onClick_Button = useCallback(
     (event: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {

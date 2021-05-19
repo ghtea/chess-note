@@ -3,17 +3,14 @@ import { firebaseAuth } from 'libraries/firebase';
 
 import history from 'libraries/history';
 import focusingChess from 'libraries/chess';
-import {
-  correctChessMoveTree,
-  markedChessMoveTree,
-} from 'components/Main/Quiz/chessMoveTree';
+import { correctChessMoveTree, markedChessMoveTree } from 'components/Main/Quiz/chessMoveTree';
 
 import { useLocation } from 'react-router-dom';
 import { FormattedMessage } from 'react-intl';
 import * as clipboardy from 'clipboardy';
 
 import { useSelector, useDispatch } from 'react-redux';
-import { StateRoot } from 'store/reducers';
+import { RootState } from 'store/reducers';
 import * as actions from 'store/actions';
 
 import InputRadio from 'components/Global/Input/InputRadio';
@@ -31,7 +28,7 @@ type PropsQuizEditingOthers = {
 function QuizEditingOthers({ top }: PropsQuizEditingOthers) {
   const dispatch = useDispatch();
 
-  const focusingQuizState = useSelector((state: StateRoot) => state.quiz.state.focusing);
+  const focusingQuizState = useSelector((state: RootState) => state.quiz.state.focusing);
 
   const refModal = useRef<HTMLDivElement>(null);
   const onClick_Window = useCallback(
@@ -99,7 +96,7 @@ function QuizEditingOthers({ top }: PropsQuizEditingOthers) {
             }),
           );
         }
-      } 
+      }
     },
     [focusingQuizState, focusingChess],
   );
@@ -127,7 +124,6 @@ function QuizEditingOthers({ top }: PropsQuizEditingOthers) {
               <FormattedMessage id={`Modal.QuizEditingOthers_UseFen`} />{' '}
             </button>
           </div>
-
         </div>
       </div>
     </div>

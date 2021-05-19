@@ -3,17 +3,14 @@ import { firebaseAuth } from 'libraries/firebase';
 
 import history from 'libraries/history';
 import focusingChess from 'libraries/chess';
-import {
-  correctChessMoveTree,
-  markedChessMoveTree,
-} from 'components/Main/Quiz/chessMoveTree';
+import { correctChessMoveTree, markedChessMoveTree } from 'components/Main/Quiz/chessMoveTree';
 
 import { useLocation } from 'react-router-dom';
 import { FormattedMessage } from 'react-intl';
 import * as clipboardy from 'clipboardy';
 
 import { useSelector, useDispatch } from 'react-redux';
-import { StateRoot } from 'store/reducers';
+import { RootState } from 'store/reducers';
 import * as actions from 'store/actions';
 
 import InputRadio from 'components/Global/Input/InputRadio';
@@ -26,11 +23,11 @@ import stylesModal from 'components/Modal/index.module.scss';
 export default function QuizHomeOthers() {
   const dispatch = useDispatch();
 
-  const userId = useSelector((state: StateRoot) => state.auth.user?.id);
+  const userId = useSelector((state: RootState) => state.auth.user?.id);
 
-  const publicQuizList = useSelector((state: StateRoot) => state.quiz.data.publicQuizList);
-  const myQuizList = useSelector((state: StateRoot) => state.quiz.data.myQuizList);
-  const displayState = useSelector((state: StateRoot) => state.quiz.state.display);
+  const publicQuizList = useSelector((state: RootState) => state.quiz.data.publicQuizList);
+  const myQuizList = useSelector((state: RootState) => state.quiz.data.myQuizList);
+  const displayState = useSelector((state: RootState) => state.quiz.state.display);
 
   const refModal = useRef<HTMLDivElement>(null);
   const onClick_Window = useCallback(

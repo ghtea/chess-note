@@ -5,7 +5,7 @@ import { ChessInstance, Move, Square } from 'chess.js';
 import focusingChess from 'libraries/chess';
 
 // import * as config from 'config';
-import { StateRoot } from 'store/reducers';
+import { RootState } from 'store/reducers';
 import * as actions from 'store/actions';
 import * as types from 'store/types';
 import pcTryMove from './pcTryMove';

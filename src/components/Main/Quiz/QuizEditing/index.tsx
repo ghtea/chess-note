@@ -8,7 +8,7 @@ import chessPlaying from 'libraries/chess';
 import styles from './index.module.scss';
 
 import { useDispatch, useSelector } from 'react-redux';
-import { StateRoot } from 'store/reducers';
+import { RootState } from 'store/reducers';
 import * as actions from 'store/actions';
 import ToolBarQE from './ToolBar';
 import StatusBarQE from './StatusBar';
@@ -16,15 +16,15 @@ import StatusBarQE from './StatusBar';
 function QuizEditing() {
   const dispatch = useDispatch();
 
-  const focusingQuizState = useSelector((state: StateRoot) => state.quiz.state.focusing);
+  const focusingQuizState = useSelector((state: RootState) => state.quiz.state.focusing);
 
-  const focusingQuizStatus = useSelector((state: StateRoot) => state.status.data.quiz.focusing);
-  const side = useSelector((state: StateRoot) => state.quiz.data.focusing.nextTurn);
-  const authorId = useSelector((state: StateRoot) => state.quiz.data.focusing.userId);
-  const quizId = useSelector((state: StateRoot) => state.quiz.data.focusing?.id);
+  const focusingQuizStatus = useSelector((state: RootState) => state.status.data.quiz.focusing);
+  const side = useSelector((state: RootState) => state.quiz.data.focusing.nextTurn);
+  const authorId = useSelector((state: RootState) => state.quiz.data.focusing.userId);
+  const quizId = useSelector((state: RootState) => state.quiz.data.focusing?.id);
 
-  const statusUser = useSelector((state: StateRoot) => state.status.auth.user);
-  const userId = useSelector((state: StateRoot) => state.auth.user?.id);
+  const statusUser = useSelector((state: RootState) => state.status.auth.user);
+  const userId = useSelector((state: RootState) => state.auth.user?.id);
 
   useEffect(() => {
     //const quizIdFromUri = (window.location.pathname.match(/[^\/]*$/) || [])[0];
@@ -63,8 +63,8 @@ function QuizEditing() {
   useEffect(() => {
     // console.log('triggered!!!')
     // console.log(statusUser, userId, authorId, focusingQuizStatus)
-    if ( statusUser.tried && focusingQuizStatus.ready) {
-      if ( authorId && (userId !== authorId)) {
+    if (statusUser.tried && focusingQuizStatus.ready) {
+      if (authorId && userId !== authorId) {
         //console.log('values: ', statusUser.tried, focusingQuizStatus.ready, authorId, userId)
         dispatch(
           actions.notification.return__ADD_DELETE_BANNER({

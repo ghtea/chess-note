@@ -4,11 +4,11 @@ import Cookies from 'js-cookie';
 
 import * as actions from 'store/actions';
 
-import { StateRoot } from 'store/reducers';
+import { RootState } from 'store/reducers';
 
 function* decideTheme(action: actions.status.type__DECIDE_THEME) {
   const optionThemeCurrent: string = yield select(
-    (state: StateRoot) => state.appearance.theme.option,
+    (state: RootState) => state.appearance.theme.option,
   );
 
   if (optionThemeCurrent === 'always-light') {

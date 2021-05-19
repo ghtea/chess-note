@@ -1,3 +1,5 @@
+import * as types from 'store/types/index';
+
 export const name__REPLACE = 'auth/REPLACE'; // 뒤에 as const 를 붙이면 reducer 에서 auth.REPLACE 로 쓸때 오류 뜬다. 아직 이해못
 interface Payload__REPLACE {
   keyList: (string | number)[];
@@ -107,6 +109,15 @@ export const return__UPDATE_PROFILE = (payload: Payload__UPDATE_PROFILE) => {
 };
 export type type__UPDATE_PROFILE = ReturnType<typeof return__UPDATE_PROFILE>;
 
+export const name__WATCH_USER_LOG_IN_OUT = 'auth/WATCH_USER_LOG_IN_OUT';
+export const return__WATCH_USER_LOG_IN_OUT = () => {
+  return {
+    type: name__WATCH_USER_LOG_IN_OUT,
+  };
+};
+export type type__WATCH_USER_LOG_IN_OUT = ReturnType<typeof return__WATCH_USER_LOG_IN_OUT>;
+
+// Member
 export const name__GET_MEMBER_BY_USER_ID = 'auth/GET_MEMBER_BY_USER_ID';
 type Payload__GET_MEMBER_BY_USER_ID = {
   userId: string;
@@ -119,10 +130,20 @@ export const return__GET_MEMBER_BY_USER_ID = (payload: Payload__GET_MEMBER_BY_US
 };
 export type type__GET_MEMBER_BY_USER_ID = ReturnType<typeof return__GET_MEMBER_BY_USER_ID>;
 
-export const name__WATCH_USER_LOG_IN_OUT = 'auth/WATCH_USER_LOG_IN_OUT';
-export const return__WATCH_USER_LOG_IN_OUT = () => {
+export const name__WATCH_MEMBER_CHANGE = 'auth/WATCH_MEMBER_CHANGE';
+export const return__WATCH_MEMBER_CHANGE = () => {
   return {
-    type: name__WATCH_USER_LOG_IN_OUT,
+    type: name__WATCH_MEMBER_CHANGE,
   };
 };
-export type type__WATCH_USER_LOG_IN_OUT = ReturnType<typeof return__WATCH_USER_LOG_IN_OUT>;
+export type type__WATCH_MEMBER_CHANGE = ReturnType<typeof return__WATCH_MEMBER_CHANGE>;
+
+export const name__UPDATE_MEMBER = 'auth/UPDATE_MEMBER ';
+type Payload__UPDATE_MEMBER = types.auth.Member;
+export const return__UPDATE_MEMBER = (payload: Payload__UPDATE_MEMBER) => {
+  return {
+    type: name__UPDATE_MEMBER,
+    payload: payload,
+  };
+};
+export type type__UPDATE_MEMBER = ReturnType<typeof return__UPDATE_MEMBER>;

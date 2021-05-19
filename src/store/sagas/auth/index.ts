@@ -16,9 +16,11 @@ import logCheckFailed from 'store/sagas/auth/logCheck/logCheckFailed';
 
 import updateProfile from 'store/sagas/auth/updateProfile';
 import watchUserLogInOut from './watchUserLogInOut';
-import getMemberByUserId from './getMemerByUserId/getMemberByUserId';
+import getMemberByUserId from './manipulateMember/getMemerByUserId';
 
 import * as actions from 'store/actions';
+import updateMember from './manipulateMember/updateMember';
+import watchMemberChange from './watchMemberChange';
 
 export default function* authSaga() {
   yield takeLatest(actions.auth.name__REPLACE_USER, replaceUser);
@@ -37,5 +39,9 @@ export default function* authSaga() {
   yield takeLatest(actions.auth.name__UPDATE_PROFILE, updateProfile);
 
   yield takeLatest(actions.auth.name__WATCH_USER_LOG_IN_OUT, watchUserLogInOut);
+  yield takeLatest(actions.auth.name__WATCH_MEMBER_CHANGE, watchMemberChange);
+
   yield takeLatest(actions.auth.name__GET_MEMBER_BY_USER_ID, getMemberByUserId);
+  yield takeLatest(actions.auth.name__UPDATE_MEMBER, updateMember);
+
 }

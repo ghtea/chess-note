@@ -5,7 +5,7 @@ import { FormattedMessage } from 'react-intl';
 import focusingChess from 'libraries/chess';
 
 import { useSelector, useDispatch } from 'react-redux';
-import { StateRoot } from 'store/reducers';
+import { RootState } from 'store/reducers';
 
 // https://github.com/STRML/react-draggable
 
@@ -32,17 +32,17 @@ export default function ToolBarQP() {
   const dispatch = useDispatch();
 
   const heightToolbar = useSelector(
-    (state: StateRoot) => state.appearance.layout.document.chessBoard.toolBar.height,
+    (state: RootState) => state.appearance.layout.document.chessBoard.toolBar.height,
   );
   const lengthChessBoard = useSelector(
-    (state: StateRoot) => state.appearance.layout.document.chessBoard.length,
+    (state: RootState) => state.appearance.layout.document.chessBoard.length,
   );
 
-  const situation = useSelector((state: StateRoot) => state.quiz.state.situation);
+  const situation = useSelector((state: RootState) => state.quiz.state.situation);
 
-  const focusingId = useSelector((state: StateRoot) => state.quiz.data.focusing.id);
-  const playingIdList = useSelector((state: StateRoot) => state.quiz.state.playingIdList);
-  const focusingQuizData = useSelector((state: StateRoot) => state.quiz.data.focusing);
+  const focusingId = useSelector((state: RootState) => state.quiz.data.focusing.id);
+  const playingIdList = useSelector((state: RootState) => state.quiz.state.playingIdList);
+  const focusingQuizData = useSelector((state: RootState) => state.quiz.data.focusing);
 
   const onClick_Main = useCallback((e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
     const value = e.currentTarget.value;

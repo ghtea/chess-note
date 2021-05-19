@@ -5,8 +5,7 @@ import { ChessInstance, Move, Square } from 'chess.js';
 import focusingChess from 'libraries/chess';
 import { correctChessMoveTree, markedChessMoveTree } from 'components/Main/Quiz/chessMoveTree';
 
-// import * as config from 'config';
-import { StateRoot } from 'store/reducers';
+import { RootState } from 'store/reducers';
 import * as actions from 'store/actions';
 import * as types from 'store/types';
 import applySucceededMoveToQuizState from '../moveWhilePlayingQuiz/applySucceededMoveToQuizState';
@@ -17,7 +16,7 @@ export default function* showAnswerOrMark(action: actions.quiz.type__SHOW_ANSWER
   try {
     yield put(
       actions.appearance.return__REPLACE({
-        keyList: ['showing', 'modal', kind === 'answer' ? 'quizManageAnswers' : 'quizManageMarks' ],
+        keyList: ['showing', 'modal', kind === 'answer' ? 'quizManageAnswers' : 'quizManageMarks'],
         replacement: false,
       }),
     );
@@ -32,7 +31,9 @@ export default function* showAnswerOrMark(action: actions.quiz.type__SHOW_ANSWER
     const showingSanQueue = [...showingSanSeries];
     while (showingSanQueue.length > 0) {
       const triedMoveResult = focusingChess.move(showingSanQueue.shift() as string);
+      //console.warn(showingSanQueue)
 
+      //console.warn(triedMoveResult)
       if (triedMoveResult) {
         yield delay(1000);
         yield applySucceededMoveToQuizState(triedMoveResult);
