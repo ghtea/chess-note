@@ -15,7 +15,7 @@ import * as types from 'store/types';
 
 const UPDATE_QUIZ = gql`
     mutation UpdateQuiz($argument: UpdateQuizInputType!){
-        updateQuiz(updateQuizInputType: $argument) 
+        updateQuiz(updateQuizInput: $argument) 
             ${types.quiz.gqlQuizString}
     }
 `;

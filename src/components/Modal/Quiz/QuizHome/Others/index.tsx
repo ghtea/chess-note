@@ -25,8 +25,7 @@ export default function QuizHomeOthers() {
 
   const userId = useSelector((state: RootState) => state.auth.user?.id);
 
-  const publicQuizList = useSelector((state: RootState) => state.quiz.data.publicQuizList);
-  const myQuizList = useSelector((state: RootState) => state.quiz.data.myQuizList);
+  const quizList = useSelector((state: RootState) => state.quiz.data.list);
   const displayState = useSelector((state: RootState) => state.quiz.state.display);
 
   const refModal = useRef<HTMLDivElement>(null);
@@ -54,7 +53,7 @@ export default function QuizHomeOthers() {
       const value = e.currentTarget.value;
 
       if (value === 'edit-this-quiz') {
-        const quizToEdit = (displayState.mode === 'public-quiz' ? publicQuizList : myQuizList).find(
+        const quizToEdit = quizList.find(
           (e) => e.id === displayState.clickedQuizId,
         );
         dispatch(
@@ -79,11 +78,11 @@ export default function QuizHomeOthers() {
         }),
       );
     },
-    [publicQuizList, myQuizList, displayState, userId],
+    [quizList, displayState, userId],
   );
 
   const isShowingManipulateButton = useMemo(() => {
-    const clickedQuiz = (displayState.mode === 'public-quiz' ? publicQuizList : myQuizList).find(
+    const clickedQuiz = quizList.find(
       (e) => e.id === displayState.clickedQuizId,
     );
     if (userId === clickedQuiz?.authorId) {
@@ -91,7 +90,7 @@ export default function QuizHomeOthers() {
     } else {
       return false;
     }
-  }, [userId, displayState, publicQuizList, myQuizList]);
+  }, [userId, displayState, quizList]);
 
   return (
     <div className={`${styles['root']} ${stylesModal['root']}`}>

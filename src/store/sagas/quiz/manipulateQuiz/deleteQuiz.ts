@@ -12,10 +12,11 @@ import { v4 as uuidv4 } from 'uuid';
 import { RootState } from 'store/reducers';
 import * as actions from 'store/actions';
 import * as types from 'store/types';
+import checkIfAuthorizedUserIsLoggedInUser from 'store/sagas/auth/common/checkIfAuthorizedUserIsLoggedInUser';
 
 const DELETE_QUIZ = gql`
   mutation DeleteQuiz($argument: DeleteQuizInputType!) {
-    deleteQuiz(deleteQuizInputType: $argument)
+    deleteQuiz(deleteQuizInput: $argument)
   }
 `;
 
@@ -36,7 +37,7 @@ export default function* deleteQuiz(action: actions.quiz.type__DELETE_QUIZ) {
 
     type DeleteQuizData = Record<'deleteQuiz', boolean>;
     const res: ApolloQueryResult<DeleteQuizData> = yield call(requestDeleteQuiz, argument); // eslint-disable-line @typescript-eslint/no-explicit-any
-    yield applyChangeInQuizList (id);
+    yield applyChangeInQuizList(id);
 
     yield put(
       actions.notification.return__ADD_DELETE_BANNER({
@@ -54,25 +55,13 @@ export default function* deleteQuiz(action: actions.quiz.type__DELETE_QUIZ) {
   }
 }
 
-function* applyChangeInQuizList (deletedQuizId: string){
-
-  type quizData = {
-    myQuizList: types.quiz.Quiz[];
-    publicQuizList: types.quiz.Quiz[];
-    focusing: types.quiz.Quiz;
-  }
-  const quizData: quizData = yield select(
-    (state: RootState) => state.quiz.data,
-  );
+function* applyChangeInQuizList(deletedQuizId: string) {
+  const quizList: types.quiz.Quiz[] = yield select((state: RootState) => state.quiz.data.list);
 
   yield put(
     actions.quiz.return__REPLACE({
-      keyList: ['data'],
-      replacement: {
-        ...quizData,
-        myQuizList: [...quizData.myQuizList].filter(e=>e.id !== deletedQuizId),
-        publicQuizList: [...quizData.publicQuizList].filter(e=>e.id !== deletedQuizId)
-      }
+      keyList: ['data', 'list'],
+      replacement: quizList.filter((e) => e.id !== deletedQuizId),
     }),
   );
 }

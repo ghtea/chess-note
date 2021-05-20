@@ -11,13 +11,13 @@ export default function* playRandomQuiz(action: actions.quiz.type__PLAY_RANDOM_Q
   const { kind } = action.payload;
 
   const quizList: types.quiz.Quiz[] = yield select(
-    (state: RootState) => state.quiz.data[kind === 'public-quiz' ? 'publicQuizList' : 'myQuizList'],
+    (state: RootState) => state.quiz.data.list,
   );
 
   if (!(quizList.length > 0)) {
     yield put(
       actions.notification.return__ADD_DELETE_BANNER({
-        codeSituation: kind === 'public-quiz' ? 'PlayQuiz_NoPublicQuiz__E' : 'PlayQuiz_NoMyQuiz__E',
+        codeSituation: 'PlayQuiz_NoQuiz__E',
       }),
     );
   } else {

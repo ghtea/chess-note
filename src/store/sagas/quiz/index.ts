@@ -5,7 +5,6 @@ import * as actions from 'store/actions';
 import createQuiz from './manipulateQuiz/createQuiz';
 import focusQuiz from './focusQuiz';
 import getQuizById from './getQuizById';
-import getQuizListDict from './getQuizListDict';
 
 import moveWhileEditingQuiz from './moveWhileEditingQuiz';
 import moveWhilePlayingQuiz from './moveWhilePlayingQuiz';
@@ -20,6 +19,8 @@ import showAnswerOrMark from './showAnswerOrMark';
 import watchSituationChange from './watchSituationChange';
 import updateQuiz from './manipulateQuiz/updateQuiz';
 import deleteQuiz from './manipulateQuiz/deleteQuiz';
+import likeDislikeQuiz from './manipulateQuiz/likeDislikeQuiz';
+import getQuizList from './getQuizList';
 
 export default function* quizSaga() {
   yield takeEvery(actions.quiz.name__FOCUS_QUIZ, focusQuiz);
@@ -27,9 +28,10 @@ export default function* quizSaga() {
   yield takeEvery(actions.quiz.name__CREATE_QUIZ, createQuiz);
   yield takeEvery(actions.quiz.name__UPDATE_QUIZ, updateQuiz);
   yield takeEvery(actions.quiz.name__DELETE_QUIZ, deleteQuiz);
+  yield takeEvery(actions.quiz.name__LIKE_DISLIKE_QUIZ, likeDislikeQuiz);
 
   yield takeEvery(actions.quiz.name__GET_QUIZ_BY_ID, getQuizById);
-  yield takeEvery(actions.quiz.name__GET_QUIZ_LIST_DICT, getQuizListDict);
+  yield takeEvery(actions.quiz.name__GET_QUIZ_LIST, getQuizList);
 
   yield takeEvery(actions.quiz.name__MOVE_WHILE_EDITING_QUIZ, moveWhileEditingQuiz);
   yield takeEvery(actions.quiz.name__MOVE_IN_QUIZ_PLAYING, moveWhilePlayingQuiz);

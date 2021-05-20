@@ -38,7 +38,7 @@ function* getQuizById(action: actions.quiz.type__GET_QUIZ_BY_ID) {
   try {
     const GET_QUIZ_BY_ID = gql`
             query GetQuizById($argument: GetQuizByIdInputType!){
-                getQuizById(getQuizByIdInputType: $argument)
+                getQuizById(getQuizByIdInput: $argument)
                     ${types.quiz.gqlQuizString}
             }
         `;

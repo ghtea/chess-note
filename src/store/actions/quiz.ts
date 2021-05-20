@@ -71,17 +71,17 @@ export const return__FOCUS_QUIZ = (payload: Payload__FOCUS_QUIZ) => {
 };
 export type type__FOCUS_QUIZ = ReturnType<typeof return__FOCUS_QUIZ>;
 
-export const name__GET_LIST_QUIZ = 'quiz/GET_LIST_QUIZ';
-type Payload__GET_LIST_QUIZ = {
+export const name__GET_QUIZ_LIST = 'quiz/GET_QUIZ_LIST';
+type Payload__GET_QUIZ_LIST = {
   userId?: string;
 };
-export const return__GET_LIST_QUIZ = (payload: Payload__GET_LIST_QUIZ) => {
+export const return__GET_QUIZ_LIST = (payload: Payload__GET_QUIZ_LIST) => {
   return {
-    type: name__GET_LIST_QUIZ,
+    type: name__GET_QUIZ_LIST,
     payload: payload,
   };
 };
-export type type__GET_LIST_QUIZ = ReturnType<typeof return__GET_LIST_QUIZ>;
+export type type__GET_QUIZ_LIST = ReturnType<typeof return__GET_QUIZ_LIST>;
 
 export const name__GET_QUIZ_BY_ID = 'quiz/GET_QUIZ_BY_ID';
 type Payload__GET_QUIZ_BY_ID = {
@@ -161,6 +161,20 @@ export const return__DELETE_QUIZ = (payload: Payload__DELETE_QUIZ) => {
 };
 export type type__DELETE_QUIZ = ReturnType<typeof return__DELETE_QUIZ>;
 
+// other update 
+export const name__LIKE_DISLIKE_QUIZ = 'quiz/LIKE_DISLIKE_QUIZ';
+type Payload__LIKE_DISLIKE_QUIZ = {
+  quizId: string;
+  like: boolean;
+  dislike: boolean;
+};
+export const return__LIKE_DISLIKE_QUIZ = (payload: Payload__LIKE_DISLIKE_QUIZ) => {
+  return {
+    type: name__LIKE_DISLIKE_QUIZ,
+    payload: payload,
+  };
+};
+export type type__LIKE_DISLIKE_QUIZ = ReturnType<typeof return__LIKE_DISLIKE_QUIZ>;
 
 // play
 export const name__PLAY_RANDOM_QUIZ = 'quiz/PLAY_RANDOM_QUIZ';

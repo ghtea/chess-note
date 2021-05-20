@@ -15,7 +15,7 @@ import * as types from 'store/types';
 
 const CREATE_QUIZ = gql`
     mutation CreateQuiz($argument: CreateQuizInputType!){
-        createQuiz(createQuizInputType: $argument) 
+        createQuiz(createQuizInput: $argument) 
             ${types.quiz.gqlQuizString}
     }
 `;

@@ -23,8 +23,24 @@ td {
 
   height: 40px;
 
+  button {
+    height: auto;
+    padding: 0px;
+  }
+
   :global(.icon) {
     @include color-each-theme(color, basic__5);
+  }
+
+  &.name-id {
+    span {
+      white-space: nowrap;
+      word-break: break-all;
+      overflow: hidden;
+    }
+    overflow: hidden;
+    max-width: 100%;
+    padding: 0 4px 0;
   }
 
   &.my-result {
@@ -44,18 +60,25 @@ td {
       @include color-each-theme(color, error__4);
     }
 
-    & > *:nth-child(2){
-        display: none;
+    & > *:nth-child(2) {
+      display: none;
     }
-    @media (min-width: $device-m__min-width){
-        & > *:nth-child(2){
-            display: inline-flex;
-        }
+    @media (min-width: $device-m__min-width) {
+      & > *:nth-child(2) {
+        display: inline-flex;
+      }
     }
   }
 
   &.author {
-    overflow: auto;
+    span {
+      white-space: nowrap;
+      word-break: break-all;
+      overflow: hidden;
+    }
+    overflow: hidden;
+    max-width: 100%;
+    padding: 0 4px 0;
   }
 
   &.play {
@@ -71,16 +94,31 @@ td {
     flex-flow: row wrap;
     justify-content: space-evenly;
 
-    & > *:nth-child(2){
-        display: none;
+    & > *:nth-child(2) {
+      display: none;
     }
-    @media (min-width: $device-m__min-width){
-        & > *:nth-child(2){
-            display: inline-flex;
-        }
+    @media (min-width: $device-m__min-width) {
+      & > *:nth-child(2) {
+        display: inline-flex;
+      }
     }
   }
+  &.like-dislike {
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: space-evenly;
 
+    .icon__like, .icon__dislike {
+      width: 24px;
+      height: 24px;
+    }
+    .icon__like {
+      margin-bottom: 3px;
+    }
+    .icon__dislike {
+      margin-top: 3px;
+    }
+  }
   &.others {
     .icon__others {
       width: 32px;

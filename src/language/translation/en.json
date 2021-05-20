@@ -43,6 +43,8 @@
   "Main.QuizHome_ShortCuts_PlayMyQuiz": "Play My Quiz",
   "Main.QuizHome_ShortCuts_CreateQuiz": "Create Quiz",
 
+  "Main.QuizHome_QuizDisplay_PublicQuiz": "Public Quiz",
+  "Main.QuizHome_QuizDisplay_MyQuiz": "My Quiz",
   "Main.QuizHome_QuizDisplay_MonthsAgo": "month(s) ago",
   "Main.QuizHome_QuizDisplay_DaysAgo": "day(s) ago",
   "Main.QuizHome_QuizDisplay_HoursAgo": "hour(s) ago",
@@ -116,23 +118,21 @@
   
   "Notification.PlayQuiz_Correct__S": "Correct!",
   "Notification.PlayQuiz_Wrong__W": "That's not the answer",
-  "Notification.PlayQuiz_NoPublicQuiz__E": "There is no public quiz",
-  "Notification.PlayQuiz_NoMyQuiz__E": "That's no my quiz",
+  "Notification.PlayQuiz_NoQuiz__E": "There is no quiz",
+  "Notification.ShowAnswerOrMark_NotValid__E": "There is a nonvalid move",
+
+  "Notification.EditQuiz_NotAuthor__E": "You are not author of this quiz",
 
   "Notification.CreateQuiz_Succeeded__S": "Successfully created the quiz!",
   "Notification.CreateQuiz_UnknownError__E": "Failed to create the quiz",
   "Notification.CreateQuiz_NoAnswer__E": "You should set anwser",
   "Notification.CreateQuiz_NoFenStart__E": "You should set starting position",
-
-  "Notification.EditQuiz_NotAuthor__E": "You are not author of this quiz",
-
-  "Notification.ShowAnswerOrMark_NotValid__E": "There is a nonvalid move",
-
-  "Notification.GetFocusListQuiz_UnknownError__E": "Failed to get the quizes",
+  "Notification.GetQuizList_UnknownError__E": "Failed to get the quizes",
   "Notification.GetQuiz_UnknownError__E": "Failed to get the quiz",
   "Notification.GetQuiz_NoQuiz__E": "The quiz doesn't exist",
   "Notification.UpdateQuiz_Succeeded__S": "Successfully updated the quiz!",
   "Notification.UpdateQuiz_UnknownError__E": "Failed to update the quiz",
   "Notification.DeleteQuiz_Succeeded__S": "Successfully deleted the quiz!",
-  "Notification.DeleteQuiz_UnknownError__E": "Failed to delete the quiz"
+  "Notification.DeleteQuiz_UnknownError__E": "Failed to delete the quiz",
+  "Notification.LikeDislikeQuiz_UnknownError__E": "Failed to like/dislike the quiz"
 }

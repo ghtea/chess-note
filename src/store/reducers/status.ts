@@ -15,9 +15,7 @@ const stateInitial = {
 
   data: {
     quiz: {
-      publicQuizList: { tried: false, loading: false, ready: false },
-      myQuizList: { tried: false, loading: false, ready: false },
-
+      list: { tried: false, loading: false, ready: false },
       focusing: { tried: false, loading: false, ready: false },
     },
   },

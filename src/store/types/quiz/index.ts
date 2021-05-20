@@ -6,7 +6,7 @@ export type MemberReaction = {
 };
 
 export type Quiz = {
-  id: string | null;
+  id: string;
   name: string;
   nextTurn: 'white' | 'black';
   startingFen: string;
@@ -20,6 +20,7 @@ export type Quiz = {
   updatedDate?: number;
 };
 
+
 // export type ModeQuiz = 'playing' | 'solved' | 'creating' | 'editing';
 
 export const gqlQuizString = `{
@@ -32,7 +33,10 @@ export const gqlQuizString = `{
   authorId
   authorName
   isPublic
-  memberReaction
+  memberReaction {
+    likedMemberIdList
+    dislikedMemberIdList
+  }
   createdDate
   updatedDate
 }`;
@@ -48,10 +52,10 @@ export type QuizState = {
   sanSeries: string[];
 };
 
-export type DisplayMode = 'public-quiz' | 'my-quiz';
 
+export type FilteringOption = 'my-quiz' | 'public-quiz' | 'i-liked' | 'i-disliked' | 'not-decided'
 export type SortingOption = {
-  property: string; // 'points' | 'goals_diff' | 'goals_against' | 'goals_scored',
+  property: 'name-id' | 'createdDate' | 'triedDate' | 'author' | 'likes';
   direction: 'ascending' | 'descending';
   isActive: boolean;
 };

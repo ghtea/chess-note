@@ -11,7 +11,7 @@ function* focusQuiz(action: actions.quiz.type__FOCUS_QUIZ) {
   const { quiz, situation: newSituation } = action.payload;
 
   const quizDefault: types.quiz.Quiz = {
-    id: null,
+    id: '',
     name: '',
 
     nextTurn: 'white',
