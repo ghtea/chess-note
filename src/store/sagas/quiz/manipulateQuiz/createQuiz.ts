@@ -25,7 +25,7 @@ const requestCreateQuiz = (argument: Record<string, unknown>) => {
 };
 
 // directly access to sportdataAPI -> update firebase (get document on return)
-function* createQuiz(action: actions.quiz.type__CREATE_QUIZ) {
+export default function* createQuiz(action: actions.quiz.type__CREATE_QUIZ) {
   const {
     name,
     nextTurn,
@@ -60,8 +60,8 @@ function* createQuiz(action: actions.quiz.type__CREATE_QUIZ) {
         isPublic,
       };
 
-      //const data: unknown =  yield call( requestCreateQuiz, argument );
-      const res: ApolloQueryResult<any> = yield call(requestCreateQuiz, argument); // eslint-disable-line @typescript-eslint/no-explicit-any
+      type CreateQuizData = Record<'createQuiz', types.quiz.Quiz>;
+      const res: ApolloQueryResult<CreateQuizData> = yield call(requestCreateQuiz, argument); // eslint-disable-line @typescript-eslint/no-explicit-any
 
       yield put(
         actions.notification.return__ADD_DELETE_BANNER({
@@ -71,8 +71,8 @@ function* createQuiz(action: actions.quiz.type__CREATE_QUIZ) {
 
       // console.log(res)
 
-      const quizFromRes = res.data?.createQuiz as types.quiz.Quiz | undefined;
-      if (quizFromRes?.id) {
+      const quizFromRes = res.data?.createQuiz;
+      if (quizFromRes.id) {
         history.push(`/quiz/edit/${quizFromRes.id}`);
       }
     } catch (error) {
@@ -86,5 +86,3 @@ function* createQuiz(action: actions.quiz.type__CREATE_QUIZ) {
     }
   } // else
 }
-
-export default createQuiz;

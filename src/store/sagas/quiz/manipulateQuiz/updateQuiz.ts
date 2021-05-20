@@ -62,8 +62,8 @@ export default function* updateQuiz(action: actions.quiz.type__UPDATE_QUIZ) {
         isPublic,
       };
 
-      //const data: unknown =  yield call( requestUpdateQuiz, argument );
-      const res: ApolloQueryResult<any> = yield call(requestUpdateQuiz, argument); // eslint-disable-line @typescript-eslint/no-explicit-any
+      type UpdateQuizData = Record<'updateQuiz', types.quiz.Quiz>;
+      const res: ApolloQueryResult<UpdateQuizData> = yield call(requestUpdateQuiz, argument); // eslint-disable-line @typescript-eslint/no-explicit-any
 
       yield put(
         actions.notification.return__ADD_DELETE_BANNER({
@@ -73,7 +73,7 @@ export default function* updateQuiz(action: actions.quiz.type__UPDATE_QUIZ) {
 
       // console.log(res)
 
-      const quizFromRes = res.data?.updateQuiz as types.quiz.Quiz | undefined;
+      const quizFromRes = res.data.updateQuiz;
       if (quizFromRes?.id) {
         history.push(`/quiz/edit/${quizFromRes.id}`);
       }

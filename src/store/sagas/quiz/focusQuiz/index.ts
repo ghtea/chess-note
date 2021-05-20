@@ -22,6 +22,10 @@ function* focusQuiz(action: actions.quiz.type__FOCUS_QUIZ) {
     authorId: '',
     authorName: '',
     isPublic: true,
+    memberReaction: {
+      likedMemberIdList: [],
+      dislikedMemberIdList: [],
+    }
   };
 
   const focusingQuizData: types.quiz.Quiz = quiz || quizDefault;

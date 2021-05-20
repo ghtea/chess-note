@@ -28,6 +28,11 @@ const stateInitial = {
       authorName: '',
 
       isPublic: true,
+      memberReaction: {
+        likedMemberIdList: [],
+        dislikedMemberIdList: [],
+      },
+
     } as types.quiz.Quiz,
   },
 

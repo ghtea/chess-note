@@ -1,5 +1,9 @@
 import { ChessMoveNode } from '../others/ChessMoveTree';
 
+export type MemberReaction = {
+  likedMemberIdList: string[];
+  dislikedMemberIdList: string[];
+};
 
 export type Quiz = {
   id: string | null;
@@ -11,6 +15,7 @@ export type Quiz = {
   authorId: string;
   authorName: string;
   isPublic: boolean;
+  memberReaction: MemberReaction;
   createdDate?: number;
   updatedDate?: number;
 };
@@ -27,6 +32,7 @@ export const gqlQuizString = `{
   authorId
   authorName
   isPublic
+  memberReaction
   createdDate
   updatedDate
 }`;

@@ -1,21 +1,9 @@
 @import 'styles/every.scss';
 
 .root {
-  @include color-each-theme( background-color, basic__0);
+  @include color-each-theme(background-color, basic__0);
   @include frame-each-theme(border, 1px, solid, basic__1);
   @include frame-each-theme(border-top, 0px, none, basic__1);
-
-  
-  // width: 80vw;
-  // height: 80vw;
-  // min-width: $device-xs__min-width;
-  // max-width: 700px;
-  // //max-width: $device-m__min-width;
-  // min-height: $device-xs__min-width;
-  // max-height: 700px;
-  // //max-height: $device-m__min-width;
-
-  // margin-bottom: 40px;
 
   display: flex;
   flex-wrap: nowrap;
@@ -30,13 +18,12 @@
     justify-content: center;
     align-items: center;
   }
-  
-  :global(.icon){
-    @include color-each-theme( color, basic__6);
-  }
-  
 
-  .back  {
+  :global(.icon) {
+    @include color-each-theme(color, basic__6);
+  }
+
+  .back {
     .icon__back-to-start {
       width: 26px;
       height: 26px;
@@ -48,11 +35,12 @@
     }
   }
 
+  .give-up {
+  }
 
   .answers-marks {
-
     button {
-      & > *:nth-child(n+2){
+      & > *:nth-child(n + 2) {
         margin-left: 5px;
       }
     }
@@ -66,7 +54,13 @@
       width: 24px;
       height: 24px;
     }
+  }
 
+  .exit {
+    .icon__next-quiz {
+      width: 28px;
+      height: 28px;
+    }
   }
 
   .others {
@@ -75,5 +69,4 @@
       height: 30px;
     }
   }
-  
 }

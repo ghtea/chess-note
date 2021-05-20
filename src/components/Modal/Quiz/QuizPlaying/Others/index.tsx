@@ -18,16 +18,20 @@ import convertCase from 'tools/vanilla/convertCase';
 import IconAngle from 'svgs/basic/IconAngle';
 
 import styles from './index.module.scss';
+import stylesQC from '../../common/index.module.scss';
 import stylesModal from 'components/Modal/index.module.scss';
 
-export default function QuizHomeOthers() {
+type PropsQuizPlayingOthers = {
+  top: number;
+};
+
+function QuizPlayingOthers({ top }: PropsQuizPlayingOthers) {
   const dispatch = useDispatch();
 
   const userId = useSelector((state: RootState) => state.auth.user?.id);
 
-  const publicQuizList = useSelector((state: RootState) => state.quiz.data.publicQuizList);
-  const myQuizList = useSelector((state: RootState) => state.quiz.data.myQuizList);
-  const displayState = useSelector((state: RootState) => state.quiz.state.display);
+  const focusingQuizData = useSelector((state: RootState) => state.quiz.data.focusing);
+  const focusingQuizState = useSelector((state: RootState) => state.quiz.state.focusing);
 
   const refModal = useRef<HTMLDivElement>(null);
   const onClick_Window = useCallback(
@@ -35,7 +39,7 @@ export default function QuizHomeOthers() {
       if (!refModal.current?.contains(event.target as Node)) {
         dispatch(
           actions.appearance.return__REPLACE({
-            keyList: ['showing', 'modal', convertCase('QuizHomeOthers', 'camel')],
+            keyList: ['showing', 'modal', convertCase('QuizPlayingOthers', 'camel')],
             replacement: false,
           }),
         );
@@ -52,52 +56,43 @@ export default function QuizHomeOthers() {
   const onClick_AnyMainButton = useCallback(
     async (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
       const value = e.currentTarget.value;
-
       if (value === 'edit-this-quiz') {
-        const quizToEdit = (displayState.mode === 'public-quiz' ? publicQuizList : myQuizList).find(
-          (e) => e.id === displayState.clickedQuizId,
-        );
         dispatch(
           actions.quiz.return__FOCUS_QUIZ({
-            quiz: quizToEdit,
+            quiz: focusingQuizData,
             situation: 'editing',
           }),
         );
-      } else if (value === 'delete-this-quiz') {
-        dispatch(
-          actions.quiz.return__DELETE_QUIZ({
-            id: displayState.clickedQuizId,
-            userId: userId as string,
-          }),
-        );
       }
-      // close modal after click main buttons
       dispatch(
         actions.appearance.return__REPLACE({
-          keyList: ['showing', 'modal', 'quizHomeOthers'],
+          keyList: ['showing', 'modal', 'quizPlayingOthers'],
           replacement: false,
         }),
       );
     },
-    [publicQuizList, myQuizList, displayState, userId],
+    [focusingQuizState, focusingQuizData],
   );
 
   const isShowingManipulateButton = useMemo(() => {
-    const clickedQuiz = (displayState.mode === 'public-quiz' ? publicQuizList : myQuizList).find(
-      (e) => e.id === displayState.clickedQuizId,
-    );
-    if (userId === clickedQuiz?.authorId) {
+    if (userId === focusingQuizData.authorId) {
       return true;
     } else {
       return false;
     }
-  }, [userId, displayState, publicQuizList, myQuizList]);
+  }, [userId, focusingQuizData.authorId]);
 
   return (
-    <div className={`${styles['root']} ${stylesModal['root']}`}>
+    <div className={`${styles['root']} ${stylesQC['root']} ${stylesModal['root']}`}>
       <div className={`${stylesModal['outside']}`} aria-label="Outside Save" />
 
-      <div className={`${stylesModal['modal']}`} role="dialog" aria-label="Others" ref={refModal}>
+      <div
+        className={`${stylesModal['modal']} ${stylesQC['modal']} ${stylesQC['modal']}`}
+        role="dialog"
+        aria-label="Others"
+        ref={refModal}
+        style={{ top: top }}
+      >
         <div className={`${stylesModal['content']}`}>
           {isShowingManipulateButton && (
             <>
@@ -111,17 +106,6 @@ export default function QuizHomeOthers() {
                   <FormattedMessage id={'Global.Edit'} />
                 </button>
               </div>
-
-              <div className={`${stylesModal['content__section']}`}>
-                <button
-                  type="button"
-                  value="delete-this-quiz"
-                  className={`${styles['button__delete-this-quiz']} ${stylesModal['button__basic']}`}
-                  onClick={onClick_AnyMainButton}
-                >
-                  <FormattedMessage id={'Global.Delete'} />
-                </button>
-              </div>
             </>
           )}
         </div>
@@ -129,3 +113,7 @@ export default function QuizHomeOthers() {
     </div>
   );
 }
+
+QuizPlayingOthers.defaultProps = {};
+
+export default QuizPlayingOthers;

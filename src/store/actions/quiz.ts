@@ -109,6 +109,7 @@ export const return__GET_QUIZ_LIST_DICT = (payload: Payload__GET_QUIZ_LIST_DICT)
 };
 export type type__GET_QUIZ_LIST_DICT = ReturnType<typeof return__GET_QUIZ_LIST_DICT>;
 
+// manipulate Quiz
 export const name__CREATE_QUIZ = 'quiz/CREATE_QUIZ';
 type Payload__CREATE_QUIZ = {
   name?: string;
@@ -145,6 +146,20 @@ export const return__UPDATE_QUIZ = (payload: Payload__UPDATE_QUIZ) => {
   };
 };
 export type type__UPDATE_QUIZ = ReturnType<typeof return__UPDATE_QUIZ>;
+
+
+export const name__DELETE_QUIZ = 'quiz/DELETE_QUIZ';
+type Payload__DELETE_QUIZ = {
+  id: string;
+  userId: string;
+};
+export const return__DELETE_QUIZ = (payload: Payload__DELETE_QUIZ) => {
+  return {
+    type: name__DELETE_QUIZ,
+    payload: payload,
+  };
+};
+export type type__DELETE_QUIZ = ReturnType<typeof return__DELETE_QUIZ>;
 
 
 // play

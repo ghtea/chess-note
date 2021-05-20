@@ -28,6 +28,7 @@ type PropsQuizEditingOthers = {
 function QuizEditingOthers({ top }: PropsQuizEditingOthers) {
   const dispatch = useDispatch();
 
+  const focusingQuizData = useSelector((state: RootState) => state.quiz.data.focusing);
   const focusingQuizState = useSelector((state: RootState) => state.quiz.state.focusing);
 
   const refModal = useRef<HTMLDivElement>(null);
@@ -97,22 +98,36 @@ function QuizEditingOthers({ top }: PropsQuizEditingOthers) {
           );
         }
       }
+      else if (value === 'play-this-quiz') {
+        dispatch(
+          actions.quiz.return__FOCUS_QUIZ({
+            quiz: focusingQuizData,
+            situation: 'playing-trying',
+          }),
+        );
+      }
+      dispatch(
+        actions.appearance.return__REPLACE({
+          keyList: ['showing', 'modal', 'quizEditingOthers'],
+          replacement: false,
+        }),
+      );
     },
-    [focusingQuizState, focusingChess],
+    [focusingQuizState, focusingQuizData, focusingChess],
   );
 
   return (
-    <div className={`${stylesQC['root']} ${stylesQC['root']} ${stylesModal['root']}`}>
+    <div className={`${styles['root']} ${stylesQC['root']} ${stylesModal['root']}`}>
       <div className={`${stylesModal['outside']}`} aria-label="Outside Save" />
 
       <div
         className={`${stylesModal['modal']} ${stylesQC['modal']} ${stylesQC['modal']}`}
         role="dialog"
-        aria-labelledby="Heading_Save"
+        aria-label="Others"
         ref={refModal}
         style={{ top: top }}
       >
-        <div className={`${stylesModal['content']} ${stylesQC['content']} ${stylesQC['content']}`}>
+        <div className={`${stylesModal['content']}`}>
           <div className={`${stylesModal['content__section']}`}>
             <button
               type="button"
@@ -122,6 +137,17 @@ function QuizEditingOthers({ top }: PropsQuizEditingOthers) {
             >
               {' '}
               <FormattedMessage id={`Modal.QuizEditingOthers_UseFen`} />{' '}
+            </button>
+          </div>
+
+          <div className={`${stylesModal['content__section']}`}>
+            <button
+              type="button"
+              value="play-this-quiz"
+              className={`${styles['button__play-this-quiz']} ${stylesModal['button__basic']}`}
+              onClick={onClick_AnyMainButton}
+            >
+              <FormattedMessage id={'Global.Play'} />
             </button>
           </div>
         </div>

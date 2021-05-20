@@ -15,6 +15,7 @@ import * as actions from 'store/actions';
 import * as types from 'store/types';
 
 import styles from './index.module.scss';
+import stylesQEToolBar from '../../QuizEditing/ToolBar/index.module.scss';
 import IconPaste from 'svgs/basic/IconSignIn';
 import IconOthers from 'svgs/basic/IconThreeDots';
 
@@ -73,6 +74,13 @@ export default function ToolBarQP() {
       );
     } else if (value === 'next-quiz') {
       dispatch(actions.quiz.return__PLAY_NEXT_QUIZ());
+    } else if (value === 'others') {
+      dispatch(
+        actions.appearance.return__REPLACE({
+          keyList: ['showing', 'modal', 'quizPlayingOthers'],
+          replacement: true,
+        }),
+      );
     }
   }, []);
 
@@ -91,13 +99,13 @@ export default function ToolBarQP() {
 
   return (
     <div
-      className={`${styles['root']}`}
+      className={`${styles['root']} ${stylesQEToolBar['root']}`}
       style={{
         width: lengthChessBoard,
         height: heightToolbar,
       }}
     >
-      <div className={`${styles['back']}`}>
+      <div className={`${stylesQEToolBar['back']}`}>
         <button
           type="button"
           value="back-to-start"
@@ -105,7 +113,7 @@ export default function ToolBarQP() {
           onClick={onClick_Main}
         >
           <IconBackToStart
-            className={`${styles['icon__back-to-start']}`}
+            className={`${stylesQEToolBar['icon__back-to-start']}`}
             kind="regular"
             direction="left"
           />
@@ -118,20 +126,20 @@ export default function ToolBarQP() {
           onClick={onClick_Main}
         >
           <IconBackOneMove
-            className={`${styles['icon__back-to-previous']}`}
+            className={`${stylesQEToolBar['icon__back-to-previous']}`}
             kind="regular"
             direction="left"
           />
         </button>
       </div>
 
-      <div className={`${styles['give-up']}`}>
+      <div className={`${stylesQEToolBar['give-up']}`}>
         <button type="button" value="give-up" aria-label="Give Up" onClick={onClick_Main}>
           <FormattedMessage id={'Main.QuizPlay_ToolBar_GiveUp'} />
         </button>
       </div>
 
-      <div className={`${styles['answers-marks']}`}>
+      <div className={`${stylesQEToolBar['answers-marks']}`}>
         {(situation === 'playing-solved' || situation === 'playing-failed') && (
           <>
             <button
@@ -141,7 +149,7 @@ export default function ToolBarQP() {
               onClick={onClick_Main}
             >
               <IconAnswer
-                className={`${styles['icon__answer']}`}
+                className={`${stylesQEToolBar['icon__answer']}`}
                 kind={focusingQuizData.correctSanSeriesList.length === 0 ? 'light' : 'solid'}
               />
               <span> {focusingQuizData.correctSanSeriesList.length} </span>
@@ -154,7 +162,7 @@ export default function ToolBarQP() {
               onClick={onClick_Main}
             >
               <IconMark
-                className={`${styles['icon__mark']}`}
+                className={`${stylesQEToolBar['icon__mark']}`}
                 kind={focusingQuizData.markedSanSeriesList.length === 0 ? 'light' : 'solid'}
               />
               <span> {focusingQuizData.markedSanSeriesList.length} </span>
@@ -163,18 +171,22 @@ export default function ToolBarQP() {
         )}
       </div>
 
-      <div className={`${styles['...']}`}></div>
-
-      <div className={`${styles['exit']}`}>
+      <div className={`${stylesQEToolBar['exit']}`}>
         {isShowingNextButton && (
           <button type="button" value="next-quiz" aria-label="Next quiz" onClick={onClick_Main}>
             <IconArrowInSquare
-              className={`${styles['icon__next-quiz']}`}
+              className={`${stylesQEToolBar['icon__next-quiz']}`}
               kind="solid"
               direction="right"
             />
           </button>
         )}
+      </div>
+
+      <div className={`${stylesQEToolBar['others']}`}>
+        <button type="button" value="others" aria-label="others" onClick={onClick_Main}>
+          <IconOthers className={`${stylesQEToolBar['icon__others']}`} kind="regular" />
+        </button>
       </div>
     </div>
   );

@@ -32,7 +32,9 @@ const stateInitial = {
       quizEditingSet: false,
       quizEditingUpload: false,
       quizEditingOthers: false,
-      
+
+      quizPlayingOthers: false,
+
       quizManageAnswers: false,
       quizManageMarks: false,
 

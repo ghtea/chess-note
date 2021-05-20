@@ -11,6 +11,7 @@ import QuizEditingUpload from './Quiz/QuizEditing/Upload';
 import QuizEditingSet from './Quiz/QuizEditing/Set';
 import QuizEditingManageAnswersMarks from './Quiz/common/ManageAnswersMarks';
 import QuizEditingOthers from './Quiz/QuizEditing/Others';
+import QuizPlayingOthers from './Quiz/QuizPlaying/Others';
 
 // import styles from './Modal.module.scss';
 
@@ -39,6 +40,8 @@ function Modal() {
       {showing.quizEditingUpload && <QuizEditingUpload top={topModalQuiz} />}
       {showing.quizEditingSet && <QuizEditingSet top={topModalQuiz} />}
       {showing.quizEditingOthers && <QuizEditingOthers top={topModalQuiz} />}
+
+      {showing.quizPlayingOthers && <QuizPlayingOthers top={topModalQuiz} />}
 
       {showing.quizManageAnswers && (
         <QuizEditingManageAnswersMarks top={topModalQuiz} kind="answer" />
