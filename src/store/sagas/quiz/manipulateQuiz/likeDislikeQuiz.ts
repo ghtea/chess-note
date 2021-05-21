@@ -82,6 +82,11 @@ function* applyQuizMemberReactionChange(
   dislike: boolean,
   userId: string,
 ) {
+  const situation: types.quiz.Situation = yield select(
+    (state: RootState) => state.quiz.state.situation,
+  );
+
+  // quizList
   const quizList: types.quiz.Quiz[] = yield select((state: RootState) => state.quiz.data.list);
 
   const quizToEdit = quizList.find((e) => e.id === quizId);
@@ -117,5 +122,42 @@ function* applyQuizMemberReactionChange(
       replacement: newQuizList,
     }),
   );
+
+
+  // focusingQuiz
+  const focusingQuiz: types.quiz.Quiz = yield select((state: RootState) => state.quiz.data.focusing);
+  if (
+    situation === 'editing' ||
+    situation === 'playing-trying' ||
+    situation === 'playing-solved' ||
+    situation === 'playing-failed'
+  ){
+    const newMemberReaction: types.quiz.MemberReaction = { ...focusingQuiz.memberReaction };
+
+    newMemberReaction.likedMemberIdList = newMemberReaction.likedMemberIdList.filter(
+      (e) => e !== userId,
+    );
+    newMemberReaction.dislikedMemberIdList = newMemberReaction.dislikedMemberIdList.filter(
+      (e) => e !== userId,
+    );
+    if (like) {
+      newMemberReaction.likedMemberIdList = newMemberReaction.likedMemberIdList.concat([userId]);
+    }
+    if (dislike) {
+      newMemberReaction.dislikedMemberIdList = newMemberReaction.dislikedMemberIdList.concat([
+        userId,
+      ]);
+    }
+
+    yield put(
+      actions.quiz.return__REPLACE({
+        keyList: ['data', 'focusing'],
+        replacement: {
+          ...focusingQuiz,
+          memberReaction: newMemberReaction,
+        },
+      }),
+    );
+    }
   // 다음으로 만약 현재 포커스 중인게 있다면 거기에 (단, creating 인 상태면 적용안한다)
 }

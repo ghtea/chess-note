@@ -1,33 +1,94 @@
 @import 'styles/every.scss';
 
 .root {
-    display: flex;
-}
+  .profile-photo {
+    width: auto;
+    margin-top: 8px;
+    align-self: center;
 
-.photo-profile {
-    width: 50px;
-    height: 50px;
-    border-radius: 50%;
+    img {
+      object-fit: cover;
+      width: 70px;
 
-    position: absolute;
-    top: 60px;
-    right: 20px;
-}
+      height: 70px;
 
-.button__log-out {
-    width: 100%;
-    height: 36px;
+      border-radius: 50%;
+    }
+  }
+  .email {
+    .email {
+      padding: 0px 0px 0px 4px;
+      font-weight: bold;
 
-    @include frame-each-theme(border, 2px, solid, error__5);
-    @include color-each-theme(color, error__6);
+      @include color-each-theme(color, basic__6);
+    }
+  }
 
-    font-weight: bold;
-    // margin-top: 12px;
-}
+  .name {
+    .current-name {
+      width: 100%;
+      padding: 0px 0px 0px 12px;
+      font-weight: bold;
 
-.email, .name {
-    padding: 0px 0px 0px 4px;
-    font-weight: bold;
+      @include color-each-theme(color, basic__6);
+    }
 
-    @include color-each-theme(color, basic__6);
+    .start-editing-name,
+    .cancel-editing-name {
+      width: 28px;
+      height: 28px;
+      padding: 0;
+      position: absolute;
+
+      display: none;
+      &:global(.active) {
+        display: flex;
+      }
+    }
+    .start-editing-name {
+      right: 10px;
+      bottom: -2px;
+
+      :global(.icon) {
+        @include color-each-theme(color, basic__4);
+        width: 24px;
+        height: 24px;
+      }
+    }
+    .cancel-editing-name {
+      right: 10px;
+      bottom: 3px;
+
+      :global(.icon) {
+        @include color-each-theme(color, basic__4);
+        width: 24px;
+        height: 24px;
+      }
+    }
+  }
+
+  .photo {
+    .photo-profile {
+      width: 50px;
+      height: 50px;
+      border-radius: 50%;
+
+      position: absolute;
+      top: 60px;
+      right: 20px;
+    }
+  }
+
+  .log-out {
+    .button__log-out {
+      width: 100%;
+      height: 36px;
+
+      @include frame-each-theme(border, 2px, solid, error__5);
+      @include color-each-theme(color, error__6);
+
+      font-weight: bold;
+      // margin-top: 12px;
+    }
+  }
 }

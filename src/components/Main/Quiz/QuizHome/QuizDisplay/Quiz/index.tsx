@@ -20,6 +20,7 @@ import IconCheckCircle from 'svgs/basic/IconCheckCircle';
 import IconXCircle from 'svgs/basic/IconXCircle';
 import IconThumbsUp from 'svgs/basic/IconThumbsUp';
 import IconThumbsDown from 'svgs/basic/IconThumbsDown';
+import refineQuizRecord from './refineQuizRecord';
 
 // import IconSort from 'svgs/basic/IconSort';
 type PropsQuiz = {
@@ -53,13 +54,14 @@ function Quiz({ quiz }: PropsQuiz) {
           }),
         );
       } else if (value === 'like' || value === 'dislike') {
-        const dolike = (userReady && quiz.memberReaction.likedMemberIdList.includes(userId || ''));
-        const doDislike = (userReady && quiz.memberReaction.dislikedMemberIdList.includes(userId || ''));
+        const dolike = userReady && quiz.memberReaction.likedMemberIdList.includes(userId || '');
+        const doDislike =
+          userReady && quiz.memberReaction.dislikedMemberIdList.includes(userId || '');
         dispatch(
           actions.quiz.return__LIKE_DISLIKE_QUIZ({
             quizId: quiz.id as string,
-            like: value === 'like' ? !dolike : dolike, 
-            dislike: value === 'dislike' ? !doDislike : doDislike, 
+            like: value === 'like' ? !dolike : dolike,
+            dislike: value === 'dislike' ? !doDislike : doDislike,
           }),
         );
       } else if (value === 'others') {
@@ -80,46 +82,10 @@ function Quiz({ quiz }: PropsQuiz) {
     [quiz, userReady, userId],
   );
 
-  const refinedRecord = useMemo(() => {
-    const thisQuizRecord = (quizRecordList || []).find((e) => e.quizId === quiz.id);
-    if (thisQuizRecord) {
-      const result = thisQuizRecord.result;
-      const dateDiff = Date.now() - thisQuizRecord.date;
-      let dateText = '';
-      if (dateDiff >= 1000 * 60 * 60 * 24 * 30) {
-        // 한달 이상이면
-        dateText = `${Math.floor(dateDiff / (1000 * 60 * 60 * 24 * 30))} ${intl.formatMessage({
-          id: 'Main.QuizHome_QuizDisplay_MonthsAgo',
-        })}`;
-      } else if (dateDiff >= 1000 * 60 * 60 * 24) {
-        // 1일 이상이면
-        dateText = `${Math.floor(dateDiff / (1000 * 60 * 60 * 24))} ${intl.formatMessage({
-          id: 'Main.QuizHome_QuizDisplay_DaysAgo',
-        })}`;
-      } else if (dateDiff >= 1000 * 60 * 60) {
-        // 1시간 이상이면
-        dateText = `${Math.floor(dateDiff / (1000 * 60 * 60))} ${intl.formatMessage({
-          id: 'Main.QuizHome_QuizDisplay_HoursAgo',
-        })}`;
-      } else if (dateDiff >= 1000 * 60) {
-        // 1분 이상이면
-        dateText = `${Math.floor(dateDiff / (1000 * 60))} ${intl.formatMessage({
-          id: 'Main.QuizHome_QuizDisplay_MinsAgo',
-        })}`;
-      } else {
-        dateText = `${intl.formatMessage({
-          id: 'Main.QuizHome_QuizDisplay_JustBefore',
-        })}`;
-      }
-
-      return {
-        result: result,
-        dateText: dateText,
-      };
-    } else {
-      return null;
-    }
-  }, [quizRecordList, quiz.id]);
+  const refinedRecord = useMemo(
+    () => refineQuizRecord(quizRecordList, quiz.id, intl),
+    [quizRecordList, quiz.id, intl],
+  );
 
   const dateTextPair = useMemo(() => {
     const yearCurrent = new Date().getFullYear();
@@ -195,7 +161,7 @@ function Quiz({ quiz }: PropsQuiz) {
             {(myReaction.doLike || !myReaction.doDislike) && (
               <button type="button" onClick={onClick_Button} value="like" aria-label="Like">
                 <IconThumbsUp
-                  className={styles['icon__like']}
+                  className={`${styles['icon__like']} ${myReaction.doLike ? 'active' : ''}`}
                   kind={myReaction.doLike ? 'solid' : 'regular'}
                 />
               </button>
@@ -203,7 +169,7 @@ function Quiz({ quiz }: PropsQuiz) {
             {(myReaction.doDislike || !myReaction.doLike) && (
               <button type="button" onClick={onClick_Button} value="dislike" aria-label="Dislike">
                 <IconThumbsDown
-                  className={styles['icon__dislike']}
+                  className={`${styles['icon__dislike']} ${myReaction.doDislike ? 'active' : ''}`}
                   kind={myReaction.doDislike ? 'solid' : 'regular'}
                 />
               </button>

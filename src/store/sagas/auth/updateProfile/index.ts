@@ -70,11 +70,15 @@ function* updateProfile(action: actions.auth.type__UPDATE_PROFILE) {
       yield call(updateProfileFirebase, update);
       yield put(actions.auth.return__REPLACE_USER());
 
-      console.log('updateProfile worked successfully!');
+      yield put(
+        actions.notification.return__ADD_DELETE_BANNER({
+          situationCode: 'UpdateProfile_Succeeded__S',
+        }),
+      );
     }
   } catch (error) {
     console.error(error);
-    console.error('updateProfile has been failed');
+    //console.error('updateProfile has been failed');
 
     yield put(
       actions.notification.return__ADD_DELETE_BANNER({

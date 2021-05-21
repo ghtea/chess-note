@@ -59,23 +59,23 @@ function ChessBoard({ listSquare, side, page }: PropsChessBoard) {
     (state: RootState) => state.appearance.layout.document.chessBoard.toolBar.height,
   );
 
-  const lengthChessBoard = useSelector(
+  const chessBoardLength = useSelector(
     (state: RootState) => state.appearance.layout.document.chessBoard.length,
   );
 
   useEffect(() => {
     // height
-    let lengthChessBoardNew = heightWindow - heightHeader - heightStatusBar - heightToolBar;
-    if (lengthChessBoardNew > 700) {
-      lengthChessBoardNew = 700;
+    let chessBoardLengthNew = heightWindow - heightHeader - heightStatusBar - heightToolBar;
+    if (chessBoardLengthNew > 700) {
+      chessBoardLengthNew = 700;
     }
-    if (widthWindow < lengthChessBoardNew) {
-      lengthChessBoardNew = widthWindow;
+    if (widthWindow < chessBoardLengthNew) {
+      chessBoardLengthNew = widthWindow;
     }
     dispatch(
       actions.appearance.return__REPLACE({
         keyList: ['layout', 'document', 'chessBoard', 'length'],
-        replacement: lengthChessBoardNew,
+        replacement: chessBoardLengthNew,
       }),
     );
     // $device-xs__min-width: 320px;
@@ -93,7 +93,7 @@ function ChessBoard({ listSquare, side, page }: PropsChessBoard) {
         replacement: chessBoard.getBoundingClientRect().top,
       }),
     );
-  }, [lengthChessBoard]);
+  }, [chessBoardLength]);
 
   const [positionStart, setPositionStart] = useState<null | string>(null);
 
@@ -166,7 +166,7 @@ function ChessBoard({ listSquare, side, page }: PropsChessBoard) {
     <div
       className={`${styles['root']} ChessBoard`}
       onClick={(e) => onClick_Board(e, positionStart)}
-      style={{ width: lengthChessBoard, height: lengthChessBoard }}
+      style={{ width: chessBoardLength, height: chessBoardLength }}
     >
       {listSquareForCurrentSide.map((row, iRow) =>
         row.map((e, iCol) => {

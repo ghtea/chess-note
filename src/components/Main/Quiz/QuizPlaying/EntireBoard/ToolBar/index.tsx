@@ -15,7 +15,7 @@ import * as actions from 'store/actions';
 import * as types from 'store/types';
 
 import styles from './index.module.scss';
-import stylesQEToolBar from '../../QuizEditing/ToolBar/index.module.scss';
+import stylesQEToolBar from 'components/Main/Quiz/QuizEditing/ToolBar/index.module.scss';
 import IconPaste from 'svgs/basic/IconSignIn';
 import IconOthers from 'svgs/basic/IconThreeDots';
 
@@ -32,10 +32,10 @@ import IconQuestionSquare from 'svgs/basic/IconQuestionSquare';
 export default function ToolBarQP() {
   const dispatch = useDispatch();
 
-  const heightToolbar = useSelector(
+  const toolbarHeight = useSelector(
     (state: RootState) => state.appearance.layout.document.chessBoard.toolBar.height,
   );
-  const lengthChessBoard = useSelector(
+  const chessBoardLength = useSelector(
     (state: RootState) => state.appearance.layout.document.chessBoard.length,
   );
 
@@ -101,8 +101,8 @@ export default function ToolBarQP() {
     <div
       className={`${styles['root']} ${stylesQEToolBar['root']}`}
       style={{
-        width: lengthChessBoard,
-        height: heightToolbar,
+        width: chessBoardLength,
+        height: toolbarHeight,
       }}
     >
       <div className={`${stylesQEToolBar['back']}`}>

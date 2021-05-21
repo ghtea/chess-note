@@ -58,6 +58,12 @@
   "Main.QuizPlay_StatusBar_Failed": "틀렸습니다",
   "Main.QuizPlay_ToolBar_GiveUp": "포기하기",
 
+  "Main.ReactionDisplay_PeopleLike": "명이 좋아합니다",
+  "Main.ReactionDisplay_Solved": "성공",
+  "Main.ReactionDisplay_Failed": "실패",
+  "Main.ReactionDisplay_NotTried": "시도한적 없음",
+
+
   "Modal.QuizEditingUpload_IsPublic": "공개 여부",
   "Modal.QuizEditingUpload_Public": "공개",
   "Modal.QuizEditingUpload_Private": "비공개",
@@ -115,6 +121,7 @@
   "Notification.SignUp_PasswordsDifferent__E": "두 비밀번호가 서로 다릅니다",
   "Notification.SignUp_WeakPassword__E": "비밀번호는 6글자 이상이어야 합니다",
 
+  "Notification.UpdateProfile_Succeeded__S": "성공적으로 프로필를 수정했습니다!",
   "Notification.GetMember_UnknownError__E": "회원 정보를 가져오는 과정에서 알수 없는 에러가 발생했습니다",
   "Notification.UpdateMember_UnknownError__E": "회원 정보를 업데이트하는 과정에서 알수 없는 에러가 발생했습니다",
 

@@ -30,10 +30,10 @@ function ToolBarQE() {
 
   const situation = useSelector((state: RootState) => state.quiz.state.situation);
 
-  const heightToolbar = useSelector(
+  const toolbarHeight = useSelector(
     (state: RootState) => state.appearance.layout.document.chessBoard.toolBar.height,
   );
-  const lengthChessBoard = useSelector(
+  const chessBoardLength = useSelector(
     (state: RootState) => state.appearance.layout.document.chessBoard.length,
   );
   //const focusingQuizState = useSelector((state: RootState)=>state.quiz.state.focusing);
@@ -100,8 +100,8 @@ function ToolBarQE() {
     <div
       className={`${styles['root']}`}
       style={{
-        width: lengthChessBoard,
-        height: heightToolbar,
+        width: chessBoardLength,
+        height: toolbarHeight,
       }}
     >
       <div className={`${styles['back']}`}>

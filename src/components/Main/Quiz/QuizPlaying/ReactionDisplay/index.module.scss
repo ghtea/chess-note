@@ -1,0 +1,81 @@
+@import 'styles/every.scss';
+
+.root {
+  //width: auto;
+  max-width: 360px;
+
+  display: flex;
+  // flex-shrink: 1;
+  // flex-grow: 1;
+
+  flex-flow: row wrap;
+  justify-content: center;
+  align-items: stretch;
+
+  margin: 10px;
+
+  & > * {
+    width: 160px;
+    // width: 100%;
+    // min-width: 160px;
+    // max-width: 300px;
+
+    @include color-each-theme(background-color, basic__0);
+    @include frame-each-theme(border, 1px, solid, basic__1);
+
+    border-radius: 5px;
+    margin: 10px;
+    padding: 8px;
+  }
+
+  .like-dislike {
+    .button-pair {
+      display: flex;
+      flex-flow: row wrap;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .icon__like,
+    .icon__dislike {
+      width: 22px;
+      height: 22px;
+    }
+
+    .people-like {
+      font-size: 0.9rem;
+    }
+  }
+
+  .my-record {
+    font-size: 1rem;
+    display: flex;
+    flex-flow: column wrap;
+    justify-content: space-evenly;
+
+    .result {
+      display: flex;
+      flex-flow: row nowrap;
+      justify-content: space-evenly;
+      align-items: center;
+
+      & > *:nth-child(2) {
+        margin-left: 10px;
+      }
+
+      .icon__solved {
+        width: 24px;
+        height: 24px;
+        @include color-each-theme(color, success__4);
+      }
+      .icon__failed {
+        width: 24px;
+        height: 224px0px;
+        @include color-each-theme(color, error__4);
+      }
+    }
+
+    .date {
+    }
+  }
+}

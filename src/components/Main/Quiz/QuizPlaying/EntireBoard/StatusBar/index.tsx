@@ -25,7 +25,7 @@ export default function StatusBarQP() {
   const heightStatusBar = useSelector(
     (state: RootState) => state.appearance.layout.document.chessBoard.statusBar.height,
   );
-  const lengthChessBoard = useSelector(
+  const chessBoardLength = useSelector(
     (state: RootState) => state.appearance.layout.document.chessBoard.length,
   );
 
@@ -46,7 +46,7 @@ export default function StatusBarQP() {
     <div
       className={`${styles['root']}`}
       style={{
-        width: lengthChessBoard,
+        width: chessBoardLength,
         height: heightStatusBar,
       }}
     >

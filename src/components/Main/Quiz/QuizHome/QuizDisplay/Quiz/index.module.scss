@@ -114,9 +114,15 @@ td {
     }
     .icon__like {
       margin-bottom: 3px;
+      &:global(.active){
+        @include color-each-theme(color, success__3);
+      }
     }
     .icon__dislike {
       margin-top: 3px;
+      &:global(.active){
+        @include color-each-theme(color, error__3);
+      }
     }
   }
   &.others {

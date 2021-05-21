@@ -64,7 +64,7 @@ function Quiz() {
         <QuizEditing />
       </Route>
 
-      <Route path="/quiz/edit">
+      <Route path="/quiz/edit/:quizId">
         <QuizEditing />
       </Route>
 

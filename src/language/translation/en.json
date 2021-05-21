@@ -64,6 +64,11 @@
   "Main.QuizPlay_StatusBar_Failed": "Failed",
   "Main.QuizPlay_ToolBar_GiveUp": "Give Up",
 
+  "Main.ReactionDisplay_PeopleLike": "people like",
+  "Main.ReactionDisplay_Solved": "solved",
+  "Main.ReactionDisplay_Failed": "failed",
+  "Main.ReactionDisplay_NotTried": "not tried",
+  
   "Modal.QuizEditingUpload_IsPublic": "Is Public",
   "Modal.QuizEditingUpload_Public": "Public",
   "Modal.QuizEditingUpload_Private": "Private",
@@ -113,6 +118,7 @@
   "Notification.SignUp_PasswordsDifferent__E": "The two passwords are different",
   "Notification.SignUp_WeakPassword__E": "Password should be at least 6 characters long",
 
+  "Notification.UpdateProfile_Succeeded__S": "Successfully updated the profile!",
   "Notification.GetMember_UnknownError__E": "An unknown error has occurred while retrieving member information",
   "Notification.UpdateMember_UnknownError__E": "An unknown error has occurred while updating member information",
 

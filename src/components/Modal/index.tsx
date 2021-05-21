@@ -21,14 +21,14 @@ function Modal() {
   const topChessBoard = useSelector(
     (state: RootState) => state.appearance.layout.document.chessBoard.top,
   );
-  const lengthChessBoard = useSelector(
+  const chessBoardLength = useSelector(
     (state: RootState) => state.appearance.layout.document.chessBoard.length,
   );
 
   const topModalQuiz = useMemo(() => {
     // 우선 위끝을 체스판 아래끝에 맞추고, 나중에 css 에서 modal 크기 고려해서 위로 좀더 이동시킨다
-    return topChessBoard + 1 * lengthChessBoard;
-  }, [topChessBoard, lengthChessBoard]);
+    return topChessBoard + 1 * chessBoardLength;
+  }, [topChessBoard, chessBoardLength]);
 
   return (
     <>
