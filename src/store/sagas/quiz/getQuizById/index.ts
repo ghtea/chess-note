@@ -85,7 +85,7 @@ function* getQuizById(action: actions.quiz.type__GET_QUIZ_BY_ID) {
       history.push('/quiz');
       yield put(
         actions.notification.return__ADD_DELETE_BANNER({
-          codeSituation: 'GetQuiz_NoQuiz__E',
+          situationCode: 'GetQuiz_NoQuiz__E',
         }),
       );
 
@@ -106,7 +106,7 @@ function* getQuizById(action: actions.quiz.type__GET_QUIZ_BY_ID) {
 
     yield put(
       actions.notification.return__ADD_DELETE_BANNER({
-        codeSituation: 'GetQuiz_UnknownError__E',
+        situationCode: 'GetQuiz_UnknownError__E',
       }),
     );
 

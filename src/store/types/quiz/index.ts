@@ -42,18 +42,18 @@ export const gqlQuizString = `{
 }`;
 
 
-
+export const defaultFen = 'rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1';
 
 export type Situation = null | 'creating' | 'editing' | 'playing-trying' | 'playing-solved' | 'playing-failed';
 
 export type QuizState = {
-  fen: string | null;
+  fen: string;
   turn: 'white' | 'black';
   sanSeries: string[];
 };
 
 
-export type FilteringOption = 'my-quiz' | 'public-quiz' | 'i-liked' | 'i-disliked' | 'not-decided'
+export type FilteringOption = 'my-quiz' | 'public-quiz' | 'i-liked' | 'i-disliked' | 'not-decided' | 'i-solved' | 'i-failed' | 'not-tried';
 export type SortingOption = {
   property: 'name-id' | 'createdDate' | 'triedDate' | 'author' | 'likes';
   direction: 'ascending' | 'descending';

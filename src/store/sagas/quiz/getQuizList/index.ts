@@ -78,7 +78,7 @@ function* getQuizList(action: actions.quiz.type__GET_QUIZ_LIST) {
 
     yield put(
       actions.notification.return__ADD_DELETE_BANNER({
-        codeSituation: 'GetQuizList_UnknownError__E',
+        situationCode: 'GetQuizList_UnknownError__E',
       }),
     );
 

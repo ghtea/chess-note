@@ -6,7 +6,7 @@ import focusingChess from 'libraries/chess';
 import { correctChessMoveTree, markedChessMoveTree } from 'components/Main/Quiz/chessMoveTree';
 
 import { useLocation } from 'react-router-dom';
-import { FormattedMessage } from 'react-intl';
+import { FormattedMessage, useIntl } from 'react-intl';
 import * as clipboardy from 'clipboardy';
 
 import { useSelector, useDispatch } from 'react-redux';
@@ -27,6 +27,7 @@ type PropsQuizPlayingOthers = {
 
 function QuizPlayingOthers({ top }: PropsQuizPlayingOthers) {
   const dispatch = useDispatch();
+  const intl = useIntl();
 
   const userId = useSelector((state: RootState) => state.auth.user?.id);
 
@@ -56,13 +57,21 @@ function QuizPlayingOthers({ top }: PropsQuizPlayingOthers) {
   const onClick_AnyMainButton = useCallback(
     async (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
       const value = e.currentTarget.value;
-      if (value === 'edit-this-quiz') {
+      if (value === 'edit') {
         dispatch(
           actions.quiz.return__FOCUS_QUIZ({
             quiz: focusingQuizData,
             situation: 'editing',
           }),
         );
+      } else if (value === 'delete') {
+        if (window.confirm(intl.formatMessage({ id: 'Confirm.AreYouSureToDeleteThisQuiz' }))) {
+          dispatch(
+            actions.quiz.return__DELETE_QUIZ({
+              quizId: focusingQuizData.id,
+            }),
+          );
+        }
       }
       dispatch(
         actions.appearance.return__REPLACE({
@@ -99,11 +108,21 @@ function QuizPlayingOthers({ top }: PropsQuizPlayingOthers) {
               <div className={`${stylesModal['content__section']}`}>
                 <button
                   type="button"
-                  value="edit-this-quiz"
-                  className={`${styles['button__edit-this-quiz']} ${stylesModal['button__basic']}`}
+                  value="edit"
+                  className={`${styles['button__edit']} ${stylesModal['button__basic']}`}
                   onClick={onClick_AnyMainButton}
                 >
                   <FormattedMessage id={'Global.Edit'} />
+                </button>
+              </div>
+              <div className={`${stylesModal['content__section']}`}>
+                <button
+                  type="button"
+                  value="delete"
+                  className={`${styles['button__delete']} ${stylesModal['button__basic']}`}
+                  onClick={onClick_AnyMainButton}
+                >
+                  <FormattedMessage id={'Global.Delete'} />
                 </button>
               </div>
             </>

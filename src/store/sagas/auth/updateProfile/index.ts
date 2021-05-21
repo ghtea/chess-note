@@ -32,14 +32,14 @@ function* updateProfile(action: actions.auth.type__UPDATE_PROFILE) {
     if (!userReady) {
       yield put(
         actions.notification.return__ADD_DELETE_BANNER({
-          codeSituation: 'NotLoggedIn__E',
+          situationCode: 'NotLoggedIn__E',
         }),
       );
     } else {
       /*
         else if (action.payload.initials.length > 3) {
             yield put( actionsNotification.return__ADD_DELETE_BANNER({
-                codeSituation: 'Portal_InitialsTooLong__E'
+                situationCode: 'Portal_InitialsTooLong__E'
             }) );
         }
         */
@@ -78,7 +78,7 @@ function* updateProfile(action: actions.auth.type__UPDATE_PROFILE) {
 
     yield put(
       actions.notification.return__ADD_DELETE_BANNER({
-        codeSituation: 'UnknownError__E',
+        situationCode: 'UnknownError__E',
       }),
     );
   }

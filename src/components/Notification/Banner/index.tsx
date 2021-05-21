@@ -51,24 +51,27 @@ function Banner({ banner }: PropsBanner) {
     <div
       role="alert"
       aria-labelledby={idMessaga}
-      className={`${styles['root']} ${styles[banner['kindSituation']]}`}
+      className={`${styles['root']} ${styles[banner['situationKind']]}`}
     >
       <div className={`${styles['left']}`}>
-        {banner['kindSituation'] === 'success' && (
+        {banner['situationKind'] === 'success' && (
           <IconSuccess className={`${styles['icon__success']}`} />
         )}
-        {banner['kindSituation'] === 'hint' && <IconHint className={`${styles['icon__hint']}`} />}
-        {banner['kindSituation'] === 'error' && (
+        {banner['situationKind'] === 'hint' && <IconHint className={`${styles['icon__hint']}`} />}
+        {banner['situationKind'] === 'error' && (
           <IconError className={`${styles['icon__error']}`} />
         )}
-        {banner['kindSituation'] === 'warning' && (
+        {banner['situationKind'] === 'warning' && (
           <IconWarning className={`${styles['icon__warning']}`} />
         )}
       </div>
 
       <div className={`${styles['middle']}`}>
         <div id={idMessaga}>
-          <FormattedMessage id={banner.idMessage} />{' '}
+          <FormattedMessage 
+            id={banner.messageId} 
+            values={banner.messageValues}
+          />
         </div>
       </div>
 

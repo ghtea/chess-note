@@ -246,7 +246,7 @@
           onKeyPress={onKeyPress_LogIn}
       />
       //
-      <FormattedMessage id={`Notification.${codeSituationPassword}`}/>
+      <FormattedMessage id={`Notification.${situationCodePassword}`}/>
   ```
 
   ```

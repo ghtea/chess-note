@@ -31,7 +31,7 @@ export default function* moveWhilePlayingQuiz(action: actions.quiz.type__MOVE_IN
       if (gradingResult === 'wrong') {
         yield put(
           actions.notification.return__ADD_DELETE_BANNER({
-            codeSituation: 'PlayQuiz_Wrong__W',
+            situationCode: 'PlayQuiz_Wrong__W',
           }),
         );
         yield put(
@@ -43,7 +43,7 @@ export default function* moveWhilePlayingQuiz(action: actions.quiz.type__MOVE_IN
       } else if (gradingResult === 'complete-answer') {
         yield put(
           actions.notification.return__ADD_DELETE_BANNER({
-            codeSituation: 'PlayQuiz_Correct__S',
+            situationCode: 'PlayQuiz_Correct__S',
           }),
         );
         yield put(

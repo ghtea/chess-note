@@ -52,7 +52,7 @@ export default function QuizHomeOthers() {
     async (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
       const value = e.currentTarget.value;
 
-      if (value === 'edit-this-quiz') {
+      if (value === 'edit') {
         const quizToEdit = quizList.find(
           (e) => e.id === displayState.clickedQuizId,
         );
@@ -65,8 +65,7 @@ export default function QuizHomeOthers() {
       } else if (value === 'delete-this-quiz') {
         dispatch(
           actions.quiz.return__DELETE_QUIZ({
-            id: displayState.clickedQuizId,
-            userId: userId as string,
+            quizId: displayState.clickedQuizId,
           }),
         );
       }
@@ -103,8 +102,8 @@ export default function QuizHomeOthers() {
               <div className={`${stylesModal['content__section']}`}>
                 <button
                   type="button"
-                  value="edit-this-quiz"
-                  className={`${styles['button__edit-this-quiz']} ${stylesModal['button__basic']}`}
+                  value="edit"
+                  className={`${styles['button__edit']} ${stylesModal['button__basic']}`}
                   onClick={onClick_AnyMainButton}
                 >
                   <FormattedMessage id={'Global.Edit'} />

@@ -12,7 +12,6 @@
   "Global.Search": "검색",
   "Global.Play": "플레이",
 
-
   "Global.Opening": "오프닝",
   "Global.Quiz": "퀴즈",
   "Global.WhiteToMove": "백 차례",
@@ -33,10 +32,20 @@
   "Main.SignUp_SignUp": "회원가입",
   "Main.SignUp_PasswordAgain": "비밀번호 재입력",
 
-  "Main.QuizHome_ShortCuts_PlayPublicQuiz": "공개 퀴즈 풀기",
-  "Main.QuizHome_ShortCuts_PlayMyQuiz": "내 퀴즈 풀기",
-  "Main.QuizHome_ShortCuts_CreateQuiz": "퀴즈 만들기",
+  "Modal.Setting_Title": "설정",
+  "Modal.Setting_Theme": "테마",
+  "Modal.Setting_Language": "언어",
+  "Modal.Setting_LogOut": "로그아웃",
 
+  "Modal.MyProfile_Title": "프로필",
+  "Modal.MyProfile_EmailAddress": "이메일 주소",
+  "Modal.MyProfile_Name": "이름",
+  "Modal.MyProfile_Photo": "사진",
+  "Modal.MyProfile_Update": "업데이트",
+
+  
+  "Main.QuizHome_ShortCuts_PlayArrangedQuizList": "선택된 퀴즈 풀기",
+  "Main.QuizHome_ShortCuts_CreateQuiz": "퀴즈 만들기",
   "Main.QuizHome_QuizDisplay_PublicQuiz": "공개 퀴즈",
   "Main.QuizHome_QuizDisplay_MyQuiz": "내 퀴즈",
   "Main.QuizHome_QuizDisplay_MonthsAgo": "개월 전",
@@ -49,37 +58,24 @@
   "Main.QuizPlay_StatusBar_Failed": "틀렸습니다",
   "Main.QuizPlay_ToolBar_GiveUp": "포기하기",
 
-
-  "Modal.Setting_Title": "설정",
-  "Modal.Setting_Theme": "테마",
-  "Modal.Setting_Language": "언어",
-  "Modal.Setting_LogOut": "로그아웃",
-
-  "Modal.MyProfile_Title": "프로필",
-  "Modal.MyProfile_EmailAddress": "이메일 주소",
-  "Modal.MyProfile_Name": "이름",
-  "Modal.MyProfile_Photo": "사진",
-  "Modal.MyProfile_Update": "업데이트",
-
   "Modal.QuizEditingUpload_IsPublic": "공개 여부",
   "Modal.QuizEditingUpload_Public": "공개",
   "Modal.QuizEditingUpload_Private": "비공개",
-
   "Modal.QuizEditingSet_SetAsStart": "시작 지점으로 지정",
   "Modal.QuizEditingSet_SetAsAnswer": "해답으로 지정",
   "Modal.QuizEditingSet_SetAsMark": "참고표시로 지정",
-
   "Modal.QuizEditingOthers_UseFen": "클립보드의 FEN 이용",
-  "Modal.QuizEditingOthers_NotValidFen": "올바른 FEN가 아닙니다",
   "Modal.QuizEditingOthers_ChangeSide": "흑백 바꾸기",
 
   "Modal.QuizManageAnswersMarks_ShowAnswer": "해답 {index} 보기",
   "Modal.QuizManageAnswersMarks_DeleteAnswer": "해답 {index} 삭제하기",
   "Modal.QuizManageAnswersMarks_NoAnswer": "현재 해답 없음",
+  "Modal.QuizManageAnswersMarks_ShowAllAnswers": "모든 정답 보기",
 
   "Modal.QuizManageAnswersMarks_ShowMark": "참고표시 {index} 보기",
   "Modal.QuizManageAnswersMarks_DeleteMark": "참고표시 {index} 삭제하기",
   "Modal.QuizManageAnswersMarks_NoMark": "현재 참고표시 없음",
+  "Modal.QuizManageAnswersMarks_ShowAllMarks": "모든 참고표시 보기",
 
   "Nav.NameApp": "체스 노트",
   "Nav.Home": "홈",
@@ -87,6 +83,12 @@
   "Nav.SignUp": "회원가입",
   "Nav.Opening": "오프닝",
   "Nav.Quiz": "퀴즈",
+
+  "Confirm.AreYouSureToDeleteThisQuiz": "이 퀴즈를 삭제하시겠습니까?",
+  "Confirm.AreYouSureToDeleteThisAnswer": "이 정답을 삭제하시겠습니까?",
+  "Confirm.AreYouSureToDeleteThisMark": "이 참고표시를 삭제하시겠습니까?",
+  "Confirm.AreYouSureToChangeStartingFen": "시작 지점을 변경하시겠습니까? 정답, 참고표시가 초기화됩니다.",
+
 
   "Notification.Test1__S": "테스트에 성공하였습니다 1 !",
   "Notification.Test2__H": "테스트에 성공하였습니다 2 !",
@@ -119,9 +121,12 @@
   "Notification.PlayQuiz_Correct__S": "정답입니다!",
   "Notification.PlayQuiz_Wrong__W": "틀렸습니다",
   "Notification.PlayQuiz_NoQuiz__E": "퀴즈가 없습니다",
+  "Notification.ShowAnswerOrMark_AnswerEnded__H": "정답 {index} 입니다",
+  "Notification.ShowAnswerOrMark_MarkEnded__H": "참고표시 {index} 입니다",
   "Notification.ShowAnswerOrMark_NotValid__E": "올바르지 않은 수가 있습니다",
 
   "Notification.EditQuiz_NotAuthor__E": "이 퀴즈의 작성자가 아닙니다",
+  "Notification.QuizEditingOthers_NotValidFen": "올바른 FEN가 아닙니다",
 
   "Notification.CreateQuiz_Succeeded__S": "성공적으로 퀴즈를 만들었습니다!",
   "Notification.CreateQuiz_UnknownError__E": "퀴즈를 만들지 못했습니다",
@@ -135,5 +140,4 @@
   "Notification.DeleteQuiz_Succeeded__S": "성공적으로 퀴즈를 삭제했습니다!",
   "Notification.DeleteQuiz_UnknownError__E": "퀴즈를 삭제하지 못했습니다",
   "Notification.LikeDislikeQuiz_UnknownError__E": "퀴즈를 좋아요/싫어요 하지 못했습니다"
-
 }

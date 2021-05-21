@@ -32,20 +32,21 @@ export default function* createQuiz(action: actions.quiz.type__CREATE_QUIZ) {
     startingFen,
     correctSanSeriesList,
     markedSanSeriesList,
-    authorId,
     isPublic,
   } = action.payload;
+
+  const userIdInApp: types.quiz.Quiz[] = yield select((state: RootState) => state.auth.user?.id);
 
   if (!startingFen) {
     yield put(
       actions.notification.return__ADD_DELETE_BANNER({
-        codeSituation: 'CreateQuiz_NoFenStart__E',
+        situationCode: 'CreateQuiz_NoFenStart__E',
       }),
     );
   } else if (correctSanSeriesList.length === 0) {
     yield put(
       actions.notification.return__ADD_DELETE_BANNER({
-        codeSituation: 'CreateQuiz_NoAnswer__E',
+        situationCode: 'CreateQuiz_NoAnswer__E',
       }),
     );
   } else {
@@ -56,7 +57,7 @@ export default function* createQuiz(action: actions.quiz.type__CREATE_QUIZ) {
         startingFen,
         correctSanSeriesList,
         markedSanSeriesList,
-        authorId,
+        authorId: userIdInApp,
         isPublic,
       };
 
@@ -65,7 +66,7 @@ export default function* createQuiz(action: actions.quiz.type__CREATE_QUIZ) {
 
       yield put(
         actions.notification.return__ADD_DELETE_BANNER({
-          codeSituation: 'CreateQuiz_Succeeded__S',
+          situationCode: 'CreateQuiz_Succeeded__S',
         }),
       );
 
@@ -80,7 +81,7 @@ export default function* createQuiz(action: actions.quiz.type__CREATE_QUIZ) {
 
       yield put(
         actions.notification.return__ADD_DELETE_BANNER({
-          codeSituation: 'CreateQuiz_UnknownError__E',
+          situationCode: 'CreateQuiz_UnknownError__E',
         }),
       );
     }

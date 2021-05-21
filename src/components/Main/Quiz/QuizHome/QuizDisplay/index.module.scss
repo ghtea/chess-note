@@ -21,13 +21,15 @@
     }
 
     .public-my,
-    .like-dislike {
+    .like-dislike,
+    .solved-failed
+    {
       display: flex;
       flex-flow: row nowrap;
       justify-content: center;
       align-items: center;
 
-      &:nth-child(2) {
+      &:nth-child(n+2) {
         margin-left: 20px;
       }
 
@@ -74,8 +76,20 @@
         width: 16px;
         height: 16px;
       }
-      .icon__like,
-      .icon__dislike {
+      .icon__i-liked,
+      .icon__i-disliked {
+        width: 20px;
+        height: 20px;
+      }
+    }
+
+    .solved-failed {
+      .icon__not-tried {
+        width: 16px;
+        height: 16px;
+      }
+      .icon__i-solved,
+      .icon__i-failed {
         width: 20px;
         height: 20px;
       }

@@ -4,7 +4,7 @@ import { Route, Switch } from 'react-router-dom';
 //import { useQuery, gql } from '@apollo/client';
 import history from 'libraries/history';
 import { ChessInstance, Move, Square } from 'chess.js';
-import chessPlaying from 'libraries/chess';
+import focusingChess from 'libraries/chess';
 import styles from './index.module.scss';
 
 import { useDispatch, useSelector } from 'react-redux';
@@ -68,7 +68,7 @@ function QuizEditing() {
         //console.log('values: ', statusUser.tried, focusingQuizStatus.ready, authorId, userId)
         dispatch(
           actions.notification.return__ADD_DELETE_BANNER({
-            codeSituation: 'EditQuiz_NotAuthor__E',
+            situationCode: 'EditQuiz_NotAuthor__E',
           }),
         );
         history.push('/quiz');
@@ -77,7 +77,7 @@ function QuizEditing() {
   }, [statusUser.tried, userId, authorId, focusingQuizStatus.ready]);
 
   const listSquare = useMemo(() => {
-    return chessPlaying.board();
+    return focusingChess.board();
   }, [focusingQuizState.fen]);
 
   return (

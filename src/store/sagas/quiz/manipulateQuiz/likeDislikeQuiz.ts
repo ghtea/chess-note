@@ -33,7 +33,7 @@ export default function* likeDislikeQuiz(action: actions.quiz.type__LIKE_DISLIKE
   if (!userIdInApp) {
     yield put(
       actions.notification.return__ADD_DELETE_BANNER({
-        codeSituation: 'NotLoggedIn__E',
+        situationCode: 'NotLoggedIn__E',
       }),
     );
     return;
@@ -58,7 +58,7 @@ export default function* likeDislikeQuiz(action: actions.quiz.type__LIKE_DISLIKE
 
     // yield put(
     //   actions.notification.return__ADD_DELETE_BANNER({
-    //     codeSituation: 'LikeDislikeQuiz_Succeeded__S',
+    //     situationCode: 'LikeDislikeQuiz_Succeeded__S',
     //   }),
     // );
 
@@ -70,13 +70,18 @@ export default function* likeDislikeQuiz(action: actions.quiz.type__LIKE_DISLIKE
 
     yield put(
       actions.notification.return__ADD_DELETE_BANNER({
-        codeSituation: 'LikeDislikeQuiz_UnknownError__E',
+        situationCode: 'LikeDislikeQuiz_UnknownError__E',
       }),
     );
   }
 } // else
 
-function* applyQuizMemberReactionChange(quizId: string, like: boolean, dislike: boolean, userId: string) {
+function* applyQuizMemberReactionChange(
+  quizId: string,
+  like: boolean,
+  dislike: boolean,
+  userId: string,
+) {
   const quizList: types.quiz.Quiz[] = yield select((state: RootState) => state.quiz.data.list);
 
   const quizToEdit = quizList.find((e) => e.id === quizId);
@@ -95,7 +100,9 @@ function* applyQuizMemberReactionChange(quizId: string, like: boolean, dislike: 
       newMemberReaction.likedMemberIdList = newMemberReaction.likedMemberIdList.concat([userId]);
     }
     if (dislike) {
-      newMemberReaction.dislikedMemberIdList = newMemberReaction.dislikedMemberIdList.concat([userId]);
+      newMemberReaction.dislikedMemberIdList = newMemberReaction.dislikedMemberIdList.concat([
+        userId,
+      ]);
     }
 
     newQuizList.push({

@@ -32,14 +32,27 @@ export default function* watchStaringFenChange(
     );
 
     correctChessMoveTree.restart(newStartingFen);
-    focusingQuizData.correctSanSeriesList.forEach((e) => {
-      correctChessMoveTree.putSeriesSan(e);
-    });
+    // focusingQuizData.correctSanSeriesList.forEach((e) => {
+    //   correctChessMoveTree.putSeriesSan(e);
+    // });
 
     markedChessMoveTree.restart(newStartingFen);
-    focusingQuizData.markedSanSeriesList.forEach((e) => {
-      markedChessMoveTree.putSeriesSan(e);
-    });
+    // focusingQuizData.markedSanSeriesList.forEach((e) => {
+    //   markedChessMoveTree.putSeriesSan(e);
+    // });
+
+    const newFocusingQuizData: types.quiz.Quiz = {
+      ...focusingQuizData,
+      correctSanSeriesList: [],
+      markedSanSeriesList: [],
+      nextTurn: focusingChess.turn() === 'w' ? 'white' : 'black',
+    }
+    yield put(
+      actions.quiz.return__REPLACE({
+        keyList: ['data', 'focusing'],
+        replacement: newFocusingQuizData,
+      }),
+    );
 
     yield put(
       actions.quiz.return__REPLACE({

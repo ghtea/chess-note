@@ -61,7 +61,7 @@ function QuizEditingUpload({ top }: PropsQuizEditingUpload) {
       if (!userReady) {
         dispatch(
           actions.notification.return__ADD_DELETE_BANNER({
-            codeSituation: 'NotLoggedIn__E',
+            situationCode: 'NotLoggedIn__E',
           }),
         );
       } else if (focusingQuizData && userId) {
@@ -73,11 +73,9 @@ function QuizEditingUpload({ top }: PropsQuizEditingUpload) {
               startingFen: focusingQuizData.startingFen,
               correctSanSeriesList: focusingQuizData.correctSanSeriesList,
               markedSanSeriesList: focusingQuizData.markedSanSeriesList,
-              authorId: userId,
               isPublic: focusingQuizData.isPublic,
             }),
           );
-          
         } else {
           dispatch(
             actions.quiz.return__UPDATE_QUIZ({
@@ -89,6 +87,7 @@ function QuizEditingUpload({ top }: PropsQuizEditingUpload) {
               markedSanSeriesList: focusingQuizData.markedSanSeriesList,
               authorId: userId,
               isPublic: focusingQuizData.isPublic,
+              memberReaction: focusingQuizData.memberReaction,
             }),
           );
         }

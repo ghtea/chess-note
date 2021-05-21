@@ -35,23 +35,27 @@ export default function* updateQuiz(action: actions.quiz.type__UPDATE_QUIZ) {
     markedSanSeriesList,
     authorId,
     isPublic,
+    memberReaction,
   } = action.payload;
+
+  const userIdInApp: types.quiz.Quiz[] = yield select((state: RootState) => state.auth.user?.id);
 
   if (!startingFen) {
     yield put(
       actions.notification.return__ADD_DELETE_BANNER({
-        codeSituation: 'UpdateQuiz_NoFenStart__E',
+        situationCode: 'UpdateQuiz_NoFenStart__E',
       }),
     );
   } else if (correctSanSeriesList.length === 0) {
     yield put(
       actions.notification.return__ADD_DELETE_BANNER({
-        codeSituation: 'UpdateQuiz_NoAnswer__E',
+        situationCode: 'UpdateQuiz_NoAnswer__E',
       }),
     );
   } else {
     try {
       const argument = {
+        userId: userIdInApp,
         id,
         name,
         nextTurn,
@@ -60,6 +64,7 @@ export default function* updateQuiz(action: actions.quiz.type__UPDATE_QUIZ) {
         markedSanSeriesList,
         authorId,
         isPublic,
+        memberReaction,
       };
 
       type UpdateQuizData = Record<'updateQuiz', types.quiz.Quiz>;
@@ -67,7 +72,7 @@ export default function* updateQuiz(action: actions.quiz.type__UPDATE_QUIZ) {
 
       yield put(
         actions.notification.return__ADD_DELETE_BANNER({
-          codeSituation: 'UpdateQuiz_Succeeded__S',
+          situationCode: 'UpdateQuiz_Succeeded__S',
         }),
       );
 
@@ -82,7 +87,7 @@ export default function* updateQuiz(action: actions.quiz.type__UPDATE_QUIZ) {
 
       yield put(
         actions.notification.return__ADD_DELETE_BANNER({
-          codeSituation: 'UpdateQuiz_UnknownError__E',
+          situationCode: 'UpdateQuiz_UnknownError__E',
         }),
       );
     }

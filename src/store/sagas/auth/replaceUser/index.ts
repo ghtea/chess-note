@@ -56,7 +56,7 @@ function* replaceUser(action: actions.auth.type__REPLACE_USER) {
 
     yield put(
       actions.notification.return__ADD_CODE_SITUATION_OTHERS({
-        codeSituation: 'UnknownError__E',
+        situationCode: 'UnknownError__E',
       }),
     );
   }

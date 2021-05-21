@@ -64,14 +64,14 @@ function* logInTwitter(action: actions.auth.type__CONTINUE_WITH_TWITTER) {
         console.error(error.message);
         yield put(
           actions.notification.return__ADD_DELETE_BANNER({
-            codeSituation: 'LogIn_UnknownError__E',
+            situationCode: 'LogIn_UnknownError__E',
           }),
         );
       } else {
         console.error(error);
         yield put(
           actions.notification.return__ADD_DELETE_BANNER({
-            codeSituation: 'LogIn_UnknownError__E',
+            situationCode: 'LogIn_UnknownError__E',
           }),
         );
       }
@@ -97,7 +97,7 @@ function* logInTwitter(action: actions.auth.type__CONTINUE_WITH_TWITTER) {
 
     yield put(
       actions.notification.return__ADD_CODE_SITUATION_OTHERS({
-        codeSituation: 'LogIn_UnknownError__E',
+        situationCode: 'LogIn_UnknownError__E',
       }),
     );
   }

@@ -63,14 +63,14 @@ function* logInGoogle(action: actions.auth.type__CONTINUE_WITH_GOOGLE) {
         console.error(error.message);
         yield put(
           actions.notification.return__ADD_DELETE_BANNER({
-            codeSituation: 'LogIn_UnknownError__E',
+            situationCode: 'LogIn_UnknownError__E',
           }),
         );
       } else {
         console.error(error);
         yield put(
           actions.notification.return__ADD_DELETE_BANNER({
-            codeSituation: 'LogIn_UnknownError__E',
+            situationCode: 'LogIn_UnknownError__E',
           }),
         );
       }
@@ -96,7 +96,7 @@ function* logInGoogle(action: actions.auth.type__CONTINUE_WITH_GOOGLE) {
 
     yield put(
       actions.notification.return__ADD_CODE_SITUATION_OTHERS({
-        codeSituation: 'LogIn_UnknownError__E',
+        situationCode: 'LogIn_UnknownError__E',
       }),
     );
   }

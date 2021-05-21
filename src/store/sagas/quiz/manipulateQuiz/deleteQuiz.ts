@@ -26,22 +26,24 @@ const requestDeleteQuiz = (argument: Record<string, unknown>) => {
 
 // directly access to sportdataAPI -> update firebase (get document on return)
 export default function* deleteQuiz(action: actions.quiz.type__DELETE_QUIZ) {
-  const { id, userId } = action.payload;
+  const { quizId } = action.payload;
+
+  const userIdInApp: types.quiz.Quiz[] = yield select((state: RootState) => state.auth.user?.id);
 
   // 권한은 서버쪽에서 확인
   try {
     const argument = {
-      id,
-      userId,
+      id: quizId,
+      userId: userIdInApp,
     };
 
     type DeleteQuizData = Record<'deleteQuiz', boolean>;
     const res: ApolloQueryResult<DeleteQuizData> = yield call(requestDeleteQuiz, argument); // eslint-disable-line @typescript-eslint/no-explicit-any
-    yield applyChangeInQuizList(id);
+    yield applyChangeInQuizList(quizId);
 
     yield put(
       actions.notification.return__ADD_DELETE_BANNER({
-        codeSituation: 'DeleteQuiz_Succeeded__S',
+        situationCode: 'DeleteQuiz_Succeeded__S',
       }),
     );
   } catch (error) {
@@ -49,7 +51,7 @@ export default function* deleteQuiz(action: actions.quiz.type__DELETE_QUIZ) {
 
     yield put(
       actions.notification.return__ADD_DELETE_BANNER({
-        codeSituation: 'DeleteQuiz_UnknownError__E',
+        situationCode: 'DeleteQuiz_UnknownError__E',
       }),
     );
   }

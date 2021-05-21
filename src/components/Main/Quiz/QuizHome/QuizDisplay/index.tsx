@@ -22,6 +22,8 @@ import getFilteredSortedQuizList from './getFilteredSortedQuizList';
 import IconThumbsDown from 'svgs/basic/IconThumbsDown';
 import IconThumbsUp from 'svgs/basic/IconThumbsUp';
 import IconCircle from 'svgs/basic/IconCircle';
+import IconCheckCircle from 'svgs/basic/IconCheckCircle';
+import IconXCircle from 'svgs/basic/IconXCircle';
 
 function QuizDisplay() {
   const dispatch = useDispatch();
@@ -81,15 +83,29 @@ function QuizDisplay() {
     [displayState.filteringOptionList],
   );
 
-  const filteredSortedQuizList = useMemo(() => {
-    return getFilteredSortedQuizList(
+  useEffect(() => {
+    const result = getFilteredSortedQuizList(
       quizList,
       displayState.filteringOptionList,
       displayState.sortingOptionList,
       userId,
       member,
     );
-  }, [quizList, displayState, userId, member]);
+    dispatch(
+      actions.quiz.return__REPLACE({
+        keyList: ['state', 'display', 'arrangedIdList'],
+        replacement: result.map((e) => e.id),
+      }),
+    );
+  }, [quizList, displayState.filteringOptionList, displayState.sortingOptionList, userId, member]);
+
+  const filteredSortedQuizList = useMemo(() => {
+    return displayState.arrangedIdList
+      .map((eachId) => {
+        return quizList.find((eachQuiz) => eachQuiz.id === eachId);
+      })
+      .filter((e) => e !== undefined) as types.quiz.Quiz[];
+  }, [quizList, displayState.arrangedIdList]);
 
   return (
     <section className={`${styles['root']}`}>
@@ -125,10 +141,12 @@ function QuizDisplay() {
               aria-label={'I liked'}
               onClick={onClick_FilteringOptionButton}
             >
-              <IconThumbsUp className={styles['icon__like']} kind="solid" />
+              <IconThumbsUp className={styles['icon__i-liked']} kind="solid" />
             </button>
             <button
-              className={`${displayState.filteringOptionList.includes('not-decided') ? 'active': ''}`}
+              className={`${
+                displayState.filteringOptionList.includes('not-decided') ? 'active' : ''
+              }`}
               name="filteringOption"
               value={'not-decided'}
               aria-label={'Not decided'}
@@ -137,16 +155,55 @@ function QuizDisplay() {
               <IconCircle className={styles['icon__not-decided']} kind="regular" />
             </button>
             <button
-              className={`${displayState.filteringOptionList.includes('i-disliked') ? 'active': ''}`}
+              className={`${
+                displayState.filteringOptionList.includes('i-disliked') ? 'active' : ''
+              }`}
               name="filteringOption"
               value={'i-disliked'}
               aria-label={'I disliked'}
               onClick={onClick_FilteringOptionButton}
             >
-              <IconThumbsDown className={styles['icon__dislike']} kind="solid" />
+              <IconThumbsDown className={styles['icon__i-disliked']} kind="solid" />
             </button>
           </div>
         )}
+
+{userReady && (
+          <div className={`${styles['solved-failed']}`}>
+            <button
+              className={`${displayState.filteringOptionList.includes('i-solved') ? 'active' : ''}`}
+              name="filteringOption"
+              value={'i-liked'}
+              aria-label={'I liked'}
+              onClick={onClick_FilteringOptionButton}
+            >
+              <IconCheckCircle className={styles['icon__i-solved']} kind="solid" />
+            </button>
+            <button
+              className={`${
+                displayState.filteringOptionList.includes('not-tried') ? 'active' : ''
+              }`}
+              name="filteringOption"
+              value={'not-tried'}
+              aria-label={'Not tried'}
+              onClick={onClick_FilteringOptionButton}
+            >
+              <IconCircle className={styles['icon__not-tried']} kind="regular" />
+            </button>
+            <button
+              className={`${
+                displayState.filteringOptionList.includes('i-failed') ? 'active' : ''
+              }`}
+              name="filteringOption"
+              value={'i-failed'}
+              aria-label={'I failed'}
+              onClick={onClick_FilteringOptionButton}
+            >
+              <IconXCircle className={styles['icon__i-failed']} kind="solid" />
+            </button>
+          </div>
+        )}
+
 
         {/* <button
                 className={`${styles['sorting']}`}

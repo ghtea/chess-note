@@ -3,7 +3,7 @@ import { firebaseAuth } from 'libraries/firebase';
 
 import history from 'libraries/history';
 import { useLocation } from 'react-router-dom';
-import { FormattedMessage } from 'react-intl';
+import { FormattedMessage, useIntl } from 'react-intl';
 import Cookies from 'js-cookie';
 
 import { useSelector, useDispatch } from 'react-redux';
@@ -19,6 +19,7 @@ import stylesQC from '../../common/index.module.scss';
 import stylesModal from 'components/Modal/index.module.scss';
 
 import { correctChessMoveTree, markedChessMoveTree } from 'components/Main/Quiz/chessMoveTree';
+import * as types from 'store/types';
 
 type PropsQuizEditingSet = {
   top: number;
@@ -26,6 +27,7 @@ type PropsQuizEditingSet = {
 
 function QuizEditingSet({ top }: PropsQuizEditingSet) {
   const dispatch = useDispatch();
+  const intl = useIntl();
 
   const focusingQuizState = useSelector((state: RootState) => state.quiz.state.focusing);
   const focusingQuizData = useSelector((state: RootState) => state.quiz.data.focusing);
@@ -62,18 +64,22 @@ function QuizEditingSet({ top }: PropsQuizEditingSet) {
       );
 
       if (value === 'start') {
-        dispatch(
-          actions.quiz.return__REPLACE({
-            keyList: ['data', 'focusing', 'startingFen'],
-            replacement: focusingQuizState.fen,
-          }),
-        );
-        dispatch(
-          actions.quiz.return__REPLACE({
-            keyList: ['state', 'focusing', 'sanSeries'],
-            replacement: [],
-          }),
-        );
+        if (focusingQuizData.startingFen !== types.quiz.defaultFen) {
+          if (window.confirm(intl.formatMessage({ id: 'Confirm.AreYouSureToChangeStartingFen' }))) {
+            dispatch(
+              actions.quiz.return__CHANGE_STARTING_FEN({
+                startingFen: focusingQuizState.fen,
+              }),
+            );
+          }
+        } else {
+          // 현재 시작지점이 체스 시작시점이라 바로 초기화해도 잃는게 거의 없음
+          dispatch(
+            actions.quiz.return__CHANGE_STARTING_FEN({
+              startingFen: focusingQuizState.fen,
+            }),
+          );
+        }
       } else if (value === 'answer') {
         correctChessMoveTree.putSeriesSan(focusingQuizState.sanSeries);
         dispatch(

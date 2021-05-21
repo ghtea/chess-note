@@ -46,7 +46,7 @@ export default function* updateMember(action: actions.auth.type__UPDATE_MEMBER) 
 
     yield put(
       actions.notification.return__ADD_DELETE_BANNER({
-        codeSituation: 'UpdateMember_UnknownError__E',
+        situationCode: 'UpdateMember_UnknownError__E',
       }),
     );
   }

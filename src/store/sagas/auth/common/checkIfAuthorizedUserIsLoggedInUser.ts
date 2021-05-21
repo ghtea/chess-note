@@ -12,7 +12,7 @@ export default function* checkIfAuthorizedUserIsLoggedInUser(authorizedUserId: s
   } else {
     yield put(
       actions.notification.return__ADD_DELETE_BANNER({
-        codeSituation: 'NotAuthorized__E',
+        situationCode: 'NotAuthorized__E',
       }),
     );
     return false;

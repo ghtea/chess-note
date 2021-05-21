@@ -17,6 +17,7 @@ import Loading from 'components/Global/Loading';
 import styles from './index.module.scss';
 import IconPlus from 'svgs/basic/IconPlus';
 import IconShuffle from 'svgs/basic/IconShuffle';
+import IconPlay from 'svgs/basic/IconPlay';
 // import IconSort from 'svgs/basic/IconSort';
 
 function ShortCuts() {
@@ -24,23 +25,13 @@ function ShortCuts() {
   const userReady = useSelector((state: RootState) => state.status.auth.user.ready);
   const userId = useSelector((state: RootState) => state.auth.user?.id);
 
+  const arrangedIdList = useSelector((state: RootState) => state.quiz.state.display.arrangedIdList);
+
   const onClick_MainButton = useCallback(
     (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
       const value = e.currentTarget.value;
-      if (value === 'play-public-random-quiz') {
-        dispatch(
-          actions.quiz.return__PLAY_RANDOM_QUIZ({
-            kind: 'public-quiz',
-          }),
-        );
-      } else if (value === 'play-my-random-quiz') {
-        if (userReady && userId) {
-          dispatch(
-            actions.quiz.return__PLAY_RANDOM_QUIZ({
-              kind: 'my-quiz',
-            }),
-          );
-        }
+      if (value === 'play-arranged-quiz-list') {
+        dispatch(actions.quiz.return__PLAY_ARRANGED_QUIZ_LIST());
       } else if (value === 'create') {
         history.push('/quiz/create');
         dispatch(
@@ -57,33 +48,21 @@ function ShortCuts() {
   return (
     <section className={`${styles['root']}`}>
       <button
-        className={`${styles['button__main']}`}
+        className={`${styles['button__main']} ${styles['play-arranged-quiz-list']}`}
         type="button"
-        value="play-public-random-quiz"
+        value="play-arranged-quiz-list"
         onClick={onClick_MainButton}
       >
-        <IconShuffle className={`${styles['icon__shuffle']}`} kind="regular" />
+        <IconPlay className={`${styles['icon__play']}`} kind="solid" />
         <span>
-          <FormattedMessage id={'Main.QuizHome_ShortCuts_PlayPublicQuiz'} />
+          <FormattedMessage id={'Main.QuizHome_ShortCuts_PlayArrangedQuizList'} />
         </span>
       </button>
 
       {userReady && (
         <>
           <button
-            className={`${styles['button__main']}`}
-            type="button"
-            value="play-my-random-quiz"
-            onClick={onClick_MainButton}
-          >
-            <IconShuffle className={`${styles['icon__shuffle']}`} kind="regular" />
-            <span>
-              <FormattedMessage id={'Main.QuizHome_ShortCuts_PlayMyQuiz'} />
-            </span>
-          </button>
-
-          <button
-            className={`${styles['button__main']}`}
+            className={`${styles['button__main']} ${styles['create']}`}
             type="button"
             value="create"
             onClick={onClick_MainButton}

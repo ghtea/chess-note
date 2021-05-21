@@ -15,7 +15,7 @@ function* logCheckFailed(action: actions.auth.type__LOG_CHECK_FAILED) {
 
   yield put(
     actions.notification.return__ADD_CODE_SITUATION_OTHERS({
-      codeSituation: 'LogCheck_UnknownError__E',
+      situationCode: 'LogCheck_UnknownError__E',
     }),
   );
   console.log('log check failed');

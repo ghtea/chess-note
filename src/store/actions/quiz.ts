@@ -117,7 +117,6 @@ type Payload__CREATE_QUIZ = {
   startingFen: string;
   correctSanSeriesList: string[][];
   markedSanSeriesList: string[][];
-  authorId: string;
   isPublic: boolean;
 };
 export const return__CREATE_QUIZ = (payload: Payload__CREATE_QUIZ) => {
@@ -138,6 +137,7 @@ type Payload__UPDATE_QUIZ = {
   markedSanSeriesList: string[][];
   authorId: string;
   isPublic: boolean;
+  memberReaction: types.quiz.MemberReaction;
 };
 export const return__UPDATE_QUIZ = (payload: Payload__UPDATE_QUIZ) => {
   return {
@@ -147,11 +147,9 @@ export const return__UPDATE_QUIZ = (payload: Payload__UPDATE_QUIZ) => {
 };
 export type type__UPDATE_QUIZ = ReturnType<typeof return__UPDATE_QUIZ>;
 
-
 export const name__DELETE_QUIZ = 'quiz/DELETE_QUIZ';
 type Payload__DELETE_QUIZ = {
-  id: string;
-  userId: string;
+  quizId: string;
 };
 export const return__DELETE_QUIZ = (payload: Payload__DELETE_QUIZ) => {
   return {
@@ -161,7 +159,7 @@ export const return__DELETE_QUIZ = (payload: Payload__DELETE_QUIZ) => {
 };
 export type type__DELETE_QUIZ = ReturnType<typeof return__DELETE_QUIZ>;
 
-// other update 
+// other update
 export const name__LIKE_DISLIKE_QUIZ = 'quiz/LIKE_DISLIKE_QUIZ';
 type Payload__LIKE_DISLIKE_QUIZ = {
   quizId: string;
@@ -177,17 +175,13 @@ export const return__LIKE_DISLIKE_QUIZ = (payload: Payload__LIKE_DISLIKE_QUIZ) =
 export type type__LIKE_DISLIKE_QUIZ = ReturnType<typeof return__LIKE_DISLIKE_QUIZ>;
 
 // play
-export const name__PLAY_RANDOM_QUIZ = 'quiz/PLAY_RANDOM_QUIZ';
-type Payload__PLAY_RANDOM_QUIZ = {
-  kind: 'my-quiz' | 'public-quiz';
-};
-export const return__PLAY_RANDOM_QUIZ = (payload: Payload__PLAY_RANDOM_QUIZ) => {
+export const name__PLAY_ARRANGED_QUIZ_LIST = 'quiz/PLAY_ARRANGED_QUIZ_LIST';
+export const return__PLAY_ARRANGED_QUIZ_LIST = () => {
   return {
-    type: name__PLAY_RANDOM_QUIZ,
-    payload: payload,
+    type: name__PLAY_ARRANGED_QUIZ_LIST,
   };
 };
-export type type__PLAY_RANDOM_QUIZ = ReturnType<typeof return__PLAY_RANDOM_QUIZ>;
+export type type__PLAY_ARRANGED_QUIZ_LIST = ReturnType<typeof return__PLAY_ARRANGED_QUIZ_LIST>;
 
 export const name__PLAY_NEXT_QUIZ = 'quiz/PLAY_NEXT_QUIZ';
 export const return__PLAY_NEXT_QUIZ = () => {
@@ -200,7 +194,8 @@ export type type__PLAY_NEXT_QUIZ = ReturnType<typeof return__PLAY_NEXT_QUIZ>;
 // manage answers, marks
 export const name__SHOW_ANSWER_OR_MARK = 'quiz/SHOW_ANSWER_OR_MARK';
 type Payload__SHOW_ANSWER_OR_MARK = {
-  index: number;
+  index?: number;
+  length?: number;
   kind: 'answer' | 'mark';
 };
 export const return__SHOW_ANSWER_OR_MARK = (payload: Payload__SHOW_ANSWER_OR_MARK) => {
@@ -211,7 +206,6 @@ export const return__SHOW_ANSWER_OR_MARK = (payload: Payload__SHOW_ANSWER_OR_MAR
 };
 export type type__SHOW_ANSWER_OR_MARK = ReturnType<typeof return__SHOW_ANSWER_OR_MARK>;
 
-
 // watch state change
 export const name__WATCH_STARTING_FEN_CHANGE = 'quiz/WATCH_STARTING_FEN_CHANGE';
 export const return__WATCH_STARTING_FEN_CHANGE = () => {
@@ -221,7 +215,6 @@ export const return__WATCH_STARTING_FEN_CHANGE = () => {
 };
 export type type__WATCH_STARTING_FEN_CHANGE = ReturnType<typeof return__WATCH_STARTING_FEN_CHANGE>;
 
-
 export const name__WATCH_SITUATION_CHANGE = 'quiz/WATCH_SITUATION_CHANGE';
 export const return__WATCH_SITUATION_CHANGE = () => {
   return {
@@ -229,3 +222,15 @@ export const return__WATCH_SITUATION_CHANGE = () => {
   };
 };
 export type type__WATCH_SITUATION_CHANGE = ReturnType<typeof return__WATCH_SITUATION_CHANGE>;
+
+export const name__CHANGE_STARTING_FEN = 'quiz/CHANGE_STARTING_FEN';
+type Payload__CHANGE_STARTING_FEN = {
+  startingFen: string;
+};
+export const return__CHANGE_STARTING_FEN = (payload: Payload__CHANGE_STARTING_FEN) => {
+  return {
+    type: name__CHANGE_STARTING_FEN,
+    payload: payload,
+  };
+};
+export type type__CHANGE_STARTING_FEN = ReturnType<typeof return__CHANGE_STARTING_FEN>;

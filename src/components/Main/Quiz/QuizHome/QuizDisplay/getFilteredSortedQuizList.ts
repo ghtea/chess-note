@@ -11,6 +11,8 @@ export default function getFilteredSortedQuizList(
   member: types.auth.Member | null,
 ) {
   // filter
+
+  // my, public
   let aFilteredQuizIdList: string[] = [];
   if (filteringOptionList.includes('my-quiz')) {
     aFilteredQuizIdList = aFilteredQuizIdList.concat(
@@ -23,6 +25,7 @@ export default function getFilteredSortedQuizList(
     );
   }
 
+  // like-dislike
   let bFilteredQuizIdList: string[] = [];
   if (filteringOptionList.includes('i-liked')) {
     bFilteredQuizIdList = bFilteredQuizIdList.concat(
@@ -50,14 +53,62 @@ export default function getFilteredSortedQuizList(
         .map((e) => e.id),
     );
   }
+
+  // solved-failed
+  let cFilteredQuizIdList: string[] = [];
+  if (filteringOptionList.includes('i-solved')) {
+    cFilteredQuizIdList = cFilteredQuizIdList.concat(
+      quizList
+        .filter((eachQuiz) => {
+          const record = member?.quizRecordList.find(
+            (eachRecord) => eachRecord.quizId === eachQuiz.id,
+          );
+          if (record && record.result === true) {
+            return true;
+          } else {
+            return false;
+          }
+        })
+        .map((e) => e.id),
+    );
+  }
+
+  if (filteringOptionList.includes('not-tried')) {
+    cFilteredQuizIdList = cFilteredQuizIdList.concat(
+      quizList
+        .filter(
+          (eachQuiz) =>
+            member?.quizRecordList.findIndex((eachRecord) => eachRecord.quizId === eachQuiz.id) ===
+            -1,
+        )
+        .map((e) => e.id),
+    );
+  }
+
+  if (filteringOptionList.includes('i-failed')) {
+    cFilteredQuizIdList = cFilteredQuizIdList.concat(
+      quizList
+        .filter((eachQuiz) => {
+          const record = member?.quizRecordList.find(
+            (eachRecord) => eachRecord.quizId === eachQuiz.id,
+          );
+          if (record && record.result === false) {
+            return true;
+          } else {
+            return false;
+          }
+        })
+        .map((e) => e.id),
+    );
+  }
   // 교집합
-  let filteredQuizIdList: string[] = aFilteredQuizIdList.filter((e) =>
-    bFilteredQuizIdList.includes(e),
-  );
+  let filteredQuizIdList: string[] = aFilteredQuizIdList
+    .filter((e) => bFilteredQuizIdList.includes(e))
+    .filter((e) => cFilteredQuizIdList.includes(e));
 
   // 중복 제거
   // https://wsvincent.com/javascript-remove-duplicates-array/
-  filteredQuizIdList = filteredQuizIdList.filter((e,i) => filteredQuizIdList.indexOf(e) === i);
+  filteredQuizIdList = filteredQuizIdList.filter((e, i) => filteredQuizIdList.indexOf(e) === i);
 
   const filteredQuizList = filteredQuizIdList
     .map((eachId) => quizList.find((e) => e.id === eachId))

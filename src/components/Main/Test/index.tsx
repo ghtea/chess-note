@@ -14,11 +14,11 @@ function Test() {
 
   const onClick_AddBanner = useCallback(
     (event: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
-      const { value: codeSituation } = event.currentTarget;
+      const { value: situationCode } = event.currentTarget;
 
       dispatch(
         actions.notification.return__ADD_DELETE_BANNER({
-          codeSituation: codeSituation,
+          situationCode: situationCode,
         }),
       );
     },
