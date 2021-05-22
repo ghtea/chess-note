@@ -15,12 +15,12 @@ import ReactionDisplay from './ReactionDisplay';
 export default function QuizPlaying() {
   //const dispatch = useDispatch();
 
-  // const focusingQuizStatus = useSelector((state: RootState) => state.status.data.quiz.focusing);
+  const userReady = useSelector((state: RootState) => state.status.auth.user.ready);
 
   return (
     <div className={`${styles['root']}`}>
       <EntireBoard />
-      <ReactionDisplay />
+      {userReady && <ReactionDisplay />}
     </div>
   );
 }

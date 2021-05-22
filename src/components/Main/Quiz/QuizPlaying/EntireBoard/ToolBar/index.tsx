@@ -33,12 +33,13 @@ export default function ToolBarQP() {
   const dispatch = useDispatch();
 
   const toolbarHeight = useSelector(
-    (state: RootState) => state.appearance.layout.document.chessBoard.toolBar.height,
+    (state: RootState) => state.appearance.layout.document.entireBoard.toolBar.height,
   );
   const chessBoardLength = useSelector(
-    (state: RootState) => state.appearance.layout.document.chessBoard.length,
+    (state: RootState) => state.appearance.layout.document.entireBoard.chessBoard.length,
   );
 
+  const userReady = useSelector((state: RootState) => state.status.auth.user.ready);
   const situation = useSelector((state: RootState) => state.quiz.state.situation);
 
   const focusingId = useSelector((state: RootState) => state.quiz.data.focusing.id);
@@ -184,9 +185,11 @@ export default function ToolBarQP() {
       </div>
 
       <div className={`${stylesQEToolBar['others']}`}>
-        <button type="button" value="others" aria-label="others" onClick={onClick_Main}>
-          <IconOthers className={`${stylesQEToolBar['icon__others']}`} kind="regular" />
-        </button>
+        {userReady && (
+          <button type="button" value="others" aria-label="others" onClick={onClick_Main}>
+            <IconOthers className={`${stylesQEToolBar['icon__others']}`} kind="regular" />
+          </button>
+        )}
       </div>
     </div>
   );

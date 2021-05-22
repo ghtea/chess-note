@@ -28,7 +28,7 @@ const stateInitial = {
       myProfile: false,
 
       quizHomeOthers: false,
-      
+
       quizEditingSet: false,
       quizEditingUpload: false,
       quizEditingOthers: false,
@@ -37,8 +37,6 @@ const stateInitial = {
 
       quizManageAnswers: false,
       quizManageMarks: false,
-
-      quizTryingOthers: false,
     },
   },
 
@@ -51,9 +49,14 @@ const stateInitial = {
       header: {
         height: 60,
       },
-      chessBoard: {
-        length: 0,
-        top: 0,
+      entireBoard: {
+        chessBoard: {
+          length: 100,
+          position: {
+            x: 0,
+            y: 0,
+          },
+        },
         statusBar: {
           height: 40,
         },

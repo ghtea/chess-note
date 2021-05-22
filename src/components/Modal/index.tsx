@@ -18,17 +18,21 @@ import QuizPlayingOthers from './Quiz/QuizPlaying/Others';
 function Modal() {
   const showing = useSelector((state: RootState) => state.appearance.showing.modal);
 
-  const topChessBoard = useSelector(
-    (state: RootState) => state.appearance.layout.document.chessBoard.top,
+  const { x: chessBoardx, y: chessBoardy } = useSelector(
+    (state: RootState) => state.appearance.layout.document.entireBoard.chessBoard.position,
   );
   const chessBoardLength = useSelector(
-    (state: RootState) => state.appearance.layout.document.chessBoard.length,
+    (state: RootState) => state.appearance.layout.document.entireBoard.chessBoard.length,
   );
 
-  const topModalQuiz = useMemo(() => {
-    // 우선 위끝을 체스판 아래끝에 맞추고, 나중에 css 에서 modal 크기 고려해서 위로 좀더 이동시킨다
-    return topChessBoard + 1 * chessBoardLength;
-  }, [topChessBoard, chessBoardLength]);
+  const quizModalPositionStyle: React.CSSProperties = useMemo(() => {
+    return {
+      position: 'absolute',
+      top: chessBoardy + chessBoardLength - 10,
+      left: chessBoardx + chessBoardLength * 0.5,
+      transform: 'translateX(-50%) translateY(-100%)',
+    };
+  }, [chessBoardx, chessBoardy, chessBoardLength]);
 
   return (
     <>
@@ -37,18 +41,29 @@ function Modal() {
 
       {showing.quizHomeOthers && <QuizHomeOthers />}
 
-      {showing.quizEditingUpload && <QuizEditingUpload top={topModalQuiz} />}
-      {showing.quizEditingSet && <QuizEditingSet top={topModalQuiz} />}
-      {showing.quizEditingOthers && <QuizEditingOthers top={topModalQuiz} />}
-
-      {showing.quizPlayingOthers && <QuizPlayingOthers top={topModalQuiz} />}
+      {showing.quizEditingUpload && (
+        <QuizEditingUpload quizModalPositionStyle={quizModalPositionStyle} />
+      )}
+      {showing.quizEditingSet && <QuizEditingSet quizModalPositionStyle={quizModalPositionStyle} />}
+      {showing.quizEditingOthers && (
+        <QuizEditingOthers quizModalPositionStyle={quizModalPositionStyle} />
+      )}
+      {showing.quizPlayingOthers && (
+        <QuizPlayingOthers quizModalPositionStyle={quizModalPositionStyle} />
+      )}
 
       {showing.quizManageAnswers && (
-        <QuizEditingManageAnswersMarks top={topModalQuiz} kind="answer" />
+        <QuizEditingManageAnswersMarks
+          quizModalPositionStyle={quizModalPositionStyle}
+          kind="answer"
+        />
       )}
-      {showing.quizManageMarks && <QuizEditingManageAnswersMarks top={topModalQuiz} kind="mark" />}
-
-      {showing.quizTryingOthers && <QuizEditingSet top={topModalQuiz} />}
+      {showing.quizManageMarks && (
+        <QuizEditingManageAnswersMarks
+          quizModalPositionStyle={quizModalPositionStyle}
+          kind="mark"
+        />
+      )}
     </>
   );
 }

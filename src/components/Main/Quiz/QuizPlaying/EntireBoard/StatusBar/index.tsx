@@ -23,10 +23,10 @@ export default function StatusBarQP() {
   const dispatch = useDispatch();
 
   const heightStatusBar = useSelector(
-    (state: RootState) => state.appearance.layout.document.chessBoard.statusBar.height,
+    (state: RootState) => state.appearance.layout.document.entireBoard.statusBar.height,
   );
   const chessBoardLength = useSelector(
-    (state: RootState) => state.appearance.layout.document.chessBoard.length,
+    (state: RootState) => state.appearance.layout.document.entireBoard.chessBoard.length,
   );
 
   const turn = useSelector((state: RootState) => state.quiz.state.focusing.turn);

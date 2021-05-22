@@ -31,10 +31,10 @@ function ToolBarQE() {
   const situation = useSelector((state: RootState) => state.quiz.state.situation);
 
   const toolbarHeight = useSelector(
-    (state: RootState) => state.appearance.layout.document.chessBoard.toolBar.height,
+    (state: RootState) => state.appearance.layout.document.entireBoard.toolBar.height,
   );
   const chessBoardLength = useSelector(
-    (state: RootState) => state.appearance.layout.document.chessBoard.length,
+    (state: RootState) => state.appearance.layout.document.entireBoard.chessBoard.length,
   );
   //const focusingQuizState = useSelector((state: RootState)=>state.quiz.state.focusing);
   const focusingQuizData = useSelector((state: RootState) => state.quiz.data.focusing);

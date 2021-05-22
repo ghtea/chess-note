@@ -53,29 +53,29 @@ function ChessBoard({ listSquare, side, page }: PropsChessBoard) {
     (state: RootState) => state.appearance.layout.document.header.height,
   );
   const heightStatusBar = useSelector(
-    (state: RootState) => state.appearance.layout.document.chessBoard.statusBar.height,
+    (state: RootState) => state.appearance.layout.document.entireBoard.statusBar.height,
   );
   const heightToolBar = useSelector(
-    (state: RootState) => state.appearance.layout.document.chessBoard.toolBar.height,
+    (state: RootState) => state.appearance.layout.document.entireBoard.toolBar.height,
   );
 
   const chessBoardLength = useSelector(
-    (state: RootState) => state.appearance.layout.document.chessBoard.length,
+    (state: RootState) => state.appearance.layout.document.entireBoard.chessBoard.length,
   );
 
   useEffect(() => {
     // height
-    let chessBoardLengthNew = heightWindow - heightHeader - heightStatusBar - heightToolBar;
-    if (chessBoardLengthNew > 700) {
-      chessBoardLengthNew = 700;
+    let newChessBoardLength = heightWindow - heightHeader - heightStatusBar - heightToolBar;
+    if (newChessBoardLength > 700) {
+      newChessBoardLength = 700;
     }
-    if (widthWindow < chessBoardLengthNew) {
-      chessBoardLengthNew = widthWindow;
+    if (widthWindow < newChessBoardLength) {
+      newChessBoardLength = widthWindow;
     }
     dispatch(
       actions.appearance.return__REPLACE({
-        keyList: ['layout', 'document', 'chessBoard', 'length'],
-        replacement: chessBoardLengthNew,
+        keyList: ['layout', 'document', 'entireBoard', 'chessBoard', 'length'],
+        replacement: newChessBoardLength,
       }),
     );
     // $device-xs__min-width: 320px;
@@ -87,13 +87,17 @@ function ChessBoard({ listSquare, side, page }: PropsChessBoard) {
   useEffect(() => {
     const chessBoard = document.getElementsByClassName('ChessBoard')[0];
 
+    const newChessBoardPosition= {
+      x: chessBoard.getBoundingClientRect().x,
+      y: chessBoard.getBoundingClientRect().y,
+    }
     dispatch(
       actions.appearance.return__REPLACE({
-        keyList: ['layout', 'document', 'chessBoard', 'top'],
-        replacement: chessBoard.getBoundingClientRect().top,
+        keyList: ['layout', 'document', 'entireBoard', 'chessBoard', 'position'],
+        replacement: newChessBoardPosition,
       }),
     );
-  }, [chessBoardLength]);
+  }, [chessBoardLength, widthWindow, heightWindow]);
 
   const [positionStart, setPositionStart] = useState<null | string>(null);
 

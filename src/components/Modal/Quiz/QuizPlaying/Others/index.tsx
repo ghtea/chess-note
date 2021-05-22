@@ -22,10 +22,11 @@ import stylesQC from '../../common/index.module.scss';
 import stylesModal from 'components/Modal/index.module.scss';
 
 type PropsQuizPlayingOthers = {
-  top: number;
+  quizModalPositionStyle: React.CSSProperties;
+
 };
 
-function QuizPlayingOthers({ top }: PropsQuizPlayingOthers) {
+function QuizPlayingOthers({ quizModalPositionStyle }: PropsQuizPlayingOthers) {
   const dispatch = useDispatch();
   const intl = useIntl();
 
@@ -100,7 +101,7 @@ function QuizPlayingOthers({ top }: PropsQuizPlayingOthers) {
         role="dialog"
         aria-label="Others"
         ref={refModal}
-        style={{ top: top }}
+        style={quizModalPositionStyle}
       >
         <div className={`${stylesModal['content']}`}>
           {isShowingManipulateButton && (

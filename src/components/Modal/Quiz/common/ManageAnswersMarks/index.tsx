@@ -22,11 +22,11 @@ import stylesQC from '../../common/index.module.scss';
 import stylesModal from 'components/Modal/index.module.scss';
 
 type PropsManageAnswersMarks = {
-  top: number;
+  quizModalPositionStyle: React.CSSProperties;
   kind: 'answer' | 'mark';
 };
 
-export default function ManageAnswersMarks({ top, kind }: PropsManageAnswersMarks) {
+export default function ManageAnswersMarks({ quizModalPositionStyle, kind }: PropsManageAnswersMarks) {
   const dispatch = useDispatch();
   const intl = useIntl();
 
@@ -136,6 +136,8 @@ export default function ManageAnswersMarks({ top, kind }: PropsManageAnswersMark
       .length;
   }, [focusingQuizData, kind]);
 
+  
+
   return (
     <div className={`${styles['root']} ${stylesQC['root']} ${stylesModal['root']}`}>
       <div
@@ -148,7 +150,7 @@ export default function ManageAnswersMarks({ top, kind }: PropsManageAnswersMark
         role="dialog"
         aria-label={kind === 'answer' ? 'Manage Answers' : 'Manage Marks'}
         ref={refModal}
-        style={{ top: top }}
+        style={quizModalPositionStyle}
       >
         <div className={`${stylesModal['content']} ${stylesQC['content']} ${styles['content']}`}>
           {itemAllNumber === 0 && (

@@ -23,10 +23,11 @@ import stylesQC from '../../common/index.module.scss';
 import stylesModal from 'components/Modal/index.module.scss';
 
 type PropsQuizEditingOthers = {
-  top: number;
+  quizModalPositionStyle: React.CSSProperties;
+
 };
 
-function QuizEditingOthers({ top }: PropsQuizEditingOthers) {
+function QuizEditingOthers({ quizModalPositionStyle }: PropsQuizEditingOthers) {
   const dispatch = useDispatch();
   const intl = useIntl();
 
@@ -123,7 +124,7 @@ function QuizEditingOthers({ top }: PropsQuizEditingOthers) {
         role="dialog"
         aria-label="Others"
         ref={refModal}
-        style={{ top: top }}
+        style={quizModalPositionStyle}
       >
         <div className={`${stylesModal['content']}`}>
           <div className={`${stylesModal['content__section']}`}>

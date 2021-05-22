@@ -22,10 +22,11 @@ import InputText from 'components/Global/Input/InputText';
 import InputRadio from 'components/Global/Input/InputRadio';
 
 type PropsQuizEditingUpload = {
-  top: number;
+  quizModalPositionStyle: React.CSSProperties;
+
 };
 
-function QuizEditingUpload({ top }: PropsQuizEditingUpload) {
+function QuizEditingUpload({ quizModalPositionStyle }: PropsQuizEditingUpload) {
   const dispatch = useDispatch();
   const intl = useIntl();
   const userReady = useSelector((state: RootState) => state.status.auth.user.ready);
@@ -111,7 +112,7 @@ function QuizEditingUpload({ top }: PropsQuizEditingUpload) {
         role="dialog"
         aria-labelledby="Heading_Put"
         ref={refModal}
-        style={{ top: top }}
+        style={quizModalPositionStyle}
       >
         <div className={`${stylesModal['content']} ${stylesQC['content']} ${styles['content']}`}>
           <div className={`${stylesModal['content__section']} ${styles['input-name']}`}>

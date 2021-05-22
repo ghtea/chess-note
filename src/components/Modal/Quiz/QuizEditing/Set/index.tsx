@@ -22,10 +22,11 @@ import { correctChessMoveTree, markedChessMoveTree } from 'components/Main/Quiz/
 import * as types from 'store/types';
 
 type PropsQuizEditingSet = {
-  top: number;
+  quizModalPositionStyle: React.CSSProperties;
+
 };
 
-function QuizEditingSet({ top }: PropsQuizEditingSet) {
+function QuizEditingSet({ quizModalPositionStyle }: PropsQuizEditingSet) {
   const dispatch = useDispatch();
   const intl = useIntl();
 
@@ -130,7 +131,7 @@ function QuizEditingSet({ top }: PropsQuizEditingSet) {
         role="dialog"
         aria-labelledby="Heading_Set"
         ref={refModal}
-        style={{ top: top }}
+        style={quizModalPositionStyle}
       >
         <div className={`${stylesModal['content']} ${stylesQC['content']} ${styles['content']}`}>
           <div className={`${stylesModal['content__section']}`}>
