@@ -102,9 +102,16 @@ export default function getFilteredSortedQuizList(
     );
   }
   // 교집합
-  let filteredQuizIdList: string[] = aFilteredQuizIdList
+  // 로그인 안했을 때
+  let filteredQuizIdList: string[] = aFilteredQuizIdList;
+
+  // 로그인 했을 때
+  if (userId){
+    filteredQuizIdList = aFilteredQuizIdList
     .filter((e) => bFilteredQuizIdList.includes(e))
     .filter((e) => cFilteredQuizIdList.includes(e));
+  }
+  
 
   // 중복 제거
   // https://wsvincent.com/javascript-remove-duplicates-array/

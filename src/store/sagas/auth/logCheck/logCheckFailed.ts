@@ -18,7 +18,7 @@ function* logCheckFailed(action: actions.auth.type__LOG_CHECK_FAILED) {
       situationCode: 'LogCheck_UnknownError__E',
     }),
   );
-  console.log('log check failed');
+  //console.log('log check failed');
 }
 
 export default logCheckFailed;

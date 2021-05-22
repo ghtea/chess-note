@@ -23,7 +23,7 @@ function Home() {
     event.preventDefault();
 
     const href = (event.currentTarget as HTMLAnchorElement).getAttribute('href'); // https://stackoverflow.com/questions/1550901/how-to-get-raw-href-contents-in-javascript
-    console.log(href);
+    //console.log(href);
     if (href) {
       history.push(href);
     }
