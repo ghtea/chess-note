@@ -62,14 +62,14 @@ function* logInGithub(action: actions.auth.type__CONTINUE_WITH_GITHUB) {
         console.log(error.message);
         yield put(
           actions.notification.return__ADD_DELETE_BANNER({
-            codeSituation: 'LogIn_UnknownError__E',
+            situationCode: 'LogIn_UnknownError__E',
           }),
         );
       } else {
         console.error(error);
         yield put(
           actions.notification.return__ADD_DELETE_BANNER({
-            codeSituation: 'LogIn_UnknownError__E',
+            situationCode: 'LogIn_UnknownError__E',
           }),
         );
       }
@@ -95,7 +95,7 @@ function* logInGithub(action: actions.auth.type__CONTINUE_WITH_GITHUB) {
 
     yield put(
       actions.notification.return__ADD_CODE_SITUATION_OTHERS({
-        codeSituation: 'LogIn_UnknownError__E',
+        situationCode: 'LogIn_UnknownError__E',
       }),
     );
   }

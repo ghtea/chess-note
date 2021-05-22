@@ -6,12 +6,13 @@ import focusingChess from 'libraries/chess';
 import { correctChessMoveTree, markedChessMoveTree } from 'components/Main/Quiz/chessMoveTree';
 
 import { useLocation } from 'react-router-dom';
-import { FormattedMessage } from 'react-intl';
+import { FormattedMessage, useIntl } from 'react-intl';
 import * as clipboardy from 'clipboardy';
 
 import { useSelector, useDispatch } from 'react-redux';
 import { RootState } from 'store/reducers';
 import * as actions from 'store/actions';
+import * as types from 'store/types';
 
 import InputRadio from 'components/Global/Input/InputRadio';
 import convertCase from 'tools/vanilla/convertCase';
@@ -27,7 +28,9 @@ type PropsQuizEditingOthers = {
 
 function QuizEditingOthers({ top }: PropsQuizEditingOthers) {
   const dispatch = useDispatch();
+  const intl = useIntl();
 
+  const focusingQuizData = useSelector((state: RootState) => state.quiz.data.focusing);
   const focusingQuizState = useSelector((state: RootState) => state.quiz.state.focusing);
 
   const refModal = useRef<HTMLDivElement>(null);
@@ -57,62 +60,72 @@ function QuizEditingOthers({ top }: PropsQuizEditingOthers) {
       if (value === 'use-fen') {
         const valueFromClipboard = await clipboardy.read();
         const { valid } = focusingChess.validate_fen(valueFromClipboard);
-
         if (valid) {
-          focusingChess.load(valueFromClipboard);
-          const turn = focusingChess.turn() === 'w' ? 'white' : 'black';
-
-          dispatch(
-            actions.quiz.return__REPLACE({
-              keyList: ['data', 'focusing', 'startingFen'],
-              replacement: focusingChess.fen(),
-            }),
-          );
-
-          dispatch(
-            actions.quiz.return__REPLACE({
-              keyList: ['data', 'focusing', 'side'],
-              replacement: turn,
-            }),
-          );
-
-          const newQuizState = {
-            ...focusingQuizState,
-            fen: focusingChess.fen(),
-            turn: turn,
-            sanSeries: [],
-          };
-
-          dispatch(
-            actions.quiz.return__REPLACE({
-              keyList: ['state', 'focusing'],
-              replacement: newQuizState,
-            }),
-          );
+          if (focusingQuizData.startingFen !== types.quiz.defaultFen) {
+            if (
+              window.confirm(intl.formatMessage({ id: 'Confirm.AreYouSureToChangeStartingFen' }))
+            ) {
+              dispatch(
+                actions.quiz.return__CHANGE_STARTING_FEN({
+                  startingFen: valueFromClipboard,
+                }),
+              );
+            }
+          } else {
+            // 현재 시작지점이 체스 시작시점이라 바로 초기화해도 잃는게 거의 없음
+            dispatch(
+              actions.quiz.return__CHANGE_STARTING_FEN({
+                startingFen: valueFromClipboard,
+              }),
+            );
+          }
         } else {
+          // not valid
           dispatch(
             actions.notification.return__ADD_DELETE_BANNER({
-              codeSituation: 'QuizEditingOthers_NotValidFen',
+              situationCode: 'QuizEditingOthers_NotValidFen__E',
+            }),
+          );
+          console.error('not valid fen');
+        }
+      } else if (value === 'play') {
+        dispatch(
+          actions.quiz.return__FOCUS_QUIZ({
+            quiz: focusingQuizData,
+            situation: 'playing-trying',
+          }),
+        );
+      } else if (value === 'delete') {
+        if (window.confirm(intl.formatMessage({ id: 'Confirm.AreYouSureToDeleteThisQuiz' }))) {
+          dispatch(
+            actions.quiz.return__DELETE_QUIZ({
+              quizId: focusingQuizData.id,
             }),
           );
         }
       }
+      dispatch(
+        actions.appearance.return__REPLACE({
+          keyList: ['showing', 'modal', 'quizEditingOthers'],
+          replacement: false,
+        }),
+      );
     },
-    [focusingQuizState, focusingChess],
+    [focusingQuizState, focusingQuizData, focusingChess],
   );
 
   return (
-    <div className={`${stylesQC['root']} ${stylesQC['root']} ${stylesModal['root']}`}>
+    <div className={`${styles['root']} ${stylesQC['root']} ${stylesModal['root']}`}>
       <div className={`${stylesModal['outside']}`} aria-label="Outside Save" />
 
       <div
         className={`${stylesModal['modal']} ${stylesQC['modal']} ${stylesQC['modal']}`}
         role="dialog"
-        aria-labelledby="Heading_Save"
+        aria-label="Others"
         ref={refModal}
         style={{ top: top }}
       >
-        <div className={`${stylesModal['content']} ${stylesQC['content']} ${stylesQC['content']}`}>
+        <div className={`${stylesModal['content']}`}>
           <div className={`${stylesModal['content__section']}`}>
             <button
               type="button"
@@ -122,6 +135,28 @@ function QuizEditingOthers({ top }: PropsQuizEditingOthers) {
             >
               {' '}
               <FormattedMessage id={`Modal.QuizEditingOthers_UseFen`} />{' '}
+            </button>
+          </div>
+
+          <div className={`${stylesModal['content__section']}`}>
+            <button
+              type="button"
+              value="play"
+              className={`${styles['button__play']} ${stylesModal['button__basic']}`}
+              onClick={onClick_AnyMainButton}
+            >
+              <FormattedMessage id={'Global.Play'} />
+            </button>
+          </div>
+
+          <div className={`${stylesModal['content__section']}`}>
+            <button
+              type="button"
+              value="delete"
+              className={`${styles['button__delete']} ${stylesModal['button__basic']}`}
+              onClick={onClick_AnyMainButton}
+            >
+              <FormattedMessage id={'Global.Delete'} />
             </button>
           </div>
         </div>

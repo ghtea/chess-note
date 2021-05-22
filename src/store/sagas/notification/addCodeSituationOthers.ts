@@ -9,7 +9,7 @@ function* addCodeSituationOthers(action: actions.notification.type__ADD_CODE_SIT
   );
 
   const otherSituationCodeListNew = [
-    action.payload.codeSituation,
+    action.payload.situationCode,
     ...otherSituationCodeListPrevious,
   ];
 

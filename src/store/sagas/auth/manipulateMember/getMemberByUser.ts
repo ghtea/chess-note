@@ -63,7 +63,7 @@ function* getMemberByUser(action: actions.auth.type__GET_MEMBER_BY_USER) {
 
     yield put(
       actions.notification.return__ADD_DELETE_BANNER({
-        codeSituation: 'GetMember_UnknownError__E',
+        situationCode: 'GetMember_UnknownError__E',
       }),
     );
   }

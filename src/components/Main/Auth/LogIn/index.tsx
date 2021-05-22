@@ -39,8 +39,8 @@ function LogIn() {
     password: '',
   });
 
-  const [codeSituationEmail, setCodeSituationEmail] = useState('');
-  const [codeSituationPassword, setCodeSituationPassword] = useState('');
+  const [situationCodeEmail, setCodeSituationEmail] = useState('');
+  const [situationCodePassword, setCodeSituationPassword] = useState('');
 
   useEffect(() => {
     if (statusUser.ready) {
@@ -128,8 +128,8 @@ function LogIn() {
           />
           <div>
             {' '}
-            {codeSituationEmail && (
-              <FormattedMessage id={`Notification.${codeSituationEmail}`} />
+            {situationCodeEmail && (
+              <FormattedMessage id={`Notification.${situationCodeEmail}`} />
             )}{' '}
           </div>
         </div>
@@ -146,8 +146,8 @@ function LogIn() {
           />
           <div>
             {' '}
-            {codeSituationPassword && (
-              <FormattedMessage id={`Notification.${codeSituationPassword}`} />
+            {situationCodePassword && (
+              <FormattedMessage id={`Notification.${situationCodePassword}`} />
             )}{' '}
           </div>
         </div>

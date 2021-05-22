@@ -25,8 +25,7 @@ export default function QuizHomeOthers() {
 
   const userId = useSelector((state: RootState) => state.auth.user?.id);
 
-  const publicQuizList = useSelector((state: RootState) => state.quiz.data.publicQuizList);
-  const myQuizList = useSelector((state: RootState) => state.quiz.data.myQuizList);
+  const quizList = useSelector((state: RootState) => state.quiz.data.list);
   const displayState = useSelector((state: RootState) => state.quiz.state.display);
 
   const refModal = useRef<HTMLDivElement>(null);
@@ -53,8 +52,8 @@ export default function QuizHomeOthers() {
     async (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
       const value = e.currentTarget.value;
 
-      if (value === 'edit-this-quiz') {
-        const quizToEdit = (displayState.mode === 'public-quiz' ? publicQuizList : myQuizList).find(
+      if (value === 'edit') {
+        const quizToEdit = quizList.find(
           (e) => e.id === displayState.clickedQuizId,
         );
         dispatch(
@@ -63,9 +62,13 @@ export default function QuizHomeOthers() {
             situation: 'editing',
           }),
         );
-      } else if (value === 'delete-answer') {
+      } else if (value === 'delete-this-quiz') {
+        dispatch(
+          actions.quiz.return__DELETE_QUIZ({
+            quizId: displayState.clickedQuizId,
+          }),
+        );
       }
-
       // close modal after click main buttons
       dispatch(
         actions.appearance.return__REPLACE({
@@ -74,11 +77,11 @@ export default function QuizHomeOthers() {
         }),
       );
     },
-    [publicQuizList, myQuizList, displayState],
+    [quizList, displayState, userId],
   );
 
-  const isShowingEditButton = useMemo(() => {
-    const clickedQuiz = (displayState.mode === 'public-quiz' ? publicQuizList : myQuizList).find(
+  const isShowingManipulateButton = useMemo(() => {
+    const clickedQuiz = quizList.find(
       (e) => e.id === displayState.clickedQuizId,
     );
     if (userId === clickedQuiz?.authorId) {
@@ -86,7 +89,7 @@ export default function QuizHomeOthers() {
     } else {
       return false;
     }
-  }, [userId, displayState, publicQuizList, myQuizList]);
+  }, [userId, displayState, quizList]);
 
   return (
     <div className={`${styles['root']} ${stylesModal['root']}`}>
@@ -94,17 +97,30 @@ export default function QuizHomeOthers() {
 
       <div className={`${stylesModal['modal']}`} role="dialog" aria-label="Others" ref={refModal}>
         <div className={`${stylesModal['content']}`}>
-          {isShowingEditButton && (
-            <div className={`${stylesModal['content__section']}`}>
-              <button
-                type="button"
-                value="edit-this-quiz"
-                className={`${styles['button__edit-this-quiz']} ${stylesModal['button__basic']}`}
-                onClick={onClick_AnyMainButton}
-              >
-                <FormattedMessage id={'Global.Edit'} />
-              </button>
-            </div>
+          {isShowingManipulateButton && (
+            <>
+              <div className={`${stylesModal['content__section']}`}>
+                <button
+                  type="button"
+                  value="edit"
+                  className={`${styles['button__edit']} ${stylesModal['button__basic']}`}
+                  onClick={onClick_AnyMainButton}
+                >
+                  <FormattedMessage id={'Global.Edit'} />
+                </button>
+              </div>
+
+              <div className={`${stylesModal['content__section']}`}>
+                <button
+                  type="button"
+                  value="delete-this-quiz"
+                  className={`${styles['button__delete-this-quiz']} ${stylesModal['button__basic']}`}
+                  onClick={onClick_AnyMainButton}
+                >
+                  <FormattedMessage id={'Global.Delete'} />
+                </button>
+              </div>
+            </>
           )}
         </div>
       </div>

@@ -12,9 +12,9 @@ function* deleteCodeSituationOthers(
 
   let otherSituationCodeListNew: string[] = otherSituationCodeListPrevious;
 
-  if (action.payload.codeSituation) {
+  if (action.payload.situationCode) {
     otherSituationCodeListNew = otherSituationCodeListPrevious.filter(
-      (code) => code !== action.payload.codeSituation,
+      (code) => code !== action.payload.situationCode,
     );
   } else if (action.payload.regex) {
     otherSituationCodeListNew = otherSituationCodeListPrevious.filter((code) =>

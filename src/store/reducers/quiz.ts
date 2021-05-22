@@ -12,11 +12,10 @@ export type State = typeof stateInitial; // 아직 불확실
 
 const stateInitial = {
   data: {
-    myQuizList: [] as types.quiz.Quiz[],
-    publicQuizList: [] as types.quiz.Quiz[],
+    list: [] as types.quiz.Quiz[],
 
     focusing: {
-      id: null,
+      id: '',
       name: '',
 
       nextTurn: 'white',
@@ -28,22 +27,36 @@ const stateInitial = {
       authorName: '',
 
       isPublic: true,
+      memberReaction: {
+        likedMemberIdList: [],
+        dislikedMemberIdList: [],
+      },
     } as types.quiz.Quiz,
   },
 
   state: {
-
     situation: null as types.quiz.Situation,
 
     display: {
-      mode: 'public-quiz' as types.quiz.DisplayMode,
+      filteringOptionList: [
+        'my-quiz',
+        'public-quiz',
+        'i-liked',
+        'i-disliked',
+        'not-decided',
+        'i-solved',
+        'i-failed',
+        'not-tried',
+      ] as types.quiz.FilteringOption[],
+      sortingOptionList: [] as types.quiz.SortingOption[],
+      arrangedIdList: [] as string[],
       clickedQuizId: '',
     },
 
-    playingIdList: [],
+    playingIdList: [] as string[],
 
     focusing: {
-      fen: null,
+      fen: types.quiz.defaultFen,
       turn: 'white',
       sanSeries: [],
     } as types.quiz.QuizState,

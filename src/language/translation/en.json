@@ -10,6 +10,7 @@
   "Global.Edit": "Edit",
   "Global.Update": "Update",
   "Global.Search": "Search",
+  "Global.Play": "Play",
 
   "Global.Opening": "Opening",
   "Global.Quiz": "Quiz",
@@ -38,21 +39,6 @@
   "Main.SignUp_SignUp": "Sign Up",
   "Main.SignUp_PasswordAgain": "Password Again",
 
-  "Main.QuizHome_ShortCuts_PlayPublicQuiz": "Play Public Quiz",
-  "Main.QuizHome_ShortCuts_PlayMyQuiz": "Play My Quiz",
-  "Main.QuizHome_ShortCuts_CreateQuiz": "Create Quiz",
-
-  "Main.QuizHome_QuizDisplay_MonthsAgo": "month(s) ago",
-  "Main.QuizHome_QuizDisplay_DaysAgo": "day(s) ago",
-  "Main.QuizHome_QuizDisplay_HoursAgo": "hour(s) ago",
-  "Main.QuizHome_QuizDisplay_MinsAgo": "min(s) ago",
-  "Main.QuizHome_QuizDisplay_JustBefore": "just before",
-
-
-  "Main.QuizPlay_StatusBar_Solved": "Solved!",
-  "Main.QuizPlay_StatusBar_Failed": "Failed",
-  "Main.QuizPlay_ToolBar_GiveUp": "Give Up",
-
   "Modal.Setting_Title": "Setting",
   "Modal.Setting_Theme": "Theme",
   "Modal.Setting_Language": "Language",
@@ -64,26 +50,48 @@
   "Modal.MyProfile_Photo": "Photo",
   "Modal.MyProfile_Update": "Update",
 
+  "Main.QuizHome_ShortCuts_PlayArrangedQuizList": "Play Arranged Quizzes",
+  "Main.QuizHome_ShortCuts_CreateQuiz": "Create Quiz",
+  "Main.QuizHome_QuizDisplay_PublicQuiz": "Public Quiz",
+  "Main.QuizHome_QuizDisplay_MyQuiz": "My Quiz",
+  "Main.QuizHome_QuizDisplay_MonthsAgo": "month(s) ago",
+  "Main.QuizHome_QuizDisplay_DaysAgo": "day(s) ago",
+  "Main.QuizHome_QuizDisplay_HoursAgo": "hour(s) ago",
+  "Main.QuizHome_QuizDisplay_MinsAgo": "min(s) ago",
+  "Main.QuizHome_QuizDisplay_JustBefore": "just before",
+
+  "Main.QuizPlay_StatusBar_Solved": "Solved!",
+  "Main.QuizPlay_StatusBar_Failed": "Failed",
+  "Main.QuizPlay_ToolBar_GiveUp": "Give Up",
+
+  "Main.ReactionDisplay_PeopleLike": "people like",
+  "Main.ReactionDisplay_Solved": "solved",
+  "Main.ReactionDisplay_Failed": "failed",
+  "Main.ReactionDisplay_NotTried": "not tried",
+  
   "Modal.QuizEditingUpload_IsPublic": "Is Public",
   "Modal.QuizEditingUpload_Public": "Public",
   "Modal.QuizEditingUpload_Private": "Private",
-
   "Modal.QuizEditingSet_SetAsStart": "Set as Start",
   "Modal.QuizEditingSet_SetAsAnswer": "Set as an Answer",
   "Modal.QuizEditingSet_SetAsMark": "Set as a Mark",
-
   "Modal.QuizEditingOthers_UseFen": "Use FEN from Clipboard",
-  "Modal.QuizEditingOthers_NotValidFen": "This is not valid FEN",
   "Modal.QuizEditingOthers_ChangeSide": "Change Side",
 
   "Modal.QuizManageAnswersMarks_ShowAnswer": "Show Answer {index}",
   "Modal.QuizManageAnswersMarks_DeleteAnswer": "Delete Answer {index}",
   "Modal.QuizManageAnswersMarks_NoAnswer": "No Answer",
+  "Modal.QuizManageAnswersMarks_ShowAllAnswers": "Show All Answers",
 
   "Modal.QuizManageAnswersMarks_ShowMark": "Show Mark {index}",
   "Modal.QuizManageAnswersMarks_DeleteMark": "Delete Mark {index}",
   "Modal.QuizManageAnswersMarks_NoMark": "No Mark",
+  "Modal.QuizManageAnswersMarks_ShowAllMarks": "Show All Marks",
 
+  "Confirm.AreYouSureToDeleteThisQuiz": "Are you sure to delete this quiz?",
+  "Confirm.AreYouSureToDeleteThisAnswer": "Are you sure to delete this answer?",
+  "Confirm.AreYouSureToDeleteThisMark": "Are you sure to delete this mark?",
+  "Confirm.AreYouSureToChangeStartingFen": "Are you sure to change starting position? Answers and marks will be reset.",
 
   "Notification.Test1__S": "Succuessfully tested 1 !",
   "Notification.Test2__H": "Succuessfully tested 2 !",
@@ -110,28 +118,30 @@
   "Notification.SignUp_PasswordsDifferent__E": "The two passwords are different",
   "Notification.SignUp_WeakPassword__E": "Password should be at least 6 characters long",
 
+  "Notification.UpdateProfile_Succeeded__S": "Successfully updated the profile!",
   "Notification.GetMember_UnknownError__E": "An unknown error has occurred while retrieving member information",
   "Notification.UpdateMember_UnknownError__E": "An unknown error has occurred while updating member information",
-  
+
   "Notification.PlayQuiz_Correct__S": "Correct!",
   "Notification.PlayQuiz_Wrong__W": "That's not the answer",
-  "Notification.PlayQuiz_NoPublicQuiz__E": "There is no public quiz",
-  "Notification.PlayQuiz_NoMyQuiz__E": "That's no my quiz",
+  "Notification.PlayQuiz_NoQuiz__E": "There is no quiz",
+  "Notification.ShowAnswerOrMark_AnswerEnded__H": "This is the answer {index}",
+  "Notification.ShowAnswerOrMark_MarkEnded__H": "This is the mark {index}",
+  "Notification.ShowAnswerOrMark_NotValid__E": "There is a nonvalid move",
+
+  "Notification.EditQuiz_NotAuthor__E": "You are not author of this quiz",
+  "Notification.QuizEditingOthers_NotValidFen__E": "This is not valid FEN",
 
   "Notification.CreateQuiz_Succeeded__S": "Successfully created the quiz!",
   "Notification.CreateQuiz_UnknownError__E": "Failed to create the quiz",
   "Notification.CreateQuiz_NoAnswer__E": "You should set anwser",
   "Notification.CreateQuiz_NoFenStart__E": "You should set starting position",
-
-  "Notification.EditQuiz_NotAuthor__E": "You are not author of this quiz",
-
-  "Notification.ShowAnswerOrMark_NotValid__E": "There is a nonvalid move",
-
-  "Notification.GetFocusListQuiz_UnknownError__E": "Failed to get the quizes",
+  "Notification.GetQuizList_UnknownError__E": "Failed to get the quizes",
   "Notification.GetQuiz_UnknownError__E": "Failed to get the quiz",
   "Notification.GetQuiz_NoQuiz__E": "The quiz doesn't exist",
   "Notification.UpdateQuiz_Succeeded__S": "Successfully updated the quiz!",
   "Notification.UpdateQuiz_UnknownError__E": "Failed to update the quiz",
   "Notification.DeleteQuiz_Succeeded__S": "Successfully deleted the quiz!",
-  "Notification.DeleteQuiz_UnknownError__E": "Failed to delete the quiz"
+  "Notification.DeleteQuiz_UnknownError__E": "Failed to delete the quiz",
+  "Notification.LikeDislikeQuiz_UnknownError__E": "Failed to like/dislike the quiz"
 }

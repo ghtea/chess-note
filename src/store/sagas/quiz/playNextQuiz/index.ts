@@ -21,16 +21,13 @@ export default function* playNextQuiz(action: actions.quiz.type__PLAY_NEXT_QUIZ)
   } else if (currentIndex === playingIdList.length - 1) {
     console.log('no more quiz');
   } else {
-    const myQuizList: types.quiz.Quiz[] = yield select(
-      (state: RootState) => state.quiz.data.myQuizList,
-    );
-    const publicQuizList: types.quiz.Quiz[] = yield select(
-      (state: RootState) => state.quiz.data.publicQuizList,
+    const quizList: types.quiz.Quiz[] = yield select(
+      (state: RootState) => state.quiz.data.list,
     );
 
     yield put(
       actions.quiz.return__FOCUS_QUIZ({
-        quiz: [...myQuizList, ...publicQuizList].find(
+        quiz: quizList.find(
           (e) => e.id === playingIdList[currentIndex + 1],
         ),
         situation: 'playing-trying',

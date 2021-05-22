@@ -23,14 +23,14 @@ function* logIn(action: actions.auth.type__LOG_IN) {
       console.log('type email address');
       yield put(
         actions.notification.return__ADD_CODE_SITUATION_OTHERS({
-          codeSituation: 'LogIn_NoEmail__E',
+          situationCode: 'LogIn_NoEmail__E',
         }),
       );
     } else if (action.payload.password === '') {
       console.log('type password');
       yield put(
         actions.notification.return__ADD_CODE_SITUATION_OTHERS({
-          codeSituation: 'LogIn_NoPassword__E',
+          situationCode: 'LogIn_NoPassword__E',
         }),
       );
     } else {
@@ -49,11 +49,9 @@ function* logIn(action: actions.auth.type__LOG_IN) {
       const password: string = action.payload.password;
 
       try {
-
         yield call(requestLogIn, email, password);
 
         yield applyLoggedInUser();
-
       } catch (error) {
         yield put(
           actions.status.return__REPLACE({
@@ -73,35 +71,35 @@ function* logIn(action: actions.auth.type__LOG_IN) {
           console.error(error.message);
           yield put(
             actions.notification.return__ADD_CODE_SITUATION_OTHERS({
-              codeSituation: 'LogIn_WrongPassword__E',
+              situationCode: 'LogIn_WrongPassword__E',
             }),
           );
         } else if (error.code === 'auth/invalid-email') {
           console.error(error.message);
           yield put(
             actions.notification.return__ADD_CODE_SITUATION_OTHERS({
-              codeSituation: 'LogIn_InvalidEmail__E',
+              situationCode: 'LogIn_InvalidEmail__E',
             }),
           );
         } else if (error.code === 'auth/user-disabled') {
           console.error(error.message);
           yield put(
             actions.notification.return__ADD_DELETE_BANNER({
-              codeSituation: 'LogIn_UserDisabled__E',
+              situationCode: 'LogIn_UserDisabled__E',
             }),
           );
         } else if (error.code === 'auth/user-not-found') {
           console.error(error.message);
           yield put(
             actions.notification.return__ADD_DELETE_BANNER({
-              codeSituation: 'LogIn_UserNotFound__E',
+              situationCode: 'LogIn_UserNotFound__E',
             }),
           );
         } else {
           console.error(error);
           yield put(
             actions.notification.return__ADD_DELETE_BANNER({
-              codeSituation: 'LogIn_UnknownError__E',
+              situationCode: 'LogIn_UnknownError__E',
             }),
           );
         }
@@ -127,7 +125,7 @@ function* logIn(action: actions.auth.type__LOG_IN) {
 
     yield put(
       actions.notification.return__ADD_CODE_SITUATION_OTHERS({
-        codeSituation: 'LogIn_UnknownError__E',
+        situationCode: 'LogIn_UnknownError__E',
       }),
     );
   }

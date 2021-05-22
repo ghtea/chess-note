@@ -14,7 +14,7 @@ import * as actions from 'store/actions';
 import * as types from 'store/types';
 
 import styles from './index.module.scss';
-import stylesQPS from '../../QuizPlaying/StatusBar/index.module.scss';
+import stylesQPS from 'components/Main/Quiz/QuizPlaying/EntireBoard/StatusBar/index.module.scss';
 import IconPaste from 'svgs/basic/IconSignIn';
 import IconAngle from 'svgs/basic/IconAngle';
 import IconOthers from 'svgs/basic/IconThreeDots';
@@ -26,7 +26,7 @@ export default function StatusBarQE() {
   const heightStatusBar = useSelector(
     (state: RootState) => state.appearance.layout.document.chessBoard.statusBar.height,
   );
-  const lengthChessBoard = useSelector(
+  const chessBoardLength = useSelector(
     (state: RootState) => state.appearance.layout.document.chessBoard.length,
   );
 
@@ -47,7 +47,7 @@ export default function StatusBarQE() {
     <div
       className={`${styles['root']} ${stylesQPS['root']}`}
       style={{
-        width: lengthChessBoard,
+        width: chessBoardLength,
         height: heightStatusBar,
       }}
     >

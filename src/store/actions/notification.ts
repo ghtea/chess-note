@@ -11,61 +11,50 @@ export const return__REPLACE = (payload: Payload__REPLACE) => {
     payload: payload,
   };
 };
-
 export type type__REPLACE = ReturnType<typeof return__REPLACE>;
 
 export const name__ADD_DELETE_BANNER = `notification/ADD_DELETE_BANNER`;
-
 interface Payload__ADD_DELETE_BANNER {
-  codeSituation: string;
+  situationCode: string;
+  messageValues?: Record<string, React.ReactNode>;
 }
-
 export const return__ADD_DELETE_BANNER = (payload: Payload__ADD_DELETE_BANNER) => {
   return {
     type: name__ADD_DELETE_BANNER,
     payload: payload,
   };
 };
-
 export type type__ADD_DELETE_BANNER = ReturnType<typeof return__ADD_DELETE_BANNER>;
 
 export const name__DELETE_BANNER = `notification/DELETE_BANNER`; // 뒤에 as const 를 붙이면 reducer 에서 notification.REPLACE 로 쓸때 오류 뜬다. 아직 이해못
-
 interface Payload__DELETE_BANNER {
   id: string;
 }
-
 export const return__DELETE_BANNER = (payload: Payload__DELETE_BANNER) => {
   return {
     type: name__DELETE_BANNER,
     payload: payload,
   };
 };
-
 export type type__DELETE_BANNER = ReturnType<typeof return__DELETE_BANNER>;
 
 export const name__ADD_CODE_SITUATION_OTHERS = `notification/ADD_CODE_SITUATION_OTHERS`;
-
 interface Payload__ADD_CODE_SITUATION_OTHERS {
-  codeSituation: string;
+  situationCode: string;
 }
-
 export const return__ADD_CODE_SITUATION_OTHERS = (payload: Payload__ADD_CODE_SITUATION_OTHERS) => {
   return {
     type: name__ADD_CODE_SITUATION_OTHERS,
     payload: payload,
   };
 };
-
 export type type__ADD_CODE_SITUATION_OTHERS = ReturnType<typeof return__ADD_CODE_SITUATION_OTHERS>;
 
 export const name__DELETE_CODE_SITUATION_OTHERS = `notification/DELETE_CODE_SITUATION_OTHERS`;
-
 interface Payload__DELETE_CODE_SITUATION_OTHERS {
-  codeSituation?: string;
+  situationCode?: string;
   regex?: RegExp;
 }
-
 export const return__DELETE_CODE_SITUATION_OTHERS = (
   payload: Payload__DELETE_CODE_SITUATION_OTHERS,
 ) => {

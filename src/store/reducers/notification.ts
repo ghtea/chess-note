@@ -17,9 +17,10 @@ import putValueToNestedObject from 'tools/vanilla/putValueToNestedObject';
 
 export type Banner = {
   id: string;
-  codeSituation: string;
-  kindSituation: types.notification.KindSituation;
-  idMessage: string;
+  situationCode: string;
+  situationKind: types.notification.KindSituation;
+  messageId: string;
+  messageValues?: Record<string, React.ReactNode>;
   msTime: number;
 };
 

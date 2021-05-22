@@ -7,21 +7,20 @@ import * as types from 'store/types';
 import focusingChess from 'libraries/chess';
 import shuffleArray from 'tools/vanilla/suffleArray';
 
-export default function* playRandomQuiz(action: actions.quiz.type__PLAY_RANDOM_QUIZ) {
-  const { kind } = action.payload;
-
-  const quizList: types.quiz.Quiz[] = yield select(
-    (state: RootState) => state.quiz.data[kind === 'public-quiz' ? 'publicQuizList' : 'myQuizList'],
+export default function* playArrangedQuizList(action: actions.quiz.type__PLAY_ARRANGED_QUIZ_LIST) {
+  const arrangedQuizIdList: string[] = yield select(
+    (state: RootState) => state.quiz.state.display.arrangedIdList,
   );
+  const quizList: types.quiz.Quiz[] = yield select((state: RootState) => state.quiz.data.list);
 
-  if (!(quizList.length > 0)) {
+  if (!(quizList.length > 0) || !(arrangedQuizIdList.length > 0)) {
     yield put(
       actions.notification.return__ADD_DELETE_BANNER({
-        codeSituation: kind === 'public-quiz' ? 'PlayQuiz_NoPublicQuiz__E' : 'PlayQuiz_NoMyQuiz__E',
+        situationCode: 'PlayQuiz_NoQuiz__E',
       }),
     );
   } else {
-    const newPlayingIdList = [...quizList.map((e) => e.id)];
+    const newPlayingIdList = [...arrangedQuizIdList];
     shuffleArray(newPlayingIdList);
 
     yield put(

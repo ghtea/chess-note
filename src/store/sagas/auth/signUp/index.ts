@@ -34,7 +34,7 @@ function* signUp(action: actions.auth.type__SIGN_UP) {
       console.log('type email address');
       yield put(
         actions.notification.return__ADD_CODE_SITUATION_OTHERS({
-          codeSituation: 'SignUp_NoEmail__E',
+          situationCode: 'SignUp_NoEmail__E',
         }),
       );
       //addDeleteNotification("auth01", language);
@@ -43,7 +43,7 @@ function* signUp(action: actions.auth.type__SIGN_UP) {
         else if ( !(/\S+@\S+\.\S+/).test(action.payload.email) ){
             console.log('type valid email address');
             yield put( actionsNotification.return__ADD_CODE_SITUATION_OTHERS({
-                codeSituation: 'SignUp_NotValidEmail'
+                situationCode: 'SignUp_NotValidEmail'
             }) );
             //addDeleteNotification("auth021", language);
         }
@@ -51,7 +51,7 @@ function* signUp(action: actions.auth.type__SIGN_UP) {
       console.log('type both passwords');
       yield put(
         actions.notification.return__ADD_CODE_SITUATION_OTHERS({
-          codeSituation: 'SignUp_NoPassword__E',
+          situationCode: 'SignUp_NoPassword__E',
         }),
       );
       //addDeleteNotification("auth03", language);
@@ -59,7 +59,7 @@ function* signUp(action: actions.auth.type__SIGN_UP) {
       console.log('two passwords are different');
       yield put(
         actions.notification.return__ADD_CODE_SITUATION_OTHERS({
-          codeSituation: 'SignUp_PasswordsDifferent__E',
+          situationCode: 'SignUp_PasswordsDifferent__E',
         }),
       );
       //addDeleteNotification("auth04", language);
@@ -68,7 +68,7 @@ function* signUp(action: actions.auth.type__SIGN_UP) {
         else if (action.payload.password1.length < 6) {
             console.log('password is too short');
             yield put( actionsNotification.return__ADD_CODE_SITUATION_OTHERS({
-                codeSituation: 'SignUp_ShortPassword'
+                situationCode: 'SignUp_ShortPassword'
             }) );
             //addDeleteNotification("auth04", language);
         }
@@ -93,7 +93,7 @@ function* signUp(action: actions.auth.type__SIGN_UP) {
 
         yield put(
           actions.notification.return__ADD_DELETE_BANNER({
-            codeSituation: 'SignUp_Succeeded__S',
+            situationCode: 'SignUp_Succeeded__S',
           }),
         );
       } catch (error) {
@@ -107,35 +107,35 @@ function* signUp(action: actions.auth.type__SIGN_UP) {
       console.error(error.message);
       yield put(
         actions.notification.return__ADD_CODE_SITUATION_OTHERS({
-          codeSituation: 'SignUp_DuplicateEmail__E',
+          situationCode: 'SignUp_DuplicateEmail__E',
         }),
       );
     } else if (error.code === 'auth/invalid-email') {
       console.error(error.message);
       yield put(
         actions.notification.return__ADD_CODE_SITUATION_OTHERS({
-          codeSituation: 'SignUp_InvalidEmail__E',
+          situationCode: 'SignUp_InvalidEmail__E',
         }),
       );
     } else if (error.code === 'auth/weak-password') {
       console.error(error.message);
       yield put(
         actions.notification.return__ADD_CODE_SITUATION_OTHERS({
-          codeSituation: 'SignUp_WeakPassword__E',
+          situationCode: 'SignUp_WeakPassword__E',
         }),
       );
     } else if (error.code === 'auth/operation-not-allowed') {
       console.error(error.message);
       yield put(
         actions.notification.return__ADD_DELETE_BANNER({
-          codeSituation: 'SignUp_UnknownError__E',
+          situationCode: 'SignUp_UnknownError__E',
         }),
       );
     } else {
       console.error(error);
       yield put(
         actions.notification.return__ADD_DELETE_BANNER({
-          codeSituation: 'SignUp_UnknownError__E',
+          situationCode: 'SignUp_UnknownError__E',
         }),
       );
     }

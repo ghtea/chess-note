@@ -6,7 +6,7 @@ import focusingChess from 'libraries/chess';
 import { correctChessMoveTree, markedChessMoveTree } from 'components/Main/Quiz/chessMoveTree';
 
 import { useLocation } from 'react-router-dom';
-import { FormattedMessage } from 'react-intl';
+import { FormattedMessage, useIntl } from 'react-intl';
 import * as clipboardy from 'clipboardy';
 
 import { useSelector, useDispatch } from 'react-redux';
@@ -21,13 +21,14 @@ import styles from './index.module.scss';
 import stylesQC from '../../common/index.module.scss';
 import stylesModal from 'components/Modal/index.module.scss';
 
-type PropsManageAnswer = {
+type PropsManageAnswersMarks = {
   top: number;
   kind: 'answer' | 'mark';
 };
 
-export default function ManageAnswer({ top, kind }: PropsManageAnswer) {
+export default function ManageAnswersMarks({ top, kind }: PropsManageAnswersMarks) {
   const dispatch = useDispatch();
+  const intl = useIntl();
 
   const situation = useSelector((state: RootState) => state.quiz.state.situation);
   const focusingQuizState = useSelector((state: RootState) => state.quiz.state.focusing);
@@ -38,16 +39,19 @@ export default function ManageAnswer({ top, kind }: PropsManageAnswer) {
   const onClick_Window = useCallback(
     (event: MouseEvent) => {
       if (!refModal.current?.contains(event.target as Node)) {
-        dispatch(
-          actions.appearance.return__REPLACE({
-            keyList: [
-              'showing',
-              'modal',
-              convertCase(kind === 'answer' ? 'QuizManageAnswers' : 'QuizManageMarks', 'camel'),
-            ],
-            replacement: false,
-          }),
-        );
+        if (true) {
+          // when it is not
+          dispatch(
+            actions.appearance.return__REPLACE({
+              keyList: [
+                'showing',
+                'modal',
+                convertCase(kind === 'answer' ? 'QuizManageAnswers' : 'QuizManageMarks', 'camel'),
+              ],
+              replacement: false,
+            }),
+          );
+        }
       }
     },
     [refModal],
@@ -68,25 +72,42 @@ export default function ManageAnswer({ top, kind }: PropsManageAnswer) {
             kind: kind,
           }),
         );
-      } else if (value === 'delete-item') {
-        if (kind === 'answer') {
-          correctChessMoveTree.deleteNthSeriesSan(itemIndex);
-          dispatch(
-            actions.quiz.return__REPLACE({
-              keyList: ['data', 'focusing', 'correctSanSeriesList'],
-              replacement: correctChessMoveTree.returnSanSeriesList(),
+      } else if (value === 'delete-current-item') {
+        if (
+          window.confirm(
+            intl.formatMessage({
+              id: `Confirm.AreYouSureToDeleteThis${kind === 'answer' ? 'Answer' : 'Mark'}`,
             }),
-          );
-        } else {
-          // if (kind === 'mark') {
-          markedChessMoveTree.deleteNthSeriesSan(itemIndex);
-          dispatch(
-            actions.quiz.return__REPLACE({
-              keyList: ['data', 'focusing', 'markedSanSeriesList'],
-              replacement: markedChessMoveTree.returnSanSeriesList(),
-            }),
-          );
+          )
+        ) {
+          if (kind === 'answer') {
+            correctChessMoveTree.deleteNthSeriesSan(itemIndex);
+            dispatch(
+              actions.quiz.return__REPLACE({
+                keyList: ['data', 'focusing', 'correctSanSeriesList'],
+                replacement: correctChessMoveTree.returnSanSeriesList(),
+              }),
+            );
+          } else {
+            // if (kind === 'mark') {
+            markedChessMoveTree.deleteNthSeriesSan(itemIndex);
+            dispatch(
+              actions.quiz.return__REPLACE({
+                keyList: ['data', 'focusing', 'markedSanSeriesList'],
+                replacement: markedChessMoveTree.returnSanSeriesList(),
+              }),
+            );
+          }
         }
+      } else if (value === 'show-all-items') {
+        dispatch(
+          actions.quiz.return__SHOW_ANSWER_OR_MARK({
+            length:
+              focusingQuizData[kind === 'answer' ? 'correctSanSeriesList' : 'markedSanSeriesList']
+                .length,
+            kind: kind,
+          }),
+        );
       }
     },
     [focusingQuizState.sanSeries, focusingQuizData, itemIndex],
@@ -96,7 +117,7 @@ export default function ManageAnswer({ top, kind }: PropsManageAnswer) {
     (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
       const numberItem =
         focusingQuizData[kind === 'answer' ? 'correctSanSeriesList' : 'markedSanSeriesList'].length;
-      //console.log(numberAnswer)
+
       const value = e.currentTarget.value;
       let itemIndexNew = itemIndex;
       if (value === 'previous-item') {
@@ -158,38 +179,42 @@ export default function ManageAnswer({ top, kind }: PropsManageAnswer) {
                     }}
                   />
                 </button>
-                <button
-                  type="button"
-                  value="previous-item"
-                  onClick={onClick_ButtonChangeItem}
-                  className={`${stylesQC['button__previous-item']}`}
-                >
-                  <IconAngle
-                    className={`${stylesQC['icon__previous-item']}`}
-                    direction="left"
-                    kind="regular"
-                  />
-                </button>
-                <button
-                  type="button"
-                  value="next-item"
-                  aria-label="next item"
-                  onClick={onClick_ButtonChangeItem}
-                  className={`${stylesQC['button__next-item']}`}
-                >
-                  <IconAngle
-                    className={`${stylesQC['icon__next-item']}`}
-                    direction="right"
-                    kind="regular"
-                  />
-                </button>
+                {itemAllNumber > 1 && (
+                  <>
+                    <button
+                      type="button"
+                      value="previous-item"
+                      onClick={onClick_ButtonChangeItem}
+                      className={`${stylesQC['button__previous-item']}`}
+                    >
+                      <IconAngle
+                        className={`${stylesQC['icon__previous-item']}`}
+                        direction="left"
+                        kind="regular"
+                      />
+                    </button>
+                    <button
+                      type="button"
+                      value="next-item"
+                      aria-label="next item"
+                      onClick={onClick_ButtonChangeItem}
+                      className={`${stylesQC['button__next-item']}`}
+                    >
+                      <IconAngle
+                        className={`${stylesQC['icon__next-item']}`}
+                        direction="right"
+                        kind="regular"
+                      />
+                    </button>
+                  </>
+                )}
               </div>
               {(situation === 'editing' || situation === 'creating') && (
                 <div className={`${stylesModal['content__section']}`}>
                   <button
                     type="button"
-                    value="delete-item"
-                    className={`${styles['button__delete-item']} ${stylesQC['button__basic']}`}
+                    value="delete-current-item"
+                    className={`${styles['button__delete-current-item']} ${stylesQC['button__basic']}`}
                     onClick={onClick_AnyMainButton}
                   >
                     <FormattedMessage
@@ -201,33 +226,55 @@ export default function ManageAnswer({ top, kind }: PropsManageAnswer) {
                       }}
                     />
                   </button>
-                  <button
-                    type="button"
-                    value="previous-item"
-                    onClick={onClick_ButtonChangeItem}
-                    className={`${stylesQC['button__previous-item']}`}
-                  >
-                    <IconAngle
-                      className={`${stylesQC['icon__previous-item']}`}
-                      direction="left"
-                      kind="regular"
-                    />
-                  </button>
-                  <button
-                    type="button"
-                    value="next-item"
-                    onClick={onClick_ButtonChangeItem}
-                    className={`${stylesQC['button__next-item']}`}
-                  >
-                    <IconAngle
-                      className={`${stylesQC['icon__next-item']}`}
-                      direction="right"
-                      kind="regular"
-                    />
-                  </button>
+
+                  {itemAllNumber > 1 && (
+                    <>
+                      <button
+                        type="button"
+                        value="previous-item"
+                        onClick={onClick_ButtonChangeItem}
+                        className={`${stylesQC['button__previous-item']}`}
+                      >
+                        <IconAngle
+                          className={`${stylesQC['icon__previous-item']}`}
+                          direction="left"
+                          kind="regular"
+                        />
+                      </button>
+
+                      <button
+                        type="button"
+                        value="next-item"
+                        onClick={onClick_ButtonChangeItem}
+                        className={`${stylesQC['button__next-item']}`}
+                      >
+                        <IconAngle
+                          className={`${stylesQC['icon__next-item']}`}
+                          direction="right"
+                          kind="regular"
+                        />
+                      </button>
+                    </>
+                  )}
                 </div>
               )}
             </>
+          )}
+          {itemAllNumber > 1 && (
+            <div className={`${stylesModal['content__section']}`}>
+              <button
+                type="button"
+                value="show-all-items"
+                className={`${styles['button__show-all-items']} ${stylesQC['button__basic']}`}
+                onClick={onClick_AnyMainButton}
+              >
+                <FormattedMessage
+                  id={`Modal.QuizManageAnswersMarks_ShowAll${
+                    kind === 'answer' ? 'Answers' : 'Marks'
+                  }`}
+                />
+              </button>
+            </div>
           )}
         </div>
       </div>

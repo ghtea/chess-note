@@ -15,30 +15,30 @@ function* addDeleteBanner(action: actions.notification.type__ADD_DELETE_BANNER) 
 
   const id = uuidv4();
 
-  const codeSituation: string = action.payload.codeSituation;
+  const { situationCode, messageValues } = action.payload;
 
-  let kindSituation: types.notification.KindSituation = 'warning';
-  if (codeSituation.match(/__S$/)) {
-    kindSituation = 'success';
-  } else if (codeSituation.match(/__H$/)) {
-    kindSituation = 'hint';
-  } else if (codeSituation.match(/__W$/)) {
-    kindSituation = 'warning';
-  } else if (codeSituation.match(/__E$/)) {
-    kindSituation = 'error';
+  let situationKind: types.notification.KindSituation = 'warning';
+  if (situationCode.match(/__S$/)) {
+    situationKind = 'success';
+  } else if (situationCode.match(/__H$/)) {
+    situationKind = 'hint';
+  } else if (situationCode.match(/__W$/)) {
+    situationKind = 'warning';
+  } else if (situationCode.match(/__E$/)) {
+    situationKind = 'error';
   }
 
-  const idMessage = `Notification.${codeSituation}`;
+  const messageId = `Notification.${situationCode}`;
 
   let levelTimeBanner: types.notification.LevelTimeBanner = 'normal';
 
-  if (kindSituation === 'success') {
+  if (situationKind === 'success') {
     levelTimeBanner = 'short';
-  } else if (kindSituation === 'hint') {
+  } else if (situationKind === 'hint') {
     levelTimeBanner = 'normal';
-  } else if (kindSituation === 'error') {
+  } else if (situationKind === 'error') {
     levelTimeBanner = 'long';
-  } else if (kindSituation === 'warning') {
+  } else if (situationKind === 'warning') {
     levelTimeBanner = 'normal';
   }
 
@@ -46,9 +46,10 @@ function* addDeleteBanner(action: actions.notification.type__ADD_DELETE_BANNER) 
 
   const bannerAdding = {
     id: id,
-    codeSituation: codeSituation,
-    kindSituation: kindSituation,
-    idMessage: idMessage,
+    situationCode: situationCode,
+    situationKind: situationKind,
+    messageId: messageId,
+    messageValues: messageValues,
     msTime: msTime,
   };
 

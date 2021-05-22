@@ -13,10 +13,10 @@ export type Category = {
 }
 
 const nav: (Category | Link)[] = [
-    {
-        id: 'opening',
-        kind: 'link'
-    },
+    // {
+    //     id: 'opening',
+    //     kind: 'link'
+    // },
     {
         id: 'quiz',
         kind: 'link'

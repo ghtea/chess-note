@@ -18,6 +18,9 @@ import IconThreeDots from 'svgs/basic/IconThreeDots';
 import IconPlay from 'svgs/basic/IconPlay';
 import IconCheckCircle from 'svgs/basic/IconCheckCircle';
 import IconXCircle from 'svgs/basic/IconXCircle';
+import IconThumbsUp from 'svgs/basic/IconThumbsUp';
+import IconThumbsDown from 'svgs/basic/IconThumbsDown';
+import refineQuizRecord from './refineQuizRecord';
 
 // import IconSort from 'svgs/basic/IconSort';
 type PropsQuiz = {
@@ -27,18 +30,22 @@ type PropsQuiz = {
 function Quiz({ quiz }: PropsQuiz) {
   const dispatch = useDispatch();
   const intl = useIntl();
+
   const quizRecordList = useSelector((state: RootState) => state.auth.member?.quizRecordList);
+  const userId = useSelector((state: RootState) => state.auth.user?.id);
+  const userReady = useSelector((state: RootState) => state.status.auth.user.ready);
 
   const onClick_Button = useCallback(
     (event: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
-      if (event.currentTarget.value === 'play-this-quiz') {
+      const value = event.currentTarget.value;
+
+      if (value === 'play') {
         dispatch(
           actions.quiz.return__FOCUS_QUIZ({
             quiz: quiz,
             situation: 'playing-trying',
           }),
         );
-
         // 단 하나만 플레이 리스트로서 대체
         dispatch(
           actions.quiz.return__REPLACE({
@@ -46,7 +53,18 @@ function Quiz({ quiz }: PropsQuiz) {
             replacement: [quiz.id],
           }),
         );
-      } else if (event.currentTarget.value === 'others') {
+      } else if (value === 'like' || value === 'dislike') {
+        const dolike = userReady && quiz.memberReaction.likedMemberIdList.includes(userId || '');
+        const doDislike =
+          userReady && quiz.memberReaction.dislikedMemberIdList.includes(userId || '');
+        dispatch(
+          actions.quiz.return__LIKE_DISLIKE_QUIZ({
+            quizId: quiz.id as string,
+            like: value === 'like' ? !dolike : dolike,
+            dislike: value === 'dislike' ? !doDislike : doDislike,
+          }),
+        );
+      } else if (value === 'others') {
         dispatch(
           actions.quiz.return__REPLACE({
             keyList: ['state', 'display', 'clickedQuizId'],
@@ -61,49 +79,13 @@ function Quiz({ quiz }: PropsQuiz) {
         );
       }
     },
-    [quiz],
+    [quiz, userReady, userId],
   );
 
-  const refinedRecord = useMemo(() => {
-    const thisQuizRecord = (quizRecordList || []).find((e) => e.quizId === quiz.id);
-    if (thisQuizRecord) {
-      const result = thisQuizRecord.result;
-      const dateDiff = Date.now() - thisQuizRecord.date;
-      let dateText = '';
-      if (dateDiff >= 1000 * 60 * 60 * 24 * 30) {
-        // 한달 이상이면
-        dateText = `${Math.floor(dateDiff / (1000 * 60 * 60 * 24 * 30))} ${intl.formatMessage({
-          id: 'Main.QuizHome_QuizDisplay_MonthsAgo',
-        })}`;
-      } else if (dateDiff >= 1000 * 60 * 60 * 24) {
-        // 1일 이상이면
-        dateText = `${Math.floor(dateDiff / (1000 * 60 * 60 * 24))} ${intl.formatMessage({
-          id: 'Main.QuizHome_QuizDisplay_DaysAgo',
-        })}`;
-      } else if (dateDiff >= 1000 * 60 * 60) {
-        // 1시간 이상이면
-        dateText = `${Math.floor(dateDiff / (1000 * 60 * 60))} ${intl.formatMessage({
-          id: 'Main.QuizHome_QuizDisplay_HoursAgo',
-        })}`;
-      } else if (dateDiff >= 1000 * 60) {
-        // 1분 이상이면
-        dateText = `${Math.floor(dateDiff / (1000 * 60))} ${intl.formatMessage({
-          id: 'Main.QuizHome_QuizDisplay_MinsAgo',
-        })}`;
-      } else {
-        dateText = `${intl.formatMessage({
-          id: 'Main.QuizHome_QuizDisplay_JustBefore',
-        })}`;
-      }
-
-      return {
-        result: result,
-        dateText: dateText,
-      };
-    } else {
-      return null;
-    }
-  }, [quizRecordList, quiz.id]);
+  const refinedRecord = useMemo(
+    () => refineQuizRecord(quizRecordList, quiz.id, intl),
+    [quizRecordList, quiz.id, intl],
+  );
 
   const dateTextPair = useMemo(() => {
     const yearCurrent = new Date().getFullYear();
@@ -127,12 +109,21 @@ function Quiz({ quiz }: PropsQuiz) {
     }
   }, [quiz.createdDate]);
 
+  const myReaction = useMemo(() => {
+    return {
+      doLike: userId && quiz.memberReaction.likedMemberIdList.includes(userId),
+      doDislike: userId && quiz.memberReaction.dislikedMemberIdList.includes(userId),
+    };
+  }, [quiz.memberReaction, userId]);
+
   return (
     <tr
       className={`${styles['root']} 
             ${stylesDisplay['row']}`}
     >
-      <td className={`${styles['id']}`}>{`${quiz.id?.toString().slice(0, 16)}...`}</td>
+      <td className={`${styles['name-id']}`}>
+        <span>{quiz.name || quiz.id}</span>
+      </td>
 
       <td className={`${styles['my-result']}`}>
         {refinedRecord && (
@@ -149,7 +140,9 @@ function Quiz({ quiz }: PropsQuiz) {
         )}
       </td>
 
-      <td className={`${styles['author']}`}>{quiz.authorName}</td>
+      <td className={`${styles['author']}`}>
+        <span>{quiz.authorName}</span>
+      </td>
 
       <td className={`${styles['created']}`}>
         <span>{dateTextPair[0]}</span>
@@ -157,14 +150,32 @@ function Quiz({ quiz }: PropsQuiz) {
       </td>
 
       <td className={`${styles['play']}`}>
-        <button
-          type="button"
-          onClick={onClick_Button}
-          value="play-this-quiz"
-          aria-label="Play This Quiz"
-        >
+        <button type="button" onClick={onClick_Button} value="play" aria-label="Play This Quiz">
           <IconPlay className={styles['icon__play']} kind="solid" />
         </button>
+      </td>
+
+      <td className={`${styles['like-dislike']}`}>
+        {userId && (
+          <>
+            {(myReaction.doLike || !myReaction.doDislike) && (
+              <button type="button" onClick={onClick_Button} value="like" aria-label="Like">
+                <IconThumbsUp
+                  className={`${styles['icon__like']} ${myReaction.doLike ? 'active' : ''}`}
+                  kind={myReaction.doLike ? 'solid' : 'regular'}
+                />
+              </button>
+            )}
+            {(myReaction.doDislike || !myReaction.doLike) && (
+              <button type="button" onClick={onClick_Button} value="dislike" aria-label="Dislike">
+                <IconThumbsDown
+                  className={`${styles['icon__dislike']} ${myReaction.doDislike ? 'active' : ''}`}
+                  kind={myReaction.doDislike ? 'solid' : 'regular'}
+                />
+              </button>
+            )}
+          </>
+        )}
       </td>
 
       <td className={`${styles['others']}`}>

@@ -31,7 +31,7 @@ function Home() {
 
   return (
     <div className={`${styles['root']}`}>
-      <article>
+      {/* <article>
         <a href={'/opening'} onClick={onClick_Link}>
           <h2>
             <FormattedMessage id={'Global.Opening'} />
@@ -40,7 +40,7 @@ function Home() {
             <FormattedMessage id={'Main.Home_Opening_Introduction'} />
           </p>
         </a>
-      </article>
+      </article> */}
 
       <article>
         <a href={'/quiz'} onClick={onClick_Link}>

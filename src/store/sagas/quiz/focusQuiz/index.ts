@@ -10,21 +10,25 @@ import focusingChess from 'libraries/chess';
 function* focusQuiz(action: actions.quiz.type__FOCUS_QUIZ) {
   const { quiz, situation: newSituation } = action.payload;
 
-  const quizDefault: types.quiz.Quiz = {
-    id: null,
+  const defaultQuiz: types.quiz.Quiz = {
+    id: '',
     name: '',
 
     nextTurn: 'white',
-    startingFen: '',
+    startingFen: types.quiz.defaultFen,
     correctSanSeriesList: [],
     markedSanSeriesList: [],
 
     authorId: '',
     authorName: '',
     isPublic: true,
+    memberReaction: {
+      likedMemberIdList: [],
+      dislikedMemberIdList: [],
+    }
   };
 
-  const focusingQuizData: types.quiz.Quiz = quiz || quizDefault;
+  const focusingQuizData: types.quiz.Quiz = quiz || defaultQuiz;
 
   let fenUsing = focusingQuizData.startingFen;
 

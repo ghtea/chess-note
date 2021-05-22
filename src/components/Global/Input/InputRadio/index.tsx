@@ -2,8 +2,7 @@ import React, { useMemo } from 'react';
 
 // idk how to set type of valueCurrent and value to be same
 type PropsInputRadio = {
-  valueCurrent: string | number | readonly string[] | undefined;
-
+  valueCurrent?: string | number | readonly string[] | undefined;
   name: string;
   value: string | number | readonly string[] | undefined;
   label: string;

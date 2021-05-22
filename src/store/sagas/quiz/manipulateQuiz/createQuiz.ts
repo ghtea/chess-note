@@ -15,7 +15,7 @@ import * as types from 'store/types';
 
 const CREATE_QUIZ = gql`
     mutation CreateQuiz($argument: CreateQuizInputType!){
-        createQuiz(createQuizInputType: $argument) 
+        createQuiz(createQuizInput: $argument) 
             ${types.quiz.gqlQuizString}
     }
 `;
@@ -25,27 +25,28 @@ const requestCreateQuiz = (argument: Record<string, unknown>) => {
 };
 
 // directly access to sportdataAPI -> update firebase (get document on return)
-function* createQuiz(action: actions.quiz.type__CREATE_QUIZ) {
+export default function* createQuiz(action: actions.quiz.type__CREATE_QUIZ) {
   const {
     name,
     nextTurn,
     startingFen,
     correctSanSeriesList,
     markedSanSeriesList,
-    authorId,
     isPublic,
   } = action.payload;
+
+  const userIdInApp: types.quiz.Quiz[] = yield select((state: RootState) => state.auth.user?.id);
 
   if (!startingFen) {
     yield put(
       actions.notification.return__ADD_DELETE_BANNER({
-        codeSituation: 'CreateQuiz_NoFenStart__E',
+        situationCode: 'CreateQuiz_NoFenStart__E',
       }),
     );
   } else if (correctSanSeriesList.length === 0) {
     yield put(
       actions.notification.return__ADD_DELETE_BANNER({
-        codeSituation: 'CreateQuiz_NoAnswer__E',
+        situationCode: 'CreateQuiz_NoAnswer__E',
       }),
     );
   } else {
@@ -56,23 +57,23 @@ function* createQuiz(action: actions.quiz.type__CREATE_QUIZ) {
         startingFen,
         correctSanSeriesList,
         markedSanSeriesList,
-        authorId,
+        authorId: userIdInApp,
         isPublic,
       };
 
-      //const data: unknown =  yield call( requestCreateQuiz, argument );
-      const res: ApolloQueryResult<any> = yield call(requestCreateQuiz, argument); // eslint-disable-line @typescript-eslint/no-explicit-any
+      type CreateQuizData = Record<'createQuiz', types.quiz.Quiz>;
+      const res: ApolloQueryResult<CreateQuizData> = yield call(requestCreateQuiz, argument); // eslint-disable-line @typescript-eslint/no-explicit-any
 
       yield put(
         actions.notification.return__ADD_DELETE_BANNER({
-          codeSituation: 'CreateQuiz_Succeeded__S',
+          situationCode: 'CreateQuiz_Succeeded__S',
         }),
       );
 
       // console.log(res)
 
-      const quizFromRes = res.data?.createQuiz as types.quiz.Quiz | undefined;
-      if (quizFromRes?.id) {
+      const quizFromRes = res.data?.createQuiz;
+      if (quizFromRes.id) {
         history.push(`/quiz/edit/${quizFromRes.id}`);
       }
     } catch (error) {
@@ -80,11 +81,9 @@ function* createQuiz(action: actions.quiz.type__CREATE_QUIZ) {
 
       yield put(
         actions.notification.return__ADD_DELETE_BANNER({
-          codeSituation: 'CreateQuiz_UnknownError__E',
+          situationCode: 'CreateQuiz_UnknownError__E',
         }),
       );
     }
   } // else
 }
-
-export default createQuiz;

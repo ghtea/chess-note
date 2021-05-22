@@ -15,7 +15,7 @@ import * as types from 'store/types';
 
 const UPDATE_QUIZ = gql`
     mutation UpdateQuiz($argument: UpdateQuizInputType!){
-        updateQuiz(updateQuizInputType: $argument) 
+        updateQuiz(updateQuizInput: $argument) 
             ${types.quiz.gqlQuizString}
     }
 `;
@@ -35,23 +35,27 @@ export default function* updateQuiz(action: actions.quiz.type__UPDATE_QUIZ) {
     markedSanSeriesList,
     authorId,
     isPublic,
+    memberReaction,
   } = action.payload;
+
+  const userIdInApp: types.quiz.Quiz[] = yield select((state: RootState) => state.auth.user?.id);
 
   if (!startingFen) {
     yield put(
       actions.notification.return__ADD_DELETE_BANNER({
-        codeSituation: 'UpdateQuiz_NoFenStart__E',
+        situationCode: 'UpdateQuiz_NoFenStart__E',
       }),
     );
   } else if (correctSanSeriesList.length === 0) {
     yield put(
       actions.notification.return__ADD_DELETE_BANNER({
-        codeSituation: 'UpdateQuiz_NoAnswer__E',
+        situationCode: 'UpdateQuiz_NoAnswer__E',
       }),
     );
   } else {
     try {
       const argument = {
+        userId: userIdInApp,
         id,
         name,
         nextTurn,
@@ -60,20 +64,21 @@ export default function* updateQuiz(action: actions.quiz.type__UPDATE_QUIZ) {
         markedSanSeriesList,
         authorId,
         isPublic,
+        memberReaction,
       };
 
-      //const data: unknown =  yield call( requestUpdateQuiz, argument );
-      const res: ApolloQueryResult<any> = yield call(requestUpdateQuiz, argument); // eslint-disable-line @typescript-eslint/no-explicit-any
+      type UpdateQuizData = Record<'updateQuiz', types.quiz.Quiz>;
+      const res: ApolloQueryResult<UpdateQuizData> = yield call(requestUpdateQuiz, argument); // eslint-disable-line @typescript-eslint/no-explicit-any
 
       yield put(
         actions.notification.return__ADD_DELETE_BANNER({
-          codeSituation: 'UpdateQuiz_Succeeded__S',
+          situationCode: 'UpdateQuiz_Succeeded__S',
         }),
       );
 
       // console.log(res)
 
-      const quizFromRes = res.data?.updateQuiz as types.quiz.Quiz | undefined;
+      const quizFromRes = res.data.updateQuiz;
       if (quizFromRes?.id) {
         history.push(`/quiz/edit/${quizFromRes.id}`);
       }
@@ -82,7 +87,7 @@ export default function* updateQuiz(action: actions.quiz.type__UPDATE_QUIZ) {
 
       yield put(
         actions.notification.return__ADD_DELETE_BANNER({
-          codeSituation: 'UpdateQuiz_UnknownError__E',
+          situationCode: 'UpdateQuiz_UnknownError__E',
         }),
       );
     }

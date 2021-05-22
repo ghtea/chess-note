@@ -16,7 +16,7 @@ function QuizHome() {
   useEffect(() => {
     if (userStatus.ready || (userStatus.tried && !userStatus.ready)) {
       dispatch(
-        actions.quiz.return__GET_QUIZ_LIST_DICT({
+        actions.quiz.return__GET_QUIZ_LIST({
           userId: userId,
         }),
       );
