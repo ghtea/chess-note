@@ -179,9 +179,11 @@ function Quiz({ quiz }: PropsQuiz) {
       </td>
 
       <td className={`${styles['others']}`}>
-        <button type="button" onClick={onClick_Button} value="others" aria-label="Others">
-          <IconThreeDots className={styles['icon__others']} kind="regular" />
-        </button>
+        {userReady && (
+          <button type="button" onClick={onClick_Button} value="others" aria-label="Others">
+            <IconThreeDots className={styles['icon__others']} kind="regular" />
+          </button>
+        )}
       </td>
     </tr>
   );

@@ -235,24 +235,24 @@ function QuizDisplay() {
           <thead>
             <tr className={`${styles['row']}`}>
               <th scope="col">
-                <span>ID</span>
-                <span>ID</span>
+                <span><FormattedMessage id={'Main.QuizHome_QuizDisplay_NameId'} /></span>
+                <span><FormattedMessage id={'Main.QuizHome_QuizDisplay_NameId'} /></span>
               </th>
               <th scope="col">
                 <span></span>
-                <span>My Result</span>
+                <span> {userReady && <FormattedMessage id={'Main.QuizHome_QuizDisplay_MyResult'} />}</span>
               </th>
               <th scope="col">
-                <span>Author</span>
-                <span>Author</span>
-              </th>
-              <th scope="col">
-                <span></span>
-                <span>Created</span>
+                <span><FormattedMessage id={'Main.QuizHome_QuizDisplay_Author'} /></span>
+                <span><FormattedMessage id={'Main.QuizHome_QuizDisplay_Author'} /></span>
               </th>
               <th scope="col">
                 <span></span>
-                <span>Play</span>
+                <span><FormattedMessage id={'Main.QuizHome_QuizDisplay_Created'} /></span>
+              </th>
+              <th scope="col">
+                <span></span>
+                <span><FormattedMessage id={'Global.Play'} /></span>
               </th>
               <th scope="col">
                 <span></span>

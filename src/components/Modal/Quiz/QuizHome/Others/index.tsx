@@ -6,7 +6,7 @@ import focusingChess from 'libraries/chess';
 import { correctChessMoveTree, markedChessMoveTree } from 'components/Main/Quiz/chessMoveTree';
 
 import { useLocation } from 'react-router-dom';
-import { FormattedMessage } from 'react-intl';
+import { FormattedMessage, useIntl } from 'react-intl';
 import * as clipboardy from 'clipboardy';
 
 import { useSelector, useDispatch } from 'react-redux';
@@ -22,6 +22,7 @@ import stylesModal from 'components/Modal/index.module.scss';
 
 export default function QuizHomeOthers() {
   const dispatch = useDispatch();
+  const intl = useIntl();
 
   const userId = useSelector((state: RootState) => state.auth.user?.id);
 
@@ -62,12 +63,14 @@ export default function QuizHomeOthers() {
             situation: 'editing',
           }),
         );
-      } else if (value === 'delete-this-quiz') {
-        dispatch(
-          actions.quiz.return__DELETE_QUIZ({
-            quizId: displayState.clickedQuizId,
-          }),
-        );
+      } else if (value === 'delete') {
+        if (window.confirm(intl.formatMessage({ id: 'Confirm.AreYouSureToDeleteThisQuiz' }))) {
+          dispatch(
+            actions.quiz.return__DELETE_QUIZ({
+              quizId: displayState.clickedQuizId
+            }),
+          );
+        }
       }
       // close modal after click main buttons
       dispatch(
@@ -113,8 +116,8 @@ export default function QuizHomeOthers() {
               <div className={`${stylesModal['content__section']}`}>
                 <button
                   type="button"
-                  value="delete-this-quiz"
-                  className={`${styles['button__delete-this-quiz']} ${stylesModal['button__basic']}`}
+                  value="delete"
+                  className={`${styles['button__delete']} ${stylesModal['button__basic']}`}
                   onClick={onClick_AnyMainButton}
                 >
                   <FormattedMessage id={'Global.Delete'} />

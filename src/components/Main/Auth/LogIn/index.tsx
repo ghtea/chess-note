@@ -127,10 +127,9 @@ function LogIn() {
             onKeyPress={onKeyPress_Main}
           />
           <div>
-            {' '}
             {situationCodeEmail && (
               <FormattedMessage id={`Notification.${situationCodeEmail}`} />
-            )}{' '}
+            )}
           </div>
         </div>
 
@@ -145,10 +144,9 @@ function LogIn() {
             onKeyPress={onKeyPress_Main}
           />
           <div>
-            {' '}
             {situationCodePassword && (
               <FormattedMessage id={`Notification.${situationCodePassword}`} />
-            )}{' '}
+            )}
           </div>
         </div>
 
@@ -168,30 +166,25 @@ function LogIn() {
               <img src={imgGoogle} />
             </span>
             <span className={`${styles['text']}`}>
-              {' '}
-              <FormattedMessage id={`Main.LogIn_ContinueWithGoogle`} />{' '}
+              <FormattedMessage id={`Main.LogIn_ContinueWithGoogle`} />
             </span>
           </button>
 
           <button type="button" value="twitter" onClick={onClick_LogInSocial}>
             <span className={`${styles['icon']}`}>
-              {' '}
               <IconTwitter className={`icon__twitter`} />
             </span>
             <span className={`${styles['text']}`}>
-              {' '}
-              <FormattedMessage id={`Main.LogIn_ContinueWithTwitter`} />{' '}
+              <FormattedMessage id={`Main.LogIn_ContinueWithTwitter`} />
             </span>
           </button>
 
           <button type="button" value="github" onClick={onClick_LogInSocial}>
             <span className={`${styles['icon']}`}>
-              {' '}
               <IconGithub className={`icon__github`} />
             </span>
             <span className={`${styles['text']}`}>
-              {' '}
-              <FormattedMessage id={`Main.LogIn_ContinueWithGithub`} />{' '}
+              <FormattedMessage id={`Main.LogIn_ContinueWithGithub`} />
             </span>
           </button>
         </div>
@@ -199,14 +192,12 @@ function LogIn() {
         <nav className={`${styles['collection-link']}`}>
           <div>
             <a href="/" onClick={onClick_LinkInsideApp}>
-              {' '}
-              <FormattedMessage id={`Nav.Home`} />{' '}
+              <FormattedMessage id={`Nav.Home`} />
             </a>
           </div>
           <div>
             <a href="/sign-up" onClick={onClick_LinkInsideApp}>
-              {' '}
-              <FormattedMessage id={`Nav.SignUp`} />{' '}
+              <FormattedMessage id={`Nav.SignUp`} />
             </a>
           </div>
         </nav>
