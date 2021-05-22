@@ -20,7 +20,9 @@ export default function QuizEditing() {
   return (
     <div className={`${styles['root']}`}>
       <EntireBoard />
-      {situation !== 'creating' && <ReactionDisplay />}
+      
     </div>
   );
 }
+
+// {situation !== 'creating' && <ReactionDisplay />}

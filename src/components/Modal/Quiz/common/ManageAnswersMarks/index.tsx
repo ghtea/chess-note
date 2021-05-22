@@ -179,33 +179,35 @@ export default function ManageAnswersMarks({ top, kind }: PropsManageAnswersMark
                     }}
                   />
                 </button>
-
-                <button
-                  type="button"
-                  value="previous-item"
-                  onClick={onClick_ButtonChangeItem}
-                  className={`${stylesQC['button__previous-item']}`}
-                >
-                  <IconAngle
-                    className={`${stylesQC['icon__previous-item']}`}
-                    direction="left"
-                    kind="regular"
-                  />
-                </button>
-
-                <button
-                  type="button"
-                  value="next-item"
-                  aria-label="next item"
-                  onClick={onClick_ButtonChangeItem}
-                  className={`${stylesQC['button__next-item']}`}
-                >
-                  <IconAngle
-                    className={`${stylesQC['icon__next-item']}`}
-                    direction="right"
-                    kind="regular"
-                  />
-                </button>
+                {itemAllNumber > 1 && (
+                  <>
+                    <button
+                      type="button"
+                      value="previous-item"
+                      onClick={onClick_ButtonChangeItem}
+                      className={`${stylesQC['button__previous-item']}`}
+                    >
+                      <IconAngle
+                        className={`${stylesQC['icon__previous-item']}`}
+                        direction="left"
+                        kind="regular"
+                      />
+                    </button>
+                    <button
+                      type="button"
+                      value="next-item"
+                      aria-label="next item"
+                      onClick={onClick_ButtonChangeItem}
+                      className={`${stylesQC['button__next-item']}`}
+                    >
+                      <IconAngle
+                        className={`${stylesQC['icon__next-item']}`}
+                        direction="right"
+                        kind="regular"
+                      />
+                    </button>
+                  </>
+                )}
               </div>
               {(situation === 'editing' || situation === 'creating') && (
                 <div className={`${stylesModal['content__section']}`}>
@@ -225,31 +227,35 @@ export default function ManageAnswersMarks({ top, kind }: PropsManageAnswersMark
                     />
                   </button>
 
-                  <button
-                    type="button"
-                    value="previous-item"
-                    onClick={onClick_ButtonChangeItem}
-                    className={`${stylesQC['button__previous-item']}`}
-                  >
-                    <IconAngle
-                      className={`${stylesQC['icon__previous-item']}`}
-                      direction="left"
-                      kind="regular"
-                    />
-                  </button>
+                  {itemAllNumber > 1 && (
+                    <>
+                      <button
+                        type="button"
+                        value="previous-item"
+                        onClick={onClick_ButtonChangeItem}
+                        className={`${stylesQC['button__previous-item']}`}
+                      >
+                        <IconAngle
+                          className={`${stylesQC['icon__previous-item']}`}
+                          direction="left"
+                          kind="regular"
+                        />
+                      </button>
 
-                  <button
-                    type="button"
-                    value="next-item"
-                    onClick={onClick_ButtonChangeItem}
-                    className={`${stylesQC['button__next-item']}`}
-                  >
-                    <IconAngle
-                      className={`${stylesQC['icon__next-item']}`}
-                      direction="right"
-                      kind="regular"
-                    />
-                  </button>
+                      <button
+                        type="button"
+                        value="next-item"
+                        onClick={onClick_ButtonChangeItem}
+                        className={`${stylesQC['button__next-item']}`}
+                      >
+                        <IconAngle
+                          className={`${stylesQC['icon__next-item']}`}
+                          direction="right"
+                          kind="regular"
+                        />
+                      </button>
+                    </>
+                  )}
                 </div>
               )}
             </>

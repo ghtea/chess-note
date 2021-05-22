@@ -15,7 +15,7 @@ import * as actions from 'store/actions';
 import * as types from 'store/types';
 
 import styles from './index.module.scss';
-import stylesQEToolBar from 'components/Main/Quiz/QuizEditing/ToolBar/index.module.scss';
+import stylesQEToolBar from 'components/Main/Quiz/QuizEditing/EntireBoard/ToolBar/index.module.scss';
 import IconPaste from 'svgs/basic/IconSignIn';
 import IconOthers from 'svgs/basic/IconThreeDots';
 
