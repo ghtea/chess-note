@@ -154,7 +154,7 @@ export class ChessMoveTree {
     }
   }
 
-  putSeriesSan(sanSeries: string[]) {
+  putSanSeries(sanSeries: string[]) {
     const queueSan = [...sanSeries];
 
     let chessMoveNodeFocusing: ChessMoveTree | ChessMoveNode = this; // eslint-disable-line @typescript-eslint/no-this-alias

@@ -25,6 +25,7 @@ export default function* showOneAnswerOrMark(index:number, kind: 'answer' | 'mar
     const chessMoveTree = kind === 'answer' ? correctChessMoveTree : markedChessMoveTree;
 
     const list = chessMoveTree.returnSanSeriesList();
+    //console.log(chessMoveTree)
     const showingSanSeries = list[index];
 
     const showingSanQueue = [...showingSanSeries];

@@ -33,12 +33,12 @@ export default function* watchStaringFenChange(
 
     correctChessMoveTree.restart(newStartingFen);
     // focusingQuizData.correctSanSeriesList.forEach((e) => {
-    //   correctChessMoveTree.putSeriesSan(e);
+    //   correctChessMoveTree.putSanSeries(e);
     // });
 
     markedChessMoveTree.restart(newStartingFen);
     // focusingQuizData.markedSanSeriesList.forEach((e) => {
-    //   markedChessMoveTree.putSeriesSan(e);
+    //   markedChessMoveTree.putSanSeries(e);
     // });
 
     const newFocusingQuizData: types.quiz.Quiz = {
@@ -46,7 +46,7 @@ export default function* watchStaringFenChange(
       correctSanSeriesList: [],
       markedSanSeriesList: [],
       nextTurn: focusingChess.turn() === 'w' ? 'white' : 'black',
-    }
+    };
     yield put(
       actions.quiz.return__REPLACE({
         keyList: ['data', 'focusing'],

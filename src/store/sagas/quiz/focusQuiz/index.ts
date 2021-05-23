@@ -6,6 +6,7 @@ import { RootState } from 'store/reducers';
 import * as actions from 'store/actions';
 import * as types from 'store/types';
 import focusingChess from 'libraries/chess';
+import { correctChessMoveTree, markedChessMoveTree } from 'components/Main/Quiz/chessMoveTree';
 
 function* focusQuiz(action: actions.quiz.type__FOCUS_QUIZ) {
   const { quiz, situation: newSituation } = action.payload;
@@ -25,7 +26,7 @@ function* focusQuiz(action: actions.quiz.type__FOCUS_QUIZ) {
     memberReaction: {
       likedMemberIdList: [],
       dislikedMemberIdList: [],
-    }
+    },
   };
 
   const focusingQuizData: types.quiz.Quiz = quiz || defaultQuiz;
@@ -38,6 +39,16 @@ function* focusQuiz(action: actions.quiz.type__FOCUS_QUIZ) {
   }
 
   focusingChess.load(focusingQuizData.startingFen);
+
+  correctChessMoveTree.restart(fenUsing);
+  focusingQuizData.correctSanSeriesList.forEach((eachCorrectSanSeries) => {
+    correctChessMoveTree.putSanSeries(eachCorrectSanSeries);
+  });
+
+  markedChessMoveTree.restart(fenUsing);
+  focusingQuizData.markedSanSeriesList.forEach((eachMarkedSanSeries) => {
+    markedChessMoveTree.putSanSeries(eachMarkedSanSeries);
+  });
 
   yield put(
     actions.quiz.return__REPLACE({

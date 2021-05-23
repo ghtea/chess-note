@@ -23,7 +23,6 @@ import * as types from 'store/types';
 
 type PropsQuizEditingSet = {
   quizModalPositionStyle: React.CSSProperties;
-
 };
 
 function QuizEditingSet({ quizModalPositionStyle }: PropsQuizEditingSet) {
@@ -82,7 +81,7 @@ function QuizEditingSet({ quizModalPositionStyle }: PropsQuizEditingSet) {
           );
         }
       } else if (value === 'answer') {
-        correctChessMoveTree.putSeriesSan(focusingQuizState.sanSeries);
+        correctChessMoveTree.putSanSeries(focusingQuizState.sanSeries);
         dispatch(
           actions.quiz.return__REPLACE({
             keyList: ['data', 'focusing', 'correctSanSeriesList'],
@@ -90,7 +89,7 @@ function QuizEditingSet({ quizModalPositionStyle }: PropsQuizEditingSet) {
           }),
         );
       } else if (value === 'mark') {
-        markedChessMoveTree.putSeriesSan(focusingQuizState.sanSeries);
+        markedChessMoveTree.putSanSeries(focusingQuizState.sanSeries);
         dispatch(
           actions.quiz.return__REPLACE({
             keyList: ['data', 'focusing', 'markedSanSeriesList'],
