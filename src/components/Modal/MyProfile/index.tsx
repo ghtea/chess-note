@@ -15,7 +15,7 @@ import IconX from 'svgs/basic/IconX';
 
 import styles from './index.module.scss';
 import stylesModal from 'components/Modal/index.module.scss';
-import InputText from 'components/Global/Input/InputText';
+import InputText from 'components/common/Input/InputText';
 import IconEdit from 'svgs/basic/IconEdit';
 
 function MyProfile() {

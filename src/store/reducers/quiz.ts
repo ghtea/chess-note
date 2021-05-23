@@ -35,7 +35,7 @@ const stateInitial = {
   },
 
   state: {
-    situation: null as types.quiz.Situation,
+    situation: '' as types.quiz.Situation,
 
     display: {
       filteringOptionList: [

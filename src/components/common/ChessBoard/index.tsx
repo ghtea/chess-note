@@ -34,16 +34,16 @@ type PropsChessBoard = {
 function ChessBoard({ listSquare, side, page }: PropsChessBoard) {
   const dispatch = useDispatch();
 
-  const situationQuiz = useSelector((state: RootState) => state.quiz.state.situation);
+  const quizSituation = useSelector((state: RootState) => state.quiz.state.situation);
 
   const situation = useMemo(() => {
     // console.log('modeQuiz: ', situationQuiz)
     if (page === 'quiz') {
-      return situationQuiz;
+      return quizSituation;
     } else {
       return 'opening';
     }
-  }, [page, situationQuiz]);
+  }, [page, quizSituation]);
 
   const { width: widthWindow, height: heightWindow } = useSelector(
     (state: RootState) => state.appearance.layout.window,
@@ -99,49 +99,8 @@ function ChessBoard({ listSquare, side, page }: PropsChessBoard) {
     );
   }, [chessBoardLength, widthWindow, heightWindow]);
 
-  const [positionStart, setPositionStart] = useState<null | string>(null);
+  const [firstClickedPosition, setFirstClickedPosition] = useState<null | string>(null);
 
-  const onClick_Board = useCallback(
-    (event: React.MouseEvent<HTMLDivElement, MouseEvent>, positionStart: string | null) => {
-      // because of event delegation
-      let elementUsing = event.target as HTMLDivElement | HTMLImageElement;
-      while (!elementUsing.dataset || elementUsing.dataset['level'] !== 'square') {
-        elementUsing = elementUsing.parentElement as HTMLDivElement | HTMLImageElement;
-      }
-      const position = (elementUsing.dataset['file'] || '') + (elementUsing.dataset['rank'] || '');
-      // when first clicking to choose pice to move
-      if (positionStart === null) {
-        setPositionStart(position);
-      }
-      // when clicking to move
-      else {
-        //console.log('mode: ', mode)
-        if (page === 'quiz') {
-          if (situation === 'creating' || situation === 'editing') {
-            dispatch(
-              actions.quiz.return__MOVE_WHILE_EDITING_QUIZ({
-                from: positionStart,
-                to: position,
-              }),
-            );
-          } else if (
-            situation === 'playing-trying' ||
-            situation === 'playing-failed' ||
-            situation === 'playing-solved'
-          ) {
-            dispatch(
-              actions.quiz.return__MOVE_IN_QUIZ_PLAYING({
-                from: positionStart,
-                to: position,
-              }),
-            );
-          }
-        }
-        setPositionStart(null);
-      }
-    },
-    [page, situation, positionStart], // move 같은 함수도 잊지 말고 dependency list 에 추가!
-  );
 
   // Junhyeon
   // 8 => 13 => 6.5
@@ -169,7 +128,6 @@ function ChessBoard({ listSquare, side, page }: PropsChessBoard) {
   return (
     <div
       className={`${styles['root']} ChessBoard`}
-      onClick={(e) => onClick_Board(e, positionStart)}
       style={{ width: chessBoardLength, height: chessBoardLength }}
     >
       {listSquareForCurrentSide.map((row, iRow) =>
@@ -183,8 +141,15 @@ function ChessBoard({ listSquare, side, page }: PropsChessBoard) {
                 rank: stringRank[iRowNew] as '1' | '2' | '3' | '4' | '5' | '6' | '7' | '8',
                 file: stringFile[iColNew] as 'a' | 'b' | 'g' | 'c' | 'd' | 'e' | 'f' | 'h',
               }}
-              focused={stringFile[iColNew] + stringRank[iRowNew] === positionStart}
+              focused={stringFile[iColNew] + stringRank[iRowNew] === firstClickedPosition}
               color={(iRowNew + iColNew) % 2 === standardLight ? 'light' : 'dark'}
+
+              firstClickedPosition = {firstClickedPosition}
+              setFirstClickedPosition = {setFirstClickedPosition}
+
+              situation={situation}
+              page={page}
+
               key={`ChessSquare-${iRowNew}-${iColNew}`}
             />
           );

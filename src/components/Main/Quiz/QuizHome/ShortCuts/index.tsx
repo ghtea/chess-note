@@ -8,7 +8,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import { RootState } from 'store/reducers';
 import * as actions from 'store/actions';
 
-import Loading from 'components/Global/Loading';
+import Loading from 'components/common/Loading';
 
 //import actions from 'store/actions';
 

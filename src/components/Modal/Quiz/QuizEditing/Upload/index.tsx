@@ -18,8 +18,8 @@ import styles from './index.module.scss';
 import stylesQC from '../../common/index.module.scss';
 import stylesModal from 'components/Modal/index.module.scss';
 
-import InputText from 'components/Global/Input/InputText';
-import InputRadio from 'components/Global/Input/InputRadio';
+import InputText from 'components/common/Input/InputText';
+import InputRadio from 'components/common/Input/InputRadio';
 
 type PropsQuizEditingUpload = {
   quizModalPositionStyle: React.CSSProperties;

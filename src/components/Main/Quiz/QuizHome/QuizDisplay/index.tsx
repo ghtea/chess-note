@@ -9,7 +9,7 @@ import { RootState } from 'store/reducers';
 import * as actions from 'store/actions';
 import * as types from 'store/types';
 
-import Loading from 'components/Global/Loading';
+import Loading from 'components/common/Loading';
 
 //import actions from 'store/actions';
 
@@ -17,7 +17,7 @@ import Loading from 'components/Global/Loading';
 
 import styles from './index.module.scss';
 import Quiz from './Quiz';
-import InputRadio from 'components/Global/Input/InputRadio';
+import InputRadio from 'components/common/Input/InputRadio';
 import getFilteredSortedQuizList from './getFilteredSortedQuizList';
 import IconThumbsDown from 'svgs/basic/IconThumbsDown';
 import IconThumbsUp from 'svgs/basic/IconThumbsUp';

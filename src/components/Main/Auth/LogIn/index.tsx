@@ -10,8 +10,8 @@ import * as actions from 'store/actions';
 import useInputBasic from 'tools/hooks/useInputBasic';
 import useLink from 'tools/hooks/useLink';
 
-import InputEmail from 'components/Global/Input/InputEmail';
-import InputPassword from 'components/Global/Input/InputPassword';
+import InputEmail from 'components/common/Input/InputEmail';
+import InputPassword from 'components/common/Input/InputPassword';
 
 //import IconLogIn from 'svgs/basic/IconLogIn';
 import imgGoogle from 'others/images/g-logo.png';

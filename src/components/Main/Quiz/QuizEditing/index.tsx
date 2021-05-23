@@ -1,4 +1,4 @@
-import ChessBoard from 'components/Global/ChessBoard';
+import ChessBoard from 'components/common/ChessBoard';
 import React, { useCallback, useState, useMemo, useEffect } from 'react';
 import { Route, Switch } from 'react-router-dom';
 

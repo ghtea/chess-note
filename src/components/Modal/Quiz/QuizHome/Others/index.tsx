@@ -13,7 +13,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import { RootState } from 'store/reducers';
 import * as actions from 'store/actions';
 
-import InputRadio from 'components/Global/Input/InputRadio';
+import InputRadio from 'components/common/Input/InputRadio';
 import convertCase from 'tools/vanilla/convertCase';
 import IconAngle from 'svgs/basic/IconAngle';
 

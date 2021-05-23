@@ -44,7 +44,7 @@ export const gqlQuizString = `{
 
 export const defaultFen = 'rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1';
 
-export type Situation = null | 'creating' | 'editing' | 'playing-trying' | 'playing-solved' | 'playing-failed';
+export type Situation = '' | 'creating' | 'editing' | 'playing-trying' | 'playing-solved' | 'playing-failed';
 
 export type QuizState = {
   fen: string;
