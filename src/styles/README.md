@@ -1,11 +1,7 @@
-### Styles
+# Styles
 
-[back to to top](#system)
-
-> Utilize Sass for Dark mode and module coding
-
-- reset.css, basic styles for popular tags
-- made mixins for getting color value from map(using key) and apply it with class for theme name
+## 다크 모드 구현, 체계적인 색상 이용을 위한 mixin 이용 
+- 각 색상과 단계 (배경색을 기준으로 얼마나 대비가 강한지 나타내는 것)을 입력하면, mixin 에서 테마별로 이전에 지정해둔 색상 골라준다
 
   ```Scss
       @mixin color-each-theme($property, $key-color, $opacity: 1, $is-module: true) {
@@ -41,11 +37,8 @@
 
 
 
-### Icons
+## 아이콘을 컴포넌트로 구현
 
-[back to to top](#system)
-
-> svg components from Font Awesome svgs
 
     - [template file](https://github.com/ghtea/chess-note/blob/master/src/svgs/_IconTemplateAdvanced.tsx)
     ```javascript
@@ -98,7 +91,4 @@
 
     ```
 
----
 
-
----
