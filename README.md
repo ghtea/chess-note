@@ -8,9 +8,9 @@
 <br/>
 ---
 
-## 사용한 기술들
-<img src="https://user-images.githubusercontent.com/47841931/119231435-e4348f80-bb5b-11eb-9e2d-bb903d30a3eb.png" alt="drawing" width="240"/>
-
+## 참고 이미지
+<img src="https://user-images.githubusercontent.com/47841931/119231435-e4348f80-bb5b-11eb-9e2d-bb903d30a3eb.png" alt="drawing" width="360"/>
+<img src="https://user-images.githubusercontent.com/47841931/120080007-c33ae400-c0f1-11eb-9e59-408c6904ac00.png" alt="drawing" width="360"/>
 
 ---
 
