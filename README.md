@@ -9,10 +9,8 @@
 ---
 
 ## 참고 이미지
-![ChessNote skills](https://user-images.githubusercontent.com/47841931/120080024-dea5ef00-c0f1-11eb-811d-1c42f5f259a1.png)
-
-<img src="https://user-images.githubusercontent.com/47841931/119231435-e4348f80-bb5b-11eb-9e2d-bb903d30a3eb.png" alt="drawing" width="360"/>
-<img src="https://user-images.githubusercontent.com/47841931/120080007-c33ae400-c0f1-11eb-9e59-408c6904ac00.png" alt="drawing" width="360"/>
+![ChessNote](https://user-images.githubusercontent.com/47841931/120080024-dea5ef00-c0f1-11eb-811d-1c42f5f259a1.png)
+![ChessNote skills](https://user-images.githubusercontent.com/47841931/120080007-c33ae400-c0f1-11eb-9e59-408c6904ac00.png)
 
 ---
 
