@@ -40,7 +40,7 @@ function* getQuizList(action: actions.quiz.type__GET_QUIZ_LIST) {
             getQuizList(getQuizListInput: $argument)
               ${types.quiz.gqlQuizString}
         }
-    `;
+    `; 
 
     const argument = {
       userId,

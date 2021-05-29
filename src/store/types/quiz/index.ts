@@ -5,6 +5,7 @@ export type MemberReaction = {
   dislikedMemberIdList: string[];
 };
 
+
 export type Quiz = {
   id: string;
   name: string;
