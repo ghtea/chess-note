@@ -40,8 +40,9 @@
 ## 아이콘을 컴포넌트로 구현
 
 
-    - [template file](https://github.com/ghtea/chess-note/blob/master/src/svgs/_IconTemplateAdvanced.tsx)
-    ```javascript
+- [template file](https://github.com/ghtea/chess-note/blob/master/src/svgs/_IconTemplateAdvanced.tsx)
+    
+ ```javascript
     import React from "react";
 
 
