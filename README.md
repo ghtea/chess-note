@@ -1,16 +1,17 @@
 # Chess Note
 
-- [웹사이트 방문](https://cn.nextwing.me/quiz)
+[웹사이트 방문](https://cn.nextwing.me/quiz)
+
 - 체스 퀴즈를 직접 만들고, 수정, 플레이 하는 웹사이트
   -  체스 퀴즈: 체스의 특정 상황에서 최적의 수 맞추는 문제
 - 1인 개발
-<br/>
-<br/>
+
 ---
 
 ## 참고 이미지
-![ChessNote](https://user-images.githubusercontent.com/47841931/120080024-dea5ef00-c0f1-11eb-811d-1c42f5f259a1.png)
 ![ChessNote skills](https://user-images.githubusercontent.com/47841931/120080007-c33ae400-c0f1-11eb-9e59-408c6904ac00.png)
+![ChessNote](https://user-images.githubusercontent.com/47841931/120080024-dea5ef00-c0f1-11eb-811d-1c42f5f259a1.png)
+
 
 ---
 
