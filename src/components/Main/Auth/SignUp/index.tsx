@@ -196,7 +196,7 @@ function SignUp() {
           </button>
 
           <button type="button" value="twitter" onClick={onClick_LogInSocial}>
-            <span className={`${styles['icon']}`}>
+            <span className={`${stylesLogIn['icon']}`}>
               {' '}
               <IconTwitter className={`icon__twitter`} />
             </span>
