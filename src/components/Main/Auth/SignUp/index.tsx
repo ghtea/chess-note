@@ -109,9 +109,9 @@ function SignUp() {
       if (value === 'google') {
         dispatch(actions.auth.return__CONTINUE_WITH_GOOGLE());
       } else if (value === 'twitter') {
-        dispatch(actions.auth.return__CONTINUE_WITH_GITHUB());
-      } else if (value === 'github') {
         dispatch(actions.auth.return__CONTINUE_WITH_TWITTER());
+      } else if (value === 'github') {
+        dispatch(actions.auth.return__CONTINUE_WITH_GITHUB());
       }
     },
     [],
