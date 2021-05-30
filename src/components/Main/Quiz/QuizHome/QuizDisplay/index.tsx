@@ -173,8 +173,8 @@ function QuizDisplay() {
             <button
               className={`${displayState.filteringOptionList.includes('i-solved') ? 'active' : ''}`}
               name="filteringOption"
-              value={'i-liked'}
-              aria-label={'I liked'}
+              value={'i-solved'}
+              aria-label={'I solved'}
               onClick={onClick_FilteringOptionButton}
             >
               <IconCheckCircle className={styles['icon__i-solved']} kind="solid" />
