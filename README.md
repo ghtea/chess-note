@@ -1,6 +1,6 @@
 # Chess Note
 
-[웹사이트 방문](https://cn.nextwing.me/quiz)
+[웹사이트 방문](https://cn.nextwing.me/quiz) (회원가입을 하면 더 많은 을 이용할 수 있습니다)
 
 - 체스 퀴즈를 직접 만들고, 수정, 플레이 하는 웹사이트
   -  체스 퀴즈: 체스의 특정 상황에서 최적의 수 맞추는 문제
@@ -11,6 +11,18 @@
 ## 참고 이미지
 ![ChessNote skills](https://user-images.githubusercontent.com/47841931/120080007-c33ae400-c0f1-11eb-9e59-408c6904ac00.png)
 ![ChessNote](https://user-images.githubusercontent.com/47841931/120080024-dea5ef00-c0f1-11eb-811d-1c42f5f259a1.png)
+
+## 참고 사용 예
+### 체스 퀴즈 만들기 
+- 체스 게임 상황을 표시하는 FEN 표기법을 이용
+![Create](https://user-images.githubusercontent.com/47841931/120092151-d7abca80-c14b-11eb-9379-8fbdf617ed66.gif)
+
+### 체스 퀴즈들 필터링
+![Filter](https://user-images.githubusercontent.com/47841931/120092152-d8dcf780-c14b-11eb-8bd3-c95ae51be00c.gif)
+
+### 정답, 참고 움직임을 자동 플레이로 보여주기
+![AutoPlay](https://user-images.githubusercontent.com/47841931/120092154-da0e2480-c14b-11eb-9b23-6619b8470316.gif)
+
 
 
 ---
