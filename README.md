@@ -29,17 +29,17 @@
 
 ## 기술 포인트
 
-### 체스관련 라이브러리 + 직접 보강 으로 체스 플레이 구현 [더보기](/tree/master/src/libraries)
+### 체스관련 라이브러리 + 직접 보강 으로 체스 플레이 구현 [더보기](https://github.com/ghtea/chess-note/tree/master/src/libraries)
 - 시각적인 부분, 정답 움직임 경로 처리 등을 직접 구현
 - 라이브러리와 상태 관리, Redux saga의 교묘한 협업
 ---
-### 체계적인 UI의 구성 [더보기]
+### 체계적인 UI의 구성
 - HTML 구조와 비슷하게 폴더 트리 구현
 - 배너 알림 구현 (Notification)
 - aria 속성 활용 등 시맨틱 마크업 고려
 - 철저한 다국어 (영어, 한글) 지원
 ---
-### 체계적인 스타일 시스템 [더보기](/tree/master/src/styles)
+### 체계적인 스타일 시스템 [더보기](https://github.com/ghtea/chess-note/tree/master/src/styles)
 - 다크모드의 편한 구현을 위해 독자적인 색상 시스템, 믹스인 만듬
 - 아이콘은 fontawesome 에서 svg 다운받아 component 으로 만들어서 사용
 - 정사각형의 체스판을 구현하기 위해 상태관리와 연동에서 관련 스타일 구현
